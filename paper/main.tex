@@ -16,6 +16,7 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{listings}
+\usepackage{url}
 \usetikzlibrary{arrows.meta,calc,positioning}
 
 \lstdefinestyle{paperprompt}{
@@ -199,7 +200,7 @@ H3-M1 contributes two counterbalanced provenance-recognition inputs and five neu
 
 The two evaluation packages cover 14 clinical families under five recorded model conditions. Families and clinical contrasts define their breadth; repeated invocations measure within-input stability. Comparative recognition measures whether a model can label a relation when asked directly, not whether its answer is carried into a later aggregation call. H3 tests composition with a study-group cue, and H3-M1 measures the effect of removing that cue while retaining bibliographic and trial identity information. Oracle tests measure sensitivity to explicit relation or policy information. The later study-grouping prompt is an intervention, not external deduplication; the P5R/P6R prompt-order robustness audit and the one-family lineage-by-overlap control are reported separately from the main evaluation \citep{mizrahi-etal-2024-state,ceballos-arroyo-etal-2024-open}.
 
-\paragraph{Code and data availability.} An anonymized repository link will accompany the submission: \texttt{[anonymized repository link]}. The repository contains the paper source, frozen inputs, rendered prompts, schemas, configurations, recorded outputs, manifests, audit summaries, figures, and rerun scripts. GPT-5.5 calls were run through Codex with medium reasoning effort; the archived records support audit of those calls, while exact GPT reruns require Codex access. The open-weight runs can be rerun with the pinned model revisions and GPU runner.
+\paragraph{Code and data availability.} The anonymized repository is available at \url{https://anonymous.4open.science/r/study-lineage-review-artifact/}. It contains the paper source, frozen inputs, rendered prompts, schemas, configurations, recorded outputs, manifests, audit summaries, figures, and rerun scripts. GPT-5.5 calls were run through Codex with medium reasoning effort; the archived records support audit of those calls, while exact GPT reruns require Codex access. The open-weight runs can be rerun with the pinned model revisions and GPU runner.
 
 \section{Results}
 \label{sec:results}
