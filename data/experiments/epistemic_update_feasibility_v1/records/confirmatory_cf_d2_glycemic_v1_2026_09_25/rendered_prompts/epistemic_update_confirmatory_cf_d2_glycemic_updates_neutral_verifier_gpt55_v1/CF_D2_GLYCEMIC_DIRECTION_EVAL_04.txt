@@ -1,0 +1,78 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_D2_GLYCEMIC_DIRECTION_EVAL_04",
+  "claim_id": "CF_D2_GLYCEMIC_T2D_MORTALITY_CV_CLAIM",
+  "claim_text": "In adults with type 2 diabetes, intensive glycemic control reduces death or major cardiovascular risk compared with conventional or standard glycemic control.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_D2_E1_UKPDS91_METHODS",
+      "source_title": "Post-trial monitoring of a randomised controlled trial of intensive glycaemic control in type 2 diabetes extended from 10 years to 24 years (UKPDS 91)",
+      "pmid": "38772405",
+      "doi": "10.1016/S0140-6736(24)00537-3",
+      "trial_id": "ISRCTN75451837",
+      "source_locator": "PubMed abstract Background and Methods sentences",
+      "passage_text": "Background: The 20-year UK Prospective Diabetes Study showed major clinical benefits for people with newly diagnosed type 2 diabetes randomly allocated to intensive glycaemic control with sulfonylurea or insulin therapy or metformin therapy, compared with conventional glycaemic control. Methods: 5102 patients enrolled between 1977 and 1991 were originally randomly allocated to intensive glycaemic control or conventional glycaemic control."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_D2_E2_UKPDS91_RESULTS",
+      "source_title": "Post-trial monitoring of a randomised controlled trial of intensive glycaemic control in type 2 diabetes extended from 10 years to 24 years (UKPDS 91)",
+      "pmid": "38772405",
+      "doi": "10.1016/S0140-6736(24)00537-3",
+      "trial_id": "ISRCTN75451837",
+      "source_locator": "PubMed abstract Findings and Interpretation sentences",
+      "passage_text": "Findings: Early intensive glycaemic control with sulfonylurea or insulin therapy, compared with conventional glycaemic control, showed relative risk reductions of 10% for death from any cause, 17% for myocardial infarction, and 26% for microvascular disease. Interpretation: Early intensive glycaemic control with sulfonylurea or insulin, or with metformin, appeared to confer a near-lifelong reduced risk of death and myocardial infarction."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "CF_D2_E3_ACCORD_RESULTS",
+    "source_title": "Effects of intensive glucose lowering in type 2 diabetes",
+    "pmid": "18539917",
+    "doi": "10.1056/NEJMoa0802743",
+    "trial_id": "NCT00000620",
+    "source_locator": "PubMed and journal abstract Methods, Results, and Conclusions sentences",
+    "passage_text": "Methods: The trial randomly assigned 10,251 participants with type 2 diabetes and cardiovascular disease or additional cardiovascular risk factors to intensive therapy targeting glycated hemoglobin below 6.0% or standard therapy targeting 7.0% to 7.9%. Results: Death from any cause occurred in 257 patients in the intensive-therapy group and 203 in the standard-therapy group, a hazard ratio of 1.22. Conclusions: Higher mortality in the intensive-therapy group led to discontinuation of the intensive regimen for safety reasons."
+  }
+}

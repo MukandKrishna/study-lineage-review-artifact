@@ -1,0 +1,62 @@
+{
+    "experiment_id":  "epistemic_update_prospective_p5r_p6r_h5_h6_document_level_missing20_completion_gpt55_v1",
+    "bundle_id":  "epistemic_update_p5r_p6r_h5_h6_combined_220_h5_repaired_v1",
+    "description":  "User-authorized completion of the 20 current-input GPT document calls unavailable after provenance reconciliation.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/verifier_inputs",
+    "prompt_version":  "epistemic_update_verifier_neutral_v2",
+    "prompt_sha256":  "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+    "aggregation_mode":  "document_level_baseline",
+    "response_schema":  "epistemic_multi_evidence_judge_openai_v1",
+    "response_schema_sha256":  "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_missing20_completion_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_missing20_completion_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  2,
+                         "condition_count":  4,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  20,
+                         "recognition_calls":  0,
+                         "purpose":  "Complete only the exact-current-input GPT document rows missing from the reconciled 85-call plan."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_neutral_verifier",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "h5_initial",
+                           "execution_item_id":  "H5_INITIAL",
+                           "input_file":  "h5_initial.json",
+                           "input_sha256":  "1522df4a0aea9b6de05ce902b00c03c51a32198d0c6f56ce832bff5a65a66eb8"
+                       },
+                       {
+                           "condition_id":  "h6_initial",
+                           "execution_item_id":  "H6_INITIAL",
+                           "input_file":  "h6_initial.json",
+                           "input_sha256":  "d29ee752e5609d0d9bbdcecc4960c71b13ea9824ffe465ca3fafc0c32fdefe26"
+                       },
+                       {
+                           "condition_id":  "h6_same_trial_update",
+                           "execution_item_id":  "H6_SAME_TRIAL_UPDATE",
+                           "input_file":  "h6_same_trial_update.json",
+                           "input_sha256":  "bf8f6352bd1152bb64df22de39c360fab720298d2674f944420aa34798149219"
+                       },
+                       {
+                           "condition_id":  "h6_exact_repeat",
+                           "execution_item_id":  "H6_EXACT_REPEAT",
+                           "input_file":  "h6_exact_repeat.json",
+                           "input_sha256":  "632553d9eaad7d8aa9d256a253ebdcd1df0e75ae1e1baa19f7644151ff25f40c"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

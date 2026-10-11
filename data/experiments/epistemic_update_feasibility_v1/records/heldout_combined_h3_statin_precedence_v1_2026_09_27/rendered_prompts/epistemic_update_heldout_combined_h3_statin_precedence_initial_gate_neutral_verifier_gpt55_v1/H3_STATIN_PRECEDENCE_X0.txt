@@ -1,0 +1,71 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "H3_STATIN_PRECEDENCE_X0",
+  "claim_id": "H3_PRAVASTATIN_PRIMARY_PREVENTION_CHD_EVENTS_CLAIM",
+  "claim_text": "Among middle-aged men with hypercholesterolemia and no prior myocardial infarction, pravastatin reduces fatal or nonfatal coronary events compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "H3_E1_WOSCOPS_PRIMARY_DESIGN",
+      "source_group_id": "STATIN_SOURCE_WOSCOPS_PRIMARY",
+      "source_title": "Prevention of coronary heart disease with pravastatin in men with hypercholesterolemia",
+      "pmid": "7566020",
+      "doi": "10.1056/NEJM199511163332001",
+      "trial_id": "WOSCOPS",
+      "source_locator": "PubMed/NEJM abstract methods and objective",
+      "passage_text": "BACKGROUND: This double-blind study was designed to determine whether pravastatin in men with hypercholesterolemia and no history of myocardial infarction reduced the combined incidence of nonfatal myocardial infarction and death from coronary heart disease. METHODS: 6595 men, 45 to 64 years of age, were randomly assigned to pravastatin (40 mg each evening) or placebo. The average follow-up period was 4.9 years."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "H3_E2_WOSCOPS_PRIMARY_RESULT",
+      "source_group_id": "STATIN_SOURCE_WOSCOPS_PRIMARY",
+      "source_title": "Prevention of coronary heart disease with pravastatin in men with hypercholesterolemia",
+      "pmid": "7566020",
+      "doi": "10.1056/NEJM199511163332001",
+      "trial_id": "WOSCOPS",
+      "source_locator": "PubMed/NEJM abstract results and conclusions",
+      "passage_text": "RESULTS: There were 248 definite coronary events, specified as nonfatal myocardial infarction or death from coronary heart disease, in the placebo group and 174 in the pravastatin group. CONCLUSIONS: Treatment with pravastatin significantly reduced the incidence of myocardial infarction and death from cardiovascular causes."
+    }
+  ],
+  "added_evidence": null
+}

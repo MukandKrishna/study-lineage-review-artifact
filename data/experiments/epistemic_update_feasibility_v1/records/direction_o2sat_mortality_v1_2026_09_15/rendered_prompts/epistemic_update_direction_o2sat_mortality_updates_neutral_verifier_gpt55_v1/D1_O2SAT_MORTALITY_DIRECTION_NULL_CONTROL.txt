@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "D1_O2SAT_MORTALITY_DIRECTION_NULL_CONTROL",
+  "claim_id": "D1_O2SAT_LOWER_TARGET_HIGHER_MORTALITY_CLAIM",
+  "claim_text": "Among extremely preterm infants assigned to an oxygen-saturation target of 85% to 89% rather than 91% to 95%, observed mortality by approximately 18 to 24 months' corrected age was higher in the lower-target group.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "D1_E1_SUPPORT_METHODS",
+      "source_group_id": "O2SAT_SOURCE_SUPPORT_NCT00233324",
+      "source_title": "Neurodevelopmental outcomes in the early CPAP and pulse oximetry trial.",
+      "pmid": "23268664",
+      "doi": "10.1056/NEJMoa1208506",
+      "trial_id": "NCT00233324",
+      "source_locator": "PubMed abstract methods and mortality result",
+      "passage_text": "METHODS: Using a 2-by-2 factorial design, we randomly assigned infants born between 24 weeks 0 days and 27 weeks 6 days of gestation to early CPAP with a limited ventilation strategy or early surfactant administration and to lower or higher target ranges of oxygen saturation (85 to 89% or 91 to 95%). The primary composite outcome for the longer-term analysis was death before assessment at 18 to 22 months or neurodevelopmental impairment at 18 to 22 months of corrected age."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "D1_E2_SUPPORT_MORTALITY_RESULT",
+      "source_group_id": "O2SAT_SOURCE_SUPPORT_NCT00233324",
+      "source_title": "Neurodevelopmental outcomes in the early CPAP and pulse oximetry trial.",
+      "pmid": "23268664",
+      "doi": "10.1056/NEJMoa1208506",
+      "trial_id": "NCT00233324",
+      "source_locator": "PubMed abstract methods and mortality result",
+      "passage_text": "RESULTS: Mortality was increased with the lower-oxygen-saturation target (22.1%, vs. 18.2% with the higher-oxygen-saturation target; relative risk, 1.25; 95% CI, 1.00 to 1.55; P=0.046)."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "D1_E2_SUPPORT_MORTALITY_RESULT",
+    "source_group_id": "O2SAT_SOURCE_SUPPORT_NCT00233324",
+    "source_title": "Neurodevelopmental outcomes in the early CPAP and pulse oximetry trial.",
+    "pmid": "23268664",
+    "doi": "10.1056/NEJMoa1208506",
+    "trial_id": "NCT00233324",
+    "source_locator": "PubMed abstract methods and mortality result",
+    "passage_text": "RESULTS: Mortality was increased with the lower-oxygen-saturation target (22.1%, vs. 18.2% with the higher-oxygen-saturation target; relative risk, 1.25; 95% CI, 1.00 to 1.55; P=0.046)."
+  }
+}

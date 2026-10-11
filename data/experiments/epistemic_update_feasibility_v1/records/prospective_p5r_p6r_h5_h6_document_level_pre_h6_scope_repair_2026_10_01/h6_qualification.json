@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "item_id": "H6_QUALIFICATION",
+  "claim_id": "H6_COMPOSITION_CLAIM",
+  "claim_text": "In previously untreated metastatic nonsquamous NSCLC without sensitising EGFR or ALK alterations, adding an immune-checkpoint inhibitor to platinum-based chemotherapy improves overall and progression-free survival compared with the matching chemotherapy control.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P6R_E1_KEYNOTE189_PRIMARY_RESULT",
+      "source_group_id": "NSCLC_KEYNOTE189_NCT02578680",
+      "source_title": "Pembrolizumab Plus Chemotherapy in Metastatic Non-Small-Cell Lung Cancer",
+      "pmid": "29658856",
+      "doi": "10.1056/NEJMoa1801005",
+      "trial_id": "NCT02578680",
+      "source_locator": "PubMed abstract, Conclusion",
+      "passage_text": "The addition of pembrolizumab to standard chemotherapy resulted in significantly longer overall survival and progression-free survival than chemotherapy alone."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P6R_E3_IMPOWER150",
+      "source_group_id": "NSCLC_IMPOWER150_NCT02366143",
+      "source_title": "IMpower150 Final Overall Survival Analyses",
+      "pmid": "34311108",
+      "doi": "10.1016/j.jtho.2021.07.009",
+      "trial_id": "NCT02366143",
+      "source_locator": "PubMed abstract, Results",
+      "passage_text": "OS benefit was sustained with ABCP versus BCP (ITT-WT: 19.5 versus 14.7 mo; hazard ratio = 0.80; 95% confidence interval: 0.67-0.95)."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "H6_E5_IMPOWER132_QUALIFICATION",
+    "source_group_id": "NSCLC_IMPOWER132",
+    "source_title": "IMpower132 trial of atezolizumab plus chemotherapy",
+    "pmid": "33333328",
+    "doi": null,
+    "trial_id": "NCT02657434",
+    "source_locator": "PubMed abstract, co-primary endpoints",
+    "passage_text": "IMpower132 met its co-primary PFS end point but not its co-primary OS end point."
+  }
+}

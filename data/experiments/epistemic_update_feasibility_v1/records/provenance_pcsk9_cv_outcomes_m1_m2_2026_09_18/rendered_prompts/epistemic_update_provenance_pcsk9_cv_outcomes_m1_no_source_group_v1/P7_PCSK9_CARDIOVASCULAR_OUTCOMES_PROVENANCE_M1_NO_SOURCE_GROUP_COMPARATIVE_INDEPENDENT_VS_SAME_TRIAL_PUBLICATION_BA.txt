@@ -1,0 +1,101 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M1_NO_SOURCE_GROUP_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_BA",
+  "claim_id": "P7_PCSK9_CV_OUTCOMES_CLAIM",
+  "claim_text": "Among high-risk patients with established atherosclerotic cardiovascular disease or recent acute coronary syndrome receiving statin or background lipid-lowering therapy, PCSK9-inhibitor treatment reduced major cardiovascular events compared with placebo.",
+  "target_relation": "provenance",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P7_E1_FOURIER_CLASS_POPULATION_CONTEXT",
+      "source_title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease",
+      "pmid": "28304224",
+      "doi": "10.1056/NEJMoa1615664",
+      "trial_id": "NCT01764633",
+      "source_locator": "PubMed abstract background, methods, results, conclusion, and registration",
+      "passage_text": "Background: Evolocumab is a monoclonal antibody that inhibits proprotein convertase subtilisin-kexin type 9 (PCSK9) and lowers low-density lipoprotein (LDL) cholesterol levels by approximately 60%.\n\nMethods: We conducted a randomized, double-blind, placebo-controlled trial involving 27,564 patients with atherosclerotic cardiovascular disease and LDL cholesterol levels of 70 mg per deciliter (1.8 mmol per liter) or higher who were receiving statin therapy. Patients were randomly assigned to receive evolocumab or matching placebo as subcutaneous injections. The primary efficacy end point was the composite of cardiovascular death, myocardial infarction, stroke, hospitalization for unstable angina, or coronary revascularization.\n\nResults: Relative to placebo, evolocumab treatment significantly reduced the risk of the primary end point (1344 patients [9.8%] vs. 1563 patients [11.3%]; hazard ratio, 0.85; 95% confidence interval [CI], 0.79 to 0.92; P<0.001) and the key secondary end point (816 [5.9%] vs. 1013 [7.4%]; hazard ratio, 0.80; 95% CI, 0.73 to 0.88; P<0.001).\n\nConclusions: Inhibition of PCSK9 with evolocumab on a background of statin therapy lowered LDL cholesterol levels to a median of 30 mg per deciliter (0.78 mmol per liter) and reduced the risk of cardiovascular events. (Funded by Amgen; FOURIER ClinicalTrials.gov number, NCT01764633.)."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P7_E2_FOURIER_PRIMARY_RESULT",
+      "source_title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease",
+      "pmid": "28304224",
+      "doi": "10.1056/NEJMoa1615664",
+      "trial_id": "NCT01764633",
+      "source_locator": "PubMed abstract results and conclusion",
+      "passage_text": "Results: Relative to placebo, evolocumab treatment significantly reduced the risk of the primary end point (1344 patients [9.8%] vs. 1563 patients [11.3%]; hazard ratio, 0.85; 95% confidence interval [CI], 0.79 to 0.92; P<0.001) and the key secondary end point (816 [5.9%] vs. 1013 [7.4%]; hazard ratio, 0.80; 95% CI, 0.73 to 0.88; P<0.001).\n\nConclusions: Inhibition of PCSK9 with evolocumab on a background of statin therapy lowered LDL cholesterol levels to a median of 30 mg per deciliter (0.78 mmol per liter) and reduced the risk of cardiovascular events. (Funded by Amgen; FOURIER ClinicalTrials.gov number, NCT01764633.)."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "P7_U1_FOURIER_DIABETES_STATUS_SAME_TRIAL",
+    "source_title": "Cardiovascular safety and efficacy of the PCSK9 inhibitor evolocumab in patients with and without diabetes and the effect of evolocumab on glycaemia and risk of new-onset diabetes: a prespecified analysis of the FOURIER randomised controlled trial",
+    "pmid": "28927706",
+    "doi": "10.1016/S2213-8587(17)30313-3",
+    "trial_id": "NCT01764633",
+    "source_locator": "PubMed abstract background, methods, findings, interpretation, and registration",
+    "passage_text": "Background: In the FOURIER trial, the proprotein convertase subtilisin-kexin type 9 (PCSK9) inhibitor evolocumab significantly reduced LDL cholesterol and cardiovascular events and was safe and well tolerated over a median of 2.2 years.\n\nMethods: FOURIER was a randomised trial of evolocumab versus placebo in 27,564 patients with atherosclerotic disease who were on statin therapy, followed up for a median of 2.2 years. In this prespecified analysis, we investigated the efficacy and safety of evolocumab by diabetes status and the effect of evolocumab on glycaemia and risk of developing diabetes.\n\nFindings: Evolocumab significantly reduced cardiovascular outcomes consistently in patients with and without diabetes at baseline. For the primary composite endpoint, hazard ratios were 0.83 (95% CI 0.75-0.93) for patients with diabetes and 0.87 (95% CI 0.79-0.96) for patients without diabetes.\n\nInterpretation: PCSK9 inhibition with evolocumab significantly reduced cardiovascular risk in patients with and without diabetes. FOURIER is registered with ClinicalTrials.gov, number NCT01764633."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "P7_U2_ODYSSEY_OUTCOMES_PRIMARY_INDEPENDENT_TRIAL",
+    "source_title": "Alirocumab and Cardiovascular Outcomes after Acute Coronary Syndrome",
+    "pmid": "30403574",
+    "doi": "10.1056/NEJMoa1801174",
+    "trial_id": "NCT01663402",
+    "source_locator": "PubMed abstract background, methods, results, conclusion, and registration",
+    "passage_text": "Background: Patients who have had an acute coronary syndrome are at high risk for recurrent ischemic cardiovascular events. Alirocumab, a human monoclonal antibody to proprotein convertase subtilisin-kexin type 9 (PCSK9), produces substantial reductions in LDL cholesterol levels in such patients.\n\nMethods: We conducted a multicenter, randomized, double-blind, placebo-controlled trial involving 18,924 patients who had an acute coronary syndrome 1 to 12 months earlier, had an LDL cholesterol level of at least 70 mg per deciliter, and were receiving statin therapy at a high-intensity dose or at the maximum tolerated dose. Patients were randomly assigned to receive alirocumab or placebo. The primary end point was a composite of death from coronary heart disease, nonfatal myocardial infarction, fatal or nonfatal ischemic stroke, or unstable angina requiring hospitalization.\n\nResults: A composite primary end-point event occurred in 903 patients (9.5%) in the alirocumab group and in 1052 patients (11.1%) in the placebo group (hazard ratio, 0.85; 95% confidence interval [CI], 0.78 to 0.93; P<0.001).\n\nConclusions: Among patients who had a previous acute coronary syndrome and who were receiving high-intensity statin therapy, the risk of recurrent ischemic cardiovascular events was lower among those who received alirocumab than among those who received placebo. (Funded by Sanofi and Regeneron Pharmaceuticals; ODYSSEY OUTCOMES ClinicalTrials.gov number, NCT01663402.)."
+  }
+}

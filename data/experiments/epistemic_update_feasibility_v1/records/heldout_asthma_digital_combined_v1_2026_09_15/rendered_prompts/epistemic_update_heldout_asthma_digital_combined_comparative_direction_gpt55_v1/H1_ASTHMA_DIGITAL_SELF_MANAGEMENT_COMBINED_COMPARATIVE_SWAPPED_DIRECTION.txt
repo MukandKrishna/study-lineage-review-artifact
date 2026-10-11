@@ -1,0 +1,96 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison. For
+every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. Do not join separate spans, change words, or insert ellipses. An empty
+evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "H1_ASTHMA_DIGITAL_SELF_MANAGEMENT_COMBINED_COMPARATIVE_SWAPPED_DIRECTION",
+  "claim_id": "H1_ADULT_ASTHMA_IBSM_QOL_6M_PLUS_CLAIM",
+  "claim_text": "Among adults with asthma, internet-based self-management improved asthma-related quality of life compared with usual care at follow-up of 6 months or longer.",
+  "target_relation": "direction",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "H1_E1_SMASHING_ADULTS_METHODS",
+      "source_group_id": "ASTHMA_DIGITAL_SOURCE_SMASHING_ADULTS_ISRCTN79864465",
+      "source_title": "Internet-based self-management plus education compared with usual care in asthma: a randomized trial.",
+      "pmid": "19620163",
+      "doi": "10.7326/0003-4819-151-2-200907210-00008",
+      "trial_id": "ISRCTN79864465",
+      "source_locator": "PubMed abstract design, patients, measurements, intervention, results, and conclusion",
+      "passage_text": "DESIGN: Randomized, controlled trial. PATIENTS: 200 adults with asthma who were treated with inhaled corticosteroids for 3 months or more during the previous year and had access to the Internet. MEASUREMENTS: Asthma-related quality of life at 12 months (minimal clinically significant difference of 0.5 on the 7-point scale), asthma control, symptom-free days, lung function, and exacerbations. INTERVENTION: Participants were randomly assigned by using a computer-generated permuted block scheme to Internet-based self-management (n = 101) or usual care (n = 99). The Internet-based self-management program included weekly asthma control monitoring and treatment advice, online and group education, and remote Web communications."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "H1_E2_SMASHING_ADULTS_AQLQ_RESULT",
+      "source_group_id": "ASTHMA_DIGITAL_SOURCE_SMASHING_ADULTS_ISRCTN79864465",
+      "source_title": "Internet-based self-management plus education compared with usual care in asthma: a randomized trial.",
+      "pmid": "19620163",
+      "doi": "10.7326/0003-4819-151-2-200907210-00008",
+      "trial_id": "ISRCTN79864465",
+      "source_locator": "PubMed abstract design, patients, measurements, intervention, results, and conclusion",
+      "passage_text": "RESULTS: Asthma-related quality of life improved by 0.56 and 0.18 points in the Internet and usual care groups, respectively (adjusted between-group difference, 0.38 [95% CI, 0.20 to 0.56])."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "H1_U2_MAP_ADULTS_APPLICABLE_NO_SUSTAINED_QOL",
+    "source_group_id": "ASTHMA_DIGITAL_SOURCE_MAP_ADULTS_ISRCTN34326236",
+    "source_title": "The Effectiveness of Web-Based Asthma Self-Management System, My Asthma Portal (MAP): A Pilot Randomized Controlled Trial",
+    "pmid": "27908846",
+    "doi": "10.2196/jmir.5866",
+    "trial_id": "ISRCTN34326236",
+    "source_locator": "PubMed abstract methods and 6-/9-month quality-of-life result",
+    "passage_text": "METHODS: A multicenter, parallel, 2-arm, pilot, randomized controlled trial was conducted with 100 adults with confirmed diagnosis of asthma from 2 specialty clinics. Asthma control was measured using an algorithm based on overuse of fast-acting bronchodilators and emergency department visits, and asthma-related quality of life was assessed using the Mini-Asthma Quality of Life Questionnaire (MAQLQ).\n\nRESULTS: No significant differences in asthma quality of life were found between the intervention and control groups at 6 (mean change 0.46, 95% CI -0.12 to 1.05) and 9 months (mean change 0.39, 95% CI -0.2 to 0.98). For poor control status, there was no significant effect of group, time, or group by time."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "H1_U1_ADOLESCENT_IBSM_OUT_OF_SCOPE_POSITIVE",
+    "source_group_id": "ASTHMA_DIGITAL_SOURCE_SMASHING_ADOLESCENTS_ISRCTN11633371",
+    "source_title": "Internet-based self-management compared with usual care in adolescents with asthma: a randomized controlled trial.",
+    "pmid": "22644646",
+    "doi": "10.1002/ppul.22575",
+    "trial_id": "ISRCTN11633371",
+    "source_locator": "PubMed abstract methods and 3-month PAQLQ result",
+    "passage_text": "METHODS: Adolescents (12-18 years) with persistent and not well-controlled asthma participated in a randomized controlled trial with 1 year follow-up and were allocated to IBSM (n = 46) or usual care (UC, n = 44). IBSM consisted of weekly asthma control monitoring with treatment advice by a web-based algorithm. Outcomes included asthma-related quality of life (Pediatric Asthma Quality of Life Questionnaire, PAQLQ) and asthma control (Asthma Control Questionnaire, ACQ) and were analyzed by a linear mixed-effects model.\n\nRESULTS: At 3 months, PAQLQ improved with 0.40 points (95% CI: 0.17-0.62, P < 0.01), by IBSM compared to 0.0 points for UC (P = 0.02 for the difference)."
+  }
+}

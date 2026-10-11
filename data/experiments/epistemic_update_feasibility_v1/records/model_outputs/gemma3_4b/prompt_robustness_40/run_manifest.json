@@ -1,0 +1,9 @@
+{
+  "bundle_id": "epistemic_update_prompt_robustness_p5r_p6r_v1",
+  "model_id": "gemma_model_c",
+  "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+  "planned_calls": 40,
+  "completed_calls": 40,
+  "valid_predictions": 40,
+  "invalid_or_runtime_records": 0
+}

@@ -1,0 +1,105 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_ADULT_WEIGHT_VS_ADOLESCENT_POSITIVE",
+  "claim_id": "H2_ADULT_SEMAGLUTIDE_OBESITY_WEIGHT_LOSS_CLAIM",
+  "claim_text": "Among adults with overweight or obesity without diabetes, once-weekly semaglutide 2.4 mg reduced body weight compared with placebo.",
+  "target_relation": "applicability",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "H2_E1_STEP1_ADULTS_METHODS",
+      "source_group_id": "SEMAGLUTIDE_SOURCE_STEP1_ADULTS_NCT03548935",
+      "source_title": "Once-Weekly Semaglutide in Adults with Overweight or Obesity",
+      "pmid": "33567185",
+      "doi": "10.1056/NEJMoa2032183",
+      "trial_id": "NCT03548935",
+      "source_locator": "PubMed abstract methods, results, and conclusions",
+      "passage_text": "METHODS: In this double-blind trial, we enrolled 1961 adults with a body-mass index of 30 or greater, or 27 or greater in persons with at least one weight-related coexisting condition, who did not have diabetes, and randomly assigned them, in a 2:1 ratio, to 68 weeks of treatment with once-weekly subcutaneous semaglutide at a dose of 2.4 mg or placebo, plus lifestyle intervention. The coprimary end points were the percentage change in body weight and weight reduction of at least 5%."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "H2_E2_STEP1_ADULTS_WEIGHT_RESULT",
+      "source_group_id": "SEMAGLUTIDE_SOURCE_STEP1_ADULTS_NCT03548935",
+      "source_title": "Once-Weekly Semaglutide in Adults with Overweight or Obesity",
+      "pmid": "33567185",
+      "doi": "10.1056/NEJMoa2032183",
+      "trial_id": "NCT03548935",
+      "source_locator": "PubMed abstract methods, results, and conclusions",
+      "passage_text": "RESULTS: The mean change in body weight from baseline to week 68 was -14.9% in the semaglutide group as compared with -2.4% with placebo, for an estimated treatment difference of -12.4 percentage points. More participants in the semaglutide group than in the placebo group achieved weight reductions of 5% or more at week 68."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "H2_U1_SELECT_ADULT_WEIGHT_APPLICABLE",
+    "source_group_id": "SEMAGLUTIDE_SOURCE_SELECT_NCT03574597",
+    "source_title": "Long-term weight loss effects of semaglutide in obesity without diabetes in the SELECT trial",
+    "pmid": "38740993",
+    "doi": "10.1038/s41591-024-02996-7",
+    "trial_id": "NCT03574597",
+    "source_locator": "PubMed abstract SELECT weight and anthropometric outcomes",
+    "passage_text": "ABSTRACT: In the SELECT cardiovascular outcomes trial, semaglutide showed a 20% reduction in major adverse cardiovascular events in 17,604 adults with preexisting cardiovascular disease, overweight or obesity, without diabetes. Here in this prespecified analysis, effects of semaglutide on weight and anthropometric outcomes, safety and tolerability by baseline body mass index were examined. In patients treated with semaglutide, weight loss continued over 65 weeks and was sustained for up to 4 years. At 208 weeks, semaglutide was associated with mean reduction in weight (-10.2%) versus placebo (-1.5%; P < 0.0001). ClinicalTrials.gov identifier: NCT03574597."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "H2_U2_STEP_TEENS_OUT_OF_SCOPE_POSITIVE",
+    "source_group_id": "SEMAGLUTIDE_SOURCE_STEP_TEENS_NCT04102189",
+    "source_title": "Once-Weekly Semaglutide in Adolescents with Obesity",
+    "pmid": "36322838",
+    "doi": "10.1056/NEJMoa2208601",
+    "trial_id": "NCT04102189",
+    "source_locator": "PubMed abstract methods, results, and conclusions",
+    "passage_text": "METHODS: In this double-blind, parallel-group, randomized, placebo-controlled trial, adolescents (12 to <18 years of age) with obesity or with overweight and at least one weight-related coexisting condition were randomly assigned in a 2:1 ratio to receive once-weekly subcutaneous semaglutide at a dose of 2.4 mg or placebo for 68 weeks, plus lifestyle intervention. The primary end point was the percentage change in BMI from baseline to week 68.\n\nRESULTS: The mean change in BMI from baseline to week 68 was -16.1% with semaglutide and 0.6% with placebo. At week 68, 73% of participants in the semaglutide group had weight loss of 5% or more, as compared with 18% in the placebo group.\n\nCONCLUSIONS: Among adolescents with obesity, once-weekly treatment with a 2.4-mg dose of semaglutide plus lifestyle intervention resulted in a greater reduction in BMI than lifestyle intervention alone. STEP TEENS ClinicalTrials.gov number, NCT04102189."
+  }
+}

@@ -1,0 +1,139 @@
+{
+    "experiment_id":  "epistemic_update_prospective_p5r_p6r_h5_h6_document_level_neutral_verifier_gpt55_v1",
+    "description":  "Frozen P5R/P6R/H5/H6 verifier under document_level_baseline.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/verifier_inputs",
+    "prompt_version":  "epistemic_update_verifier_neutral_v2",
+    "prompt_sha256":  "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+    "aggregation_mode":  "document_level_baseline",
+    "response_schema":  "epistemic_multi_evidence_judge_openai_v1",
+    "response_schema_sha256":  "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_neutral_verifier_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_neutral_verifier_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  4,
+                         "condition_count":  17,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  85,
+                         "recognition_calls":  0,
+                         "purpose":  "Frozen P5R/P6R/H5/H6 verifier under document_level_baseline."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_neutral_verifier",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "p5r_initial",
+                           "execution_item_id":  "P5R_INITIAL",
+                           "input_file":  "p5r_initial.json",
+                           "input_sha256":  "ac2e854f5f88921e09a912b4fd4e004abf12c8d37402add875af41f34065cf85"
+                       },
+                       {
+                           "condition_id":  "p5r_same_trial_update",
+                           "execution_item_id":  "P5R_SAME_TRIAL_UPDATE",
+                           "input_file":  "p5r_same_trial_update.json",
+                           "input_sha256":  "0516aedc07607eff754a15948ff5a070ba7911fc9bd93a547085ce8088d4b038"
+                       },
+                       {
+                           "condition_id":  "p5r_independent_update",
+                           "execution_item_id":  "P5R_INDEPENDENT_UPDATE",
+                           "input_file":  "p5r_independent_update.json",
+                           "input_sha256":  "f7c390aaecd728b6b48d238c6307046793b4769548cf0ab104379702c132bc68"
+                       },
+                       {
+                           "condition_id":  "p5r_exact_repeat",
+                           "execution_item_id":  "P5R_EXACT_REPEAT",
+                           "input_file":  "p5r_exact_repeat.json",
+                           "input_sha256":  "1a6fbe5e8594c287035363ad8ab412a2543807e8f48c8e23d3be84810da2b47f"
+                       },
+                       {
+                           "condition_id":  "p6r_initial",
+                           "execution_item_id":  "P6R_INITIAL",
+                           "input_file":  "p6r_initial.json",
+                           "input_sha256":  "bb12613d8be6015af676200eb2654075eb17f1a10ac29cda4ef893d03c881db4"
+                       },
+                       {
+                           "condition_id":  "p6r_same_trial_update",
+                           "execution_item_id":  "P6R_SAME_TRIAL_UPDATE",
+                           "input_file":  "p6r_same_trial_update.json",
+                           "input_sha256":  "696fd4910eeeee88e25eb8d6012ae27a7bd8503a005688f2070c10f6ecf6279c"
+                       },
+                       {
+                           "condition_id":  "p6r_independent_update",
+                           "execution_item_id":  "P6R_INDEPENDENT_UPDATE",
+                           "input_file":  "p6r_independent_update.json",
+                           "input_sha256":  "8e5c08176d38399f772b2bf3be309b848401f2e5ed03180dbe5b3b85e7d7358b"
+                       },
+                       {
+                           "condition_id":  "p6r_exact_repeat",
+                           "execution_item_id":  "P6R_EXACT_REPEAT",
+                           "input_file":  "p6r_exact_repeat.json",
+                           "input_sha256":  "097d9176f165851af0dfe966e48e9c36289346b700f4e5db91d7e2aa21d5fff5"
+                       },
+                       {
+                           "condition_id":  "h5_initial",
+                           "execution_item_id":  "H5_INITIAL",
+                           "input_file":  "h5_initial.json",
+                           "input_sha256":  "1522df4a0aea9b6de05ce902b00c03c51a32198d0c6f56ce832bff5a65a66eb8"
+                       },
+                       {
+                           "condition_id":  "h5_same_trial_update",
+                           "execution_item_id":  "H5_SAME_TRIAL_UPDATE",
+                           "input_file":  "h5_same_trial_update.json",
+                           "input_sha256":  "29bc9d4fd4b14019c4ca47ab206aeae08f655e164641a325bc9d163548a99fd8"
+                       },
+                       {
+                           "condition_id":  "h5_out_of_scope",
+                           "execution_item_id":  "H5_OUT_OF_SCOPE",
+                           "input_file":  "h5_out_of_scope.json",
+                           "input_sha256":  "6e48b205f71716d71ffbe113963c7166debc3998af2c657b2dd8eafbd88b5ed7"
+                       },
+                       {
+                           "condition_id":  "h5_qualification",
+                           "execution_item_id":  "H5_QUALIFICATION",
+                           "input_file":  "h5_qualification.json",
+                           "input_sha256":  "9098f06e6c0375bb1c094e6916673c4aba5d2ef2ce3b6d67318739cba7bc2c8a"
+                       },
+                       {
+                           "condition_id":  "h5_exact_repeat",
+                           "execution_item_id":  "H5_EXACT_REPEAT",
+                           "input_file":  "h5_exact_repeat.json",
+                           "input_sha256":  "776cf7938d1aed0e3e60f7506bea51e40e8dcc0d456c2bbcd52326d27a6b220f"
+                       },
+                       {
+                           "condition_id":  "h6_initial",
+                           "execution_item_id":  "H6_INITIAL",
+                           "input_file":  "h6_initial.json",
+                           "input_sha256":  "d29ee752e5609d0d9bbdcecc4960c71b13ea9824ffe465ca3fafc0c32fdefe26"
+                       },
+                       {
+                           "condition_id":  "h6_same_trial_update",
+                           "execution_item_id":  "H6_SAME_TRIAL_UPDATE",
+                           "input_file":  "h6_same_trial_update.json",
+                           "input_sha256":  "bf8f6352bd1152bb64df22de39c360fab720298d2674f944420aa34798149219"
+                       },
+                       {
+                           "condition_id":  "h6_qualification",
+                           "execution_item_id":  "H6_QUALIFICATION",
+                           "input_file":  "h6_qualification.json",
+                           "input_sha256":  "ef37bff131eb5878efdd955f5debc0ad09522e65cdd2878ce361ccf73c177f3d"
+                       },
+                       {
+                           "condition_id":  "h6_exact_repeat",
+                           "execution_item_id":  "H6_EXACT_REPEAT",
+                           "input_file":  "h6_exact_repeat.json",
+                           "input_sha256":  "632553d9eaad7d8aa9d256a253ebdcd1df0e75ae1e1baa19f7644151ff25f40c"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

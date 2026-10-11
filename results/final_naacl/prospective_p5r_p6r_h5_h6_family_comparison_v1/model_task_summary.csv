@@ -1,0 +1,10 @@
+model,task_type,planned_calls,valid_calls,invalid_calls,validity_rate,invalid_output_rate
+GPT-5.5,recognition,50,50,0,1.0,0.0
+GPT-5.5,document_level,85,85,0,1.0,0.0
+GPT-5.5,grouped,85,85,0,1.0,0.0
+Qwen3-4B,recognition,50,50,0,1.0,0.0
+Qwen3-4B,document_level,85,85,0,1.0,0.0
+Qwen3-4B,grouped,85,75,10,0.8824,0.1176
+Gemma3-4B,recognition,50,50,0,1.0,0.0
+Gemma3-4B,document_level,85,70,15,0.8235,0.1765
+Gemma3-4B,grouped,85,75,10,0.8824,0.1176

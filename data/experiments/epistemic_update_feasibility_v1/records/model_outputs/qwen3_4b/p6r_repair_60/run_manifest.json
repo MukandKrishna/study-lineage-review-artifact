@@ -1,0 +1,10 @@
+{
+  "bundle_id": "epistemic_update_p6r_h6_impower130_repair_180_v1",
+  "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "planned_calls": 60,
+  "completed_calls": 60,
+  "valid_predictions": 55,
+  "invalid_records": 5,
+  "run_status": "complete"
+}

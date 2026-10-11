@@ -1,0 +1,18 @@
+{
+  "source_rows": 120,
+  "models": [
+    "GPT-5.5",
+    "Gemma3-4B",
+    "Qwen3-4B"
+  ],
+  "families": [
+    "P5R",
+    "P6R"
+  ],
+  "audit_scope": "Secondary semantic audit; primary strict/canonical validity and raw outputs are unchanged.",
+  "qwen_failures": {
+    "fail_same_trial_independent_flag": 20,
+    "pass": 15,
+    "fail_independent_flag_or_added_use": 5
+  }
+}

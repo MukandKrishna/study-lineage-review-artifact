@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "qwen3_4b_primary_10_family_v1_2026_09_28",
+  "created_at_utc": "2026-09-28T07:03:03.334145+00:00",
+  "model_calls_made_by_archiver": 0,
+  "status": "complete_strict_audit",
+  "preservation_policy": "Preserve the frozen inputs, extracted ledgers, strict invalid rows, hashes, and evaluation outputs without post-hoc repair. Raw execution archives are stored outside this repository.",
+  "raw_archives_external": true,
+  "derived_files": [
+    "predictions.jsonl",
+    "errors.jsonl",
+    "run_manifest.json",
+    "strict_family_results.csv",
+    "strict_evaluation_summary.json"
+  ]
+}

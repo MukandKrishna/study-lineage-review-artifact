@@ -1,0 +1,96 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison. For
+every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. Do not join separate spans, change words, or insert ellipses. An empty
+evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P5_DAPA_HF_KCCQ_PROVENANCE_V2_COMPARATIVE_INDEPENDENT_VS_REGISTRY_SAME_TRIAL_AB",
+  "claim_id": "P5V2_HFREF_DAPA_SYMPTOM_CLAIM",
+  "claim_text": "Among patients with heart failure and reduced ejection fraction, dapagliflozin improved heart-failure symptoms compared with placebo.",
+  "target_relation": "provenance",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P5V2_E1_DAPA_HF_TRIAL_DESIGN",
+      "source_group_id": "HF_KCCQ_SOURCE_DAPA_HF_NCT03036124",
+      "source_title": "Effects of Dapagliflozin on Symptoms, Function, and Quality of Life in Patients With Heart Failure and Reduced Ejection Fraction: Results From the DAPA-HF Trial",
+      "pmid": "31736335",
+      "doi": "10.1161/CIRCULATIONAHA.119.044138",
+      "trial_id": "NCT03036124",
+      "source_locator": "PMC methods, DAPA-HF trial design paragraph",
+      "passage_text": "DAPA-HF was a randomized, double-blind, controlled trial in patients with HFrEF, which evaluated the efficacy and safety of dapagliflozin 10 mg once daily, compared with matching placebo, added to standard care."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P5V2_E2_DAPA_HF_KCCQ_RESULT",
+      "source_group_id": "HF_KCCQ_SOURCE_DAPA_HF_NCT03036124",
+      "source_title": "Effects of Dapagliflozin on Symptoms, Function, and Quality of Life in Patients With Heart Failure and Reduced Ejection Fraction: Results From the DAPA-HF Trial",
+      "pmid": "31736335",
+      "doi": "10.1161/CIRCULATIONAHA.119.044138",
+      "trial_id": "NCT03036124",
+      "source_locator": "PubMed abstract results and conclusions",
+      "passage_text": "Results: Patients treated with dapagliflozin had greater improvement in mean KCCQ-TSS, clinical summary score, and overall summary score at 8 months (2.8, 2.5 and 2.3 points higher versus placebo; P<0.0001 for all).\n\nConclusions: Dapagliflozin reduced cardiovascular death and worsening heart failure across the range of baseline KCCQ, and improved symptoms, physical function, and quality of life in patients with heart failure and reduced ejection fraction."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "P5V2_U3_DETERMINE_REDUCED_RESULT",
+    "source_group_id": "HF_KCCQ_SOURCE_DETERMINE_REDUCED_NCT03877237",
+    "source_title": "Effect of Dapagliflozin Versus Placebo on Symptoms and 6-Minute Walk Distance in Patients With Heart Failure: The DETERMINE Randomized Clinical Trials",
+    "pmid": "38059368",
+    "doi": "10.1161/CIRCULATIONAHA.123.065061",
+    "trial_id": "NCT03877237",
+    "source_locator": "PubMed abstract DETERMINE-Reduced results, conclusion, and registration",
+    "passage_text": "Results: Among the 313 randomized patients with HF with reduced ejection fraction, the median placebo-corrected difference in KCCQ-TSS from baseline at 16 weeks was 4.2 (95% CI, 1.0, 8.2; P=0.022) in favor of dapagliflozin.\n\nConclusions: Dapagliflozin improved the KCCQ-TSS in patients with HF with reduced ejection fraction but did not improve KCCQ-PLS or 6MWD.\n\nRegistration: URL: https://www.clinicaltrials.gov; Unique identifiers: NCT03877237 and NCT03877224."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "P5V2_U2_DAPA_HF_REGISTRY_RESULT_RECORD",
+    "source_group_id": "HF_KCCQ_SOURCE_DAPA_HF_NCT03036124",
+    "source_title": "ClinicalTrials.gov Results Record for DAPA-HF",
+    "pmid": null,
+    "doi": null,
+    "trial_id": "NCT03036124",
+    "source_locator": "ClinicalTrials.gov API v2 identification, design, and KCCQ outcome-result fields; retrieved 2026-09-14",
+    "passage_text": "ClinicalTrials.gov Identifier: NCT03036124. Acronym: DAPA-HF. Allocation: RANDOMIZED. Intervention model: PARALLEL. Masking: QUADRUPLE.\n\nOutcome measure: Change From Baseline in the KCCQ Total Symptom Score. Time frame: Baseline and 8 months or death before 8 months. Higher scores reflect better health status. Dapa 10 mg: mean 6.1, standard deviation 18.6. Placebo: mean 3.3, standard deviation 19.2. Win ratio 1.18; 95% confidence interval 1.11 to 1.26; p<0.0001."
+  }
+}

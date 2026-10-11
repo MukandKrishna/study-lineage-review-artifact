@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_MATCHED_A",
+  "claim_id": "A2_HFREF_DAPA_SYMPTOM_CLAIM",
+  "claim_text": "Among patients with heart failure and reduced ejection fraction, dapagliflozin improved heart-failure symptoms compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "A2_E1_DAPA_HF_TRIAL_DESIGN_HFREF",
+      "source_group_id": "HF_KCCQ_SOURCE_DAPA_HF_NCT03036124",
+      "source_title": "Effects of Dapagliflozin on Symptoms, Function, and Quality of Life in Patients With Heart Failure and Reduced Ejection Fraction: Results From the DAPA-HF Trial",
+      "pmid": "31736335",
+      "doi": "10.1161/CIRCULATIONAHA.119.044138",
+      "trial_id": "NCT03036124",
+      "source_locator": "DAPA-HF methods passage",
+      "passage_text": "DAPA-HF was a randomized, double-blind, controlled trial in patients with HFrEF, which evaluated the efficacy and safety of dapagliflozin 10 mg once daily, compared with matching placebo, added to standard care."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "A2_E2_DAPA_HF_KCCQ_RESULT_HFREF",
+      "source_group_id": "HF_KCCQ_SOURCE_DAPA_HF_NCT03036124",
+      "source_title": "Effects of Dapagliflozin on Symptoms, Function, and Quality of Life in Patients With Heart Failure and Reduced Ejection Fraction: Results From the DAPA-HF Trial",
+      "pmid": "31736335",
+      "doi": "10.1161/CIRCULATIONAHA.119.044138",
+      "trial_id": "NCT03036124",
+      "source_locator": "PubMed abstract DAPA-HF KCCQ results and conclusion",
+      "passage_text": "Results: Patients treated with dapagliflozin had greater improvement in mean KCCQ-TSS, clinical summary score, and overall summary score at 8 months (2.8, 2.5 and 2.3 points higher versus placebo; P<0.0001 for all).\n\nConclusions: Dapagliflozin reduced cardiovascular death and worsening heart failure across the range of baseline KCCQ, and improved symptoms, physical function, and quality of life in patients with heart failure and reduced ejection fraction."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "A2_U1_DETERMINE_REDUCED_APPLICABLE_HFREF",
+    "source_group_id": "HF_KCCQ_SOURCE_DETERMINE_REDUCED_NCT03877237",
+    "source_title": "Effect of Dapagliflozin Versus Placebo on Symptoms and 6-Minute Walk Distance in Patients With Heart Failure: The DETERMINE Randomized Clinical Trials",
+    "pmid": "38059368",
+    "doi": "10.1161/CIRCULATIONAHA.123.065061",
+    "trial_id": "NCT03877237",
+    "source_locator": "PubMed abstract DETERMINE-Reduced methods, results, conclusion",
+    "passage_text": "Methods: The DETERMINE double-blind, placebo-controlled, multicenter trials assessed dapagliflozin on the KCCQ Total Symptom Score in 313 patients with heart failure with reduced ejection fraction.\n\nResults: The median placebo-corrected difference in KCCQ-TSS from baseline at 16 weeks was 4.2 (95% CI, 1.0, 8.2; P=0.022) in favor of dapagliflozin.\n\nConclusions: Dapagliflozin improved the KCCQ-TSS in patients with HF with reduced ejection fraction."
+  }
+}

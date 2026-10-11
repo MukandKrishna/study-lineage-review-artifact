@@ -1,0 +1,49 @@
+{
+  "experiment_id": "epistemic_update_heldout_combined_h3_statin_precedence_comparative_applicability_gpt55_v1",
+  "description": "H3 statin precedence comparative applicability recognition with A/B swap.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_heldout_combined_precedence_h3_statin_primary_prevention_v1/comparative_recognition_inputs_applicability",
+  "prompt_version": "epistemic_update_relation_comparative_recognition_v2_2",
+  "prompt_sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+  "response_schema": "epistemic_update_relation_comparative_recognition_v1",
+  "response_schema_sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_heldout_combined_h3_statin_precedence_comparative_applicability_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_heldout_combined_h3_statin_precedence_comparative_applicability_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 2,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 10,
+    "recognition_calls": 10,
+    "purpose": "Check H3 applicability recognition before any integration claim."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_comparative_recognition_judge",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "h3_statin_precedence_applicability_ab",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_COMPARATIVE_APPLICABILITY",
+      "input_file": "h3_statin_precedence_applicability_ab.json",
+      "input_sha256": "a068d6496f09dce119b0328a6f241970affcbfe780cc8e351126299f3869eea2",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "h3_statin_precedence_applicability_ba",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_COMPARATIVE_SWAPPED_APPLICABILITY",
+      "input_file": "h3_statin_precedence_applicability_ba.json",
+      "input_sha256": "25a01493abba797ce5239a3a09c7af5e162eb2d4371eafff7b9af06c73abaee7",
+      "expected_comparative_answer": "A"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after approved H3 comparative applicability recognition gate completed: 2 inputs x 5 repeats = 10 calls."
+}

@@ -1,0 +1,101 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_A1_PEMBROLIZUMAB_COMPARATIVE_APPLICABILITY_AB",
+  "claim_id": "CF_A1_PEMBROLIZUMAB_ADJUVANT_RFS_CLAIM",
+  "claim_text": "In patients with resected high-risk melanoma, adjuvant pembrolizumab improves recurrence-free survival compared with control.",
+  "target_relation": "applicability",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_A1_E1_KEYNOTE054_METHODS",
+      "source_title": "Adjuvant pembrolizumab versus placebo in resected stage III melanoma",
+      "pmid": "33857412",
+      "doi": "10.1016/S1470-2045(21)00065-6",
+      "trial_id": "NCT02362594",
+      "source_locator": "PubMed abstract Background and Methods sentences",
+      "passage_text": "Background: The European Organisation for Research and Treatment of Cancer (EORTC) 1325/KEYNOTE-054 trial assessed pembrolizumab versus placebo in patients with resected high-risk stage III melanoma. At 15-month median follow-up, pembrolizumab improved recurrence-free survival compared with placebo. Methods: Patients aged 18 years or older with complete resection of cutaneous melanoma metastatic to lymph node, classified as stage IIIA, IIIB, or IIIC, and with an Eastern Cooperative Oncology Group performance status of 0 or 1 were eligible."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_A1_E2_KEYNOTE054_RESULTS",
+      "source_title": "Adjuvant pembrolizumab versus placebo in resected stage III melanoma",
+      "pmid": "33857412",
+      "doi": "10.1016/S1470-2045(21)00065-6",
+      "trial_id": "NCT02362594",
+      "source_locator": "PubMed abstract recurrence-free survival and interpretation sentences",
+      "passage_text": "Recurrence-free survival remained longer in the pembrolizumab group than the placebo group at this 3.5-year follow-up in the ITT population. Interpretation: Pembrolizumab adjuvant therapy provided a significant and clinically meaningful improvement in distant metastasis-free survival at a 3.5-year median follow-up, which was consistent with the improvement in recurrence-free survival."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "CF_A1_UA_SWOGS1404_RESULTS",
+    "source_title": "Adjuvant pembrolizumab versus interferon alfa-2b or ipilimumab in resected high-risk melanoma",
+    "pmid": "34764195",
+    "doi": "10.1158/2159-8290.CD-21-1141",
+    "trial_id": "S1404",
+    "source_locator": "PubMed abstract methods and results sentences",
+    "passage_text": "We conducted a randomized phase III trial to evaluate whether adjuvant pembrolizumab for one year improved recurrence-free survival or overall survival in comparison with high-dose interferon alfa-2b for one year or ipilimumab for up to three years, the approved standard-of-care adjuvant immunotherapies at the time of enrollment for patients with high-risk resected melanoma. At a median follow-up of 47.5 months, pembrolizumab was associated with significantly longer RFS than prior standard-of-care adjuvant immunotherapies."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "CF_A1_UB_KEYNOTE006_RESULTS",
+    "source_title": "Pembrolizumab versus ipilimumab for advanced melanoma: final overall survival results",
+    "pmid": "28822576",
+    "doi": "10.1016/S0140-6736(17)31601-X",
+    "trial_id": "NCT01866319",
+    "source_locator": "PubMed abstract Methods, Findings, and Interpretation sentences",
+    "passage_text": "Methods: Eligible patients were at least 18 years old, with an Eastern Cooperative Oncology Group performance status of 0 or 1, at least one measurable lesion, unresectable stage III or IV melanoma, and up to one previous systemic therapy. Findings: Median overall survival was not reached in either pembrolizumab group and was 16.0 months with ipilimumab. Interpretation: Pembrolizumab continued to provide superior overall survival versus ipilimumab, with no difference between pembrolizumab dosing schedules."
+  }
+}

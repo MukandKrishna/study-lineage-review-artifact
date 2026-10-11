@@ -1,0 +1,813 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16",
+  "created_at_utc": "2026-09-16T17:45:48.526712+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve exact prompts, prompt versions, model/version and settings, exact model inputs, rendered prompts, raw outputs, parsed outputs, repetitions, errors/retries, A/B assignments, token logs where available, source records, family-change records, and the pre-call acceptance matrix.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_record_archive.json",
+    "bytes": 2259,
+    "sha256": "0658fafbf0a97ea66a0929d8bfef2d3571d2a9698b41dcb70a681c5b92111abb",
+    "last_write_time_utc": "2026-09-16T17:45:29.617177+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2133,
+      "sha256": "0c016e52596e1bc2ef698e52000b9f330bdfa710182dcde1a51b927814c29a38",
+      "last_write_time_utc": "2026-09-16T17:45:29.593107+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 3253,
+      "sha256": "5bc0e4b4a145b78955b92f48139f4223d15823e0560d3e69d57b591bf82b0bb3",
+      "last_write_time_utc": "2026-09-16T17:45:29.609768+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1.json",
+      "bytes": 3842,
+      "sha256": "4660a4f4649a55d633cf78e9db353e6f12b30cb0870edb2022ce467f271e1072",
+      "last_write_time_utc": "2026-09-16T17:45:29.609768+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_2.txt",
+      "bytes": 2718,
+      "sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+      "last_write_time_utc": "2026-09-16T07:25:50.409464+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_initial_gate_neutral_verifier_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X0",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_initial_gate_neutral_verifier_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X0.txt",
+      "rendered_prompt_sha256": "d4eb14e55e93895a8ce58a7dbbdfa355b6e4e1c2bc4e852d1e145723e3c7485d",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X1",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_applicable_adult_weight_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X1.txt",
+      "rendered_prompt_sha256": "a2efb9a76f9c358151955783d2ebcfe8b8203a1607fc1534134a3f715aa07398",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X2",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_out_of_scope_adolescent_positive",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X2.txt",
+      "rendered_prompt_sha256": "a51b92737cef132db944ddc6b45be3130504e63a8a6c74b11dba81b10ed55a64",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X3",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_endpoint_scope_distractor",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X3.txt",
+      "rendered_prompt_sha256": "d545a8fa617a2f565fe422c33a1cd999ee1bb2a90bef24ed57f00615e112768b",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X4",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_null_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_updates_neutral_verifier_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X4.txt",
+      "rendered_prompt_sha256": "b6c7750bda153cea59847e65c88cf00ed40247b52cf30a0ace97fe6c391c35e2",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_ADULT_WEIGHT_VS_ADOLESCENT_POSITIVE",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_adult_weight_vs_adolescent_positive_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_ADULT_WEIGHT_VS_ADOLESCENT_POSITIVE.txt",
+      "rendered_prompt_sha256": "e914fa1b30fc3a549c3234f12992b73f3ab5e9fc28c1536b279dee9dd8c9393d",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_SWAPPED_ADULT_WEIGHT_VS_ADOLESCENT_POSITIVE",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_adult_weight_vs_adolescent_positive_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_SWAPPED_ADULT_WEIGHT_VS_ADOLESCENT_POSITIVE.txt",
+      "rendered_prompt_sha256": "4392b8a3088eb2f35ec67958aa4f2acce917353c960029bf2b2f6fdf2dfaa41c",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_ADULT_WEIGHT_VS_CV_ENDPOINT",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_adult_weight_vs_cv_endpoint_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_ADULT_WEIGHT_VS_CV_ENDPOINT.txt",
+      "rendered_prompt_sha256": "ce51df465feac39b3b4717e4156251405d72ba33cd9bdba3f02f4e5731cca2fc",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1",
+      "execution_item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_SWAPPED_ADULT_WEIGHT_VS_CV_ENDPOINT",
+      "condition_id": "h2_semaglutide_obesity_scope_transfer_adult_weight_vs_cv_endpoint_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\heldout_semaglutide_obesity_scope_transfer_v1_2026_09_16\\rendered_prompts\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_gpt55_v1\\H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_COMPARATIVE_SWAPPED_ADULT_WEIGHT_VS_CV_ENDPOINT.txt",
+      "rendered_prompt_sha256": "3a0a6c93ce1ea826f36f6a79218fb203cc3ece0a63e1c6c94bc68ae8eee2de5f",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\acceptance_matrix.csv",
+      "bytes": 1719,
+      "sha256": "0ce5fac88b2a8617fdab8212c7b1c82cdef3f6379f1f8dc6770f06b61be5f146",
+      "last_write_time_utc": "2026-09-16T17:45:29.609768+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\authoring_records\\h2_semaglutide_obesity_scope_transfer.json",
+      "bytes": 14670,
+      "sha256": "ea824ac8df4855f5869b1a4287894fafaa3d78e361dd281b3cb6ba97592a8630",
+      "last_write_time_utc": "2026-09-16T17:45:29.576441+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\construction_audit_table.csv",
+      "bytes": 1261,
+      "sha256": "2ea87513e56f187dba7dbe7134a3245d25871ab0441ff5bf5335b5a1d7d5a38e",
+      "last_write_time_utc": "2026-09-16T17:45:29.609768+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\offline_validation_report.json",
+      "bytes": 215,
+      "sha256": "6642ab9336a892333f9d82589d65c56a8d7a53ccd235a737784ccab5ea567723",
+      "last_write_time_utc": "2026-09-16T17:45:29.615163+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\source_verification_record.json",
+      "bytes": 1829,
+      "sha256": "3aa5f8a85f9cab204fbb846943235ad0f4ba123bf4c8a27983cf66c69220467f",
+      "last_write_time_utc": "2026-09-16T17:45:29.609768+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\comparative_recognition_inputs_applicability\\h2_semaglutide_obesity_scope_transfer_adult_weight_vs_adolescent_positive_ab.json",
+      "bytes": 4719,
+      "sha256": "c501fcb2f70970c91f25e01bfccf0c1dbd9758bfc56ed3858eeebb59b2b88249",
+      "last_write_time_utc": "2026-09-16T17:45:29.593107+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\comparative_recognition_inputs_applicability\\h2_semaglutide_obesity_scope_transfer_adult_weight_vs_adolescent_positive_ba.json",
+      "bytes": 4727,
+      "sha256": "23ed327c4da29be72ca977691f6a4e2c999ea780fbe9420d14cae56893d16658",
+      "last_write_time_utc": "2026-09-16T17:45:29.593107+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\comparative_recognition_inputs_applicability\\h2_semaglutide_obesity_scope_transfer_adult_weight_vs_cv_endpoint_ab.json",
+      "bytes": 4858,
+      "sha256": "79896e1701af0d1198e198980470e85f107351263e98493eb33ade758d8c06a7",
+      "last_write_time_utc": "2026-09-16T17:45:29.593107+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\comparative_recognition_inputs_applicability\\h2_semaglutide_obesity_scope_transfer_adult_weight_vs_cv_endpoint_ba.json",
+      "bytes": 4866,
+      "sha256": "642013210540fd21d8ebdd41ba84550a4cadf44d0718349d419a69c40f1a7bc0",
+      "last_write_time_utc": "2026-09-16T17:45:29.593107+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\run_plan_manifest.json",
+      "bytes": 743,
+      "sha256": "6a9fd8601ed8ea0f4583453c754dca6974d774ca9df2c2c51a0f105f50db4acd",
+      "last_write_time_utc": "2026-09-16T17:45:29.615163+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\verifier_inputs_initial_gate\\h2_semaglutide_obesity_scope_transfer_initial.json",
+      "bytes": 2103,
+      "sha256": "fc8c346a39cc5b18804fe5e07b430b347ff502603b532228a04c2612491e22ba",
+      "last_write_time_utc": "2026-09-16T17:45:29.576441+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\verifier_inputs_updates\\h2_semaglutide_obesity_scope_transfer_applicable_adult_weight_update.json",
+      "bytes": 3244,
+      "sha256": "62f8357feded8e10fe7208d3fd88006fa87dc3dbd3a88dd21a6bd5aa0fbb2424",
+      "last_write_time_utc": "2026-09-16T17:45:29.576441+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\verifier_inputs_updates\\h2_semaglutide_obesity_scope_transfer_endpoint_scope_distractor.json",
+      "bytes": 3626,
+      "sha256": "9faed418009c736cac1e0b93bd245982f05f37da56167d545521b2233c376f69",
+      "last_write_time_utc": "2026-09-16T17:45:29.592142+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\verifier_inputs_updates\\h2_semaglutide_obesity_scope_transfer_null_control.json",
+      "bytes": 2863,
+      "sha256": "4bf86b78b5ca39b2cea0744845430809e50afc8273b55797af045d794c4d0d1f",
+      "last_write_time_utc": "2026-09-16T17:45:29.593107+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_heldout_semaglutide_obesity_scope_transfer_v1\\verifier_inputs_updates\\h2_semaglutide_obesity_scope_transfer_out_of_scope_adolescent_positive.json",
+      "bytes": 3479,
+      "sha256": "02056b39ab62d6dee5e7025dad4aec4c3f88e1ce7df8c00d838bf493584200e9",
+      "last_write_time_utc": "2026-09-16T17:45:29.576441+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_heldout_semaglutide_obesity_scope_transfer_initial_v1.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_heldout_semaglutide_obesity_scope_transfer_updates_v1.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_v1.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_heldout_semaglutide_obesity_scope_transfer_initial_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_heldout_semaglutide_obesity_scope_transfer_updates_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_heldout_semaglutide_obesity_scope_transfer_comparative_applicability_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T035845Z_2c0d971bb1f9.json",
+      "bytes": 12010,
+      "sha256": "2c0d971bb1f9d2bbfda0f29ec5be151f52fd15f9a474ad2d152d70cfb0d8490b",
+      "last_write_time_utc": "2026-09-10T03:56:39.218516+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T035846Z_a595a937b403.md",
+      "bytes": 3551,
+      "sha256": "a595a937b4031371a3cdc7e4a2400bbbd20741f702d7e0d6e04e8c607133e8c1",
+      "last_write_time_utc": "2026-09-10T03:56:39.218516+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T040011Z_435073821508.md",
+      "bytes": 3903,
+      "sha256": "4350738215084829acc0f2b3e67a2b05f592a3a20f91e4d1b31c7a96a03c6bb9",
+      "last_write_time_utc": "2026-09-10T03:58:46.006150+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T040011Z_f7dc2f24f643.json",
+      "bytes": 12010,
+      "sha256": "f7dc2f24f643d8bab5edf6e68ea4a4f912761f38fd56205aab7f50df737825bc",
+      "last_write_time_utc": "2026-09-10T03:58:46.005489+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_dapa_hf_kccq_comparative_recognition_v1\\REPORT.md",
+      "bytes": 1286,
+      "sha256": "5a0d53a86a7c53a1ebf4ff0d67503738afaab5123d6313f87f979a26a32b6e11",
+      "last_write_time_utc": "2026-09-15T08:36:19.900853+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_dapa_hf_kccq_comparative_recognition_v1\\summary.json",
+      "bytes": 1293,
+      "sha256": "5670e552ed5d9578cf9d02a6eec71c6b69d6a0547599e8a8a6078e0026d37dae",
+      "last_write_time_utc": "2026-09-15T08:36:17.094350+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_dapa_hf_kccq_verifier_v1\\REPORT.md",
+      "bytes": 2271,
+      "sha256": "7c6df277bc11820b9d6a28186169434515c2eaf7d985de49aec65fc25e91c0f5",
+      "last_write_time_utc": "2026-09-15T08:32:01.213886+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_dapa_hf_kccq_verifier_v1\\summary.json",
+      "bytes": 3035,
+      "sha256": "95946193939e2c3e59e7419f12e99f3b908f0e804de60566fe5919e8a9c25985",
+      "last_write_time_utc": "2026-09-15T08:31:58.649694+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_direction_o2sat_mortality_comparative_recognition_v1\\REPORT.md",
+      "bytes": 590,
+      "sha256": "a354c5b1730e56be289467039b8b709557508bf53d19daaba77495ebc3b1fb31",
+      "last_write_time_utc": "2026-09-15T14:02:57.637146+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_direction_o2sat_mortality_comparative_recognition_v1\\summary.json",
+      "bytes": 1100,
+      "sha256": "af5124e435ad555585bd34f4390ac1b17b3e0a9df6aa37fb43ddea4609d65b4c",
+      "last_write_time_utc": "2026-09-15T14:02:57.603809+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_direction_o2sat_mortality_initial_gate_neutral_verifier_v1\\REPORT.md",
+      "bytes": 534,
+      "sha256": "041f456078d4bc26fff179d399af697910e004b4b2c8a8e63596a913336bf92a",
+      "last_write_time_utc": "2026-09-15T13:43:44.248687+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_direction_o2sat_mortality_initial_gate_neutral_verifier_v1\\summary.json",
+      "bytes": 1013,
+      "sha256": "1070c9527dac845d81c7336cf45a3e3e7d20f143f84b648d1b6c6e13020f0fc8",
+      "last_write_time_utc": "2026-09-15T13:43:44.223923+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_direction_o2sat_mortality_updates_neutral_verifier_v1\\REPORT.md",
+      "bytes": 720,
+      "sha256": "cd0d252bfb5a4c2a61ac3fafac4f9fad4e9e0e6c107eaaa5c7197871a7c67503",
+      "last_write_time_utc": "2026-09-15T13:54:35.860170+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_direction_o2sat_mortality_updates_neutral_verifier_v1\\summary.json",
+      "bytes": 2274,
+      "sha256": "a154d8b9b1398e7678934c586a8ed3c8f9db0b9c4e1159c352c32e172edda867",
+      "last_write_time_utc": "2026-09-15T13:54:35.860170+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v1\\_history\\REPORT_20260916T071831Z_ba4997dd42b8.md",
+      "bytes": 630,
+      "sha256": "ba4997dd42b80ac1c1e6b6a47ceba2c39b5e4c21002bfa64cc578499a21821ab",
+      "last_write_time_utc": "2026-09-16T07:16:24.113682+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v1\\_history\\REPORT_20260916T072000Z_6503246f5c87.md",
+      "bytes": 632,
+      "sha256": "6503246f5c87d55a071b246d04958bc25308b95be327a00a8f78614f7fd4665c",
+      "last_write_time_utc": "2026-09-16T07:18:31.731323+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v1\\_history\\summary_20260916T071831Z_cc556289923f.json",
+      "bytes": 1141,
+      "sha256": "cc556289923fc0b50d547ef795046b76adb1afe6b10482f049a35c322f96630a",
+      "last_write_time_utc": "2026-09-16T07:16:24.111660+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v1\\_history\\summary_20260916T072000Z_8ba1a05daef2.json",
+      "bytes": 1143,
+      "sha256": "8ba1a05daef2b265488d35aca12230fd5836f1df67d990213b9c608b9d5b49eb",
+      "last_write_time_utc": "2026-09-16T07:18:31.731323+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v1\\REPORT.md",
+      "bytes": 632,
+      "sha256": "af9e8021981b1b6694fd6429f5c2ede16f911735287c9525edd083afecd0e321",
+      "last_write_time_utc": "2026-09-16T07:20:00.466946+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v1\\summary.json",
+      "bytes": 1143,
+      "sha256": "5b6599e84543c649899fcb20a4a0485ec629fef051903925786007e00d0c25b9",
+      "last_write_time_utc": "2026-09-16T07:20:00.464060+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v2\\REPORT.md",
+      "bytes": 633,
+      "sha256": "879d86b8766ff3b01f1cb68e314fb522ee595e217d8eb980a52ba99c45f7f436",
+      "last_write_time_utc": "2026-09-16T07:29:47.207280+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_applicability_v2\\summary.json",
+      "bytes": 1143,
+      "sha256": "861397ad0c78e0e55d0ea1d0d8903968695ffa28c848914559849a80e6ab6a81",
+      "last_write_time_utc": "2026-09-16T07:29:47.207280+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_direction_v1\\REPORT.md",
+      "bytes": 621,
+      "sha256": "254403f0aa127e26ef7d0e23a833bf9a61c51a241ea27c871dbf15f5497a14b3",
+      "last_write_time_utc": "2026-09-16T07:40:16.722294+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_comparative_direction_v1\\summary.json",
+      "bytes": 1131,
+      "sha256": "451239b613322d328c3ff96632e6b55672220d328dbf818b0288126570ee9207",
+      "last_write_time_utc": "2026-09-16T07:40:16.722294+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_initial_gate_neutral_verifier_v1\\REPORT.md",
+      "bytes": 554,
+      "sha256": "ff01e224975973ff240c29b8f7522076b0c30fe789e8c3b45a3a012596a7c4a2",
+      "last_write_time_utc": "2026-09-15T14:39:49.746421+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_initial_gate_neutral_verifier_v1\\summary.json",
+      "bytes": 1033,
+      "sha256": "190591aaad70a06d61cf8d8f395b22f054befea25e519085e6ec90499dbe53dc",
+      "last_write_time_utc": "2026-09-15T14:39:49.712843+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_updates_neutral_verifier_v1\\REPORT.md",
+      "bytes": 768,
+      "sha256": "8eb77496d30d233635552c47ac334a4c64996c3bbacb4aae38dabbb6821bfcbf",
+      "last_write_time_utc": "2026-09-15T15:01:50.058575+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_heldout_asthma_digital_combined_updates_neutral_verifier_v1\\summary.json",
+      "bytes": 2320,
+      "sha256": "6a719334baf393ae17f499e509a3e0169a4f95feeef6e280f1092c12b99a2fd7",
+      "last_write_time_utc": "2026-09-15T15:01:50.058037+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v1\\REPORT.md",
+      "bytes": 512,
+      "sha256": "9bc20faf8189ff617d179f264740138da7a6479ba9d91011b93bf18513d8e267",
+      "last_write_time_utc": "2026-09-09T10:25:15.942716+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v1\\summary.json",
+      "bytes": 1022,
+      "sha256": "c7f0d279aafbf05b1b2f1cd3c8efef424d67fcb6e7e9e4b4e4744ddd342e7be0",
+      "last_write_time_utc": "2026-09-09T10:25:15.941679+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v2\\REPORT.md",
+      "bytes": 512,
+      "sha256": "9a6706dad33544d07ff2bae81c1f1238d161e2bb46d0bc376abf878ed590462e",
+      "last_write_time_utc": "2026-09-10T03:54:05.654217+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v2\\summary.json",
+      "bytes": 1022,
+      "sha256": "edd222e8938f232030f5693943a2b762984adb5d0cd44657fac9d1bc93931b20",
+      "last_write_time_utc": "2026-09-10T03:54:05.654217+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v1\\REPORT.md",
+      "bytes": 695,
+      "sha256": "a04cbaeaec7a6a07c1860ceacb68db8eefb281e35b4d4f5d29492da21dd585fe",
+      "last_write_time_utc": "2026-09-09T10:19:39.881824+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v1\\summary.json",
+      "bytes": 2782,
+      "sha256": "ba8d7959f79351e8ded70bc32c46b9cf503c530222a91a0486a777002fe851c3",
+      "last_write_time_utc": "2026-09-09T10:19:39.880822+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v2\\REPORT.md",
+      "bytes": 695,
+      "sha256": "53295efa20017557db2f8c1c7aa2128f07845c7ab0eed8207d7087bce13b0482",
+      "last_write_time_utc": "2026-09-10T03:51:46.167185+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v2\\summary.json",
+      "bytes": 2782,
+      "sha256": "81574fdf73f9f612620d26de902a99d6d4ce7c51ca420e45a5ae7e1d7b044bd0",
+      "last_write_time_utc": "2026-09-10T03:51:46.167185+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_dapa_hf_kccq_v2_independent_neutral_verifier_v1\\REPORT.md",
+      "bytes": 547,
+      "sha256": "ec6b179ab5ae1d03a55b5700074824d941399bfaeb1302974a48fb89402d1997",
+      "last_write_time_utc": "2026-09-15T14:15:21.007011+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_dapa_hf_kccq_v2_independent_neutral_verifier_v1\\summary.json",
+      "bytes": 1026,
+      "sha256": "b70cb18da94e9fd80078c42cfadac48db85fb7775fdb318873fcbe93d7376020",
+      "last_write_time_utc": "2026-09-15T14:15:21.007011+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_dapa_hf_kccq_v2_initial_gate_neutral_verifier_v1\\REPORT.md",
+      "bytes": 538,
+      "sha256": "7c03ce1475ce439379e0306076212e434df4e205ea7fb3bab18b1df8cf0b12b0",
+      "last_write_time_utc": "2026-09-15T14:08:15.841367+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_dapa_hf_kccq_v2_initial_gate_neutral_verifier_v1\\summary.json",
+      "bytes": 1017,
+      "sha256": "066fbfb0daddad7addec182ad1bed3ec285dbe66bf2ad34fd7500d04f16fa736",
+      "last_write_time_utc": "2026-09-15T14:08:15.839358+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_dapa_hf_kccq_v2_null_controls_neutral_verifier_v1\\REPORT.md",
+      "bytes": 669,
+      "sha256": "41d3cea1dbbbd80ae3dec256115965bd39a178123e88566c44e6af9dcd36c623",
+      "last_write_time_utc": "2026-09-15T14:12:40.226854+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_dapa_hf_kccq_v2_null_controls_neutral_verifier_v1\\summary.json",
+      "bytes": 1684,
+      "sha256": "e9628c3d66da70c8de9604536e9251abe57edf93fbc15fad9dd1979ee28754da",
+      "last_write_time_utc": "2026-09-15T14:12:40.226854+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_neutral_verifier_v1\\REPORT.md",
+      "bytes": 1007,
+      "sha256": "35ea13f670a7a252de49361ed6a989c8db6458874e70ab21a366b3875b490227",
+      "last_write_time_utc": "2026-09-14T15:11:48.644121+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_neutral_verifier_v1\\summary.json",
+      "bytes": 3636,
+      "sha256": "5c9891d980c3e9e622810ce541f0f34a63d63743a41e731264f5bdf776c846ee",
+      "last_write_time_utc": "2026-09-14T15:11:27.450661+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_v2_h1_null_controls_neutral_verifier_v1\\REPORT.md",
+      "bytes": 859,
+      "sha256": "bf065ff5283dce14262a8a2448a492cafad543fb33b943d936d56435ac4d1d6d",
+      "last_write_time_utc": "2026-09-14T15:39:44.997151+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_v2_h1_null_controls_neutral_verifier_v1\\summary.json",
+      "bytes": 2419,
+      "sha256": "5dedc9d1e81ab6a4630918f56d6cef7bb19cf4f2f165aa9f25feae4195998f00",
+      "last_write_time_utc": "2026-09-14T15:39:37.650553+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_comparative_recognition_v1\\REPORT.md",
+      "bytes": 975,
+      "sha256": "b39cd58d9998fd2f493359dd25a353319d662b7f259a81ace43dbb13b3bd4af5",
+      "last_write_time_utc": "2026-09-16T12:47:49.147236+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_comparative_recognition_v1\\summary.json",
+      "bytes": 2021,
+      "sha256": "ab2e2ea3881db6f13914b80e2b52cfcae1cf8d383e9aa5b466243271a8e9325b",
+      "last_write_time_utc": "2026-09-16T12:47:49.114364+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_independent_v1\\REPORT.md",
+      "bytes": 555,
+      "sha256": "386431d2ab7a4cfc13a01b08164cb14d93d25233fec3a89c4677d02e912d0981",
+      "last_write_time_utc": "2026-09-16T12:37:17.123193+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_independent_v1\\summary.json",
+      "bytes": 1034,
+      "sha256": "033e201e8383600a4d3eedd653dadeafae15428ec0c2ebdac3a55c780e82aba3",
+      "last_write_time_utc": "2026-09-16T12:37:17.123193+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_initial_gate_v1\\REPORT.md",
+      "bytes": 546,
+      "sha256": "6a1c35e00ce7baa95b1a8f429798133972002f8f91d9502ead5f57ba6a7ab7ac",
+      "last_write_time_utc": "2026-09-16T12:26:14.348251+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_initial_gate_v1\\summary.json",
+      "bytes": 1025,
+      "sha256": "53a612aaa02ba6783064071e37d31cb7dd51b1231b4a9da43143c3abb822bd19",
+      "last_write_time_utc": "2026-09-16T12:26:14.308784+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_null_controls_v1\\REPORT.md",
+      "bytes": 679,
+      "sha256": "16154ba52c9e524b93c52aed2e1e4caa8b3c3fcf8dc8805ab13d79b026b0883a",
+      "last_write_time_utc": "2026-09-16T12:32:56.822191+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_sglt2_hfref_outcomes_null_controls_v1\\summary.json",
+      "bytes": 1694,
+      "sha256": "311c5045bea5c5021c2e17652577a9f83ce3c976f484be7e4bacbafb68bf6e32",
+      "last_write_time_utc": "2026-09-16T12:32:56.777488+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1\\REPORT.md",
+      "bytes": 1532,
+      "sha256": "2fd9f8f0306e74d83bec79702ab7271d44397913e7f0dfdeb110a639142ae816",
+      "last_write_time_utc": "2026-09-10T14:34:51.653790+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1\\summary.json",
+      "bytes": 7918,
+      "sha256": "1ea80768b07b4bc7a0c1e84ff2cb3b88df3dd87375f9837efb972522c78b5cfd",
+      "last_write_time_utc": "2026-09-10T14:25:38.459549+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1_partial\\REPORT.md",
+      "bytes": 1576,
+      "sha256": "720d50ce1be49661e24fc0e60b72d78f7ae26844cfb01e9502c9355040a34eb4",
+      "last_write_time_utc": "2026-09-10T14:10:19.637493+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1_partial\\summary.json",
+      "bytes": 7871,
+      "sha256": "1eea0f7e6b5b29e9e48717272076c84039cdf704750ba0e66e77b64edeb4e47b",
+      "last_write_time_utc": "2026-09-10T14:10:19.621890+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_V1_V2_PROMPT_COMPARISON.json",
+      "bytes": 12010,
+      "sha256": "1d4c1b154f418dbff2f9d5004c4b3641e9c9ca29532c1c34a98d89804fda5cca",
+      "last_write_time_utc": "2026-09-10T04:00:11.577218+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_V1_V2_PROMPT_COMPARISON.md",
+      "bytes": 3903,
+      "sha256": "530f70f986f1917b38dd20e42c2ab79e79b4acde05091575447cc2d70703e93b",
+      "last_write_time_utc": "2026-09-10T04:00:11.580125+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_VERIFIER_VS_COMPARATIVE_DIAGNOSTIC_SUMMARY.md",
+      "bytes": 17646,
+      "sha256": "9a4cd723b772774ef0a0f066a8d9c84677b33c565abf1cc3fea52b6e39fe5315",
+      "last_write_time_utc": "2026-09-10T03:29:47.552965+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 13619,
+      "sha256": "f600a126a83faf73ed1d8913668d2349a6347e0b178a59b0604918c90eadf42e",
+      "last_write_time_utc": "2026-09-10T14:11:32.237794+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 16380,
+      "sha256": "6f8539ae31ae2daa4a1f68a40032e9da80fb1ed542cb6341710aa3953fe1e6db",
+      "last_write_time_utc": "2026-09-10T14:11:48.288664+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11359,
+      "sha256": "79d42ff2c8927496b32114f0ac7593bac7841d56046c48333f475b8dde747bd4",
+      "last_write_time_utc": "2026-09-16T07:43:57.691382+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\64_build_semaglutide_obesity_scope_transfer_family.py",
+      "bytes": 50735,
+      "sha256": "2ec9b80c87baa5141259356b9e6fb3db1cfb0eb6fb9885ecdfe49a86b6201eb2",
+      "last_write_time_utc": "2026-09-16T17:43:41.996046+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 15398,
+      "sha256": "c58ae358cfba7052837172fbc2a19a63418c33afc1f27d2345f454d40356e253",
+      "last_write_time_utc": "2026-09-02T13:54:40.590589+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 7773,
+      "sha256": "d39ec34ae90ea38fa1619f4aa13e8fbe1f044f0e4209dff4f856b312fe84d3b3",
+      "last_write_time_utc": "2026-09-10T03:29:35.473060+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_multi_evidence_schemas.py",
+      "bytes": 34781,
+      "sha256": "0644d5bd40016b6ade0b4e422cdfb3284c28dfd342e4358e38c35bbb70b0af51",
+      "last_write_time_utc": "2026-09-02T19:40:42.227848+00:00"
+    }
+  ],
+  "project_notes": []
+}

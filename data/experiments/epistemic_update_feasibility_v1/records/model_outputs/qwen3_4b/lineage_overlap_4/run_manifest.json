@@ -1,0 +1,10 @@
+{
+  "bundle_id": "epistemic_update_lineage_overlap_policy_defined_28_v1_promise_arise_draft",
+  "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "planned_calls": 4,
+  "completed_calls": 4,
+  "valid_predictions": 4,
+  "invalid_records": 0,
+  "run_status": "complete"
+}

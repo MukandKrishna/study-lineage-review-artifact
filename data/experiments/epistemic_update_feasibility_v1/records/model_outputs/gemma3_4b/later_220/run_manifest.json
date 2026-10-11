@@ -1,0 +1,7 @@
+{
+  "bundle_id": "epistemic_update_p5r_p6r_h5_h6_combined_220_h5_repaired_v1",
+  "model_id": "google/gemma-3-4b-it",
+  "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+  "completed_calls": 220,
+  "planned_calls": 220
+}

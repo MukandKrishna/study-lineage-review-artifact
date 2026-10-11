@@ -1,0 +1,44 @@
+You are identifying how newly added medical evidence relates to an existing evidence set and a
+fixed medical claim.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts. The initial
+evidence and added evidence are a matched comparison. Assess the following three relations
+separately without deciding how the final claim verdict should change.
+
+This task requires a non-null added_evidence item.
+
+Use these provenance_relation labels:
+- independent: the added evidence reports a genuinely separate study or non-overlapping cohort.
+- not_independent: the added evidence derives from the same underlying trial, study, or cohort as
+  material in the initial evidence set.
+- unclear: the supplied text and metadata do not establish independence.
+
+Use these applicability_relation labels:
+- applicable: the added evidence addresses the claim's required population, intervention,
+  comparator, outcome, and relevant time frame closely enough to inform the claim.
+- not_applicable: at least one required element is explicitly mismatched, so the added evidence
+  cannot decide the claim as written.
+- unclear: the supplied text and metadata do not establish applicability.
+
+Use these direction_relation labels:
+- agrees: for the intervention/comparator/outcome it reports, the added evidence has the same
+  direction as the initial evidence.
+- conflicts: for the intervention/comparator/outcome it reports, the added evidence has the
+  opposing direction.
+- unclear: the reported direction cannot be established, including when a decisive result is absent.
+
+Judge direction separately from applicability. A passage may report the same numerical direction
+while remaining inapplicable to the claim's population or setting.
+
+For metadata_basis, list only displayed identifiers or source facts used for the provenance
+decision. For every evidence_basis entry, copy one contiguous, character-for-character substring
+from the corresponding passage_text. Do not join spans, change words, or insert ellipses. An empty
+evidence_basis list is allowed when the supplied passages do not establish a relation.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give one concise reason; do not provide hidden chain-of-thought. Do not recommend or reveal a final
+verifier label or score.
+
+MODEL INPUT:
+{model_input_json}

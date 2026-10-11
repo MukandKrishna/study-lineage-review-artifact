@@ -1,0 +1,11 @@
+family,relation,strict_valid,recognition_core,recognition_strict,integration_audit,strict_family_outcome,clean_claim_eligible
+CF-P1,provenance,30/30,10/10,10/10,same-trial over-credited 5/5,recognition_only,yes
+CF-P2,provenance,10/30,10/10,10/10,all verifier inputs strict-invalid; raw same-trial over-credit 5/5,recognition_only,no: initial invalid
+CF-P3,provenance,25/30,10/10,10/10,same-trial over-credited 5/5; repeat control invalid,recognition_only,"yes, control caveat"
+CF-A1,applicability,30/30,10/10,10/10,applicable used 5/5; mismatch ignored 5/5,joint_pass,yes
+CF-A2,applicability,30/30,10/10,10/10,applicable used 5/5; mismatch ignored 5/5,joint_pass,yes
+CF-A3,applicability,20/30,10/10,10/10,mismatch ignored 5/5; applicable update ignored and invalid 5/5,recognition_only,no
+CF-D1,direction,15/30,5/10,0/10,challenge mixed/conflict in raw 5/5 but invalid; recognition order failure,joint_fail,no
+CF-D2,direction,30/30,5/10,5/10,challenge mixed/conflict 5/5; recognition correct in one order only,integration_only,"yes, order-sensitivity result"
+CF-D3,direction,25/30,10/10,10/10,agreeing/challenging updates pass; repeat control invalid,recognition_only,target relation only
+H3,composition,55/60,30/30,30/30,provenance over-credit 5/5; clear scope exclusions pass; near challenge ignored,recognition_only,"yes, mixed/control caveat"

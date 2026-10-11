@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_EXACT_REPEAT_CONTROL",
+  "claim_id": "P7_PCSK9_CV_OUTCOMES_CLAIM",
+  "claim_text": "Among high-risk patients with established atherosclerotic cardiovascular disease or recent acute coronary syndrome receiving statin or background lipid-lowering therapy, PCSK9-inhibitor treatment reduced major cardiovascular events compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P7_E1_FOURIER_CLASS_POPULATION_CONTEXT",
+      "source_group_id": "PCSK9_SOURCE_FOURIER_NCT01764633",
+      "source_title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease",
+      "pmid": "28304224",
+      "doi": "10.1056/NEJMoa1615664",
+      "trial_id": "NCT01764633",
+      "source_locator": "PubMed abstract background, methods, results, conclusion, and registration",
+      "passage_text": "Background: Evolocumab is a monoclonal antibody that inhibits proprotein convertase subtilisin-kexin type 9 (PCSK9) and lowers low-density lipoprotein (LDL) cholesterol levels by approximately 60%.\n\nMethods: We conducted a randomized, double-blind, placebo-controlled trial involving 27,564 patients with atherosclerotic cardiovascular disease and LDL cholesterol levels of 70 mg per deciliter (1.8 mmol per liter) or higher who were receiving statin therapy. Patients were randomly assigned to receive evolocumab or matching placebo as subcutaneous injections. The primary efficacy end point was the composite of cardiovascular death, myocardial infarction, stroke, hospitalization for unstable angina, or coronary revascularization.\n\nResults: Relative to placebo, evolocumab treatment significantly reduced the risk of the primary end point (1344 patients [9.8%] vs. 1563 patients [11.3%]; hazard ratio, 0.85; 95% confidence interval [CI], 0.79 to 0.92; P<0.001) and the key secondary end point (816 [5.9%] vs. 1013 [7.4%]; hazard ratio, 0.80; 95% CI, 0.73 to 0.88; P<0.001).\n\nConclusions: Inhibition of PCSK9 with evolocumab on a background of statin therapy lowered LDL cholesterol levels to a median of 30 mg per deciliter (0.78 mmol per liter) and reduced the risk of cardiovascular events. (Funded by Amgen; FOURIER ClinicalTrials.gov number, NCT01764633.)."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P7_E2_FOURIER_PRIMARY_RESULT",
+      "source_group_id": "PCSK9_SOURCE_FOURIER_NCT01764633",
+      "source_title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease",
+      "pmid": "28304224",
+      "doi": "10.1056/NEJMoa1615664",
+      "trial_id": "NCT01764633",
+      "source_locator": "PubMed abstract results and conclusion",
+      "passage_text": "Results: Relative to placebo, evolocumab treatment significantly reduced the risk of the primary end point (1344 patients [9.8%] vs. 1563 patients [11.3%]; hazard ratio, 0.85; 95% confidence interval [CI], 0.79 to 0.92; P<0.001) and the key secondary end point (816 [5.9%] vs. 1013 [7.4%]; hazard ratio, 0.80; 95% CI, 0.73 to 0.88; P<0.001).\n\nConclusions: Inhibition of PCSK9 with evolocumab on a background of statin therapy lowered LDL cholesterol levels to a median of 30 mg per deciliter (0.78 mmol per liter) and reduced the risk of cardiovascular events. (Funded by Amgen; FOURIER ClinicalTrials.gov number, NCT01764633.)."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "P7_E2_FOURIER_PRIMARY_RESULT",
+    "source_group_id": "PCSK9_SOURCE_FOURIER_NCT01764633",
+    "source_title": "Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease",
+    "pmid": "28304224",
+    "doi": "10.1056/NEJMoa1615664",
+    "trial_id": "NCT01764633",
+    "source_locator": "PubMed abstract results and conclusion",
+    "passage_text": "Results: Relative to placebo, evolocumab treatment significantly reduced the risk of the primary end point (1344 patients [9.8%] vs. 1563 patients [11.3%]; hazard ratio, 0.85; 95% confidence interval [CI], 0.79 to 0.92; P<0.001) and the key secondary end point (816 [5.9%] vs. 1013 [7.4%]; hazard ratio, 0.80; 95% CI, 0.73 to 0.88; P<0.001).\n\nConclusions: Inhibition of PCSK9 with evolocumab on a background of statin therapy lowered LDL cholesterol levels to a median of 30 mg per deciliter (0.78 mmol per liter) and reduced the risk of cardiovascular events. (Funded by Amgen; FOURIER ClinicalTrials.gov number, NCT01764633.)."
+  }
+}

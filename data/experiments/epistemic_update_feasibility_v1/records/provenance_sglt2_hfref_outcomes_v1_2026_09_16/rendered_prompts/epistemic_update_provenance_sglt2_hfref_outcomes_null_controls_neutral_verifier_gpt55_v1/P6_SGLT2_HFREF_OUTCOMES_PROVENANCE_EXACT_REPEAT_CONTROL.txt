@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P6_SGLT2_HFREF_OUTCOMES_PROVENANCE_EXACT_REPEAT_CONTROL",
+  "claim_id": "P6_SGLT2_HFREF_OUTCOMES_CLAIM",
+  "claim_text": "Among patients with heart failure and reduced ejection fraction, SGLT2-inhibitor treatment reduced the risk of cardiovascular death or worsening heart-failure events compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P6_E1_EMPEROR_REDUCED_PRIMARY_RESULT",
+      "source_group_id": "SGLT2_HFREF_SOURCE_EMPEROR_REDUCED_NCT03057977",
+      "source_title": "Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure",
+      "pmid": "32865377",
+      "doi": "10.1056/NEJMoa2022190",
+      "trial_id": "NCT03057977",
+      "source_locator": "PubMed abstract methods, results, conclusion, and registration",
+      "passage_text": "Background: Sodium-glucose cotransporter 2 (SGLT2) inhibitors reduce the risk of hospitalization for heart failure in patients regardless of the presence or absence of diabetes.\n\nMethods: In this double-blind trial, we randomly assigned 3730 patients with class II, III, or IV heart failure and an ejection fraction of 40% or less to receive empagliflozin (10 mg once daily) or placebo, in addition to recommended therapy. The primary outcome was a composite of cardiovascular death or hospitalization for worsening heart failure.\n\nResults: During a median of 16 months, a primary outcome event occurred in 361 of 1863 patients (19.4%) in the empagliflozin group and in 462 of 1867 patients (24.7%) in the placebo group (hazard ratio for cardiovascular death or hospitalization for heart failure, 0.75; 95% confidence interval [CI], 0.65 to 0.86; P<0.001).\n\nConclusions: Among patients receiving recommended therapy for heart failure, those in the empagliflozin group had a lower risk of cardiovascular death or hospitalization for heart failure than those in the placebo group, regardless of the presence or absence of diabetes. (Funded by Boehringer Ingelheim and Eli Lilly; EMPEROR-Reduced ClinicalTrials.gov number, NCT03057977.)."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P6_E2_EMPEROR_REDUCED_SGLT2_CLASS_BRIDGE",
+      "source_group_id": "SGLT2_HFREF_SOURCE_EMPEROR_REDUCED_NCT03057977",
+      "source_title": "Uric acid and sodium-glucose cotransporter-2 inhibition with empagliflozin in heart failure with reduced ejection fraction: the EMPEROR-reduced trial",
+      "pmid": "35788657",
+      "doi": "10.1093/eurheartj/ehac320",
+      "trial_id": "NCT03057977",
+      "source_locator": "PubMed abstract background sentence",
+      "passage_text": "Background: The sodium-glucose cotransporter-2 inhibitor empagliflozin decreases the risk of cardiovascular death or hospitalization for heart failure (HF) in patients with HF with reduced ejection fraction."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "P6_E1_EMPEROR_REDUCED_PRIMARY_RESULT",
+    "source_group_id": "SGLT2_HFREF_SOURCE_EMPEROR_REDUCED_NCT03057977",
+    "source_title": "Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure",
+    "pmid": "32865377",
+    "doi": "10.1056/NEJMoa2022190",
+    "trial_id": "NCT03057977",
+    "source_locator": "PubMed abstract methods, results, conclusion, and registration",
+    "passage_text": "Background: Sodium-glucose cotransporter 2 (SGLT2) inhibitors reduce the risk of hospitalization for heart failure in patients regardless of the presence or absence of diabetes.\n\nMethods: In this double-blind trial, we randomly assigned 3730 patients with class II, III, or IV heart failure and an ejection fraction of 40% or less to receive empagliflozin (10 mg once daily) or placebo, in addition to recommended therapy. The primary outcome was a composite of cardiovascular death or hospitalization for worsening heart failure.\n\nResults: During a median of 16 months, a primary outcome event occurred in 361 of 1863 patients (19.4%) in the empagliflozin group and in 462 of 1867 patients (24.7%) in the placebo group (hazard ratio for cardiovascular death or hospitalization for heart failure, 0.75; 95% confidence interval [CI], 0.65 to 0.86; P<0.001).\n\nConclusions: Among patients receiving recommended therapy for heart failure, those in the empagliflozin group had a lower risk of cardiovascular death or hospitalization for heart failure than those in the placebo group, regardless of the presence or absence of diabetes. (Funded by Boehringer Ingelheim and Eli Lilly; EMPEROR-Reduced ClinicalTrials.gov number, NCT03057977.)."
+  }
+}

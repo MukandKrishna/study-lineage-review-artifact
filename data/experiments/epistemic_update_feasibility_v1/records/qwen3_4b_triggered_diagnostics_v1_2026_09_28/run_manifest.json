@@ -1,0 +1,47 @@
+{
+  "manifest_version": "1.0",
+  "updated_at_utc": "2026-09-28T09:00:49.216437+00:00",
+  "status": "complete",
+  "scientific_gate": true,
+  "model": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "dtype": "float16",
+    "device": "cuda:0",
+    "quantisation": "none"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "transformers": "5.0.0",
+    "huggingface_hub": "1.11.0",
+    "jsonschema": "4.26.0",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "active_device": "cuda:0"
+  },
+  "bundle_zip_sha256_expected": "590eeacd3234cb9250c9c9a5f0c6a84d4eca9cb65931f25b3fe2e99784263e1b",
+  "bundle_manifest_sha256_actual": "b95b5ce44ac8133d06e4c221cf385f65822c09fb7a200b3243ea061b354fcc51",
+  "adapter": {
+    "id": "qwen_json_schema_suffix_v1",
+    "description": "Exact diagnostic prompt plus minified JSON Schema only."
+  },
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "max_new_tokens": 2048
+  },
+  "planned_responses": 65,
+  "completed_final_records": 65,
+  "calls_this_session": 65,
+  "max_calls_this_session": 65,
+  "result_files": [
+    "predictions.jsonl",
+    "errors.jsonl"
+  ]
+}

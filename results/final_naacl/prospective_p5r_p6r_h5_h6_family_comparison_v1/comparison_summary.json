@@ -1,0 +1,71 @@
+{
+  "overall": {
+    "GPT-5.5": {
+      "planned_calls": 220,
+      "valid_calls": 220,
+      "invalid_calls": 0,
+      "validity_rate": 1.0,
+      "invalid_output_rate": 0.0
+    },
+    "Qwen3-4B": {
+      "planned_calls": 220,
+      "valid_calls": 210,
+      "invalid_calls": 10,
+      "validity_rate": 0.9545,
+      "invalid_output_rate": 0.0455
+    },
+    "Gemma3-4B": {
+      "planned_calls": 220,
+      "valid_calls": 195,
+      "invalid_calls": 25,
+      "validity_rate": 0.8864,
+      "invalid_output_rate": 0.1136
+    }
+  },
+  "planned_by_task": {
+    "recognition:H5_APPLICABILITY_AB": 5,
+    "recognition:H5_APPLICABILITY_BA": 5,
+    "recognition:H5_PROVENANCE_AB": 5,
+    "recognition:H5_PROVENANCE_BA": 5,
+    "recognition:H6_PROVENANCE_AB": 5,
+    "recognition:H6_PROVENANCE_BA": 5,
+    "recognition:P5R_PROVENANCE_AB": 5,
+    "recognition:P5R_PROVENANCE_BA": 5,
+    "recognition:P6R_PROVENANCE_AB": 5,
+    "recognition:P6R_PROVENANCE_BA": 5,
+    "document_level:P5R_INITIAL": 5,
+    "document_level:P5R_SAME_TRIAL_UPDATE": 5,
+    "document_level:P5R_INDEPENDENT_UPDATE": 5,
+    "document_level:P5R_EXACT_REPEAT": 5,
+    "document_level:P6R_INITIAL": 5,
+    "document_level:P6R_SAME_TRIAL_UPDATE": 5,
+    "document_level:P6R_INDEPENDENT_UPDATE": 5,
+    "document_level:P6R_EXACT_REPEAT": 5,
+    "document_level:H5_INITIAL": 5,
+    "document_level:H5_SAME_TRIAL_UPDATE": 5,
+    "document_level:H5_OUT_OF_SCOPE": 5,
+    "document_level:H5_QUALIFICATION": 5,
+    "document_level:H5_EXACT_REPEAT": 5,
+    "document_level:H6_INITIAL": 5,
+    "document_level:H6_SAME_TRIAL_UPDATE": 5,
+    "document_level:H6_QUALIFICATION": 5,
+    "document_level:H6_EXACT_REPEAT": 5,
+    "grouped:P5R_INITIAL": 5,
+    "grouped:P5R_SAME_TRIAL_UPDATE": 5,
+    "grouped:P5R_INDEPENDENT_UPDATE": 5,
+    "grouped:P5R_EXACT_REPEAT": 5,
+    "grouped:P6R_INITIAL": 5,
+    "grouped:P6R_SAME_TRIAL_UPDATE": 5,
+    "grouped:P6R_INDEPENDENT_UPDATE": 5,
+    "grouped:P6R_EXACT_REPEAT": 5,
+    "grouped:H5_INITIAL": 5,
+    "grouped:H5_SAME_TRIAL_UPDATE": 5,
+    "grouped:H5_OUT_OF_SCOPE": 5,
+    "grouped:H5_QUALIFICATION": 5,
+    "grouped:H5_EXACT_REPEAT": 5,
+    "grouped:H6_INITIAL": 5,
+    "grouped:H6_SAME_TRIAL_UPDATE": 5,
+    "grouped:H6_QUALIFICATION": 5,
+    "grouped:H6_EXACT_REPEAT": 5
+  }
+}

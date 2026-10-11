@@ -1,0 +1,69 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_INITIAL",
+  "claim_id": "CF_D3_VITD_CALCIUM_FALL_REDUCTION_CLAIM",
+  "claim_text": "In older adults, vitamin D plus calcium supplementation reduces falls compared with placebo or control.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_D3_E1_DAILY_VITD_CALCIUM_METHODS",
+      "source_title": "Effects of vitamin D and calcium supplementation on falls",
+      "pmid": "12568412",
+      "doi": "10.1359/jbmr.2003.18.2.343",
+      "trial_id": null,
+      "source_locator": "PubMed abstract trial description and adjusted fall reduction",
+      "passage_text": "In a double-blind randomized controlled trial, 122 elderly women in long-stay geriatric care received vitamin D plus calcium or control."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_D3_E2_DAILY_VITD_CALCIUM_FALL_RESULT",
+      "source_title": "Effects of vitamin D and calcium supplementation on falls",
+      "pmid": "12568412",
+      "doi": "10.1359/jbmr.2003.18.2.343",
+      "trial_id": null,
+      "source_locator": "PubMed abstract trial description and adjusted fall reduction",
+      "passage_text": "After adjustment, calcium plus vitamin D treatment accounted for a 49% reduction of falls, 95% CI 14 to 71%, p < 0.01."
+    }
+  ],
+  "added_evidence": null
+}

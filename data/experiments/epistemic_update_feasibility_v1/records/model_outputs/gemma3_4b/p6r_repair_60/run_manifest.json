@@ -1,0 +1,10 @@
+{
+  "bundle_id": "epistemic_update_p6r_h6_impower130_repair_180_v1",
+  "model_id": "google/gemma-3-4b-it",
+  "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+  "planned_calls": 60,
+  "completed_calls": 60,
+  "valid_predictions": 45,
+  "invalid_records": 15,
+  "run_status": "complete"
+}

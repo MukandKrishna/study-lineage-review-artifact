@@ -1,0 +1,109 @@
+{
+  "manifest_version": "1.0-llama-220-unquantized-sharded",
+  "updated_at_utc": "2026-10-05T20:08:48.133832+00:00",
+  "status": "complete",
+  "scientific_gate": true,
+  "bundle_id": "epistemic_update_p5r_p6r_h5_h6_combined_220_h5_repaired_v1",
+  "bundle_manifest_sha256": "e151cc9392d91be886054f1afa328014a9a77bccaf9b62440c4ac07443878a40",
+  "historical_prompt_identity": {
+    "source_models": [
+      "Qwen/Qwen3-4B-Instruct-2507",
+      "google/gemma-3-4b-it"
+    ],
+    "verified_unique_inputs": 44,
+    "hash_type": "adapted_prompt_sha256"
+  },
+  "model": {
+    "repo_id": "meta-llama/Llama-3.1-8B-Instruct",
+    "revision": "0e9e39f249a16976918f6564b8830bc894c89659",
+    "runtime_dtype": "float16",
+    "quantisation": "none",
+    "device": "cuda:0+cuda:1",
+    "execution_strategy": "single unquantized FP16 Llama model sharded across both T4 GPUs; calls sequential",
+    "model_role": "Model E"
+  },
+  "runtime": {
+    "python": "3.13.15",
+    "torch": "2.11.0+cu128",
+    "transformers": "5.16.1",
+    "huggingface_hub": "1.29.0",
+    "jsonschema": "4.26.0",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ]
+  },
+  "runtime_dtype": "float16",
+  "quantisation": "none",
+  "execution_strategy": "single unquantized FP16 Llama model sharded across cuda:0 and cuda:1; all scientific calls sequential",
+  "device_map": {
+    "model.embed_tokens": "0",
+    "model.layers.0": "0",
+    "model.layers.1": "0",
+    "model.layers.2": "0",
+    "model.layers.3": "0",
+    "model.layers.4": "0",
+    "model.layers.5": "0",
+    "model.layers.6": "0",
+    "model.layers.7": "0",
+    "model.layers.8": "0",
+    "model.layers.9": "0",
+    "model.layers.10": "0",
+    "model.layers.11": "0",
+    "model.layers.12": "0",
+    "model.layers.13": "0",
+    "model.layers.14": "1",
+    "model.layers.15": "1",
+    "model.layers.16": "1",
+    "model.layers.17": "1",
+    "model.layers.18": "1",
+    "model.layers.19": "1",
+    "model.layers.20": "1",
+    "model.layers.21": "1",
+    "model.layers.22": "1",
+    "model.layers.23": "1",
+    "model.layers.24": "1",
+    "model.layers.25": "1",
+    "model.layers.26": "1",
+    "model.layers.27": "1",
+    "model.layers.28": "1",
+    "model.layers.29": "1",
+    "model.layers.30": "1",
+    "model.layers.31": "1",
+    "model.norm": "1",
+    "model.rotary_emb": "1",
+    "lm_head": "1"
+  },
+  "decoding": {
+    "max_length": null,
+    "max_new_tokens": 2048,
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "num_beams": 1,
+    "explicit_seed": null,
+    "seed_note": "No explicit seed, matching the historical 220-call Qwen/Gemma runner; decoding is greedy."
+  },
+  "parser_policy": {
+    "primary_bucket_rule": "canonical-valid -> predictions; canonical-invalid -> rejected_diagnostics",
+    "strict_contract_diagnostic": "JSON parse/validation before outer-fence removal",
+    "canonicalization_rule": "strip at most one complete outer Markdown code fence",
+    "raw_output_preserved": true
+  },
+  "input_counts": {
+    "recognition": 10,
+    "document_level": 17,
+    "grouped": 17
+  },
+  "repetitions_per_input": 5,
+  "planned_calls": 220,
+  "completed_calls": 220,
+  "prediction_records": 180,
+  "rejected_scientific_records": 40,
+  "runtime_error_records": 0,
+  "calls_attempted_this_session": 220,
+  "max_calls_this_session": 220,
+  "model_file_hash_manifest": "model_files_sha256.json"
+}

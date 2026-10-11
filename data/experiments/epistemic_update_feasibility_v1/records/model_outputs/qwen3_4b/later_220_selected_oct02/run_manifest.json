@@ -1,0 +1,8 @@
+{
+  "bundle_id": "epistemic_update_p5r_p6r_h5_h6_combined_220_h5_repaired_v1",
+  "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "completed_calls": 220,
+  "runtime_errors": 0,
+  "planned_calls": 220
+}

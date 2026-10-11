@@ -1,0 +1,65 @@
+{
+  "experiment_id": "epistemic_update_heldout_combined_h3_statin_precedence_updates_neutral_verifier_gpt55_v1",
+  "description": "H3 statin precedence verifier update arms.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_heldout_combined_precedence_h3_statin_primary_prevention_v1/verifier_inputs_updates",
+  "prompt_version": "epistemic_update_verifier_neutral_v2",
+  "prompt_sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+  "response_schema": "epistemic_multi_evidence_judge_openai_v1",
+  "response_schema_sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_heldout_combined_h3_statin_precedence_updates_neutral_verifier_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_heldout_combined_h3_statin_precedence_updates_neutral_verifier_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 5,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 25,
+    "recognition_calls": 0,
+    "purpose": "Test exact-repeat, same-trial support, positive out-of-scope evidence, near-applicable challenge, and out-of-scope challenge."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_neutral_verifier",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "h3_statin_precedence_exact_repeat",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_X1",
+      "input_file": "h3_statin_precedence_exact_repeat.json",
+      "input_sha256": "255b5208087752a60c7f3473e008cb72eeafda6714337e57798c6dc3a8785296"
+    },
+    {
+      "condition_id": "h3_statin_precedence_same_trial_dependent_support",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_X2",
+      "input_file": "h3_statin_precedence_same_trial_dependent_support.json",
+      "input_sha256": "2109c4f60c5634d581785b0f821da44b6422ab37bd4f56a8d4cc85ac7b74c15f"
+    },
+    {
+      "condition_id": "h3_statin_precedence_positive_out_of_scope",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_X3",
+      "input_file": "h3_statin_precedence_positive_out_of_scope.json",
+      "input_sha256": "ae6292ca999865fa6a58cf1e3a076bd891458fa3e8b8ce8669c6033d3ce56dd1"
+    },
+    {
+      "condition_id": "h3_statin_precedence_near_applicable_challenge",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_X4",
+      "input_file": "h3_statin_precedence_near_applicable_challenge.json",
+      "input_sha256": "24efe25ee70e91efeab56382a0d2e775ffbb3b5a3d99914fdd293a8a42a45da6"
+    },
+    {
+      "condition_id": "h3_statin_precedence_out_of_scope_challenge",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_X5",
+      "input_file": "h3_statin_precedence_out_of_scope_challenge.json",
+      "input_sha256": "06a54f3996c8561466fb5c9e0acfebee95020dd07c41b360977863cc29ff114f"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after approved H3 update verifier gate completed: 5 inputs x 5 repeats = 25 calls."
+}

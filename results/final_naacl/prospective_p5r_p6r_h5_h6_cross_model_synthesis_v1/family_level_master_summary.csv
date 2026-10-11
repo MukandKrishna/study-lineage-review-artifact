@@ -1,0 +1,13 @@
+model,family,recognition_accuracy,recognition_validity_rate,document_validity_rate,document_availability_rate,document_unavailable_calls,grouped_validity_rate,grouped_availability_rate,grouped_unavailable_calls,document_supported_calls,document_valid_calls,grouped_supported_calls,grouped_valid_calls,same_trial_doc_overcredit_calls,same_trial_grouped_overcredit_calls,same_trial_rate_direction,independent_document_valid_calls,independent_grouped_valid_calls,independent_document_supported_calls,independent_grouped_supported_calls,prompt_canonical_validity_rate,prompt_strict_validity_rate,prompt_same_trial_overcredit_calls,prompt_same_trial_valid_calls,prompt_independent_semantic_pass_calls,prompt_independent_valid_calls,prompt_independent_added_use_calls
+GPT-5.5,H5,1.0,1.0,1.0,1.0,0,1.0,1.0,0,25,25,25,25,5,4,lower_under_grouping_instruction,0,0,0,0,,,0,0,0,0,0
+GPT-5.5,H6,1.0,1.0,1.0,1.0,0,1.0,1.0,0,15,20,15,20,5,1,lower_under_grouping_instruction,0,0,0,0,,,0,0,0,0,0
+GPT-5.5,P5R,1.0,1.0,1.0,1.0,0,1.0,1.0,0,20,20,20,20,4,0,lower_under_grouping_instruction,5,5,5,5,1.0,1.0,9,10,9,10,9
+GPT-5.5,P6R,1.0,1.0,1.0,1.0,0,1.0,1.0,0,17,20,19,20,4,0,lower_under_grouping_instruction,5,5,3,3,1.0,1.0,7,10,5,10,7
+Gemma3-4B,H5,0.5,1.0,0.4,1.0,0,0.6,1.0,0,10,10,15,15,0,0,not_comparable,0,0,0,0,,,0,0,0,0,0
+Gemma3-4B,H6,0.5,1.0,1.0,1.0,0,1.0,1.0,0,15,20,20,20,5,5,no_change,0,0,0,0,,,0,0,0,0,0
+Gemma3-4B,P5R,0.5,1.0,1.0,1.0,0,1.0,1.0,0,20,20,20,20,5,5,no_change,5,5,5,5,1.0,0.0,10,10,10,10,10
+Gemma3-4B,P6R,0.5,1.0,1.0,1.0,0,1.0,1.0,0,20,20,20,20,5,5,no_change,5,5,5,5,1.0,0.0,10,10,10,10,10
+Qwen3-4B,H5,0.75,1.0,1.0,1.0,0,0.8,1.0,0,25,25,20,20,5,5,no_change,0,0,0,0,,,0,0,0,0,0
+Qwen3-4B,H6,1.0,1.0,1.0,1.0,0,1.0,1.0,0,15,20,15,20,5,5,no_change,0,0,0,0,,,0,0,0,0,0
+Qwen3-4B,P5R,1.0,1.0,1.0,1.0,0,0.75,1.0,0,20,20,15,15,5,5,no_change,5,5,5,5,1.0,1.0,10,10,10,10,10
+Qwen3-4B,P6R,1.0,1.0,1.0,1.0,0,1.0,1.0,0,20,20,20,20,5,5,no_change,5,5,5,5,1.0,1.0,10,10,5,10,5

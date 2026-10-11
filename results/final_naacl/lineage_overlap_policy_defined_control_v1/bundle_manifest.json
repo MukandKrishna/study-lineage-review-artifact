@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "bundle_id": "epistemic_update_lineage_overlap_policy_defined_28_v1_promise_arise_draft",
+  "family_id": "PROMISE_ARISE_EARLY_SEPTIC_SHOCK",
+  "prompt_version": "epistemic_update_verifier_lineage_policy_v1",
+  "task_type": "document_level_policy_defined_lineage",
+  "repetitions": 1,
+  "input_counts": {
+    "document_level": 4
+  },
+  "unique_tasks": 4,
+  "planned_calls_per_model": 4,
+  "planned_models": [
+    "Qwen3-4B",
+    "Gemma3-4B"
+  ],
+  "planned_open_model_calls": 8,
+  "planned_gpt_calls": 20,
+  "planned_total_calls": 28,
+  "model_call_gate": "user_authorised_open_model_exploratory_run_review_pending",
+  "tasks": [
+    {
+      "task_type": "document_level",
+      "condition_id": "replacement_same_high",
+      "execution_item_id": "PROMISE_ARISE_SAME_HIGH",
+      "file": "verifier_inputs/PROMISE_ARISE_SAME_HIGH.json",
+      "sha256": "ff47f2b81e50f225b846f23707b12239641e16c3671018de2156785ecf452964"
+    },
+    {
+      "task_type": "document_level",
+      "condition_id": "replacement_same_low",
+      "execution_item_id": "PROMISE_ARISE_SAME_LOW",
+      "file": "verifier_inputs/PROMISE_ARISE_SAME_LOW.json",
+      "sha256": "4a55e1b5d16dc53ef404f57f1a8b05ed79f9da3a4d3da1c0393b2fcf8804de3a"
+    },
+    {
+      "task_type": "document_level",
+      "condition_id": "replacement_independent_high",
+      "execution_item_id": "PROMISE_ARISE_INDEPENDENT_HIGH",
+      "file": "verifier_inputs/PROMISE_ARISE_INDEPENDENT_HIGH.json",
+      "sha256": "1f2b8d72888e1b782a7cc77a09644592013a107ac075014b29f59e4afb4b092d"
+    },
+    {
+      "task_type": "document_level",
+      "condition_id": "replacement_independent_low",
+      "execution_item_id": "PROMISE_ARISE_INDEPENDENT_LOW",
+      "file": "verifier_inputs/PROMISE_ARISE_INDEPENDENT_LOW.json",
+      "sha256": "a1428a7a5079d60f0ef64b191217966d505bf350fbbf43c22292e9611c4d386f"
+    }
+  ],
+  "files": {
+    "document_level_prompt.txt": "21c82b57592ce3c950f1f7acbc011f6d8d39e6d0202fe938aa6aab0deb1c758e",
+    "verifier_inputs/PROMISE_ARISE_INDEPENDENT_HIGH.json": "1f2b8d72888e1b782a7cc77a09644592013a107ac075014b29f59e4afb4b092d",
+    "verifier_inputs/PROMISE_ARISE_INDEPENDENT_LOW.json": "a1428a7a5079d60f0ef64b191217966d505bf350fbbf43c22292e9611c4d386f",
+    "verifier_inputs/PROMISE_ARISE_SAME_HIGH.json": "ff47f2b81e50f225b846f23707b12239641e16c3671018de2156785ecf452964",
+    "verifier_inputs/PROMISE_ARISE_SAME_LOW.json": "4a55e1b5d16dc53ef404f57f1a8b05ed79f9da3a4d3da1c0393b2fcf8804de3a",
+    "verifier_schema.json": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344"
+  }
+}

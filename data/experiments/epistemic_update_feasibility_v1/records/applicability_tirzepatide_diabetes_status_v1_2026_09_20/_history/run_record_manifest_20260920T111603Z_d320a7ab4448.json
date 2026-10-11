@@ -1,0 +1,430 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_applicability_tirzepatide_diabetes_status_v1_2026_09_20",
+  "created_at_utc": "2026-09-20T10:54:04.281308+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve frozen sources, exact prompts and inputs, model/version settings, raw and parsed outputs, repetitions, errors, A/B assignments, and evaluation records.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_applicability_tirzepatide_diabetes_status_record_archive.json",
+    "bytes": 2478,
+    "sha256": "d219609225de6174642b2044d7019755d2ae3b9404a3c94649e8b6267b8a6d1f",
+    "last_write_time_utc": "2026-09-20T10:51:36.743179+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2211,
+      "sha256": "b6439f04cfc4e51f966383d08e7f37cb05e087f91527d64e90409fc273e27727",
+      "last_write_time_utc": "2026-09-19T14:23:17.207972+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 2940,
+      "sha256": "3e9908509a168745cb9eb415564969b2e6e898b26e673a7bd6729fd75726aa35",
+      "last_write_time_utc": "2026-09-19T14:42:09.781552+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_applicability_tirzepatide_diabetes_status_comparative_recognition_gpt55_v1.json",
+      "bytes": 2899,
+      "sha256": "4cd629915b3d2f0180de7ffe3452621657608539d8b8e3f0f9fb069379067de7",
+      "last_write_time_utc": "2026-09-20T10:44:17.025915+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_2.txt",
+      "bytes": 2718,
+      "sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+      "last_write_time_utc": "2026-09-16T07:25:50.409464+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_INITIAL",
+      "condition_id": "a3_tirzepatide_diabetes_status_applicability_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_tirzepatide_diabetes_status_v1_2026_09_20\\rendered_prompts\\epistemic_update_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_gpt55_v1\\A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_INITIAL.txt",
+      "rendered_prompt_sha256": "20617178be58252d8909249d5acd452346a6a6638e20a4df1e0ca109ecc9cdfc",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_MATCHED_A",
+      "condition_id": "a3_tirzepatide_diabetes_status_applicability_matched_a",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_tirzepatide_diabetes_status_v1_2026_09_20\\rendered_prompts\\epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1\\A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_MATCHED_A.txt",
+      "rendered_prompt_sha256": "0d053d00043805077426666d77d57c6b0d9f1b82fe78200e787a5c734d949267",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_MATCHED_B",
+      "condition_id": "a3_tirzepatide_diabetes_status_applicability_matched_b",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_tirzepatide_diabetes_status_v1_2026_09_20\\rendered_prompts\\epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1\\A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_MATCHED_B.txt",
+      "rendered_prompt_sha256": "8f21469d36c1eb7ee22abe9ef6305e64e3967b0a2cf265bde169f751cb013559",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_NULL_CONTROL",
+      "condition_id": "a3_tirzepatide_diabetes_status_applicability_null_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_tirzepatide_diabetes_status_v1_2026_09_20\\rendered_prompts\\epistemic_update_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_gpt55_v1\\A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_NULL_CONTROL.txt",
+      "rendered_prompt_sha256": "ee129cfc5659c4bc401ead8ab52aea45dc3d4d2c5bc23fd9cca02573f5f8e64c",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_tirzepatide_diabetes_status_comparative_recognition_gpt55_v1",
+      "execution_item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_COMPARATIVE_APPLICABILITY",
+      "condition_id": "a3_tirzepatide_diabetes_status_applicability_applicability_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_tirzepatide_diabetes_status_v1_2026_09_20\\rendered_prompts\\epistemic_update_applicability_tirzepatide_diabetes_status_comparative_recognition_gpt55_v1\\A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_COMPARATIVE_APPLICABILITY.txt",
+      "rendered_prompt_sha256": "80e34ba57811a754e29713ed65643589514cbd22976c8cca62ad3a0156ad8d65",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_tirzepatide_diabetes_status_comparative_recognition_gpt55_v1",
+      "execution_item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_COMPARATIVE_SWAPPED_APPLICABILITY",
+      "condition_id": "a3_tirzepatide_diabetes_status_applicability_applicability_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_tirzepatide_diabetes_status_v1_2026_09_20\\rendered_prompts\\epistemic_update_applicability_tirzepatide_diabetes_status_comparative_recognition_gpt55_v1\\A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_COMPARATIVE_SWAPPED_APPLICABILITY.txt",
+      "rendered_prompt_sha256": "5bb30e53fc81675159be8c92bc2b63721d84a2c9c82cb2297103f13790689fe3",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\acceptance_matrix.csv",
+      "bytes": 1825,
+      "sha256": "de38af49df135e7df029a20497a28dbb5fdd68f2c2e413eed1de053821d7ee82",
+      "last_write_time_utc": "2026-09-19T14:14:54.272171+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\authoring_records\\a3_tirzepatide_diabetes_status_applicability.json",
+      "bytes": 15416,
+      "sha256": "aaffa5aa2925ce298f9b5a0d19f91e8d4fb49284dff53827275e93b2ba62ae11",
+      "last_write_time_utc": "2026-09-19T14:14:54.197726+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\construction_audit_table.csv",
+      "bytes": 785,
+      "sha256": "72e2905f00bb9f825546af08fe235efa91b9f3c1fa1afa4ab71d077e2d0ae073",
+      "last_write_time_utc": "2026-09-19T14:14:54.274175+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\offline_validation_report.json",
+      "bytes": 258,
+      "sha256": "b829efc63e3d7faf18f58fe09cf5e0c92056658889d41c5d77c0d7ca7d9120e8",
+      "last_write_time_utc": "2026-09-19T14:14:54.284185+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\scientific_question_audit.csv",
+      "bytes": 3018,
+      "sha256": "43113587197a3969864088dfb1766562fa13d72e574309c2ef4246b6179c90f1",
+      "last_write_time_utc": "2026-09-19T14:14:54.276171+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\source_verification_record.json",
+      "bytes": 1649,
+      "sha256": "61679ed1467c14dbedc3778aa8536bdf5aee9066b6d979d4b836fcf6004db61e",
+      "last_write_time_utc": "2026-09-19T14:14:54.279166+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\comparative_recognition_inputs\\a3_tirzepatide_diabetes_status_applicability_applicability_ab.json",
+      "bytes": 6138,
+      "sha256": "4f7f680b898c1aa08cfdd2d0a81c5cf2dfcdfd8be3d479d2086220d3cd407583",
+      "last_write_time_utc": "2026-09-19T14:14:54.248175+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\comparative_recognition_inputs\\a3_tirzepatide_diabetes_status_applicability_applicability_ba.json",
+      "bytes": 6146,
+      "sha256": "c261bb31eda7c2f7b06dd5f75edc38e377a0baf1a79ed6f05946a2d43cdfe4bf",
+      "last_write_time_utc": "2026-09-19T14:14:54.253168+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\run_plan_manifest.json",
+      "bytes": 1661,
+      "sha256": "9920a3840ba6efbc9afbdfbe9c324fb96f94a4843feef6cad2ead94112808bb9",
+      "last_write_time_utc": "2026-09-20T10:53:47.546609+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\verifier_inputs_initial_gate\\a3_tirzepatide_diabetes_status_applicability_initial.json",
+      "bytes": 2329,
+      "sha256": "1895802ba0dd0261125c7b97cb4977958cbadde15dc321c933166005a1c3e551",
+      "last_write_time_utc": "2026-09-19T14:14:54.199721+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\verifier_inputs_updates\\a3_tirzepatide_diabetes_status_applicability_matched_a.json",
+      "bytes": 4405,
+      "sha256": "1518b8086c7ec42fad4a9f26a1857b49345565b41c31fd4177c6b74799f51418",
+      "last_write_time_utc": "2026-09-19T14:14:54.204719+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\verifier_inputs_updates\\a3_tirzepatide_diabetes_status_applicability_matched_b.json",
+      "bytes": 3994,
+      "sha256": "789ff0cee6e413c139a4db4ff071e086cdecda2000957c89b0aa461de8401ec4",
+      "last_write_time_utc": "2026-09-19T14:14:54.209723+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_tirzepatide_diabetes_status_v1\\verifier_inputs_updates\\a3_tirzepatide_diabetes_status_applicability_null_control.json",
+      "bytes": 3109,
+      "sha256": "b4b8fb4904dc862b0190ca18c66a973d25e1e4636480cc1f295c1ae11c767d36",
+      "last_write_time_utc": "2026-09-19T14:14:54.243173+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 5,
+      "sha256": "152428e6dd55c02255c0e49abebe454df69793b4d3410ed99bae60346c8b17fc",
+      "response_status_counts": {
+        "ok": 5
+      },
+      "error_category_counts": {
+        "": 5
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 15,
+      "sha256": "efc7434e5ec33900c7a89e81b660ddbbd82f63d3d1d6f9583ab4e6b9074d0119",
+      "response_status_counts": {
+        "ok": 15
+      },
+      "error_category_counts": {
+        "": 15
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_comparative_recognition_v1.jsonl",
+      "exists": true,
+      "row_count": 10,
+      "sha256": "8ada15556d44c198cf020f3c6f92367cc50c5244d67c9aa0c7fd8402ff915b6c",
+      "response_status_counts": {
+        "ok": 10
+      },
+      "error_category_counts": {
+        "": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_comparative_recognition_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_v1\\REPORT.md",
+      "bytes": 1589,
+      "sha256": "27572a213936bff0cc9efdcf24978f88e0f4bc28068dae34271cb8ef8be33c2f",
+      "last_write_time_utc": "2026-09-19T14:27:13.535726+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_initial_gate_neutral_verifier_v1\\summary.json",
+      "bytes": 2140,
+      "sha256": "0ca17c9102fa5e1303bbc4771dbabdd46482472f799a77f0127c30687c0b3bb8",
+      "last_write_time_utc": "2026-09-19T14:27:10.852458+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_v1\\REPORT.md",
+      "bytes": 2062,
+      "sha256": "5a16c248b6db8e368f9019f29385093d8123a0995085b11ce7d6e00bc40d0336",
+      "last_write_time_utc": "2026-09-19T14:44:14.533659+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_updates_neutral_verifier_v1\\summary.json",
+      "bytes": 3924,
+      "sha256": "a6fe468a6c15cfaf52ef015df46c11f78cd9529fa82a94f5071285bacdb74dcf",
+      "last_write_time_utc": "2026-09-19T14:44:12.189849+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_comparative_recognition_v1\\_history\\REPORT_20260920T104742Z_2b38edd0dfdf.md",
+      "bytes": 645,
+      "sha256": "2b38edd0dfdfac2134468bb613214eb3d7495429568efa2b1dd2b2e28dde0610",
+      "last_write_time_utc": "2026-09-20T10:44:52.292036+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_comparative_recognition_v1\\_history\\summary_20260920T104742Z_300055b37716.json",
+      "bytes": 1155,
+      "sha256": "300055b377164bb9ab3fd68bed8b1da41b18ff0470db405d5896bff480ddb549",
+      "last_write_time_utc": "2026-09-20T10:44:52.292036+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_comparative_recognition_v1\\REPORT.md",
+      "bytes": 739,
+      "sha256": "0ab2bca156549e4c2f51deb364f479b3573953af01366713e96f94576ffe03a3",
+      "last_write_time_utc": "2026-09-20T10:47:42.912443+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_tirzepatide_diabetes_status_comparative_recognition_v1\\summary.json",
+      "bytes": 1243,
+      "sha256": "31325ed86ca8e5db6024e61cd51135cc437eb823eb70a8a61a36b01ffaf69897",
+      "last_write_time_utc": "2026-09-20T10:47:42.912443+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 15903,
+      "sha256": "2edbb0f262e2b4134b972890475b40314708873065e1322bd193a85e06d4a5b6",
+      "last_write_time_utc": "2026-09-18T10:40:20.213010+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\45_evaluate_epistemic_update_p1_verifier.py",
+      "bytes": 7014,
+      "sha256": "59115203aed33807ef22f788782fd68c08bfa578af0ac86bb8347136ec45424f",
+      "last_write_time_utc": "2026-09-09T11:29:03.265163+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 17939,
+      "sha256": "c3d8002974bd621c3d2c05354903b6363f57a4b698521910c6a9d4da3fed36eb",
+      "last_write_time_utc": "2026-09-18T10:02:38.435618+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\47_evaluate_epistemic_update_p1_comparative_recognition.py",
+      "bytes": 6942,
+      "sha256": "72c32ff36cb47bb9735c193355fb2d96b350a305ea3cbf7d03ca55c4cd12d899",
+      "last_write_time_utc": "2026-09-20T10:46:15.824323+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11781,
+      "sha256": "d821660e0fba493ce4c29862dab422d5b84b4f9a2af091f6c79271c55a31c198",
+      "last_write_time_utc": "2026-09-18T10:32:40.810744+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\74_build_tirzepatide_diabetes_status_applicability_family.py",
+      "bytes": 43441,
+      "sha256": "37318804c828ffdc0f8cb6fa6c4cf2a6d9794db4c8d623be484f94950c85ed99",
+      "last_write_time_utc": "2026-09-19T14:50:40.250985+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 17825,
+      "sha256": "65cacaa751d796dd711700e99af3ccfae2cf8fd53063b620372d954d4e665a97",
+      "last_write_time_utc": "2026-09-16T17:56:10.995192+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 9561,
+      "sha256": "7d2bc0a45510de229d971464ac2cb62b3791dcd129084f0f4ffa124bc2c994e6",
+      "last_write_time_utc": "2026-09-18T10:40:17.746239+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_multi_evidence_schemas.py",
+      "bytes": 34781,
+      "sha256": "0644d5bd40016b6ade0b4e422cdfb3284c28dfd342e4358e38c35bbb70b0af51",
+      "last_write_time_utc": "2026-09-02T19:40:42.227848+00:00"
+    }
+  ],
+  "project_notes": []
+}

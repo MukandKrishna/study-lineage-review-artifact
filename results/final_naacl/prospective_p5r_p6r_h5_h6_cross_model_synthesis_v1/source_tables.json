@@ -1,0 +1,7 @@
+{
+  "family_summary": "results/final_naacl/prospective_p5r_p6r_h5_h6_family_comparison_v1/family_summary.csv",
+  "mitigation_family_summary": "results/final_naacl/prospective_p5r_p6r_h5_h6_family_comparison_v1/mitigation_family_summary.csv",
+  "prompt_family_summary": "results/final_naacl/qwen_gemma_prompt_robustness_p5r_p6r_v1/prompt_family_summary.csv",
+  "raw_records_modified": false,
+  "new_model_calls": 0
+}

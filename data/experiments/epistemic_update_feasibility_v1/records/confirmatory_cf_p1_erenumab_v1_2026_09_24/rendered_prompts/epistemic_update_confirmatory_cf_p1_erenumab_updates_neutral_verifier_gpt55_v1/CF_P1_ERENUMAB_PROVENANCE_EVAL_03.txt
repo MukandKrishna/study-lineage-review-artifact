@@ -1,0 +1,78 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_P1_ERENUMAB_PROVENANCE_EVAL_03",
+  "claim_id": "CF_P1_ERENUMAB_MIGRAINE_FREQUENCY_CLAIM",
+  "claim_text": "Among adults with episodic migraine, erenumab reduces migraine frequency compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_P1_E1_STRIVE_METHODS",
+      "source_title": "A Controlled Trial of Erenumab for Episodic Migraine",
+      "pmid": "29171821",
+      "doi": "10.1056/NEJMoa1705848",
+      "trial_id": "NCT02456740",
+      "source_locator": "NEJM full text eligibility sentence and PubMed abstract Methods sentence",
+      "passage_text": "Eligibility: Adults 18 to 65 years of age who had had a history of migraine with or without aura for at least 12 months before screening were eligible for participation in the trial. Methods: We randomly assigned patients to receive a subcutaneous injection of either erenumab, at a dose of 70 mg or 140 mg, or placebo monthly for 6 months. The primary end point was the change from baseline to months 4 through 6 in the mean number of migraine days per month."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_P1_E2_STRIVE_RESULTS",
+      "source_title": "A Controlled Trial of Erenumab for Episodic Migraine",
+      "pmid": "29171821",
+      "doi": "10.1056/NEJMoa1705848",
+      "trial_id": "NCT02456740",
+      "source_locator": "PubMed abstract Results and Conclusions sentences",
+      "passage_text": "Results: A total of 955 patients underwent randomization: 317 were assigned to the 70-mg erenumab group, 319 to the 140-mg erenumab group, and 319 to the placebo group. The mean number of migraine days per month at baseline was 8.3 in the overall population; by months 4 through 6, the number of days was reduced by 3.2 in the 70-mg erenumab group and by 3.7 in the 140-mg erenumab group, as compared with 1.8 days in the placebo group. Conclusions: Erenumab administered subcutaneously at a monthly dose of 70 mg or 140 mg significantly reduced migraine frequency."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "CF_P1_E3_STRIVE_ANALYSIS",
+    "source_title": "Erenumab prevents the occurrence of migraine attacks and not just migraine days: Post-hoc analyses of a phase III study",
+    "pmid": "33939497",
+    "doi": "10.1177/03331024211010308",
+    "trial_id": "NCT02456740",
+    "source_locator": "PubMed abstract Methods, Results, and Conclusion sentences",
+    "passage_text": "Methods: We conducted a post-hoc analysis of the data from the STRIVE study, in 955 patients with episodic migraine. Relative changes from baseline to mean over months 4, 5 and 6 of the double-blind treatment phase in monthly migraine days, monthly migraine attacks and mean migraine attack duration were assessed. Results: Erenumab reduced monthly migraine days and monthly migraine attacks compared with placebo in a similar way. Conclusion: These post-hoc analyses demonstrate that the decrease in monthly migraine days by erenumab is mainly driven by a reduction in the frequency of monthly migraine attacks."
+  }
+}

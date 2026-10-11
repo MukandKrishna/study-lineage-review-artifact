@@ -1,0 +1,78 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_04",
+  "claim_id": "CF_P3_SGLT2_CKD_PROGRESSION_CV_CLAIM",
+  "claim_text": "In adults with chronic kidney disease at risk of progression, SGLT2-inhibitor therapy reduces kidney disease progression or cardiovascular death compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_P3_E1_EMPAKIDNEY_METHODS",
+      "source_title": "Empagliflozin in Patients with Chronic Kidney Disease",
+      "pmid": "36331190",
+      "doi": "10.1056/NEJMoa2204233",
+      "trial_id": "NCT03594110",
+      "source_locator": "NEJM full text Design/Patients sentences plus abstract Methods sentence",
+      "passage_text": "Design/Patients: The EMPA-KIDNEY trial was an international, randomized, parallel-group, double-blind, placebo-controlled, clinical trial of the SGLT2 inhibitor empagliflozin. Eligible patients were adults with chronic kidney disease, including eGFR >=20 to <45 ml/minute/1.73m2 regardless of albuminuria, or eGFR >=45 to <90 ml/minute/1.73m2 with urinary albumin-to-creatinine ratio >=200 mg/g. Methods: We randomly assigned 6609 participants to empagliflozin (10mg once daily) versus matching placebo."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_P3_E2_EMPAKIDNEY_RESULTS",
+      "source_title": "Empagliflozin in Patients with Chronic Kidney Disease",
+      "pmid": "36331190",
+      "doi": "10.1056/NEJMoa2204233",
+      "trial_id": "NCT03594110",
+      "source_locator": "PMC abstract Results and Conclusions sentences",
+      "passage_text": "Results: During a median of 2.0 years follow-up, a primary outcome event occurred in 432 of 3304 patients (13.1%) in the empagliflozin group and in 558 of 3305 patients (16.9%) in the placebo group (hazard ratio, 0.72; 95% CI 0.64 to 0.82; P<0.001), with consistent results in those with or without diabetes and across the range of eGFR studied. Conclusions: Empagliflozin reduced the risk of the composite outcome of kidney disease progression or cardiovascular death in a wide range of patients at risk of CKD progression."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "CF_P3_E3_DAPACKD_RESULTS",
+    "source_title": "Dapagliflozin in Patients with Chronic Kidney Disease",
+    "pmid": "32970396",
+    "doi": "10.1056/NEJMoa2024816",
+    "trial_id": "NCT03036150",
+    "source_locator": "NEJM full text Design/Eligibility sentences plus abstract Methods, Results, and Conclusions sentences",
+    "passage_text": "Design/Eligibility: The DAPA-CKD trial was designed to assess the long-term efficacy and safety of the SGLT2 inhibitor dapagliflozin in patients with chronic kidney disease, with or without type 2 diabetes. Adults with or without type 2 diabetes who had an estimated GFR of 25 to 75 ml per minute per 1.73m2 and a urinary albumin-to-creatinine ratio of 200 to 5000 were eligible for participation. Methods: We randomly assigned 4304 participants to receive dapagliflozin (10 mg once daily) or placebo. Results: Over a median of 2.4 years, a primary outcome event occurred in 197 of 2152 participants (9.2%) in the dapagliflozin group and 312 of 2152 participants (14.5%) in the placebo group (hazard ratio, 0.61; 95% confidence interval [CI], 0.51 to 0.72; P<0.001). Conclusions: Among patients with chronic kidney disease, regardless of the presence or absence of diabetes, the risk of a composite of a sustained decline in the estimated GFR of at least 50%, end-stage kidney disease, or death from renal or cardiovascular causes was significantly lower with dapagliflozin than with placebo."
+  }
+}

@@ -1,0 +1,14 @@
+[project]
+name = "medical-claim-grounding-audit"
+version = "0.1.0"
+description = "Pilot evaluation of claim-level evidence-use auditing on PubMedQA"
+requires-python = ">=3.12,<3.13"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+

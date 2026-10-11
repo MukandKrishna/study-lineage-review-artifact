@@ -1,0 +1,78 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_D1_GLUCOSE_DIRECTION_EVAL_02",
+  "claim_id": "CF_D1_GLUCOSE_ICU_MORTALITY_CLAIM",
+  "claim_text": "In critically ill adult ICU patients, intensive glucose control reduces mortality compared with conventional glucose control.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_D1_E1_LEUVENSURGICAL_METHODS",
+      "source_title": "Intensive insulin therapy in critically ill patients",
+      "pmid": "11794168",
+      "doi": "10.1056/NEJMoa011300",
+      "trial_id": "Leuven surgical ICU randomized trial",
+      "source_locator": "Abstract Methods sentences",
+      "passage_text": "Methods: Adults admitted to a surgical intensive care unit and receiving mechanical ventilation were randomized to intensive insulin therapy, targeting blood glucose at or below 110 mg/dL, or conventional treatment, in which insulin was infused only if blood glucose exceeded 215 mg/dL and was then maintained at 180 to 200 mg/dL."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_D1_E2_LEUVENSURGICAL_RESULTS",
+      "source_title": "Intensive insulin therapy in critically ill patients",
+      "pmid": "11794168",
+      "doi": "10.1056/NEJMoa011300",
+      "trial_id": "Leuven surgical ICU randomized trial",
+      "source_locator": "Abstract Results and Conclusions sentences",
+      "passage_text": "Results: Intensive insulin therapy reduced mortality during intensive care from 8.0% with conventional treatment to 4.6%. Conclusions: Intensive insulin therapy to maintain blood glucose at or below 110 mg/dL reduced morbidity and mortality among critically ill patients in the surgical intensive care unit."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "CF_D1_E3_LEUVENSURGICAL_RESULTS_REPEAT",
+    "source_title": "Intensive insulin therapy in critically ill patients",
+    "pmid": "11794168",
+    "doi": "10.1056/NEJMoa011300",
+    "trial_id": "Leuven surgical ICU randomized trial",
+    "source_locator": "Abstract Results and Conclusions sentences",
+    "passage_text": "Results: Intensive insulin therapy reduced mortality during intensive care from 8.0% with conventional treatment to 4.6%. Conclusions: Intensive insulin therapy to maintain blood glucose at or below 110 mg/dL reduced morbidity and mortality among critically ill patients in the surgical intensive care unit."
+  }
+}

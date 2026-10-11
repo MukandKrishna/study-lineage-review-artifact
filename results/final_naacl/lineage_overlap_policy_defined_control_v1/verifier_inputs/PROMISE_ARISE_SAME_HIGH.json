@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "item_id": "PROMISE_ARISE_SAME_HIGH",
+  "claim_id": "PROMISE_ARISE_EGDT_90_DAY_MORTALITY",
+  "claim_text": "Among adults with early septic shock receiving initial resuscitation, strict early goal-directed therapy does not reduce all-cause mortality at 90 days compared with usual resuscitation.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "PROMISE_INITIAL_RESULT",
+      "source_title": "Trial of Early, Goal-Directed Resuscitation for Septic Shock",
+      "pmid": "25776532",
+      "doi": "10.1056/NEJMoa1500896",
+      "trial_id": "ISRCTN36307479",
+      "source_locator": "Abstract, Results",
+      "passage_text": "By 90 days, 184 of 623 patients (29.5%) in the EGDT group and 181 of 620 patients (29.2%) in the usual-care group had died (relative risk in the EGDT group, 1.01; 95% confidence interval [CI], 0.85 to 1.20; P=0.90), for an absolute risk reduction in the EGDT group of -0.3 percentage points (95% CI, -5.4 to 4.7)."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "PROMISE_INITIAL_CONCLUSION",
+      "source_title": "Trial of Early, Goal-Directed Resuscitation for Septic Shock",
+      "pmid": "25776532",
+      "doi": "10.1056/NEJMoa1500896",
+      "trial_id": "ISRCTN36307479",
+      "source_locator": "Abstract, Conclusions",
+      "passage_text": "In patients with septic shock who were identified early and received intravenous antibiotics and adequate fluid resuscitation, hemodynamic management according to a strict EGDT protocol did not lead to an improvement in outcome."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "PROMISE_HTA_FULL_RESULT",
+    "source_title": "Protocolised Management In Sepsis (ProMISe): a multicentre randomised controlled trial of the clinical effectiveness and cost-effectiveness of early, goal-directed, protocolised resuscitation for emerging septic shock",
+    "pmid": "26597979",
+    "doi": "10.3310/hta19970",
+    "trial_id": "ISRCTN36307479",
+    "source_locator": "Full report, clinical effectiveness results: 90-day mortality",
+    "passage_text": "At 90 days following randomisation, 184 (29.5%) patients randomised to EGDT had died, compared with 181 (29.2%) patients randomised to usual resuscitation, corresponding to an absolute risk reduction of −0.3 [95% confidence interval (CI) −5.4 to 4.7; p = 0.90] and a relative risk of 1.01 (0.85 to 1.20)."
+  }
+}

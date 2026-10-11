@@ -1,0 +1,78 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_EXACT_REPEAT_CONTROL",
+  "claim_id": "CF_A3_OLAPARIB_FIRST_LINE_MAINTENANCE_PFS_CLAIM",
+  "claim_text": "In adults with newly diagnosed advanced ovarian cancer receiving first-line maintenance therapy after platinum response, olaparib-containing maintenance improves progression-free survival compared with placebo or control maintenance.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_A3_E1_SOLO1_FIRST_LINE_SCOPE",
+      "source_title": "SOLO1/GOG 3004 maintenance olaparib in newly diagnosed advanced ovarian cancer",
+      "pmid": "34715071",
+      "doi": "10.1016/S1470-2045(21)00531-3",
+      "trial_id": "NCT01844986",
+      "source_locator": "PubMed abstract methods and 5-year PFS findings",
+      "passage_text": "Methods: SOLO1 was a randomised, double-blind, placebo-controlled, phase 3 trial that enrolled patients aged 18 years or older with BRCA-mutated, newly diagnosed, advanced, high-grade serous or endometrioid ovarian cancer with a complete or partial clinical response after platinum-based chemotherapy. Patients were randomly assigned to receive olaparib or placebo as maintenance monotherapy."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_A3_E2_SOLO1_PFS_RESULT",
+      "source_title": "SOLO1/GOG 3004 maintenance olaparib in newly diagnosed advanced ovarian cancer",
+      "pmid": "34715071",
+      "doi": "10.1016/S1470-2045(21)00531-3",
+      "trial_id": "NCT01844986",
+      "source_locator": "PubMed abstract methods and 5-year PFS findings",
+      "passage_text": "Findings: median progression-free survival was 56.0 months with olaparib versus 13.8 months with placebo, hazard ratio 0.33."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "CF_A3_E2_SOLO1_PFS_RESULT",
+    "source_title": "SOLO1/GOG 3004 maintenance olaparib in newly diagnosed advanced ovarian cancer",
+    "pmid": "34715071",
+    "doi": "10.1016/S1470-2045(21)00531-3",
+    "trial_id": "NCT01844986",
+    "source_locator": "PubMed abstract methods and 5-year PFS findings",
+    "passage_text": "Findings: median progression-free survival was 56.0 months with olaparib versus 13.8 months with placebo, hazard ratio 0.33."
+  }
+}

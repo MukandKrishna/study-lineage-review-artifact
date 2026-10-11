@@ -1,0 +1,78 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_A1_PEMBROLIZUMAB_APPLICABILITY_EVAL_02",
+  "claim_id": "CF_A1_PEMBROLIZUMAB_ADJUVANT_RFS_CLAIM",
+  "claim_text": "In patients with resected high-risk melanoma, adjuvant pembrolizumab improves recurrence-free survival compared with control.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_A1_E1_KEYNOTE054_METHODS",
+      "source_title": "Adjuvant pembrolizumab versus placebo in resected stage III melanoma",
+      "pmid": "33857412",
+      "doi": "10.1016/S1470-2045(21)00065-6",
+      "trial_id": "NCT02362594",
+      "source_locator": "PubMed abstract Background and Methods sentences",
+      "passage_text": "Background: The European Organisation for Research and Treatment of Cancer (EORTC) 1325/KEYNOTE-054 trial assessed pembrolizumab versus placebo in patients with resected high-risk stage III melanoma. At 15-month median follow-up, pembrolizumab improved recurrence-free survival compared with placebo. Methods: Patients aged 18 years or older with complete resection of cutaneous melanoma metastatic to lymph node, classified as stage IIIA, IIIB, or IIIC, and with an Eastern Cooperative Oncology Group performance status of 0 or 1 were eligible."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_A1_E2_KEYNOTE054_RESULTS",
+      "source_title": "Adjuvant pembrolizumab versus placebo in resected stage III melanoma",
+      "pmid": "33857412",
+      "doi": "10.1016/S1470-2045(21)00065-6",
+      "trial_id": "NCT02362594",
+      "source_locator": "PubMed abstract recurrence-free survival and interpretation sentences",
+      "passage_text": "Recurrence-free survival remained longer in the pembrolizumab group than the placebo group at this 3.5-year follow-up in the ITT population. Interpretation: Pembrolizumab adjuvant therapy provided a significant and clinically meaningful improvement in distant metastasis-free survival at a 3.5-year median follow-up, which was consistent with the improvement in recurrence-free survival."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "CF_A1_E3_KEYNOTE054_RESULTS",
+    "source_title": "Adjuvant pembrolizumab versus placebo in resected stage III melanoma",
+    "pmid": "33857412",
+    "doi": "10.1016/S1470-2045(21)00065-6",
+    "trial_id": "NCT02362594",
+    "source_locator": "Exact repeat of PubMed abstract recurrence-free survival and interpretation passage",
+    "passage_text": "Recurrence-free survival remained longer in the pembrolizumab group than the placebo group at this 3.5-year follow-up in the ITT population. Interpretation: Pembrolizumab adjuvant therapy provided a significant and clinically meaningful improvement in distant metastasis-free survival at a 3.5-year median follow-up, which was consistent with the improvement in recurrence-free survival."
+  }
+}

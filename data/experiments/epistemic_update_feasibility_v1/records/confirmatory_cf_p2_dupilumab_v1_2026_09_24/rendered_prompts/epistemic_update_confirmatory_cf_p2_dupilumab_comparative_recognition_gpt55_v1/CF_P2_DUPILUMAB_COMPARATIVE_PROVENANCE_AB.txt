@@ -1,0 +1,101 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_P2_DUPILUMAB_COMPARATIVE_PROVENANCE_AB",
+  "claim_id": "CF_P2_DUPILUMAB_ASTHMA_EXACERBATION_LUNGFUNCTION_CLAIM",
+  "claim_text": "In patients with uncontrolled moderate-to-severe asthma, add-on dupilumab reduces severe exacerbations and improves lung function compared with placebo.",
+  "target_relation": "provenance",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_P2_E1_QUEST_METHODS",
+      "source_title": "Dupilumab Efficacy and Safety in Moderate-to-Severe Uncontrolled Asthma",
+      "pmid": "29782217",
+      "doi": "10.1056/NEJMoa1804092",
+      "trial_id": "NCT02414854",
+      "source_locator": "PubMed abstract Background and Methods sentences",
+      "passage_text": "Background: Dupilumab is a fully human anti-interleukin-4 receptor alpha monoclonal antibody that blocks both interleukin-4 and interleukin-13 signaling. We assessed its efficacy and safety in patients with uncontrolled asthma. Methods: We randomly assigned 1902 patients 12 years of age or older with uncontrolled asthma in a 2:2:1:1 ratio to receive add-on subcutaneous dupilumab at a dose of 200 or 300 mg every 2 weeks or matched-volume placebos for 52 weeks. The primary end points were the annualized rate of severe asthma exacerbations and the absolute change from baseline to week 12 in the forced expiratory volume in 1 second (FEV1) before bronchodilator use in the overall trial population."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_P2_E2_QUEST_RESULTS",
+      "source_title": "Dupilumab Efficacy and Safety in Moderate-to-Severe Uncontrolled Asthma",
+      "pmid": "29782217",
+      "doi": "10.1056/NEJMoa1804092",
+      "trial_id": "NCT02414854",
+      "source_locator": "PubMed abstract Results and Conclusions sentences",
+      "passage_text": "Results: The annualized rate of severe asthma exacerbations was 0.46 among patients assigned to 200 mg of dupilumab every 2 weeks and 0.87 among those assigned to a matched placebo, for a 47.7% lower rate with dupilumab than with placebo (P<0.001); similar results were seen with the dupilumab dose of 300 mg every 2 weeks. At week 12, the FEV1 had increased by 0.32 liters in patients assigned to the lower dose of dupilumab (difference vs. matched placebo, 0.14 liters; P<0.001); similar results were seen with the higher dose. Conclusions: In this trial, patients who received dupilumab had significantly lower rates of severe asthma exacerbation than those who received placebo, as well as better lung function and asthma control."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "CF_P2_UA_PHASE2B_RESULTS",
+    "source_title": "Dupilumab efficacy and safety in adults with uncontrolled persistent asthma despite use of medium-to-high-dose inhaled corticosteroids plus a long-acting beta2 agonist: a randomised double-blind placebo-controlled pivotal phase 2b dose-ranging trial",
+    "pmid": "27130691",
+    "doi": "10.1016/S0140-6736(16)30307-5",
+    "trial_id": "NCT01854047",
+    "source_locator": "PubMed abstract Methods, Findings, and Interpretation sentences",
+    "passage_text": "Methods: Adults with an asthma diagnosis for 12 months or more receiving treatment with medium-to-high-dose inhaled corticosteroids plus a long-acting beta2 agonist were eligible for participation. Patients were randomly assigned (1:1:1:1:1) to receive subcutaneous dupilumab 200 mg or 300 mg every 2 weeks or every 4 weeks, or placebo, over a 24-week period. Findings: 769 patients (158 in the placebo group and 611 in the dupilumab groups) received at least one dose of study drug. Dupilumab every 2 weeks produced the greatest reductions in annualised rates of exacerbation in the overall population (70-70.5%). Interpretation: Dupilumab increased lung function and reduced severe exacerbations in patients with uncontrolled persistent asthma irrespective of baseline eosinophil count and had a favourable safety profile."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "CF_P2_UB_QUEST_ANALYSIS",
+    "source_title": "Effect of exacerbation history on clinical response to dupilumab in moderate-to-severe uncontrolled asthma",
+    "pmid": "34266940",
+    "doi": "10.1183/13993003.04498-2020",
+    "trial_id": "NCT02414854",
+    "source_locator": "PubMed abstract Background, Methods, Results, and Conclusions sentences",
+    "passage_text": "Background: The phase 3 LIBERTY ASTHMA QUEST study (ClinicalTrials.gov: NCT02414854) in patients with uncontrolled, moderate-to-severe asthma has demonstrated the efficacy and safety of dupilumab 200 and 300 mg every 2 weeks versus placebo. This post hoc analysis assessed the effect of dupilumab on efficacy outcomes and asthma control across a range of historical exacerbation rates in patients with type 2-high asthma. Methods: Annualised severe exacerbation rates over the 52-week treatment period, pre-bronchodilator forced expiratory volume in 1 s (FEV1) at weeks 12 and 52, and the five-item Asthma Control Questionnaire (ACQ-5) score at weeks 24 and 52 were assessed in patients with 1, 2 or 3 exacerbations in the previous year. Results: Across all type 2-high subgroups, dupilumab versus placebo significantly reduced severe exacerbations by 54-90%, with greater improvements in patients with more exacerbations prior to study initiation. Conclusions: Dupilumab significantly reduced severe exacerbations and improved FEV1 and asthma control in patients with elevated type 2 biomarkers irrespective of exacerbation history and baseline ICS dose."
+  }
+}

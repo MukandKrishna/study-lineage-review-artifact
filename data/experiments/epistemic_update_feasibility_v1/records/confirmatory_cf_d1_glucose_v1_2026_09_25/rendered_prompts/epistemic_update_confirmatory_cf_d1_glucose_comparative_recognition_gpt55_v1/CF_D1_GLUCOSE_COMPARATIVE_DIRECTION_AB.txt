@@ -1,0 +1,101 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_D1_GLUCOSE_COMPARATIVE_DIRECTION_AB",
+  "claim_id": "CF_D1_GLUCOSE_ICU_MORTALITY_CLAIM",
+  "claim_text": "In critically ill adult ICU patients, intensive glucose control reduces mortality compared with conventional glucose control.",
+  "target_relation": "direction",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_D1_E1_LEUVENSURGICAL_METHODS",
+      "source_title": "Intensive insulin therapy in critically ill patients",
+      "pmid": "11794168",
+      "doi": "10.1056/NEJMoa011300",
+      "trial_id": "Leuven surgical ICU randomized trial",
+      "source_locator": "Abstract Methods sentences",
+      "passage_text": "Methods: Adults admitted to a surgical intensive care unit and receiving mechanical ventilation were randomized to intensive insulin therapy, targeting blood glucose at or below 110 mg/dL, or conventional treatment, in which insulin was infused only if blood glucose exceeded 215 mg/dL and was then maintained at 180 to 200 mg/dL."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_D1_E2_LEUVENSURGICAL_RESULTS",
+      "source_title": "Intensive insulin therapy in critically ill patients",
+      "pmid": "11794168",
+      "doi": "10.1056/NEJMoa011300",
+      "trial_id": "Leuven surgical ICU randomized trial",
+      "source_locator": "Abstract Results and Conclusions sentences",
+      "passage_text": "Results: Intensive insulin therapy reduced mortality during intensive care from 8.0% with conventional treatment to 4.6%. Conclusions: Intensive insulin therapy to maintain blood glucose at or below 110 mg/dL reduced morbidity and mortality among critically ill patients in the surgical intensive care unit."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "CF_D1_UA_NICESUGAR_RESULTS",
+    "source_title": "Intensive versus conventional glucose control in critically ill patients",
+    "pmid": "19318384",
+    "doi": "10.1056/NEJMoa0810625",
+    "trial_id": "NCT00220987",
+    "source_locator": "Abstract Methods, Results, and Conclusions sentences",
+    "passage_text": "Methods: Critically ill adults were randomly assigned to intensive glucose control with a target of 81 to 108 mg/dL or conventional glucose control with a target of 180 mg/dL or less. Results: At 90 days, 27.5% of patients in the intensive-control group and 24.9% in the conventional-control group had died. Conclusions: A glucose target of 180 mg/dL or less resulted in lower mortality than a target of 81 to 108 mg/dL."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "CF_D1_UB_LEUVENMEDICAL_RESULTS",
+    "source_title": "Intensive insulin therapy in the medical ICU",
+    "pmid": "16452557",
+    "doi": "10.1056/NEJMoa052521",
+    "trial_id": "NCT00115479",
+    "source_locator": "Abstract Methods, Results, and Conclusions sentences",
+    "passage_text": "Methods: Adult patients admitted to a medical ICU and anticipated to need intensive care for at least 3 days were assigned to intensive insulin therapy or conventional treatment. Results: In-hospital mortality was 40.0% with conventional treatment and 37.3% with intensive insulin therapy overall; among patients treated for at least 3 days, mortality was reduced from 52.5% to 43.0%. Conclusions: Intensive insulin therapy reduced morbidity but not mortality among all patients, while risk of later death and disease was reduced among patients treated for 3 or more days."
+  }
+}

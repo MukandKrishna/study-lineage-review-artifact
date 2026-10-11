@@ -1,0 +1,68 @@
+{
+    "experiment_id":  "epistemic_update_heldout_combined_h3_m1_statin_precedence_comparative_provenance_gpt55_v1",
+    "description":  "H3-M1 statin precedence comparative provenance recognition after removing source_group_id.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_heldout_combined_precedence_h3_statin_primary_prevention_m1_no_source_group_v1/comparative_recognition_inputs_provenance",
+    "input_ablation":  {
+                           "condition":  "H3_M1_no_source_group_id",
+                           "omitted_evidence_fields":  "source_group_id",
+                           "preserved_evidence_fields":  [
+                                                             "bundle_position",
+                                                             "evidence_id",
+                                                             "source_title",
+                                                             "pmid",
+                                                             "doi",
+                                                             "trial_id",
+                                                             "source_locator",
+                                                             "passage_text"
+                                                         ],
+                           "baseline_family":  "H3_STATIN_PRIMARY_PREVENTION_PRECEDENCE",
+                           "baseline_construction_id":  "epistemic_update_heldout_combined_precedence_h3_statin_primary_prevention_v1",
+                           "scientific_purpose":  "Test whether H3 relation recognition and later integration survive removal of the project-created source_group_id shortcut."
+                       },
+    "prompt_version":  "epistemic_update_relation_comparative_recognition_v2_2",
+    "prompt_sha256":  "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+    "response_schema":  "epistemic_update_relation_comparative_recognition_v1",
+    "response_schema_sha256":  "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_heldout_combined_h3_m1_statin_precedence_comparative_provenance_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_heldout_combined_h3_m1_statin_precedence_comparative_provenance_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  1,
+                         "condition_count":  2,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  10,
+                         "recognition_calls":  10,
+                         "independent_unit":  "clinical_family_not_repetition",
+                         "purpose":  "Check whether H3 provenance recognition survives removal of the project-created source_group_id shortcut."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_comparative_recognition_judge",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "h3_statin_precedence_provenance_ab_m1_no_source_group",
+                           "execution_item_id":  "H3_STATIN_PRECEDENCE_COMPARATIVE_PROVENANCE_M1_NO_SOURCE_GROUP",
+                           "input_file":  "h3_statin_precedence_provenance_ab_m1_no_source_group.json",
+                           "input_sha256":  "c9e0f0423e5d37faacd927c6434d2e651c4103f0e0ea6100bf22c82b1b75ad44",
+                           "expected_comparative_answer":  "B"
+                       },
+                       {
+                           "condition_id":  "h3_statin_precedence_provenance_ba_m1_no_source_group",
+                           "execution_item_id":  "H3_STATIN_PRECEDENCE_COMPARATIVE_SWAPPED_PROVENANCE_M1_NO_SOURCE_GROUP",
+                           "input_file":  "h3_statin_precedence_provenance_ba_m1_no_source_group.json",
+                           "input_sha256":  "0d89e7378c26a0368dd81c9a426682ca384cbc964f1b974380a7bf86ec8ba60b",
+                           "expected_comparative_answer":  "A"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

@@ -1,0 +1,82 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it. This may be because the required population,
+  intervention, comparator, outcome, time frame, or setting is missing or mismatched.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P1_LDCT_PROVENANCE_MATCHED_B",
+  "claim_id": "P1_LDCT_CLAIM",
+  "claim_text": "Among adults enrolled in randomized lung-screening trials, the observed long-term lung-cancer mortality point estimate was lower with repeated CT screening than with no screening.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P1_E1_NELSON_METHODS",
+      "source_group_id": "LDCT_SOURCE_NELSON",
+      "source_title": "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial.",
+      "pmid": "31995683",
+      "doi": "10.1056/NEJMoa1911793",
+      "trial_id": "NL580",
+      "source_locator": "Exact METHODS paragraph from the frozen NELSON title/abstract passage",
+      "passage_text": "METHODS: A total of 13,195 men (primary analysis) and 2594 women (subgroup analyses) between the ages of 50 and 74 were randomly assigned to undergo CT screening at T0 (baseline), year 1, year 3, and year 5.5 or no screening. We obtained data on cancer diagnosis and the date and cause of death through linkages with national registries in the Netherlands and Belgium, and a review committee confirmed lung cancer as the cause of death when possible. A minimum follow-up of 10 years until December 31, 2015, was completed for all participants."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P1_E2_NELSON_MEN_RESULT",
+      "source_group_id": "LDCT_SOURCE_NELSON",
+      "source_title": "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial.",
+      "pmid": "31995683",
+      "doi": "10.1056/NEJMoa1911793",
+      "trial_id": "NL580",
+      "source_locator": "Exact first sentence of the frozen NELSON decisive Results quote",
+      "passage_text": "The cumulative rate ratio for death from lung cancer at 10 years was 0.76 (95% confidence interval [CI], 0.61 to 0.94; P = 0.01) in the screening group as compared with the control group, similar to the values at years 8 and 9."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "P1_UB_NELSON_SAME_TRIAL",
+    "source_group_id": "LDCT_SOURCE_NELSON",
+    "source_title": "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial.",
+    "pmid": "31995683",
+    "doi": "10.1056/NEJMoa1911793",
+    "trial_id": "NL580",
+    "source_locator": "Exact CONCLUSIONS paragraph from the frozen NELSON title/abstract passage",
+    "passage_text": "CONCLUSIONS: In this trial involving high-risk persons, lung-cancer mortality was significantly lower among those who underwent volume CT screening than among those who underwent no screening. There were low rates of follow-up procedures for results suggestive of lung cancer. (Funded by the Netherlands Organization of Health Research and Development and others; NELSON Netherlands Trial Register number, NL580.)."
+  }
+}

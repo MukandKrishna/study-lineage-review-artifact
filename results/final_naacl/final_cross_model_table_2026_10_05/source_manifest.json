@@ -1,0 +1,51 @@
+﻿{
+    "primary_counts":  {
+                           "GPT-5.5":  [
+                                           330,
+                                           330,
+                                           0,
+                                           "current project ledger/audit"
+                                       ],
+                           "Qwen3-4B":  [
+                                            330,
+                                            270,
+                                            60,
+                                            "included result records: data/experiments/epistemic_update_feasibility_v1/records/model_outputs/qwen3_4b"
+                                        ],
+                           "Gemma3-4B":  [
+                                             330,
+                                             210,
+                                             120,
+                                             "included result records: data/experiments/epistemic_update_feasibility_v1/records/model_outputs/gemma3_4b"
+                                         ],
+                           "Llama-3.1-8B":  [
+                                                330,
+                                                210,
+                                                120,
+                                                "included result records: data/experiments/epistemic_update_feasibility_v1/records/model_outputs/llama3_1_8b"
+                                            ],
+                           "Ministral-3-8B":  [
+                                                  330,
+                                                  265,
+                                                  65,
+                                                  "included result records: data/experiments/epistemic_update_feasibility_v1/records/model_outputs/ministral3_8b"
+                                              ]
+                       },
+    "lineage_status":  {
+                           "GPT-5.5":  "20/20 valid; policy labels correct in all four cells (same=duplicate, independent=corroboration)",
+                           "Qwen3-4B":  "4/4 valid; same-high duplicate, same-low mislabelled independent, independent cells correct",
+                           "Gemma3-4B":  "4/4 valid; both same-trial cells mislabelled independent, independent cells correct",
+                           "Llama-3.1-8B":  "4/4 valid; same cells mislabelled independent; independent-high under-credited; independent-low mixed",
+                           "Ministral-3-8B":  "2/4 valid; both same-trial cells rejected; accepted independent cells mixed"
+                       },
+    "grouping_source":  "results/final_naacl/extended_cross_model_grouping_audit_2026_10_05/grouping_family_level_summary.csv",
+    "raw_records_modified":  false,
+    "new_model_calls":  0,
+    "artifact_scope":  "paper-facing aggregate results and audit summaries",
+    "raw_archives_included":  false,
+    "raw_archives_location":  "archived outside this minimum NAACL repository",
+    "reproducibility_note":  "Per-call result records for the five-model summaries are included under data/experiments/epistemic_update_feasibility_v1/records/model_outputs. Model weights and execution environments remain external.",
+    "model_result_records_included":  true,
+    "model_result_records_path":  "data/experiments/epistemic_update_feasibility_v1/records/model_outputs",
+    "model_weights_included":  false
+}

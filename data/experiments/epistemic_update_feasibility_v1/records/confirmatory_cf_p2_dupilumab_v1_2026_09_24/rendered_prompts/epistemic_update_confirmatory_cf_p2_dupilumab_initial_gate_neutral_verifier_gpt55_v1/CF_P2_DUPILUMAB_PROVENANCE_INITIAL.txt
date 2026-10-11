@@ -1,0 +1,69 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_P2_DUPILUMAB_PROVENANCE_INITIAL",
+  "claim_id": "CF_P2_DUPILUMAB_ASTHMA_EXACERBATION_LUNGFUNCTION_CLAIM",
+  "claim_text": "In patients with uncontrolled moderate-to-severe asthma, add-on dupilumab reduces severe exacerbations and improves lung function compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_P2_E1_QUEST_METHODS",
+      "source_title": "Dupilumab Efficacy and Safety in Moderate-to-Severe Uncontrolled Asthma",
+      "pmid": "29782217",
+      "doi": "10.1056/NEJMoa1804092",
+      "trial_id": "NCT02414854",
+      "source_locator": "PubMed abstract Background and Methods sentences",
+      "passage_text": "Background: Dupilumab is a fully human anti-interleukin-4 receptor alpha monoclonal antibody that blocks both interleukin-4 and interleukin-13 signaling. We assessed its efficacy and safety in patients with uncontrolled asthma. Methods: We randomly assigned 1902 patients 12 years of age or older with uncontrolled asthma in a 2:2:1:1 ratio to receive add-on subcutaneous dupilumab at a dose of 200 or 300 mg every 2 weeks or matched-volume placebos for 52 weeks. The primary end points were the annualized rate of severe asthma exacerbations and the absolute change from baseline to week 12 in the forced expiratory volume in 1 second (FEV1) before bronchodilator use in the overall trial population."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_P2_E2_QUEST_RESULTS",
+      "source_title": "Dupilumab Efficacy and Safety in Moderate-to-Severe Uncontrolled Asthma",
+      "pmid": "29782217",
+      "doi": "10.1056/NEJMoa1804092",
+      "trial_id": "NCT02414854",
+      "source_locator": "PubMed abstract Results and Conclusions sentences",
+      "passage_text": "Results: The annualized rate of severe asthma exacerbations was 0.46 among patients assigned to 200 mg of dupilumab every 2 weeks and 0.87 among those assigned to a matched placebo, for a 47.7% lower rate with dupilumab than with placebo (P<0.001); similar results were seen with the dupilumab dose of 300 mg every 2 weeks. At week 12, the FEV1 had increased by 0.32 liters in patients assigned to the lower dose of dupilumab (difference vs. matched placebo, 0.14 liters; P<0.001); similar results were seen with the higher dose. Conclusions: In this trial, patients who received dupilumab had significantly lower rates of severe asthma exacerbation than those who received placebo, as well as better lung function and asthma control."
+    }
+  ],
+  "added_evidence": null
+}

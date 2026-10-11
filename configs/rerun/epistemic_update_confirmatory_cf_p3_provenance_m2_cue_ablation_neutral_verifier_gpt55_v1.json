@@ -1,0 +1,70 @@
+{
+  "experiment_id": "epistemic_update_confirmatory_cf_p3_provenance_m2_cue_ablation_neutral_verifier_gpt55_v1",
+  "description": "CF-P3 M2 cue-ablation neutral-verifier diagnostic.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_cf_p3_provenance_oracle_cue_diagnostic_v1/m2_cue_ablation_verifier_inputs",
+  "input_ablation": {
+    "condition": "m2_no_source_group_id_trial_id_or_source_locator",
+    "omitted_evidence_fields": [
+      "source_group_id",
+      "trial_id",
+      "source_locator"
+    ],
+    "preserved_evidence_fields": [
+      "source_title",
+      "pmid",
+      "doi",
+      "passage_text"
+    ],
+    "purpose": "Remove project linkage fields, structured trial IDs, and locator wording while preserving ordinary titles, PMID/DOI, and passage text."
+  },
+  "prompt_version": "epistemic_update_verifier_neutral_v2",
+  "prompt_sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+  "response_schema": "epistemic_multi_evidence_judge_openai_v1",
+  "response_schema_sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_p3_provenance_m2_cue_ablation_neutral_verifier_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_p3_provenance_m2_cue_ablation_neutral_verifier_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 3,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 15,
+    "recognition_calls": 0,
+    "independent_unit": "clinical_family_not_condition_or_repetition",
+    "purpose": "Test whether CF-P3 neutral-verifier behaviour depends on structured trial_id or source_locator cues."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_neutral_verifier",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "m2_cue_ablation_cf_p3_empakidney_provenance_exact_repeat_control",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_02_M2_CUE_ABLATION",
+      "input_file": "cf_p3_empakidney_exact_repeat_control_m2_cue_ablation.json",
+      "input_sha256": "953bd5a7e03557d4a08a2324c0796ad628ba45a546a58a5857f8dbb6d7d5ea00"
+    },
+    {
+      "condition_id": "m2_cue_ablation_cf_p3_empakidney_provenance_same_trial_secondary_analysis",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_03_M2_CUE_ABLATION",
+      "input_file": "cf_p3_empakidney_same_trial_update_m2_cue_ablation.json",
+      "input_sha256": "5d1f0668977026d050d8d86808c177d3bcacaea1c9bb0f92c5914e254fdcde1e"
+    },
+    {
+      "condition_id": "m2_cue_ablation_cf_p3_empakidney_provenance_independent_trial",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_04_M2_CUE_ABLATION",
+      "input_file": "cf_p3_dapackd_independent_update_m2_cue_ablation.json",
+      "input_sha256": "3b29810d83e6d3adfa7bc94e36c7d399cc0180e0395fc57045c83b9335805d4c"
+    }
+  ],
+  "model_calls_enabled": false,
+  "runtime_requirement": "When this gate is explicitly approved for model calls, run it with writable/unsandboxed Codex CLI state access from the first attempt. Do not attempt a sandboxed model-call run; sandboxed use is for validate-only checks.",
+  "model_call_gate": "Closed after offline design. Open only with explicit approval: 3 inputs x 5 repeats = 15 calls."
+}

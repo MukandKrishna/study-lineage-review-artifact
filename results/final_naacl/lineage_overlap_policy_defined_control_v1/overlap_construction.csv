@@ -1,0 +1,6 @@
+cell,source_role,tokens,characters,jaccard,rouge_l_f1,cosine
+anchor,ProMISe primary numerical result,68,335,,,
+same_high,ProMISe HTA numerical result,57,299,0.634615,0.400000,0.846106
+same_low,ProMISe HTA abstract conclusion,30,182,0.109375,0.122449,0.656978
+independent_high,ARISE primary numerical result,56,303,0.423729,0.370968,0.922640
+independent_low,ARISE primary conclusion,23,132,0.118644,0.109890,0.678653

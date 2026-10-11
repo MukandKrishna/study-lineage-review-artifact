@@ -1,0 +1,329 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_provenance_pcsk9_cv_outcomes_m1_m2_2026_09_18",
+  "created_at_utc": "2026-09-18T10:35:20.678155+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve M1/M2 configs, exact ablated inputs and hashes, prompt version, rendered prompts, raw and parsed outputs, repetitions, errors/retries, A/B assignments, token logs, offline acceptance/question audits, evaluators, reports, and bounded interpretation. Keep this archive separate from the completed P7 M0 archive and do not overwrite prior snapshots on rerun.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_m2_record_archive.json",
+    "bytes": 2687,
+    "sha256": "8240c9d0c69d3d44e47e32223a535ae31c2c66c9646151f6b8315ecc3cd8cf10",
+    "last_write_time_utc": "2026-09-18T10:35:01.111383+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_comparative_recognition_gpt55_v1.json",
+      "bytes": 3255,
+      "sha256": "18bf2621422d1eb66deca7f2b5625715040985576dcb9f1c36079d19c300c239",
+      "last_write_time_utc": "2026-09-18T10:15:30.689576+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_comparative_recognition_gpt55_v1.json",
+      "bytes": 3394,
+      "sha256": "7ef09d697f22988926d05caa6abec049d061b4b5840aad3019dbb8310e1fcaca",
+      "last_write_time_utc": "2026-09-18T10:27:18.326328+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_2.txt",
+      "bytes": 2718,
+      "sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+      "last_write_time_utc": "2026-09-16T07:25:50.409464+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1",
+      "execution_item_id": "P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M1_NO_SOURCE_GROUP_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_AB",
+      "condition_id": "p7_m1_independent_vs_same_trial_publication_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\provenance_pcsk9_cv_outcomes_m1_m2_2026_09_18\\rendered_prompts\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M1_NO_SOURCE_GROUP_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_AB.txt",
+      "rendered_prompt_sha256": "53bf9324c4a7f6c71fb7dc333a52bbfd466d2b3a73335303ff64b43098e0c6e1",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1",
+      "execution_item_id": "P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M1_NO_SOURCE_GROUP_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_BA",
+      "condition_id": "p7_m1_independent_vs_same_trial_publication_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\provenance_pcsk9_cv_outcomes_m1_m2_2026_09_18\\rendered_prompts\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M1_NO_SOURCE_GROUP_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_BA.txt",
+      "rendered_prompt_sha256": "d1d977ca96709bd4ab63808722231f583713137b7229742d4d92a0f4e8fea14d",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "experiment_id": "epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1",
+      "execution_item_id": "P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M2_NO_STRUCTURED_IDS_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_AB",
+      "condition_id": "p7_m2_independent_vs_same_trial_publication_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\provenance_pcsk9_cv_outcomes_m1_m2_2026_09_18\\rendered_prompts\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M2_NO_STRUCTURED_IDS_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_AB.txt",
+      "rendered_prompt_sha256": "9d5c3d57a4edc4ab971e466144337d3c76cb13a3f361b1360989b0dfc0378084",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1",
+      "execution_item_id": "P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M2_NO_STRUCTURED_IDS_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_BA",
+      "condition_id": "p7_m2_independent_vs_same_trial_publication_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\provenance_pcsk9_cv_outcomes_m1_m2_2026_09_18\\rendered_prompts\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\P7_PCSK9_CARDIOVASCULAR_OUTCOMES_PROVENANCE_M2_NO_STRUCTURED_IDS_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_BA.txt",
+      "rendered_prompt_sha256": "f81571f17ddc875181d9ee9fea2330a04e0aecb0782f8b6ef22f05e4a3d5f337",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\ablation_manifest.json",
+      "bytes": 2536,
+      "sha256": "2fb93013a2ea3aeed144d694452df61e7a8871defa30cdafa13b9ca43c87bf3b",
+      "last_write_time_utc": "2026-09-18T10:10:59.238496+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\offline_validation_report.json",
+      "bytes": 343,
+      "sha256": "8745e796b3ac1281f49ed726df3d5ce66b7c62f2eadc204f7c9019b38f49d076",
+      "last_write_time_utc": "2026-09-18T10:10:59.238496+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\scientific_question_audit.csv",
+      "bytes": 3276,
+      "sha256": "84e03414ff764147eea1cbbe197bacf5f670b82145d67c2123e19d33f3682840",
+      "last_write_time_utc": "2026-09-18T10:10:59.238496+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\comparative_recognition_inputs\\p7_m1_independent_vs_same_trial_publication_ab.json",
+      "bytes": 7017,
+      "sha256": "695ea72e9dc9e345fb0839ed7e4d0e71c1d978b127ca58db3d32cd70ecb351be",
+      "last_write_time_utc": "2026-09-18T10:10:59.238496+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\comparative_recognition_inputs\\p7_m1_independent_vs_same_trial_publication_ba.json",
+      "bytes": 7017,
+      "sha256": "d496efd60ed95f2d08ec1a2854ed1c3e535c4e64db380ad2c7a843b69e8f570b",
+      "last_write_time_utc": "2026-09-18T10:10:59.238496+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_provenance_pcsk9_cv_outcomes_m1_no_source_group_v1\\run_plan_manifest.json",
+      "bytes": 442,
+      "sha256": "97280fcf1c72c21e86bcaf133812a26df8390a496fa4055d13dbccb8acb10e36",
+      "last_write_time_utc": "2026-09-18T10:10:59.238496+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\ablation_manifest.json",
+      "bytes": 2747,
+      "sha256": "845837e6e7ac68350a0cbf9ccf778a6f938af01868ccf0ea7b53c63481ea4d34",
+      "last_write_time_utc": "2026-09-18T10:22:06.958323+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\offline_validation_report.json",
+      "bytes": 345,
+      "sha256": "2ef18e5042f55924f83742073a3c26f6bcea7618092e82ccb18f42ad84d4d2b6",
+      "last_write_time_utc": "2026-09-18T10:22:06.958323+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\scientific_question_audit.csv",
+      "bytes": 3602,
+      "sha256": "38f4843f0332628f71d41d640812ba639512bb893d246b80a31364b65d9a0f2e",
+      "last_write_time_utc": "2026-09-18T10:22:06.958323+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\comparative_recognition_inputs\\p7_m2_independent_vs_same_trial_publication_ab.json",
+      "bytes": 6887,
+      "sha256": "9af11edc33174bfbbd87d2a7d829556f737f64c1294857942546c06ad02d1b61",
+      "last_write_time_utc": "2026-09-18T10:22:06.941978+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\comparative_recognition_inputs\\p7_m2_independent_vs_same_trial_publication_ba.json",
+      "bytes": 6887,
+      "sha256": "ee1c6ccdf39dc91a60756e3ccd24652f52ff9cc7f8cc45c1c94654e107f0d846",
+      "last_write_time_utc": "2026-09-18T10:22:06.958323+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_provenance_pcsk9_cv_outcomes_m2_no_structured_ids_v1\\run_plan_manifest.json",
+      "bytes": 444,
+      "sha256": "91300dd359b8141f708344c6c895ff5991e6f06fabbe040b37795656777641d4",
+      "last_write_time_utc": "2026-09-18T10:22:06.958323+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m1_comparative_recognition_v1.jsonl",
+      "exists": true,
+      "row_count": 10,
+      "sha256": "77640f15a281483a0ba8ea022969e87af3b0f139abba4bcf56b0fc8481047bd2",
+      "response_status_counts": {
+        "ok": 10
+      },
+      "error_category_counts": {
+        "": 10
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m2_comparative_recognition_v1.jsonl",
+      "exists": true,
+      "row_count": 10,
+      "sha256": "794d3b1e2724c67a8df9bd97309c2f4457fb38a99dc53d002768d5eedbb1656c",
+      "response_status_counts": {
+        "ok": 10
+      },
+      "error_category_counts": {
+        "": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m1_comparative_recognition_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m2_comparative_recognition_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m1_comparative_recognition_v1\\REPORT.md",
+      "bytes": 1227,
+      "sha256": "e464437aa7adf5651033bd13dafbba298c99a486e4a184b4df09a2e3ea7465f1",
+      "last_write_time_utc": "2026-09-18T10:17:43.273482+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m1_comparative_recognition_v1\\summary.json",
+      "bytes": 2033,
+      "sha256": "ea55cb98b1ba2afc47dd2735d84989a3e297d2a75d4076a808e011a750f1fd61",
+      "last_write_time_utc": "2026-09-18T10:17:43.273482+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m2_comparative_recognition_v1\\REPORT.md",
+      "bytes": 1495,
+      "sha256": "3e6eaceca36c4ac06e4c8a98dcccb2c3f0eb5a549f5244f415a4cc29f24f5204",
+      "last_write_time_utc": "2026-09-18T10:29:13.380946+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_pcsk9_cv_outcomes_m2_comparative_recognition_v1\\summary.json",
+      "bytes": 2234,
+      "sha256": "9080ac1db53d5a4a0bbf5ec37b5cd611f9e6c158a141604f5b281c544877381b",
+      "last_write_time_utc": "2026-09-18T10:29:13.380946+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 17939,
+      "sha256": "c3d8002974bd621c3d2c05354903b6363f57a4b698521910c6a9d4da3fed36eb",
+      "last_write_time_utc": "2026-09-18T10:02:38.435618+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11781,
+      "sha256": "d821660e0fba493ce4c29862dab422d5b84b4f9a2af091f6c79271c55a31c198",
+      "last_write_time_utc": "2026-09-18T10:32:40.810744+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\67_build_p7_m1_provenance_cue_ablation.py",
+      "bytes": 20588,
+      "sha256": "9a531b754de1ffc3acc653778e42065e962f28c6f3c1024be8c32d2059acdd64",
+      "last_write_time_utc": "2026-09-18T10:05:22.251925+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\68_evaluate_p7_m1_provenance_cue_ablation.py",
+      "bytes": 11166,
+      "sha256": "dad596ca64198d1fbf1560522b6484fee4782e8efed0e2c7ce3c3f2519c1f56d",
+      "last_write_time_utc": "2026-09-18T10:17:26.573247+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\69_build_p7_m2_provenance_cue_ablation.py",
+      "bytes": 21905,
+      "sha256": "f4325fed9d067edfe4b4953fd5a6cc21b7effac610f7b8296f61f04ba91a6f8b",
+      "last_write_time_utc": "2026-09-18T10:21:38.094814+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\70_evaluate_p7_m2_provenance_cue_ablation.py",
+      "bytes": 7209,
+      "sha256": "7b55a3a9bc4ebe97c2495779d6447ad2a2016115eb872eaa3ce75c511e58a694",
+      "last_write_time_utc": "2026-09-18T10:28:55.276204+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 17825,
+      "sha256": "65cacaa751d796dd711700e99af3ccfae2cf8fd53063b620372d954d4e665a97",
+      "last_write_time_utc": "2026-09-16T17:56:10.995192+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 8719,
+      "sha256": "a8bb7c7cd94e3103018233f4adb0e5d13ff2a34fb1213aaa8c5d4ae0acd890dd",
+      "last_write_time_utc": "2026-09-18T10:02:36.003063+00:00"
+    }
+  ],
+  "project_notes": []
+}

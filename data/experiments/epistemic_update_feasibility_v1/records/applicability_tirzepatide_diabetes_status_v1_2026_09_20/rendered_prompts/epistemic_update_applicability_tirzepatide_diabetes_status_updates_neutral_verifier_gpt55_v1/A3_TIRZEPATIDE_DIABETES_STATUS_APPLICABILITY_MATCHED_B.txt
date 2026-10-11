@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "A3_TIRZEPATIDE_DIABETES_STATUS_APPLICABILITY_MATCHED_B",
+  "claim_id": "A3_TIRZEPATIDE_NO_DIABETES_WEIGHT_CLAIM",
+  "claim_text": "Among adults with obesity or overweight without diabetes, once-weekly tirzepatide reduced body weight compared with placebo over 72 weeks.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "A3_E1_SURMOUNT1_NO_DIABETES_METHODS",
+      "source_group_id": "TIRZ_SOURCE_SURMOUNT1_NCT04184622",
+      "source_title": "Tirzepatide Once Weekly for the Treatment of Obesity.",
+      "pmid": "35658024",
+      "doi": "10.1056/NEJMoa2206038",
+      "trial_id": "NCT04184622",
+      "source_locator": "Exact SURMOUNT-1 methods paragraph from the PubMed abstract",
+      "passage_text": "METHODS: In this phase 3 double-blind, randomized, controlled trial, we assigned 2539 adults with a body-mass index (BMI; the weight in kilograms divided by the square of the height in meters) of 30 or more, or 27 or more and at least one weight-related complication, excluding diabetes, in a 1:1:1:1 ratio to receive once-weekly, subcutaneous tirzepatide (5 mg, 10 mg, or 15 mg) or placebo for 72 weeks, including a 20-week dose-escalation period. Coprimary end points were the percentage change in weight from baseline and a weight reduction of 5% or more. The treatment-regimen estimand assessed effects regardless of treatment discontinuation in the intention-to-treat population."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "A3_E2_SURMOUNT1_WEIGHT_RESULT",
+      "source_group_id": "TIRZ_SOURCE_SURMOUNT1_NCT04184622",
+      "source_title": "Tirzepatide Once Weekly for the Treatment of Obesity.",
+      "pmid": "35658024",
+      "doi": "10.1056/NEJMoa2206038",
+      "trial_id": "NCT04184622",
+      "source_locator": "Exact SURMOUNT-1 week-72 weight-change sentence from the PubMed abstract",
+      "passage_text": "The mean percentage change in weight at week 72 was -15.0% (95% confidence interval [CI], -15.9 to -14.2) with 5-mg weekly doses of tirzepatide, -19.5% (95% CI, -20.4 to -18.5) with 10-mg doses, and -20.9% (95% CI, -21.8 to -19.9) with 15-mg doses and -3.1% (95% CI, -4.3 to -1.9) with placebo (P<0.001 for all comparisons with placebo)."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "A3_U2_SURMOUNT2_TYPE2_DIABETES_OUT_OF_SCOPE",
+    "source_group_id": "TIRZ_SOURCE_SURMOUNT2_NCT04657003",
+    "source_title": "Tirzepatide once weekly for the treatment of obesity in people with type 2 diabetes (SURMOUNT-2): a double-blind, randomised, multicentre, placebo-controlled, phase 3 trial",
+    "pmid": "37385275",
+    "doi": "10.1016/S0140-6736(23)01200-X",
+    "trial_id": "NCT04657003",
+    "source_locator": "PubMed abstract: Methods through Interpretation",
+    "passage_text": "METHODS: This phase 3, double-blind, randomised, placebo-controlled trial was conducted in seven countries. Adults (aged >=18 years) with a body-mass index (BMI) of 27 kg/m2 or higher and glycated haemoglobin (HbA1c) of 7-10% were randomly assigned (1:1:1) to receive either once-weekly, subcutaneous tirzepatide (10 mg or 15 mg) or placebo for 72 weeks. Coprimary endpoints were the percent change in bodyweight from baseline and bodyweight reduction of 5% or higher. This trial is registered with ClinicalTrials.gov, NCT04657003.\n\nFINDINGS: Least-squares mean change in bodyweight at week 72 with tirzepatide 10 mg and 15 mg was -12.8% and -14.7%, respectively, and -3.2% with placebo, resulting in estimated treatment differences versus placebo of -9.6 percentage points (95% CI -11.1 to -8.1) with tirzepatide 10 mg and -11.6 percentage points (-13.0 to -10.1) with tirzepatide 15 mg (all p<0.0001).\n\nINTERPRETATION: In this 72-week trial in adults living with obesity and type 2 diabetes, once-weekly tirzepatide 10 mg and 15 mg provided substantial and clinically meaningful reduction in bodyweight."
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_confirmatory_cf_a3_olaparib_v1_2026_09_25",
+  "created_at_utc": "2026-09-25T20:50:43.283599+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve exact prompts, prompt versions, model/version and settings, exact model inputs, rendered prompts, raw outputs, parsed outputs, repetitions, errors/retries, A/B assignments, token logs where available, source/provenance records, family-change records, the pre-call acceptance matrix, result report, and the final-test protocol. Do not overwrite earlier outputs on rerun.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_confirmatory_cf_a3_olaparib_record_archive.json",
+    "bytes": 2653,
+    "sha256": "c223b24a00caec8f875b44f3576095e43b48c6884db7a6720bbf37b5cbb76797",
+    "last_write_time_utc": "2026-09-25T20:50:33.778653+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2789,
+      "sha256": "a462452f1f6763a65c8e7f0d1fac7c434ce8e24169590efd5d8dd9efc7ff0a18",
+      "last_write_time_utc": "2026-09-25T20:04:46.545237+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 3577,
+      "sha256": "833e5711bc8d6960b6ec3def76b333227da01d397a93d912872fe9d8d0c32eaa",
+      "last_write_time_utc": "2026-09-25T20:11:13.797490+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_gpt55_v1.json",
+      "bytes": 3385,
+      "sha256": "3b4dabec2ed3efd989201c7e1e13651cd0c3df718822bf991287f7808e62d782",
+      "last_write_time_utc": "2026-09-25T20:13:45.016871+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_2.txt",
+      "bytes": 2718,
+      "sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+      "last_write_time_utc": "2026-09-16T07:25:50.409464+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_initial_gate_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_INITIAL",
+      "condition_id": "cf_a3_olaparib_ovarian_maintenance_scope_applicability_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_a3_olaparib_v1_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_initial_gate_neutral_verifier_gpt55_v1\\CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_INITIAL.txt",
+      "rendered_prompt_sha256": "4702bb078669b3fa22eedc8181832249b2251ffb05cfe465d5ebb628bd76f35e",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_EXACT_REPEAT_CONTROL",
+      "condition_id": "cf_a3_olaparib_ovarian_maintenance_scope_applicability_exact_repeat_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_a3_olaparib_v1_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1\\CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_EXACT_REPEAT_CONTROL.txt",
+      "rendered_prompt_sha256": "41871076628e0882c0c8e7497553b2b7a8568c30f194b4fc9fc037636c4d3968",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_MATCHED_A",
+      "condition_id": "cf_a3_olaparib_ovarian_maintenance_scope_applicability_matched_a",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_a3_olaparib_v1_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1\\CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_MATCHED_A.txt",
+      "rendered_prompt_sha256": "9969fa27026f76bcdc246d4ac73f073b3f942e1e80858d533691de77e455ad91",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_MATCHED_B",
+      "condition_id": "cf_a3_olaparib_ovarian_maintenance_scope_applicability_matched_b",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_a3_olaparib_v1_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_gpt55_v1\\CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_MATCHED_B.txt",
+      "rendered_prompt_sha256": "294e39e7d120faf670adbe4c06be54af30b809a2ba9381862dfeb3e3f2eb6c3d",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_gpt55_v1",
+      "execution_item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_COMPARATIVE_APPLICABILITY",
+      "condition_id": "cf_a3_olaparib_ovarian_maintenance_scope_applicability_matched_a_vs_matched_b_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_a3_olaparib_v1_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_gpt55_v1\\CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_COMPARATIVE_APPLICABILITY.txt",
+      "rendered_prompt_sha256": "241922ac6b9348c00ddd0072f9f81a484cc5c73fd1d2caa0212cacf57d5283c8",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_gpt55_v1",
+      "execution_item_id": "CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_COMPARATIVE_SWAPPED_APPLICABILITY",
+      "condition_id": "cf_a3_olaparib_ovarian_maintenance_scope_applicability_matched_a_vs_matched_b_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_a3_olaparib_v1_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_gpt55_v1\\CF_A3_OLAPARIB_OVARIAN_MAINTENANCE_SCOPE_COMPARATIVE_SWAPPED_APPLICABILITY.txt",
+      "rendered_prompt_sha256": "c79a396c608eb4939021a37270bdd7f63dee657a20ff001b2a4b7beb7f2fae61",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\authoring_record.json",
+      "bytes": 6249,
+      "sha256": "e836605d09345fb594a7b2472a338349a730b466ace45c7c69d9a077199fa708",
+      "last_write_time_utc": "2026-09-25T20:01:13.391894+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\comparative_recognition_inputs\\cf_a3_olaparib_ovarian_maintenance_scope_comparative_applicability_ab.json",
+      "bytes": 3314,
+      "sha256": "9682610385a07415ca66ec35198abae0bcdb917a18cf1290b09282f00c73c2f6",
+      "last_write_time_utc": "2026-09-25T20:01:13.477721+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\comparative_recognition_inputs\\cf_a3_olaparib_ovarian_maintenance_scope_comparative_applicability_ba.json",
+      "bytes": 3322,
+      "sha256": "d48273c7f854c731f672bf43c58753f7467cf0c913539a23e1df9860a33bab6c",
+      "last_write_time_utc": "2026-09-25T20:01:13.493547+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\verifier_inputs_applicability_updates\\cf_a3_olaparib_ovarian_maintenance_scope_exact_repeat_control.json",
+      "bytes": 2336,
+      "sha256": "69979f7d3e9b3909628ba88067d19be3a9d723fe5648df373dbce14059fe91ec",
+      "last_write_time_utc": "2026-09-25T20:01:13.444403+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\verifier_inputs_applicability_updates\\cf_a3_olaparib_ovarian_maintenance_scope_matched_a.json",
+      "bytes": 2596,
+      "sha256": "dc1d8937577d1df245463b3983012fa6e2933b0cc784ce96591d895c77748be9",
+      "last_write_time_utc": "2026-09-25T20:01:13.444403+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\verifier_inputs_applicability_updates\\cf_a3_olaparib_ovarian_maintenance_scope_matched_b.json",
+      "bytes": 2468,
+      "sha256": "ba002ffaaf927c77ad4ccc04c8d05a1ecf8ed52d0ad4c80184fc5795e8dfea0c",
+      "last_write_time_utc": "2026-09-25T20:01:13.460349+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope\\verifier_inputs_initial_gate\\cf_a3_olaparib_ovarian_maintenance_scope_initial.json",
+      "bytes": 1818,
+      "sha256": "b4043fc218069ed29c80d267458077e970c26ca202155da4512061a55116bdc4",
+      "last_write_time_utc": "2026-09-25T20:01:13.411205+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_initial_gate_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 5,
+      "sha256": "1efe47a2d472212dfad01619f4422dcc7e1e792a0f9db065f17f8d3fd2a547bb",
+      "response_status_counts": {
+        "ok": 5
+      },
+      "error_category_counts": {
+        "": 5
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 15,
+      "sha256": "15fea4bc93bf17c13ace1de4ccd4bac031c58ed9cfb6b79c2c6e05ace02a0b2c",
+      "response_status_counts": {
+        "ok": 15
+      },
+      "error_category_counts": {
+        "": 15
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_v1.jsonl",
+      "exists": true,
+      "row_count": 10,
+      "sha256": "797e87bbb566116d091994269c8c077f4ea4e0590b0ec148af0e05f2c48a9a32",
+      "response_status_counts": {
+        "ok": 10
+      },
+      "error_category_counts": {
+        "": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_initial_gate_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_updates_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_comparative_recognition_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_a3_olaparib_ovarian_maintenance_scope_v1\\REPORT.md",
+      "bytes": 1265,
+      "sha256": "a347250652a38d84f41ab88607ea2596bd1135bd259526bf92a4ebea539f2804",
+      "last_write_time_utc": "2026-09-25T20:14:18.746672+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 17190,
+      "sha256": "74a24e0399980d91e54dd5edfb800f115328d12d770cb06b622a297aa40931cb",
+      "last_write_time_utc": "2026-09-25T02:55:14.136903+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 19226,
+      "sha256": "8809a895ba9cf35ca6b61ee510e576dab3085c1c8fbeaeff5b91e397bc5446b6",
+      "last_write_time_utc": "2026-09-25T02:55:38.077879+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11781,
+      "sha256": "d821660e0fba493ce4c29862dab422d5b84b4f9a2af091f6c79271c55a31c198",
+      "last_write_time_utc": "2026-09-18T10:32:40.810744+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\75_build_confirmatory_cf_a3_cf_d3_balanced_families.py",
+      "bytes": 25234,
+      "sha256": "96b74bba055c50569dc9a30cc193271c8d82bd78910057e11218f1ee7b5b363d",
+      "last_write_time_utc": "2026-09-25T20:37:16.394043+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 17825,
+      "sha256": "65cacaa751d796dd711700e99af3ccfae2cf8fd53063b620372d954d4e665a97",
+      "last_write_time_utc": "2026-09-16T17:56:10.995192+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 9561,
+      "sha256": "7d2bc0a45510de229d971464ac2cb62b3791dcd129084f0f4ffa124bc2c994e6",
+      "last_write_time_utc": "2026-09-18T10:40:17.746239+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_multi_evidence_schemas.py",
+      "bytes": 34781,
+      "sha256": "0644d5bd40016b6ade0b4e422cdfb3284c28dfd342e4358e38c35bbb70b0af51",
+      "last_write_time_utc": "2026-09-02T19:40:42.227848+00:00"
+    }
+  ],
+  "project_notes": [
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_a3_olaparib_ovarian_maintenance_scope_acceptance_matrix.csv",
+      "bytes": 677,
+      "sha256": "b076ce26ded8b548528c9e85b4f50c72f4df5dd03e944ab1ceb577fc251f7874",
+      "last_write_time_utc": "2026-09-25T20:01:13.391894+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\candidate_inventory.csv",
+      "bytes": 8204,
+      "sha256": "24bd6bfebdcfc5fb3a5dd6abf90fe4b82d849f812156fc3f59ecb76b2bee510b",
+      "last_write_time_utc": "2026-09-24T17:03:13.536712+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\confirmatory_final_test_v1_offline_freeze_audit.csv",
+      "bytes": 4257,
+      "sha256": "13f91d2ef4fee527d753171c1e8aa200327e7c10899ae70102eb2a7d782b7f25",
+      "last_write_time_utc": "2026-09-24T17:07:52.976724+00:00"
+    }
+  ]
+}

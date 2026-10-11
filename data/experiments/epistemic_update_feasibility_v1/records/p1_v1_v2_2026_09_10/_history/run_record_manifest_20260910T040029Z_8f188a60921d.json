@@ -1,0 +1,549 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_p1_v1_v2_2026_09_10",
+  "created_at_utc": "2026-09-10T03:59:08.235492+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "preservation_policy": "This manifest preserves the P1 v1/v2 prompt comparison, including exact prompts, prompt versions, configs, model settings, exact inputs, raw outputs, parsed outputs, repetitions, errors/retries, token logs where available, A/B assignments, source records, and derived comparison reports. Earlier outputs are not overwritten.",
+  "gate_note": "The v2 configs were opened after explicit user approval on 2026-09-10, the exact planned runs completed, and both v2 config gates were then closed.",
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_p1_neutral_verifier_gpt55_v1.json",
+      "bytes": 2719,
+      "sha256": "3244ea6e298bb1949f8c913b087ec4d5ef658f3b99cd177e122c955f91f0f995",
+      "last_write_time_utc": "2026-09-09T10:28:13.192441+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_p1_neutral_verifier_gpt55_v2.json",
+      "bytes": 2756,
+      "sha256": "f2adf72b0ab10564995707c59b5038c72899c84241218cfe7d6dce4647855dbb",
+      "last_write_time_utc": "2026-09-10T03:54:21.995647+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_p1_comparative_recognition_gpt55_v1.json",
+      "bytes": 2455,
+      "sha256": "1ecdcdf8a88498b7884bee369ff0bcc90259d91018eff176ddc839d0f8be353a",
+      "last_write_time_utc": "2026-09-09T10:28:16.284025+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_p1_comparative_recognition_gpt55_v2.json",
+      "bytes": 2496,
+      "sha256": "9e8c6ea15e20b642ae691918a7d4fe27ad66f3bdaf5d81d8c9154c596277067d",
+      "last_write_time_utc": "2026-09-10T03:54:26.657766+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v1.txt",
+      "bytes": 2115,
+      "sha256": "7d0bf3f34fac228d785727769dc65482167241f3f2651f1f2b842bcc7a54e8c0",
+      "last_write_time_utc": "2026-09-09T00:44:20.864091+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2.txt",
+      "bytes": 2088,
+      "sha256": "e81f4249a11abca492c01341c20749ed7c0a4454b832652aab937f0d88dacb1f",
+      "last_write_time_utc": "2026-09-10T03:29:31.581090+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v1.txt",
+      "bytes": 2548,
+      "sha256": "8541d84013e5f614439f3d3440dfe4237f26613926cf5d1c443341515afdd451",
+      "last_write_time_utc": "2026-09-09T01:08:06.581160+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v1",
+      "execution_item_id": "P1_LDCT_PROVENANCE_INITIAL",
+      "condition_id": "initial_no_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v1\\P1_LDCT_PROVENANCE_INITIAL.txt",
+      "rendered_prompt_sha256": "29c8db2fdffb62c2c56a7f2b17d7ef202b1934fd62c697484d9c79b7f4090d73"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v1",
+      "execution_item_id": "P1_LDCT_PROVENANCE_MATCHED_A",
+      "condition_id": "independent_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v1\\P1_LDCT_PROVENANCE_MATCHED_A.txt",
+      "rendered_prompt_sha256": "8119dfd3d6620764cc47f3700f3c5673e1d5adee77dcc8669702bb7afd85065f"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v1",
+      "execution_item_id": "P1_LDCT_PROVENANCE_MATCHED_B",
+      "condition_id": "same_trial_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v1\\P1_LDCT_PROVENANCE_MATCHED_B.txt",
+      "rendered_prompt_sha256": "b3f8dde00e1f3f1c621a810b3d2d0ded379f4797de256ca4e6811060951d161a"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v1",
+      "execution_item_id": "P1_LDCT_PROVENANCE_NULL_CONTROL",
+      "condition_id": "exact_repeat_identity_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v1\\P1_LDCT_PROVENANCE_NULL_CONTROL.txt",
+      "rendered_prompt_sha256": "7cb48362f7a410fe1ba84a24885124c68cc669fd7bcc18b044558032950919dc"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v2",
+      "execution_item_id": "P1_LDCT_PROVENANCE_INITIAL",
+      "condition_id": "initial_no_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v2\\P1_LDCT_PROVENANCE_INITIAL.txt",
+      "rendered_prompt_sha256": "35a2dbc0cfc61bc04c6370ce82a6b3ad2bd240713e63df46cebf652729cb74a9"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v2",
+      "execution_item_id": "P1_LDCT_PROVENANCE_MATCHED_A",
+      "condition_id": "independent_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v2\\P1_LDCT_PROVENANCE_MATCHED_A.txt",
+      "rendered_prompt_sha256": "06d485ebda66359da89c6ca0c80c8a48e0baac95d49155a1f978fee0dafee582"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v2",
+      "execution_item_id": "P1_LDCT_PROVENANCE_MATCHED_B",
+      "condition_id": "same_trial_update",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v2\\P1_LDCT_PROVENANCE_MATCHED_B.txt",
+      "rendered_prompt_sha256": "04fcfaee02a5732457a74e78803b6d355f69c2616052c656bea49961e99e076b"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_neutral_verifier_gpt55_v2",
+      "execution_item_id": "P1_LDCT_PROVENANCE_NULL_CONTROL",
+      "condition_id": "exact_repeat_identity_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_neutral_verifier_gpt55_v2\\P1_LDCT_PROVENANCE_NULL_CONTROL.txt",
+      "rendered_prompt_sha256": "3814d0a55907ac9221751503afd15be0b489cb08f9519c856f59815ac40281d6"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_comparative_recognition_gpt55_v1",
+      "execution_item_id": "P1_LDCT_PROVENANCE_COMPARATIVE_PROVENANCE",
+      "condition_id": "provenance_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_comparative_recognition_gpt55_v1\\P1_LDCT_PROVENANCE_COMPARATIVE_PROVENANCE.txt",
+      "rendered_prompt_sha256": "6ca70b1a6ee79de7d5449ea2bbe65fe5ef2a60274a75f051ac3b57a0bc78bcf9"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_comparative_recognition_gpt55_v1",
+      "execution_item_id": "P1_LDCT_PROVENANCE_COMPARATIVE_SWAPPED_PROVENANCE",
+      "condition_id": "provenance_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_comparative_recognition_gpt55_v1\\P1_LDCT_PROVENANCE_COMPARATIVE_SWAPPED_PROVENANCE.txt",
+      "rendered_prompt_sha256": "b3c5c23f48d9c5c1de9d8f22fa275b1afa5bcbd5b09a4bd8355ed069bbdf6685"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_comparative_recognition_gpt55_v2",
+      "execution_item_id": "P1_LDCT_PROVENANCE_COMPARATIVE_PROVENANCE",
+      "condition_id": "provenance_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_comparative_recognition_gpt55_v2\\P1_LDCT_PROVENANCE_COMPARATIVE_PROVENANCE.txt",
+      "rendered_prompt_sha256": "78934fc52cefc8504250f7dd9e7dec9a112be1e32fabc89ee9df2369347ec6fc"
+    },
+    {
+      "experiment_id": "epistemic_update_p1_comparative_recognition_gpt55_v2",
+      "execution_item_id": "P1_LDCT_PROVENANCE_COMPARATIVE_SWAPPED_PROVENANCE",
+      "condition_id": "provenance_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\p1_v1_v2_2026_09_10\\rendered_prompts\\epistemic_update_p1_comparative_recognition_gpt55_v2\\P1_LDCT_PROVENANCE_COMPARATIVE_SWAPPED_PROVENANCE.txt",
+      "rendered_prompt_sha256": "88c62d3340a1c882848cc2a6e19a97b1e8a11279ffb5e83b150f4508726ebd02"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 8572,
+      "sha256": "13f7ca746b09af2711d73ae053844a95f442155f6f300333d27c2c783e5c5e25",
+      "last_write_time_utc": "2026-09-09T00:47:13.901993+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\authoring_records\\a1_nelson_sex_applicability.json",
+      "bytes": 10014,
+      "sha256": "7f020b2edca3cf51313f63ef16d8b1b2911e0e3dd974809592b42a79fb6605e6",
+      "last_write_time_utc": "2026-09-09T01:17:45.007374+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\authoring_records\\d1_fulvestrant_orr_direction.json",
+      "bytes": 14404,
+      "sha256": "106998e3f4de3149eb586ac4cd9833e2f7841d4ce7cd50ec418166f8aaf2d19c",
+      "last_write_time_utc": "2026-09-09T01:17:45.051089+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\authoring_records\\p1_ldct_provenance.json",
+      "bytes": 12451,
+      "sha256": "03136deedc00ab5645783389925257d7a32529b08ecbbcdf67334387cac2c4e2",
+      "last_write_time_utc": "2026-09-09T01:17:44.999170+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_comparative_recognition_inputs\\a1_nelson_sex_applicability_comparative_applicability.json",
+      "bytes": 3665,
+      "sha256": "0d93e3ca5b8d4a80237f08ae03367e0bc1203483c4ab8c8748c50fd0ccfae598",
+      "last_write_time_utc": "2026-09-09T01:17:45.015034+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_comparative_recognition_inputs\\a1_nelson_sex_applicability_comparative_swapped_applicability.json",
+      "bytes": 3673,
+      "sha256": "ee8a66b9e03a12ed86eb4cd8275ae2e5700050cf8f89363302de37b31d3c2176",
+      "last_write_time_utc": "2026-09-09T01:17:45.048409+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_comparative_recognition_inputs\\d1_fulvestrant_orr_direction_comparative_direction.json",
+      "bytes": 7168,
+      "sha256": "9e0a8e769468ed53f3e09620bfb4f366d053f0718a0ca61e8e1b00eec17ecca4",
+      "last_write_time_utc": "2026-09-09T01:17:45.060236+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_comparative_recognition_inputs\\d1_fulvestrant_orr_direction_comparative_swapped_direction.json",
+      "bytes": 7176,
+      "sha256": "a80ff7e44df862c85fad49c6ef284a98c40aad700a5607b8c9723b9b84f49c76",
+      "last_write_time_utc": "2026-09-09T01:17:45.063963+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_comparative_recognition_inputs\\p1_ldct_provenance_comparative_provenance.json",
+      "bytes": 5908,
+      "sha256": "9b71abeb9aadde804c1a0685c71db88adcc7aa538f1209b8e158391de435aa90",
+      "last_write_time_utc": "2026-09-09T01:17:45.004969+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_comparative_recognition_inputs\\p1_ldct_provenance_comparative_swapped_provenance.json",
+      "bytes": 5916,
+      "sha256": "a6fec5f8f4efa09e96b246f187cc7dcf23582332dbdec159222162a6d0c75bd8",
+      "last_write_time_utc": "2026-09-09T01:17:45.007374+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\a1_nelson_sex_applicability_initial.json",
+      "bytes": 2050,
+      "sha256": "485ca48d59fbade6bc95c679902c60c9e152c32239a90744263d9a7c0d721b4e",
+      "last_write_time_utc": "2026-09-09T01:17:45.007374+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\a1_nelson_sex_applicability_matched_a.json",
+      "bytes": 3019,
+      "sha256": "ff598c4b52054fc1f6867caed153f3b26935439682b1792499b62e1c1baf24ef",
+      "last_write_time_utc": "2026-09-09T01:17:45.011879+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\a1_nelson_sex_applicability_matched_b.json",
+      "bytes": 2628,
+      "sha256": "8f9d507e4d29a8751427966cac70a639d057f4f7a99c551ea6913a56f2e2591d",
+      "last_write_time_utc": "2026-09-09T01:17:45.012880+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\a1_nelson_sex_applicability_null_control.json",
+      "bytes": 2722,
+      "sha256": "8c6aaadfc1a0369452e096cba94afa220cfbe96bdbd392e74340f5ddc9a8444e",
+      "last_write_time_utc": "2026-09-09T01:17:45.012880+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\d1_fulvestrant_orr_direction_initial.json",
+      "bytes": 2414,
+      "sha256": "87ef0bad0119b2db2d973ed44e61d81029242dd161c0239f564aa4094285ab45",
+      "last_write_time_utc": "2026-09-09T01:17:45.053399+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\d1_fulvestrant_orr_direction_matched_a.json",
+      "bytes": 4689,
+      "sha256": "1e46674e74cb3cf4cdf3cc77212b220f5d6d56fcbff5863e0ff93c8a7001c5d4",
+      "last_write_time_utc": "2026-09-09T01:17:45.054168+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\d1_fulvestrant_orr_direction_matched_b.json",
+      "bytes": 4833,
+      "sha256": "cf7659b982948256f9feed9cb48560680a05a26edf5b1c2d67949e9df16d1fec",
+      "last_write_time_utc": "2026-09-09T01:17:45.056190+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\d1_fulvestrant_orr_direction_null_control.json",
+      "bytes": 3024,
+      "sha256": "9a28c0fa165d5f79d9459e7bec485332064a2fad84848cccd3cdcc0fa1c38b6d",
+      "last_write_time_utc": "2026-09-09T01:17:45.058210+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\p1_ldct_provenance_initial.json",
+      "bytes": 2054,
+      "sha256": "ad0c13eeb843535381dd7b6c6a60b671a897786b6055b2434d6886aba72fde61",
+      "last_write_time_utc": "2026-09-09T01:17:44.999170+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\p1_ldct_provenance_matched_a.json",
+      "bytes": 4994,
+      "sha256": "2518bc1f389138b75df15e68285e7828acf5ad2a4e0b504d588b0d096b08b745",
+      "last_write_time_utc": "2026-09-09T01:17:44.999170+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\p1_ldct_provenance_matched_b.json",
+      "bytes": 2906,
+      "sha256": "62c6e6c9357768feb0fd80b9da9b97164cf029d5e491c4b94ab1811806fbf95f",
+      "last_write_time_utc": "2026-09-09T01:17:45.002742+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\leak_free_inputs\\p1_ldct_provenance_null_control.json",
+      "bytes": 2713,
+      "sha256": "7509ec16ab38e8681650c26e1c57a21bb745e093df67768872ee14f8fcc9752a",
+      "last_write_time_utc": "2026-09-09T01:17:45.004969+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_first3_families_v1\\offline_validation_report.json",
+      "bytes": 671,
+      "sha256": "8b7878bb372a8ea9bb45f3fb14392d15abc776f051ba5d766811f5bfc11dc23c",
+      "last_write_time_utc": "2026-09-09T01:17:45.065983+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_p1_neutral_verifier_v1.jsonl",
+      "row_count": 20,
+      "sha256": "d95662aef302fedfe07bbcf9b6592aa490f063a3572f14fbdae7a0796b3f9a17",
+      "response_status_counts": {
+        "ok": 20
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_p1_neutral_verifier_v2.jsonl",
+      "row_count": 20,
+      "sha256": "d79877d4ae09089d11c972380fd5fe1bfa4149a0aeb62be3818bcf7aa2a6984f",
+      "response_status_counts": {
+        "ok": 20
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_p1_comparative_recognition_v1.jsonl",
+      "row_count": 10,
+      "sha256": "f51ba5ad97882091527e55ddddf75b16a1519c4b46aac3d4f37c84f2c621bec0",
+      "response_status_counts": {
+        "ok": 10
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_p1_comparative_recognition_v2.jsonl",
+      "row_count": 10,
+      "sha256": "469dcfc9e4762bc7c9d032453a8a96980c2a216c95727bb769ae2f120e5d376a",
+      "response_status_counts": {
+        "ok": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_p1_neutral_verifier_v1_errors.jsonl",
+      "row_count": 0,
+      "sha256": null,
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_p1_neutral_verifier_v2_errors.jsonl",
+      "row_count": 0,
+      "sha256": null,
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_p1_comparative_recognition_v1_errors.jsonl",
+      "row_count": 10,
+      "sha256": "99c1210338f4460e85f7650f7bb06e5ebc2c71a7615798f695cb7e865c9e1416",
+      "error_category_counts": {
+        "request_failed": 10
+      }
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_p1_comparative_recognition_v2_errors.jsonl",
+      "row_count": 0,
+      "sha256": null,
+      "error_category_counts": {}
+    }
+  ],
+  "reports": [
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v1\\REPORT.md",
+      "bytes": 695,
+      "sha256": "a04cbaeaec7a6a07c1860ceacb68db8eefb281e35b4d4f5d29492da21dd585fe",
+      "last_write_time_utc": "2026-09-09T10:19:39.881824+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v1\\summary.json",
+      "bytes": 2782,
+      "sha256": "ba8d7959f79351e8ded70bc32c46b9cf503c530222a91a0486a777002fe851c3",
+      "last_write_time_utc": "2026-09-09T10:19:39.880822+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v2\\REPORT.md",
+      "bytes": 695,
+      "sha256": "53295efa20017557db2f8c1c7aa2128f07845c7ab0eed8207d7087bce13b0482",
+      "last_write_time_utc": "2026-09-10T03:51:46.167185+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v2\\summary.json",
+      "bytes": 2782,
+      "sha256": "81574fdf73f9f612620d26de902a99d6d4ce7c51ca420e45a5ae7e1d7b044bd0",
+      "last_write_time_utc": "2026-09-10T03:51:46.167185+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v1\\REPORT.md",
+      "bytes": 512,
+      "sha256": "9bc20faf8189ff617d179f264740138da7a6479ba9d91011b93bf18513d8e267",
+      "last_write_time_utc": "2026-09-09T10:25:15.942716+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v1\\summary.json",
+      "bytes": 1022,
+      "sha256": "c7f0d279aafbf05b1b2f1cd3c8efef424d67fcb6e7e9e4b4e4744ddd342e7be0",
+      "last_write_time_utc": "2026-09-09T10:25:15.941679+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v2\\REPORT.md",
+      "bytes": 512,
+      "sha256": "9a6706dad33544d07ff2bae81c1f1238d161e2bb46d0bc376abf878ed590462e",
+      "last_write_time_utc": "2026-09-10T03:54:05.654217+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v2\\summary.json",
+      "bytes": 1022,
+      "sha256": "edd222e8938f232030f5693943a2b762984adb5d0cd44657fac9d1bc93931b20",
+      "last_write_time_utc": "2026-09-10T03:54:05.654217+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_VERIFIER_VS_COMPARATIVE_DIAGNOSTIC_SUMMARY.md",
+      "bytes": 17646,
+      "sha256": "9a4cd723b772774ef0a0f066a8d9c84677b33c565abf1cc3fea52b6e39fe5315",
+      "last_write_time_utc": "2026-09-10T03:29:47.552965+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_V1_V2_PROMPT_COMPARISON.md",
+      "bytes": 3903,
+      "sha256": "4350738215084829acc0f2b3e67a2b05f592a3a20f91e4d1b31c7a96a03c6bb9",
+      "last_write_time_utc": "2026-09-10T03:58:46.006150+00:00"
+    },
+    {
+      "role": "derived_report",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_V1_V2_PROMPT_COMPARISON.json",
+      "bytes": 12010,
+      "sha256": "f7dc2f24f643d8bab5edf6e68ea4a4f912761f38fd56205aab7f50df737825bc",
+      "last_write_time_utc": "2026-09-10T03:58:46.005489+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "runner",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 12997,
+      "sha256": "5e267a32de3d43fbfac2aecf92d4986e66fbaeab72279625c81d9847ad3255d3",
+      "last_write_time_utc": "2026-09-09T10:28:48.880349+00:00"
+    },
+    {
+      "role": "evaluator",
+      "path": "src\\45_evaluate_epistemic_update_p1_verifier.py",
+      "bytes": 7014,
+      "sha256": "59115203aed33807ef22f788782fd68c08bfa578af0ac86bb8347136ec45424f",
+      "last_write_time_utc": "2026-09-09T11:29:03.265163+00:00"
+    },
+    {
+      "role": "runner",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 15758,
+      "sha256": "6b601cb2632dd6485c29faaf56bc3eeeaf887ef48f1c6cf19446cd03b7c313ea",
+      "last_write_time_utc": "2026-09-09T10:28:51.877035+00:00"
+    },
+    {
+      "role": "evaluator",
+      "path": "src\\47_evaluate_epistemic_update_p1_comparative_recognition.py",
+      "bytes": 6826,
+      "sha256": "9998c4e0b3f45c3c6052513c3fbae2b2f139ac91b94b04d54388b210a4d1242c",
+      "last_write_time_utc": "2026-09-09T11:29:07.107088+00:00"
+    },
+    {
+      "role": "comparison_script",
+      "path": "src\\49_compare_epistemic_update_p1_v1_v2.py",
+      "bytes": 16494,
+      "sha256": "94be2a97dd9fa59b61743e3445a2401820ca3676a355ac8e54f03f7b6a44e89f",
+      "last_write_time_utc": "2026-09-10T03:58:39.807707+00:00"
+    },
+    {
+      "role": "record_archiver",
+      "path": "src\\50_archive_epistemic_update_p1_v1_v2_records.py",
+      "bytes": 11186,
+      "sha256": "ac0008221906b06279f4038438a57e54310abf52870cb08aa7b0b03b05150d1c",
+      "last_write_time_utc": "2026-09-10T03:59:00.432946+00:00"
+    },
+    {
+      "role": "provider_client",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 15398,
+      "sha256": "c58ae358cfba7052837172fbc2a19a63418c33afc1f27d2345f454d40356e253",
+      "last_write_time_utc": "2026-09-02T13:54:40.590589+00:00"
+    }
+  ],
+  "project_notes": []
+}

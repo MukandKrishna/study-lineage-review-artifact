@@ -1,0 +1,119 @@
+{
+  "experiment_id": "epistemic_update_prospective_p5r_p6r_h5_h6_comparative_recognition_gpt55_v1",
+  "description": "Frozen relation-recognition checks for P5R/P6R/H5/H6.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/comparative_recognition_inputs",
+  "prompt_version": "epistemic_update_relation_comparative_recognition_v2_2",
+  "prompt_sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+  "response_schema": "epistemic_update_relation_comparative_recognition_v1",
+  "response_schema_sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_comparative_recognition_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_comparative_recognition_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 4,
+    "condition_count": 12,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 60,
+    "recognition_calls": 60,
+    "purpose": "Recognise provenance/applicability before integration claims."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_comparative_recognition_judge",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "p5r_provenance_ab",
+      "execution_item_id": "P5R_PROVENANCE_AB",
+      "input_file": "p5r_provenance_ab.json",
+      "input_sha256": "cb6fa37c3ebe55d7f4da3b7dd22460fe01ff8d9c7397ce2cf9a1408b70b232e2",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "p5r_provenance_ba",
+      "execution_item_id": "P5R_PROVENANCE_BA",
+      "input_file": "p5r_provenance_ba.json",
+      "input_sha256": "703106d9e8ba45ca00c4ae281df9a63403ac917a0489b613e211bb1201e7bbf1",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "p6r_provenance_ab",
+      "execution_item_id": "P6R_PROVENANCE_AB",
+      "input_file": "p6r_provenance_ab.json",
+      "input_sha256": "8bc363267701a93b5bc11281b93d0376a5bc12d911d54b13a14dcb3061c5417e",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "p6r_provenance_ba",
+      "execution_item_id": "P6R_PROVENANCE_BA",
+      "input_file": "p6r_provenance_ba.json",
+      "input_sha256": "46f436a3a37fab0411b52d3264093f7fe2ca4b5e7052b9038da614526ada299a",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "h5_provenance_ab",
+      "execution_item_id": "H5_PROVENANCE_AB",
+      "input_file": "h5_provenance_ab.json",
+      "input_sha256": "8dcf2c590a372f6428e04f0d7de79a8272abd51adaad27fd2baaddc5292effc6",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "h5_provenance_ba",
+      "execution_item_id": "H5_PROVENANCE_BA",
+      "input_file": "h5_provenance_ba.json",
+      "input_sha256": "5b35afb8ace8c502397eecb694de3b03321e872c1961997d3593c06141ba0868",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "h5_applicability_ab",
+      "execution_item_id": "H5_APPLICABILITY_AB",
+      "input_file": "h5_applicability_ab.json",
+      "input_sha256": "8110c1a04cdecd009e7e3ffd5253fd6163b2926899656dca6ea923145cc62629",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "h5_applicability_ba",
+      "execution_item_id": "H5_APPLICABILITY_BA",
+      "input_file": "h5_applicability_ba.json",
+      "input_sha256": "eef47f4e9ed4290270013f1cd4fe2fbc88fd83173f658ff6e3fd6542f3fa1a4e",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "h6_provenance_ab",
+      "execution_item_id": "H6_PROVENANCE_AB",
+      "input_file": "h6_provenance_ab.json",
+      "input_sha256": "489b913d5946f29c38d0d6e30bec2ca783ba978da938bd81015258b75144a66e",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "h6_provenance_ba",
+      "execution_item_id": "H6_PROVENANCE_BA",
+      "input_file": "h6_provenance_ba.json",
+      "input_sha256": "fb778338a0faab5fdb48505e93786e0f92422a037a6d9f20a987ed4ca6f44dae",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "h6_applicability_ab",
+      "execution_item_id": "H6_APPLICABILITY_AB",
+      "input_file": "h6_applicability_ab.json",
+      "input_sha256": "5906bd96d08aa8d9fcc8a463a7b498ea14a294dd44c34a91d65c3a3f7aacc82e",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "h6_applicability_ba",
+      "execution_item_id": "H6_APPLICABILITY_BA",
+      "input_file": "h6_applicability_ba.json",
+      "input_sha256": "20d47276c155116b0a01f447d42a1b40546eeccfb98406bd37e3f64447c680b6",
+      "expected_comparative_answer": "A"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after completed 60-call GPT-5.5 recognition run. Reopen only for a separately approved verifier run."
+}

@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "epistemic_claim_side_pair_v1.schema.json",
+  "title": "Private controlled claim-side pair v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "ruleset_id",
+    "pair_id",
+    "family_id",
+    "topic_id",
+    "relation_id",
+    "split",
+    "claims",
+    "shared_evidence",
+    "gold",
+    "transformation_log",
+    "review_status"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "ruleset_id": {"const": "epistemic_relation_rules_v1"},
+    "pair_id": {"type": "string", "minLength": 1},
+    "family_id": {"type": "string", "minLength": 1},
+    "topic_id": {"type": "string", "minLength": 1},
+    "relation_id": {
+      "enum": [
+        "claim_certainty_weakening_v1",
+        "claim_scope_universal_to_existential_v1",
+        "claim_causal_to_associational_v1"
+      ]
+    },
+    "split": {"enum": ["construction", "dev", "test"]},
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stronger", "weaker"],
+      "properties": {
+        "stronger": {"$ref": "#/$defs/claim"},
+        "weaker": {"$ref": "#/$defs/claim"}
+      }
+    },
+    "shared_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source_group_id",
+        "passage_text",
+        "passage_sha256",
+        "decisive_quote",
+        "provenance"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "source_group_id": {"type": "string", "minLength": 1},
+        "passage_text": {"type": "string", "minLength": 1},
+        "passage_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "decisive_quote": {"type": "string", "minLength": 1},
+        "provenance": {"type": "object"}
+      }
+    },
+    "gold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stronger_acceptable_labels",
+        "weaker_acceptable_labels",
+        "expected_direction",
+        "allowed_outcomes",
+        "violation",
+        "scaling_gate"
+      ],
+      "properties": {
+        "stronger_acceptable_labels": {"$ref": "#/$defs/labels"},
+        "weaker_acceptable_labels": {"$ref": "#/$defs/labels"},
+        "expected_direction": {"type": "string", "minLength": 1},
+        "allowed_outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["correct_direction", "flat_or_equivalent", "violation", "uninformative"]
+          }
+        },
+        "violation": {"type": "string", "minLength": 1},
+        "scaling_gate": {"type": ["string", "null"]}
+      }
+    },
+    "transformation_log": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["changed_feature", "word_edit_operations", "held_fixed", "review_note"],
+      "properties": {
+        "changed_feature": {"type": "string", "minLength": 1},
+        "word_edit_operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["operation", "stronger_span", "weaker_span"],
+            "properties": {
+              "operation": {"enum": ["replace", "insert", "delete"]},
+              "stronger_span": {"type": "string"},
+              "weaker_span": {"type": "string"}
+            }
+          }
+        },
+        "held_fixed": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "review_note": {"type": "string", "minLength": 1}
+      }
+    },
+    "review_status": {"enum": ["approved", "approved_with_scaling_gate", "rejected"]}
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authoring_claim_id", "text", "variant_role", "model_item_id", "model_claim_id"],
+      "properties": {
+        "authoring_claim_id": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "variant_role": {"enum": ["stronger", "weaker"]},
+        "model_item_id": {"type": "string", "minLength": 1},
+        "model_claim_id": {"type": "string", "minLength": 1}
+      }
+    },
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["supported", "contradicted", "unsupported", "not_enough_evidence", "mixed_evidence"]
+      }
+    }
+  }
+}

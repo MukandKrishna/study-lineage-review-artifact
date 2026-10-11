@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "epistemic_update_family_v1.schema.json",
+  "title": "Private epistemic-update feasibility family v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "construction_id",
+    "family_id",
+    "relation_type",
+    "split",
+    "prior_model_exposure",
+    "claim",
+    "initial_evidence_ids",
+    "evidence_catalog",
+    "conditions",
+    "comparative_recognition_gold",
+    "construction_review",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "construction_id": {"type": "string", "minLength": 1},
+    "family_id": {"type": "string", "minLength": 1},
+    "relation_type": {
+      "type": "string",
+      "enum": ["provenance", "applicability", "direction"]
+    },
+    "split": {"const": "development"},
+    "prior_model_exposure": {"type": "boolean"},
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "claim_text"],
+      "properties": {
+        "claim_id": {"type": "string", "minLength": 1},
+        "claim_text": {"type": "string", "minLength": 1}
+      }
+    },
+    "initial_evidence_ids": {
+      "type": "array",
+      "minItems": 2,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "evidence_catalog": {
+      "type": "array",
+      "minItems": 4,
+      "items": {"$ref": "#/$defs/evidence_record"}
+    },
+    "conditions": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {"$ref": "#/$defs/condition"}
+    },
+    "comparative_recognition_gold": {
+      "$ref": "#/$defs/comparative_recognition_gold"
+    },
+    "construction_review": {
+      "$ref": "#/$defs/construction_review"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["accepted_development", "expert_review_required", "rejected"]
+    }
+  },
+  "$defs": {
+    "evidence_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "source_group_id",
+        "source_title",
+        "source_url",
+        "pmid",
+        "doi",
+        "trial_id",
+        "source_locator",
+        "passage_text",
+        "passage_sha256",
+        "parent_passage_sha256",
+        "decisive_quote",
+        "human_review_status"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "minLength": 1},
+        "source_group_id": {"type": "string", "minLength": 1},
+        "source_title": {"type": "string", "minLength": 1},
+        "source_url": {"type": "string", "minLength": 1},
+        "pmid": {"type": ["string", "null"]},
+        "doi": {"type": ["string", "null"]},
+        "trial_id": {"type": ["string", "null"]},
+        "source_locator": {"type": "string", "minLength": 1},
+        "passage_text": {"type": "string", "minLength": 1},
+        "passage_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "parent_passage_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "decisive_quote": {"type": "string", "minLength": 1},
+        "human_review_status": {"const": "approved"}
+      }
+    },
+    "recognition_gold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provenance_relation",
+        "applicability_relation",
+        "direction_relation",
+        "basis"
+      ],
+      "properties": {
+        "provenance_relation": {
+          "type": "string",
+          "enum": ["independent", "not_independent", "unclear"]
+        },
+        "applicability_relation": {
+          "type": "string",
+          "enum": ["applicable", "not_applicable", "unclear"]
+        },
+        "direction_relation": {
+          "type": "string",
+          "enum": ["agrees", "conflicts", "unclear"]
+        },
+        "basis": {"type": "string", "minLength": 1}
+      }
+    },
+    "verdict_gold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "initial_label",
+        "acceptable_updated_labels",
+        "expected_behavior",
+        "score_interpretation",
+        "transition_requirements",
+        "rationale"
+      ],
+      "properties": {
+        "initial_label": {"const": "supported"},
+        "acceptable_updated_labels": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "supported",
+              "contradicted",
+              "unsupported",
+              "not_enough_evidence",
+              "mixed_evidence"
+            ]
+          }
+        },
+        "expected_behavior": {
+          "type": "string",
+          "enum": ["maintain", "update"]
+        },
+        "score_interpretation": {"const": "descriptive_only_not_scored"},
+        "transition_requirements": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "conflict_registered",
+              "not_stronger_original_direction",
+              "previous_support_not_erased"
+            ]
+          }
+        },
+        "rationale": {"type": "string", "minLength": 1}
+      }
+    },
+    "comparative_recognition_gold": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_relation",
+        "update_a_condition_id",
+        "update_b_condition_id",
+        "comparative_answer",
+        "basis"
+      ],
+      "properties": {
+        "target_relation": {
+          "type": "string",
+          "enum": ["provenance", "applicability", "direction"]
+        },
+        "update_a_condition_id": {"type": "string", "minLength": 1},
+        "update_b_condition_id": {"type": "string", "minLength": 1},
+        "comparative_answer": {
+          "type": "string",
+          "enum": ["A", "B", "no_meaningful_difference"]
+        },
+        "basis": {"type": "string", "minLength": 1}
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "condition_id",
+        "condition_role",
+        "added_evidence_id",
+        "recognition_gold",
+        "verdict_gold"
+      ],
+      "properties": {
+        "condition_id": {"type": "string", "minLength": 1},
+        "condition_role": {
+          "type": "string",
+          "enum": ["matched_a", "matched_b", "null_control"]
+        },
+        "added_evidence_id": {"type": "string", "minLength": 1},
+        "recognition_gold": {"$ref": "#/$defs/recognition_gold"},
+        "verdict_gold": {"$ref": "#/$defs/verdict_gold"}
+      }
+    },
+    "construction_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_reuse",
+        "historical_sourcing_minutes",
+        "current_reverification_minutes",
+        "timing_note",
+        "judgement_call",
+        "judgement_call_reason",
+        "residual_differences",
+        "construct_validity_question",
+        "gold_label_basis",
+        "metric_interpretation_boundary",
+        "prompt_leakage_risk",
+        "main_confound_risks",
+        "rejection_or_redesign_triggers",
+        "literature_basis",
+        "acceptance_checks",
+        "reviewer_status"
+      ],
+      "properties": {
+        "source_reuse": {"type": "boolean"},
+        "historical_sourcing_minutes": {"type": ["number", "null"], "minimum": 0},
+        "current_reverification_minutes": {"type": "number", "minimum": 0},
+        "timing_note": {"type": "string", "minLength": 1},
+        "judgement_call": {"type": "boolean"},
+        "judgement_call_reason": {"type": "string"},
+        "residual_differences": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "construct_validity_question": {"type": "string", "minLength": 1},
+        "gold_label_basis": {"type": "string", "minLength": 1},
+        "metric_interpretation_boundary": {"type": "string", "minLength": 1},
+        "prompt_leakage_risk": {"type": "string", "minLength": 1},
+        "main_confound_risks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "rejection_or_redesign_triggers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "literature_basis": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "acceptance_checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "two_initial_items",
+            "source_traceable",
+            "passages_are_exact_substrings",
+            "identifiers_and_hashes_preserved",
+            "target_relation_isolatable",
+            "gold_predeclared",
+            "development_only",
+            "no_model_calls"
+          ],
+          "properties": {
+            "two_initial_items": {"const": true},
+            "source_traceable": {"const": true},
+            "passages_are_exact_substrings": {"const": true},
+            "identifiers_and_hashes_preserved": {"const": true},
+            "target_relation_isolatable": {"const": true},
+            "gold_predeclared": {"const": true},
+            "development_only": {"const": true},
+            "no_model_calls": {"const": true}
+          }
+        },
+        "reviewer_status": {
+          "type": "string",
+          "enum": ["author_reviewed_not_clinician_validated", "expert_review_required"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it. This may be because the required population,
+  intervention, comparator, outcome, time frame, or setting is missing or mismatched.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P1_LDCT_PROVENANCE_MATCHED_A",
+  "claim_id": "P1_LDCT_CLAIM",
+  "claim_text": "Among adults enrolled in randomized lung-screening trials, the observed long-term lung-cancer mortality point estimate was lower with repeated CT screening than with no screening.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P1_E1_NELSON_METHODS",
+      "source_group_id": "LDCT_SOURCE_NELSON",
+      "source_title": "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial.",
+      "pmid": "31995683",
+      "doi": "10.1056/NEJMoa1911793",
+      "trial_id": "NL580",
+      "source_locator": "Exact METHODS paragraph from the frozen NELSON title/abstract passage",
+      "passage_text": "METHODS: A total of 13,195 men (primary analysis) and 2594 women (subgroup analyses) between the ages of 50 and 74 were randomly assigned to undergo CT screening at T0 (baseline), year 1, year 3, and year 5.5 or no screening. We obtained data on cancer diagnosis and the date and cause of death through linkages with national registries in the Netherlands and Belgium, and a review committee confirmed lung cancer as the cause of death when possible. A minimum follow-up of 10 years until December 31, 2015, was completed for all participants."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P1_E2_NELSON_MEN_RESULT",
+      "source_group_id": "LDCT_SOURCE_NELSON",
+      "source_title": "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial.",
+      "pmid": "31995683",
+      "doi": "10.1056/NEJMoa1911793",
+      "trial_id": "NL580",
+      "source_locator": "Exact first sentence of the frozen NELSON decisive Results quote",
+      "passage_text": "The cumulative rate ratio for death from lung cancer at 10 years was 0.76 (95% confidence interval [CI], 0.61 to 0.94; P = 0.01) in the screening group as compared with the control group, similar to the values at years 8 and 9."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "P1_UA_MILD_INDEPENDENT",
+    "source_group_id": "LDCT_SOURCE_MILD",
+    "source_title": "Prolonged lung cancer screening reduced 10-year mortality in the MILD trial: new confirmation of lung cancer screening efficacy.",
+    "pmid": "30937431",
+    "doi": "10.1093/annonc/mdz117",
+    "trial_id": "NCT02837809",
+    "source_locator": "Complete frozen MILD source passage with decisive Results quote",
+    "passage_text": "Prolonged lung cancer screening reduced 10-year mortality in the MILD trial: new confirmation of lung cancer screening efficacy.\n\nELIGIBILITY CONTEXT FROM THE OPEN-ACCESS ARTICLE: The MILD study is a prospective randomized controlled LC screening trial launched in 2005, and initially designed as a National program for multicenter recruitment of 10 000 volunteer smokers (≥20 pack-years, current or former from <10 years), aged from 49 to 75 years, without history of cancer in ≤5 years. However, MILD faced major management difficulties: indeed, the Ethics Committee initially approved only the annual versus biennial LDCT randomization, and final protocol was accepted in December 2005 (protocol ID: INT 53/05; ClinicalTrials.gov Identifier: NCT02837809), with a single center accrual. All eligible subjects provided written informed consent.\n\nBACKGROUND: The National Lung Screening Trial showed that lung cancer (LC) screening by three annual rounds of low-dose computed tomography (LDCT) reduces LC mortality. We evaluated the benefit of prolonged LDCT screening beyond 5 years, and its impact on overall and LC specific mortality at 10 years.\n\nDESIGN: The Multicentric Italian Lung Detection (MILD) trial prospectively randomized 4099 participants, to a screening arm (n = 2376), with further randomization to annual (n = 1190) or biennial (n = 1186) LDCT for a median period of 6 years, or control arm (n = 1723) without intervention. Between 2005 and 2018, 39 293 person-years of follow-up were accumulated. The primary outcomes were 10-year overall and LC specific mortality. Landmark analysis was used to test the long-term effect of LC screening, beyond 5 years by exclusion of LCs and deaths that occurred in the first 5 years.\n\nRESULTS: The LDCT arm showed a 39% reduced risk of LC mortality at 10 years [hazard ratio (HR) 0.61; 95% confidence interval (CI) 0.39-0.95], compared with control arm, and a 20% reduction of overall mortality (HR 0.80; 95% CI 0.62-1.03). LDCT benefit improved beyond the 5th year of screening, with a 58% reduced risk of LC mortality (HR 0.42; 95% CI 0.22-0.79), and 32% reduction of overall mortality (HR 0.68; 95% CI 0.49-0.94).\n\nCONCLUSIONS: The MILD trial provides additional evidence that prolonged screening beyond 5 years can enhance the benefit of early detection and achieve a greater overall and LC mortality reduction compared with NLST trial.\n\nCLINICALTRIALS.GOV IDENTIFIER: NCT02837809."
+  }
+}

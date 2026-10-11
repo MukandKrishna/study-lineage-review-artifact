@@ -1,0 +1,48 @@
+{
+  "manifest_version": "1.0",
+  "updated_at_utc": "2026-09-28T05:49:06.489147+00:00",
+  "status": "complete",
+  "scientific_gate": true,
+  "model": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "dtype": "float16",
+    "device": "cuda:0",
+    "quantisation": "none"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "transformers": "5.0.0",
+    "huggingface_hub": "1.11.0",
+    "jsonschema": "4.26.0",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "active_device": "cuda:0"
+  },
+  "bundle_zip_sha256_expected": "3a9ed46de2b1c5b2e0ad6df12a3e9f92970c3064e64e93f5ee7c772a4485ca0c",
+  "bundle_manifest_sha256_actual": "585e66f0359f559e2cfb9b07b08bbfb96b53145b52812a3bceaf8d8a9f6cc8b3",
+  "adapter": {
+    "id": "qwen_json_schema_suffix_v1",
+    "description": "The exact archived prompt is preserved and followed only by a minified JSON Schema format contract. No clinical content, relation label, answer, or policy hint is added."
+  },
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "max_new_tokens": 2048,
+    "reason": "Greedy decoding is the lowest stochasticity supported by Transformers."
+  },
+  "planned_responses": 330,
+  "completed_final_records": 330,
+  "calls_this_session": 210,
+  "max_calls_this_session": 210,
+  "result_files": [
+    "predictions.jsonl",
+    "errors.jsonl"
+  ]
+}

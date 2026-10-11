@@ -1,0 +1,50 @@
+{
+  "experiment_id": "epistemic_update_p6r_h6_impower130_repair_comparative_recognition_gpt55_v1",
+  "bundle_id": "epistemic_update_p6r_h6_impower130_repair_180_v1",
+  "description": "Targeted non-destructive P6R/H6 repair using independent IMpower130 OS/PFS evidence.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_p6r_impower130_repair_v1/comparative_recognition_inputs",
+  "prompt_version": "epistemic_update_relation_comparative_recognition_v2_2",
+  "prompt_sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+  "response_schema": "epistemic_update_relation_comparative_recognition_v1",
+  "response_schema_sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_p6r_h6_impower130_repair_comparative_recognition_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_p6r_h6_impower130_repair_comparative_recognition_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 2,
+    "condition_count": 2,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 10,
+    "recognition_calls": 10,
+    "purpose": "Repair only the P6R/H6 conditions affected by the old OS-only passage."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_comparative_recognition_judge",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "p6r_provenance_ab",
+      "execution_item_id": "P6R_PROVENANCE_AB",
+      "input_file": "p6r_provenance_ab.json",
+      "input_sha256": "537dca676ce5ffa63e27bb0db73500bacb2b906ddafd9b173b592fb65b71558a",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "condition_id": "p6r_provenance_ba",
+      "execution_item_id": "P6R_PROVENANCE_BA",
+      "input_file": "p6r_provenance_ba.json",
+      "input_sha256": "246f066d7a47c08511c858ace82f93e6205cd1e77961296cb250d24dcdad431a",
+      "expected_comparative_answer": "A"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after offline preparation. Open only for the exact targeted repair run after final review and explicit execution approval."
+}

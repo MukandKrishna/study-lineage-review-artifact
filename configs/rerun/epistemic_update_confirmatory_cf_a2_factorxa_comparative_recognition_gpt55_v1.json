@@ -1,0 +1,64 @@
+{
+  "experiment_id": "epistemic_update_confirmatory_cf_a2_factorxa_comparative_recognition_gpt55_v1",
+  "description": "Comparative applicability recognition gate for confirmatory CF-A2 factor Xa atrial-fibrillation versus VTE endpoint-scope family.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_a2_factorxa_af_vte_endpoint_scope/comparative_recognition_inputs",
+  "input_ablation": {
+    "condition": "confirmatory_no_source_group_id",
+    "omitted_evidence_fields": [
+      "source_group_id"
+    ],
+    "preserved_evidence_fields": [
+      "source_title",
+      "pmid",
+      "doi",
+      "trial_id",
+      "source_locator",
+      "passage_text"
+    ],
+    "purpose": "Prevent project-created applicability labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+  },
+  "prompt_version": "epistemic_update_relation_comparative_recognition_v2_2",
+  "prompt_sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+  "response_schema": "epistemic_update_relation_comparative_recognition_v1",
+  "response_schema_sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_a2_factorxa_comparative_recognition_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_a2_factorxa_comparative_recognition_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 2,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 10,
+    "recognition_calls": 10,
+    "purpose": "Check whether the model recognizes that the ROCKET AF atrial-fibrillation stroke-prevention update has greater applicability to the fixed claim than the AMPLIFY acute-VTE treatment update under A/B order swaps."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_comparative_recognition_judge",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "cf_a2_factorxa_applicability_applicable_vs_endpoint_setting_mismatch_ab",
+      "execution_item_id": "CF_A2_FACTORXA_COMPARATIVE_APPLICABILITY_AB",
+      "input_file": "cf_a2_factorxa_comparative_applicability_ab.json",
+      "input_sha256": "bff1a36bb8e3cf91490aa3a5cb18d679e8334b213afa5b528c2a76391c649df8",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "cf_a2_factorxa_applicability_endpoint_setting_mismatch_vs_applicable_ba",
+      "execution_item_id": "CF_A2_FACTORXA_COMPARATIVE_APPLICABILITY_BA",
+      "input_file": "cf_a2_factorxa_comparative_applicability_ba.json",
+      "input_sha256": "455783806ba68798c56fde902e4c71007963c67f03a8e97ed47486ee151c5097",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed. Open only after explicit approval for this exact confirmatory CF-A2 comparative applicability recognition gate."
+}

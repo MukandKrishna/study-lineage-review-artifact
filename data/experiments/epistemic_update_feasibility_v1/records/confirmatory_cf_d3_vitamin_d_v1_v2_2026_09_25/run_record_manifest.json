@@ -1,0 +1,500 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25",
+  "created_at_utc": "2026-09-25T20:50:43.352102+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve exact prompts, prompt versions, model/version and settings, exact model inputs, rendered prompts, raw outputs, parsed outputs, repetitions, errors/retries, A/B assignments, token logs where available, source/provenance records, family-change records, v1 design-failure evidence, v2 repair records, pre-call acceptance matrices, result report, and the final-test protocol. Do not overwrite earlier outputs on rerun.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_confirmatory_cf_d3_vitamin_d_record_archive.json",
+    "bytes": 3450,
+    "sha256": "7176de784fb1fc8cb2757a04b362f8b6579ed5bd435e8135f16e3e229e03d233",
+    "last_write_time_utc": "2026-09-25T20:50:36.524384+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2722,
+      "sha256": "bd88e5df986113ca24dc14181368381f61c0bdda243e331cfc1ca0911e13cddd",
+      "last_write_time_utc": "2026-09-25T20:17:44.544825+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 3440,
+      "sha256": "ad1d931ba0d478c6fc2eabfef217aa67e43f000e29edf55419caef37760d01f7",
+      "last_write_time_utc": "2026-09-25T20:23:12.835488+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2749,
+      "sha256": "d5d991c1e67045ce646cdf37845aea4a91ad14ac99f01faedf5509ac3db91cc0",
+      "last_write_time_utc": "2026-09-25T20:26:53.217418+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 3455,
+      "sha256": "a3e1cb716b24a5cc49ec86a97161766342b73ee5ead112c1492f3bde6c7454b9",
+      "last_write_time_utc": "2026-09-25T20:33:28.972914+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_gpt55_v1.json",
+      "bytes": 3272,
+      "sha256": "b8e47d62f1e8a958864c84c96e1ce1b5b4478b8648022ad1b70952c5d63674b5",
+      "last_write_time_utc": "2026-09-25T20:37:23.260466+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_2.txt",
+      "bytes": 2718,
+      "sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+      "last_write_time_utc": "2026-09-16T07:25:50.409464+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_initial_gate_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_INITIAL",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_direction_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_initial_gate_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_INITIAL.txt",
+      "rendered_prompt_sha256": "62738477fdf98aa289fc0c97e83d4304db885961cf2bb4471ed87e297a903077",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_EXACT_REPEAT_CONTROL",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_direction_exact_repeat_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_EXACT_REPEAT_CONTROL.txt",
+      "rendered_prompt_sha256": "d5e4456f6551ec6854401f1c3927c733eeddee39cefe10a0ea4c817741afd72b",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_MATCHED_A",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_direction_matched_a",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_MATCHED_A.txt",
+      "rendered_prompt_sha256": "9cf42c0ee6a20058641e5cfea60183855de2be4e9ef9b029bdbf821d75dc277c",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_MATCHED_B",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_direction_matched_b",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_MATCHED_B.txt",
+      "rendered_prompt_sha256": "7bee7c67414deb23eaf741e8e22d7f3dc024a7b62b75968c51b0a63a699de186",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_initial_gate_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_INITIAL",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_v2_direction_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_initial_gate_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_INITIAL.txt",
+      "rendered_prompt_sha256": "7704cb3d577a176f6627a1bd2662e40bbdda482259b6b801a329ca767b1aaa6a",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_EXACT_REPEAT_CONTROL",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_v2_direction_exact_repeat_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_EXACT_REPEAT_CONTROL.txt",
+      "rendered_prompt_sha256": "14199bc6b2bb400d030c82da90d85188ed15997825eaf887a9411c33252a67a7",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_MATCHED_A",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_v2_direction_matched_a",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_MATCHED_A.txt",
+      "rendered_prompt_sha256": "ac6dab294a60ba2f0dfa6caa928d3f16d09ba694804d7f4eeebd4d75bffc1eb1",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_MATCHED_B",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_v2_direction_matched_b",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_MATCHED_B.txt",
+      "rendered_prompt_sha256": "aa69e04c9c13a9acb7b778e1bcc7e7239548aa2fea2c749b069668b689d19bd3",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_COMPARATIVE_DIRECTION",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_v2_direction_matched_a_vs_matched_b_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_COMPARATIVE_DIRECTION.txt",
+      "rendered_prompt_sha256": "110f21c91f28ef7e0a02c42bd8923cc28d273af023897ceeef1c267a23b9221f",
+      "expected_comparative_answer": "B"
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_gpt55_v1",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_COMPARATIVE_SWAPPED_DIRECTION",
+      "condition_id": "cf_d3_vitamin_d_falls_direction_v2_direction_matched_a_vs_matched_b_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_d3_vitamin_d_v1_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_gpt55_v1\\CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_COMPARATIVE_SWAPPED_DIRECTION.txt",
+      "rendered_prompt_sha256": "18506922539dad0ad8dad793aecc31e9810d5e17159b8572f0364c4e6aec2ef4",
+      "expected_comparative_answer": "A"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_d3_vitamin_d_falls_direction\\authoring_record.json",
+      "bytes": 5810,
+      "sha256": "8d71c60fa6d123c9ac1c003da74158d889815000e4e9348dbb72cc53a10e5278",
+      "last_write_time_utc": "2026-09-25T20:01:13.511077+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\authoring_record.json",
+      "bytes": 6074,
+      "sha256": "2ca1471edf0de7df5e8714eb16f650e3ffdac9c499c29ab8b46b675dafaea652",
+      "last_write_time_utc": "2026-09-25T20:24:44.921467+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction\\comparative_recognition_inputs\\cf_d3_vitamin_d_falls_direction_comparative_direction_ab.json",
+      "bytes": 2854,
+      "sha256": "209a70ba5a041ed063b6c50edfe11043bbebcd981156861ffa644f49aae7bfdc",
+      "last_write_time_utc": "2026-09-25T20:01:13.577086+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction\\comparative_recognition_inputs\\cf_d3_vitamin_d_falls_direction_comparative_direction_ba.json",
+      "bytes": 2862,
+      "sha256": "89eca97abd88bfbe3ae3fff04919f89aea4ba15cfc7dca80f2c44fdcff2ea4b5",
+      "last_write_time_utc": "2026-09-25T20:01:13.592994+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction\\verifier_inputs_direction_updates\\cf_d3_vitamin_d_falls_direction_exact_repeat_control.json",
+      "bytes": 1896,
+      "sha256": "902870017f557b20bf862710bd234deffa00a033f811902ed73c6580daf11dc4",
+      "last_write_time_utc": "2026-09-25T20:01:13.527816+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction\\verifier_inputs_direction_updates\\cf_d3_vitamin_d_falls_direction_matched_a.json",
+      "bytes": 2019,
+      "sha256": "5aded2172d4f55232901b16e7575faeb5086e9770c47598ffb05f9d7f32a3b79",
+      "last_write_time_utc": "2026-09-25T20:01:13.544551+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction\\verifier_inputs_direction_updates\\cf_d3_vitamin_d_falls_direction_matched_b.json",
+      "bytes": 2164,
+      "sha256": "9ebcf78c34587fa84ab5adfc28fcf773568edead82c5c0219e10a963241d1385",
+      "last_write_time_utc": "2026-09-25T20:01:13.561304+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction\\verifier_inputs_initial_gate\\cf_d3_vitamin_d_falls_direction_initial.json",
+      "bytes": 1389,
+      "sha256": "4469e1e149345c0fbdbe0787cc1e16bf87e6a0610bc6ff1b2460a0ca68068298",
+      "last_write_time_utc": "2026-09-25T20:01:13.511077+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\comparative_recognition_inputs\\cf_d3_vitamin_d_falls_direction_v2_comparative_direction_ab.json",
+      "bytes": 3149,
+      "sha256": "28baf874305049c4af6722bab9c135d1a73bf862f28dfb05daffdbb480e65c47",
+      "last_write_time_utc": "2026-09-25T20:24:45.034015+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\comparative_recognition_inputs\\cf_d3_vitamin_d_falls_direction_v2_comparative_direction_ba.json",
+      "bytes": 3157,
+      "sha256": "ccf33cda088fbb2b980ebc27bd63d65280b9efa6aafcedf49e6d212fff4720ac",
+      "last_write_time_utc": "2026-09-25T20:24:45.050575+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\verifier_inputs_direction_updates\\cf_d3_vitamin_d_falls_direction_v2_exact_repeat_control.json",
+      "bytes": 2063,
+      "sha256": "090609eeea4eb281a1ffffc8876d7ba759639a0852d944cdbcabfcb05e1f443b",
+      "last_write_time_utc": "2026-09-25T20:24:44.984874+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\verifier_inputs_direction_updates\\cf_d3_vitamin_d_falls_direction_v2_matched_a.json",
+      "bytes": 2154,
+      "sha256": "926757dbe64fe2af1893aa0090d79339b847174ea32503345c565b8bac448ded",
+      "last_write_time_utc": "2026-09-25T20:24:45.000930+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\verifier_inputs_direction_updates\\cf_d3_vitamin_d_falls_direction_v2_matched_b.json",
+      "bytes": 2380,
+      "sha256": "f03c8ef28f741d7d179a8b52827d392aa250f2cd6e7d437129dba61f1b84dcdf",
+      "last_write_time_utc": "2026-09-25T20:24:45.017255+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_d3_vitamin_d_falls_direction_v2\\verifier_inputs_initial_gate\\cf_d3_vitamin_d_falls_direction_v2_initial.json",
+      "bytes": 1445,
+      "sha256": "98f6ecb4e952cc05ed514dfd71604d4b123a08556aa9b7cdb67c17e804214f87",
+      "last_write_time_utc": "2026-09-25T20:24:44.952482+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_initial_gate_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 5,
+      "sha256": "cbd233067f3e0ad20abae7ff33d4853a455874192a3930d77973a1ef79700611",
+      "response_status_counts": {
+        "ok": 5
+      },
+      "error_category_counts": {
+        "": 5
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 15,
+      "sha256": "b447ce36d305723c70305bfa20d7451b5de5b9d0bbc9adc6f7f004a064b8ea34",
+      "response_status_counts": {
+        "ok": 15
+      },
+      "error_category_counts": {
+        "": 15
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2_initial_gate_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 5,
+      "sha256": "3f46439d4e0f680f2decaac77f3c16e189b4696b2c93ee6f180110bd2c805cc8",
+      "response_status_counts": {
+        "ok": 5
+      },
+      "error_category_counts": {
+        "": 5
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 15,
+      "sha256": "f50ec3ab78a02b7058a79b5d2601bf950ebafaa46a3c0a75280abf93e3d33e0d",
+      "response_status_counts": {
+        "ok": 15
+      },
+      "error_category_counts": {
+        "": 15
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_v1.jsonl",
+      "exists": true,
+      "row_count": 10,
+      "sha256": "5dfdde008521a6cb8acb38c3e0fc554fe58cb0abfb7c48812cc8d6d15e8acbe1",
+      "response_status_counts": {
+        "ok": 10
+      },
+      "error_category_counts": {
+        "": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_initial_gate_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_updates_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2_initial_gate_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2_updates_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2_comparative_recognition_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_v2\\REPORT.md",
+      "bytes": 2102,
+      "sha256": "a801fba39125e4c5e8ac3de75836b24fba1cbdf645cfa0a698b2bf7767e9edeb",
+      "last_write_time_utc": "2026-09-25T20:38:42.554901+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 17190,
+      "sha256": "74a24e0399980d91e54dd5edfb800f115328d12d770cb06b622a297aa40931cb",
+      "last_write_time_utc": "2026-09-25T02:55:14.136903+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 19226,
+      "sha256": "8809a895ba9cf35ca6b61ee510e576dab3085c1c8fbeaeff5b91e397bc5446b6",
+      "last_write_time_utc": "2026-09-25T02:55:38.077879+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11781,
+      "sha256": "d821660e0fba493ce4c29862dab422d5b84b4f9a2af091f6c79271c55a31c198",
+      "last_write_time_utc": "2026-09-18T10:32:40.810744+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\75_build_confirmatory_cf_a3_cf_d3_balanced_families.py",
+      "bytes": 25234,
+      "sha256": "96b74bba055c50569dc9a30cc193271c8d82bd78910057e11218f1ee7b5b363d",
+      "last_write_time_utc": "2026-09-25T20:37:16.394043+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\76_repair_confirmatory_cf_d3_vitamin_d_falls_v2.py",
+      "bytes": 8036,
+      "sha256": "002ce5dc15ab0f4e2f8e445bc787944819d96baf5ebede6759656612c6563a26",
+      "last_write_time_utc": "2026-09-25T20:24:37.227784+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 17825,
+      "sha256": "65cacaa751d796dd711700e99af3ccfae2cf8fd53063b620372d954d4e665a97",
+      "last_write_time_utc": "2026-09-16T17:56:10.995192+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 9561,
+      "sha256": "7d2bc0a45510de229d971464ac2cb62b3791dcd129084f0f4ffa124bc2c994e6",
+      "last_write_time_utc": "2026-09-18T10:40:17.746239+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_multi_evidence_schemas.py",
+      "bytes": 34781,
+      "sha256": "0644d5bd40016b6ade0b4e422cdfb3284c28dfd342e4358e38c35bbb70b0af51",
+      "last_write_time_utc": "2026-09-02T19:40:42.227848+00:00"
+    }
+  ],
+  "project_notes": [
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_d3_vitamin_d_falls_direction_acceptance_matrix.csv",
+      "bytes": 663,
+      "sha256": "041f8cfb2c0051f735a14765ae03f0bb61e6c3efc3c903e7edda9aa43bf2c2c4",
+      "last_write_time_utc": "2026-09-25T20:01:13.511077+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_d3_vitamin_d_falls_direction_v2_acceptance_matrix.csv",
+      "bytes": 585,
+      "sha256": "c2cc127e99426da710ee1f7579d3e1a793955f4d38fa2ceb30af7654413df033",
+      "last_write_time_utc": "2026-09-25T20:24:44.921467+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\candidate_inventory.csv",
+      "bytes": 8204,
+      "sha256": "24bd6bfebdcfc5fb3a5dd6abf90fe4b82d849f812156fc3f59ecb76b2bee510b",
+      "last_write_time_utc": "2026-09-24T17:03:13.536712+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\confirmatory_final_test_v1_offline_freeze_audit.csv",
+      "bytes": 4257,
+      "sha256": "13f91d2ef4fee527d753171c1e8aa200327e7c10899ae70102eb2a7d782b7f25",
+      "last_write_time_utc": "2026-09-24T17:07:52.976724+00:00"
+    }
+  ]
+}

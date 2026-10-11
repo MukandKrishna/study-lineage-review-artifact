@@ -1,0 +1,105 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "P6_SGLT2_HFREF_OUTCOMES_PROVENANCE_COMPARATIVE_INDEPENDENT_VS_SAME_TRIAL_PUBLICATION_AB",
+  "claim_id": "P6_SGLT2_HFREF_OUTCOMES_CLAIM",
+  "claim_text": "Among patients with heart failure and reduced ejection fraction, SGLT2-inhibitor treatment reduced the risk of cardiovascular death or worsening heart-failure events compared with placebo.",
+  "target_relation": "provenance",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P6_E1_EMPEROR_REDUCED_PRIMARY_RESULT",
+      "source_group_id": "SGLT2_HFREF_SOURCE_EMPEROR_REDUCED_NCT03057977",
+      "source_title": "Cardiovascular and Renal Outcomes with Empagliflozin in Heart Failure",
+      "pmid": "32865377",
+      "doi": "10.1056/NEJMoa2022190",
+      "trial_id": "NCT03057977",
+      "source_locator": "PubMed abstract methods, results, conclusion, and registration",
+      "passage_text": "Background: Sodium-glucose cotransporter 2 (SGLT2) inhibitors reduce the risk of hospitalization for heart failure in patients regardless of the presence or absence of diabetes.\n\nMethods: In this double-blind trial, we randomly assigned 3730 patients with class II, III, or IV heart failure and an ejection fraction of 40% or less to receive empagliflozin (10 mg once daily) or placebo, in addition to recommended therapy. The primary outcome was a composite of cardiovascular death or hospitalization for worsening heart failure.\n\nResults: During a median of 16 months, a primary outcome event occurred in 361 of 1863 patients (19.4%) in the empagliflozin group and in 462 of 1867 patients (24.7%) in the placebo group (hazard ratio for cardiovascular death or hospitalization for heart failure, 0.75; 95% confidence interval [CI], 0.65 to 0.86; P<0.001).\n\nConclusions: Among patients receiving recommended therapy for heart failure, those in the empagliflozin group had a lower risk of cardiovascular death or hospitalization for heart failure than those in the placebo group, regardless of the presence or absence of diabetes. (Funded by Boehringer Ingelheim and Eli Lilly; EMPEROR-Reduced ClinicalTrials.gov number, NCT03057977.)."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P6_E2_EMPEROR_REDUCED_SGLT2_CLASS_BRIDGE",
+      "source_group_id": "SGLT2_HFREF_SOURCE_EMPEROR_REDUCED_NCT03057977",
+      "source_title": "Uric acid and sodium-glucose cotransporter-2 inhibition with empagliflozin in heart failure with reduced ejection fraction: the EMPEROR-reduced trial",
+      "pmid": "35788657",
+      "doi": "10.1093/eurheartj/ehac320",
+      "trial_id": "NCT03057977",
+      "source_locator": "PubMed abstract background sentence",
+      "passage_text": "Background: The sodium-glucose cotransporter-2 inhibitor empagliflozin decreases the risk of cardiovascular death or hospitalization for heart failure (HF) in patients with HF with reduced ejection fraction."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "P6_U2_DAPA_HF_PRIMARY_INDEPENDENT_TRIAL",
+    "source_group_id": "SGLT2_HFREF_SOURCE_DAPA_HF_NCT03036124",
+    "source_title": "Dapagliflozin in Patients with Heart Failure and Reduced Ejection Fraction",
+    "pmid": "31535829",
+    "doi": "10.1056/NEJMoa1911303",
+    "trial_id": "NCT03036124",
+    "source_locator": "PubMed abstract background, methods, results, conclusion, and registration",
+    "passage_text": "Background: In patients with type 2 diabetes, inhibitors of sodium-glucose cotransporter 2 (SGLT2) reduce the risk of a first hospitalization for heart failure, possibly through glucose-independent mechanisms.\n\nMethods: In this phase 3, placebo-controlled trial, we randomly assigned 4744 patients with New York Heart Association class II, III, or IV heart failure and an ejection fraction of 40% or less to receive either dapagliflozin (at a dose of 10 mg once daily) or placebo, in addition to recommended therapy. The primary outcome was a composite of worsening heart failure (hospitalization or an urgent visit resulting in intravenous therapy for heart failure) or cardiovascular death.\n\nResults: Over a median of 18.2 months, the primary outcome occurred in 386 of 2373 patients (16.3%) in the dapagliflozin group and in 502 of 2371 patients (21.2%) in the placebo group (hazard ratio, 0.74; 95% confidence interval [CI], 0.65 to 0.85; P<0.001).\n\nConclusions: Among patients with heart failure and a reduced ejection fraction, the risk of worsening heart failure or death from cardiovascular causes was lower among those who received dapagliflozin than among those who received placebo, regardless of the presence or absence of diabetes. (Funded by AstraZeneca; DAPA-HF ClinicalTrials.gov number, NCT03036124.)."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "P6_U1_EMPEROR_REDUCED_DIABETES_STATUS_SAME_TRIAL",
+    "source_group_id": "SGLT2_HFREF_SOURCE_EMPEROR_REDUCED_NCT03057977",
+    "source_title": "Effect of Empagliflozin on Cardiovascular and Renal Outcomes in Patients With Heart Failure by Baseline Diabetes Status: Results From the EMPEROR-Reduced Trial",
+    "pmid": "33175585",
+    "doi": "10.1161/CIRCULATIONAHA.120.051824",
+    "trial_id": "NCT03057977",
+    "source_locator": "PubMed abstract methods, results, conclusion, and registration",
+    "passage_text": "Methods: Patients with Class II-IV heart failure and a left ventricular ejection fraction <=40% were randomized to receive empagliflozin (10 mg daily) or placebo in addition to recommended therapy. We prespecified a comparison of the effect of empagliflozin in patients with and without diabetes.\n\nResults: Empagliflozin reduced the risk of the primary outcome in patients with and without diabetes (hazard ratio, 0.72 [95% CI, 0.60-0.87] and 0.78 [95% CI, 0.64-0.97], respectively, P-interaction=0.57).\n\nConclusions: In EMPEROR-Reduced (Empagliflozin Outcome Trial in Patients With Chronic Heart Failure With Reduced Ejection Fraction), empagliflozin significantly improved cardiovascular and renal outcomes in patients with heart failure and a reduced ejection fraction, independent of baseline diabetes status and across the continuum of HbA1c. Registration: URL: https://www.clinicaltrials.gov; Unique identifier: NCT03057977."
+  }
+}

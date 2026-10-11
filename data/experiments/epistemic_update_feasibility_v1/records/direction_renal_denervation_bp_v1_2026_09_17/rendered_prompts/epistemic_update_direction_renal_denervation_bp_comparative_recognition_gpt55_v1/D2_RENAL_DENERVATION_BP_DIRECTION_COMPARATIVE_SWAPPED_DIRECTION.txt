@@ -1,0 +1,96 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison. For
+every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. Do not join separate spans, change words, or insert ellipses. An empty
+evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "D2_RENAL_DENERVATION_BP_DIRECTION_COMPARATIVE_SWAPPED_DIRECTION",
+  "claim_id": "D2_RDN_REDUCES_SYSTOLIC_BP_CLAIM",
+  "claim_text": "Among adults with resistant or uncontrolled hypertension, catheter-based renal denervation reduces systolic blood pressure compared with control or sham procedure.",
+  "target_relation": "direction",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "D2_E1_HTN2_METHODS",
+      "source_group_id": "RDN_SOURCE_SYMPLICITY_HTN2_NCT00888433",
+      "source_title": "Renal sympathetic denervation in patients with treatment-resistant hypertension (The Symplicity HTN-2 Trial): a randomised controlled trial",
+      "pmid": "21093036",
+      "doi": "10.1016/S0140-6736(10)62039-9",
+      "trial_id": "NCT00888433",
+      "source_locator": "PubMed abstract methods, findings, and interpretation",
+      "passage_text": "METHODS: In this multicentre, prospective, randomised trial, patients who had a baseline systolic blood pressure of 160 mm Hg or more (>=150 mm Hg for patients with type 2 diabetes), despite taking three or more antihypertensive drugs, were randomly allocated in a one-to-one ratio to undergo renal denervation with previous treatment or to maintain previous treatment alone (control group). The primary effectiveness endpoint was change in seated office-based measurement of systolic blood pressure at 6 months."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "D2_E2_HTN2_BP_RESULT",
+      "source_group_id": "RDN_SOURCE_SYMPLICITY_HTN2_NCT00888433",
+      "source_title": "Renal sympathetic denervation in patients with treatment-resistant hypertension (The Symplicity HTN-2 Trial): a randomised controlled trial",
+      "pmid": "21093036",
+      "doi": "10.1016/S0140-6736(10)62039-9",
+      "trial_id": "NCT00888433",
+      "source_locator": "PubMed abstract methods, findings, and interpretation",
+      "passage_text": "FINDINGS: Office-based blood pressure measurements in the renal denervation group reduced by 32/12 mm Hg, whereas they did not differ from baseline in the control group. Between-group differences in blood pressure at 6 months were 33/11 mm Hg. INTERPRETATION: Catheter-based renal denervation can safely be used to substantially reduce blood pressure in treatment-resistant hypertensive patients."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "D2_U2_HTN3_CHALLENGING_BP",
+    "source_group_id": "RDN_SOURCE_SYMPLICITY_HTN3_NCT01418261",
+    "source_title": "A controlled trial of renal denervation for resistant hypertension",
+    "pmid": "24678939",
+    "doi": "10.1056/NEJMoa1402670",
+    "trial_id": "NCT01418261",
+    "source_locator": "PubMed abstract methods, results, and conclusions",
+    "passage_text": "METHODS: We designed a prospective, single-blind, randomized, sham-controlled trial. Patients with severe resistant hypertension were randomly assigned in a 2:1 ratio to undergo renal denervation or a sham procedure. The primary efficacy end point was the change in office systolic blood pressure at 6 months; a secondary efficacy end point was the change in mean 24-hour ambulatory systolic blood pressure. RESULTS: A total of 535 patients underwent randomization. The mean change in systolic blood pressure at 6 months was -14.13 mm Hg in the denervation group as compared with -11.74 mm Hg in the sham-procedure group, for a difference of -2.39 mm Hg (95% CI, -6.89 to 2.12; P=0.26 for superiority with a margin of 5 mm Hg). The change in 24-hour ambulatory systolic blood pressure was -6.75 mm Hg in the denervation group and -4.79 mm Hg in the sham-procedure group, for a difference of -1.96 mm Hg (95% CI, -4.97 to 1.06; P=0.98 for superiority with a margin of 2 mm Hg). CONCLUSIONS: This blinded trial did not show a significant reduction of systolic blood pressure in patients with resistant hypertension 6 months after renal-artery denervation as compared with a sham control."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "D2_U1_SPYRAL_ON_MED_AGREEING_BP",
+    "source_group_id": "RDN_SOURCE_SPYRAL_ON_MED_NCT02439775",
+    "source_title": "Effect of renal denervation on blood pressure in the presence of antihypertensive drugs: 6-month efficacy and safety results from the SPYRAL HTN-ON MED proof-of-concept randomised trial",
+    "pmid": "29803589",
+    "doi": "10.1016/S0140-6736(18)30951-6",
+    "trial_id": "NCT02439775",
+    "source_locator": "PubMed abstract methods, findings, and interpretation",
+    "passage_text": "METHODS: In this international, randomised, single-blind, sham-control, proof-of-concept trial, patients with uncontrolled hypertension aged 20-80 years were enrolled. Eligible patients had an office systolic blood pressure between 150 mm Hg and 180 mm Hg and a diastolic blood pressure of 90 mm Hg or higher; a 24 h ambulatory systolic blood pressure between 140 mm Hg and 170 mm Hg; and were on one to three antihypertensive drugs with stable doses for at least 6 weeks. Patients underwent renal angiography and were randomly assigned to undergo renal denervation or sham control. FINDINGS: The change in blood pressure was significantly greater at 6 months in the renal denervation group than the sham-control group for office systolic blood pressure (difference -6.8 mm Hg, 95% CI -12.5 to -1.1; p=0.0205), 24 h systolic blood pressure (difference -7.4 mm Hg, -12.5 to -2.3; p=0.0051), office diastolic blood pressure (difference -3.5 mm Hg, -7.0 to -0.0; p=0.0478), and 24 h diastolic blood pressure (difference -4.1 mm Hg, -7.8 to -0.4; p=0.0292). INTERPRETATION: Renal denervation in the main renal arteries and branches significantly reduced blood pressure compared with sham control with no major safety events."
+  }
+}

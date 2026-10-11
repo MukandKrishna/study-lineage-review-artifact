@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model_input_comparative_recognition_v1.schema.json",
+  "title": "Leak-free comparative epistemic-update recognition input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "item_id",
+    "claim_id",
+    "claim_text",
+    "target_relation",
+    "initial_evidence",
+    "update_a",
+    "update_b"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "item_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_relation": {
+      "type": "string",
+      "enum": ["provenance", "applicability", "direction"]
+    },
+    "initial_evidence": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/evidence_item"
+      }
+    },
+    "update_a": {
+      "$ref": "#/$defs/evidence_item"
+    },
+    "update_b": {
+      "$ref": "#/$defs/evidence_item"
+    }
+  },
+  "$defs": {
+    "evidence_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundle_position",
+        "evidence_id",
+        "source_group_id",
+        "source_title",
+        "pmid",
+        "doi",
+        "trial_id",
+        "source_locator",
+        "passage_text"
+      ],
+      "properties": {
+        "bundle_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_group_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pmid": {
+          "type": ["string", "null"]
+        },
+        "doi": {
+          "type": ["string", "null"]
+        },
+        "trial_id": {
+          "type": ["string", "null"]
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passage_text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

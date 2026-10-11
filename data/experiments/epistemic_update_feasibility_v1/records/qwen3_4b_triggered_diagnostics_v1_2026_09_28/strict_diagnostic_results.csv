@@ -1,0 +1,14 @@
+input_index,block,test,condition_id,strict_valid,outcome,finding
+1,CF-P3 relation oracle,exact repeat,relation_oracle_cf_p3_empakidney_provenance_exact_repeat_control,5/5,pass,duplicate flagged; no independent-corroboration flag
+2,CF-P3 relation oracle,same-trial update,relation_oracle_cf_p3_empakidney_provenance_same_trial_secondary_analysis,5/5,fail,independent corroboration still claimed 5/5
+3,CF-P3 relation oracle,independent update,relation_oracle_cf_p3_empakidney_provenance_independent_trial,5/5,pass,independent corroboration claimed 5/5
+4,CF-P3 policy oracle,exact repeat,policy_oracle_cf_p3_empakidney_provenance_exact_repeat_control,5/5,pass,duplicate flagged; no independent-corroboration flag
+5,CF-P3 policy oracle,same-trial update,policy_oracle_cf_p3_empakidney_provenance_same_trial_secondary_analysis,5/5,fail,independent corroboration still claimed 5/5
+6,CF-P3 policy oracle,independent update,policy_oracle_cf_p3_empakidney_provenance_independent_trial,5/5,pass,independent corroboration claimed 5/5
+7,H3-M1,provenance A/B,h3_statin_precedence_provenance_ab_m1_no_source_group,5/5,pass,expected B; returned B 5/5
+8,H3-M1,provenance B/A,h3_statin_precedence_provenance_ba_m1_no_source_group,5/5,fail,expected A; returned B 5/5 despite reason identifying A
+9,H3-M1,exact repeat,h3_statin_precedence_exact_repeat_m1_no_source_group,0/5,strict_invalid,third evidence omitted from per-evidence output 5/5
+10,H3-M1,same-trial update,h3_statin_precedence_same_trial_dependent_support_m1_no_source_group,5/5,fail,same-trial evidence marked independent corroboration 5/5
+11,H3-M1,positive out-of-scope update,h3_statin_precedence_positive_out_of_scope_m1_no_source_group,5/5,pass_with_flag_caveat,update marked out of scope and ignored 5/5
+12,H3-M1,near-applicable challenge,h3_statin_precedence_near_applicable_challenge_m1_no_source_group,5/5,fail,challenge marked insufficient and ignored 5/5
+13,H3-M1,out-of-scope challenge,h3_statin_precedence_out_of_scope_challenge_m1_no_source_group,5/5,pass_with_flag_caveat,update marked out of scope and ignored 5/5

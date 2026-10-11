@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "created_at_utc": "2026-09-28T10:57:02.981247+00:00",
+  "model": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "dtype": "float16",
+    "device": "cuda:0",
+    "quantisation": "none"
+  },
+  "diagnostic_responses": 65,
+  "strict_valid": 60,
+  "strict_invalid": 5,
+  "exact_inputs": 13,
+  "repetitions_per_input": 5,
+  "inputs_with_one_unique_raw_output_across_repeats": 13,
+  "validation_errors": {
+    "bundle_position mismatch": 5,
+    "per_evidence_assessments order or coverage mismatch": 5
+  },
+  "max_output_tokens_observed": 1055,
+  "cf_p3_relation_oracle_same_trial_repair": "0/5",
+  "cf_p3_policy_oracle_same_trial_repair": "0/5",
+  "h3_m1_provenance_recognition": "5/10",
+  "h3_m1_same_trial_integration": "0/5",
+  "h3_m1_clear_out_of_scope_handling": "10/10",
+  "h3_m1_near_applicable_challenge_handling": "0/5",
+  "interpretation": "Qwen preserves the same-trial over-crediting failure, but neither provenance relation information nor an explicit marginal-evidence policy repairs CF-P3. H3-M1 exposes order-sensitive recognition after source_group_id removal. This strengthens evidence of a Qwen instruction-use/update-policy weakness but does not replicate GPT-5.5's successful oracle repair or cue-ablation recognition result.",
+  "conditions": [
+    {
+      "input_index": 1,
+      "block": "CF-P3 relation oracle",
+      "test": "exact repeat",
+      "condition_id": "relation_oracle_cf_p3_empakidney_provenance_exact_repeat_control",
+      "strict_valid": "5/5",
+      "outcome": "pass",
+      "finding": "duplicate flagged; no independent-corroboration flag"
+    },
+    {
+      "input_index": 2,
+      "block": "CF-P3 relation oracle",
+      "test": "same-trial update",
+      "condition_id": "relation_oracle_cf_p3_empakidney_provenance_same_trial_secondary_analysis",
+      "strict_valid": "5/5",
+      "outcome": "fail",
+      "finding": "independent corroboration still claimed 5/5"
+    },
+    {
+      "input_index": 3,
+      "block": "CF-P3 relation oracle",
+      "test": "independent update",
+      "condition_id": "relation_oracle_cf_p3_empakidney_provenance_independent_trial",
+      "strict_valid": "5/5",
+      "outcome": "pass",
+      "finding": "independent corroboration claimed 5/5"
+    },
+    {
+      "input_index": 4,
+      "block": "CF-P3 policy oracle",
+      "test": "exact repeat",
+      "condition_id": "policy_oracle_cf_p3_empakidney_provenance_exact_repeat_control",
+      "strict_valid": "5/5",
+      "outcome": "pass",
+      "finding": "duplicate flagged; no independent-corroboration flag"
+    },
+    {
+      "input_index": 5,
+      "block": "CF-P3 policy oracle",
+      "test": "same-trial update",
+      "condition_id": "policy_oracle_cf_p3_empakidney_provenance_same_trial_secondary_analysis",
+      "strict_valid": "5/5",
+      "outcome": "fail",
+      "finding": "independent corroboration still claimed 5/5"
+    },
+    {
+      "input_index": 6,
+      "block": "CF-P3 policy oracle",
+      "test": "independent update",
+      "condition_id": "policy_oracle_cf_p3_empakidney_provenance_independent_trial",
+      "strict_valid": "5/5",
+      "outcome": "pass",
+      "finding": "independent corroboration claimed 5/5"
+    },
+    {
+      "input_index": 7,
+      "block": "H3-M1",
+      "test": "provenance A/B",
+      "condition_id": "h3_statin_precedence_provenance_ab_m1_no_source_group",
+      "strict_valid": "5/5",
+      "outcome": "pass",
+      "finding": "expected B; returned B 5/5"
+    },
+    {
+      "input_index": 8,
+      "block": "H3-M1",
+      "test": "provenance B/A",
+      "condition_id": "h3_statin_precedence_provenance_ba_m1_no_source_group",
+      "strict_valid": "5/5",
+      "outcome": "fail",
+      "finding": "expected A; returned B 5/5 despite reason identifying A"
+    },
+    {
+      "input_index": 9,
+      "block": "H3-M1",
+      "test": "exact repeat",
+      "condition_id": "h3_statin_precedence_exact_repeat_m1_no_source_group",
+      "strict_valid": "0/5",
+      "outcome": "strict_invalid",
+      "finding": "third evidence omitted from per-evidence output 5/5"
+    },
+    {
+      "input_index": 10,
+      "block": "H3-M1",
+      "test": "same-trial update",
+      "condition_id": "h3_statin_precedence_same_trial_dependent_support_m1_no_source_group",
+      "strict_valid": "5/5",
+      "outcome": "fail",
+      "finding": "same-trial evidence marked independent corroboration 5/5"
+    },
+    {
+      "input_index": 11,
+      "block": "H3-M1",
+      "test": "positive out-of-scope update",
+      "condition_id": "h3_statin_precedence_positive_out_of_scope_m1_no_source_group",
+      "strict_valid": "5/5",
+      "outcome": "pass_with_flag_caveat",
+      "finding": "update marked out of scope and ignored 5/5"
+    },
+    {
+      "input_index": 12,
+      "block": "H3-M1",
+      "test": "near-applicable challenge",
+      "condition_id": "h3_statin_precedence_near_applicable_challenge_m1_no_source_group",
+      "strict_valid": "5/5",
+      "outcome": "fail",
+      "finding": "challenge marked insufficient and ignored 5/5"
+    },
+    {
+      "input_index": 13,
+      "block": "H3-M1",
+      "test": "out-of-scope challenge",
+      "condition_id": "h3_statin_precedence_out_of_scope_challenge_m1_no_source_group",
+      "strict_valid": "5/5",
+      "outcome": "pass_with_flag_caveat",
+      "finding": "update marked out of scope and ignored 5/5"
+    }
+  ]
+}

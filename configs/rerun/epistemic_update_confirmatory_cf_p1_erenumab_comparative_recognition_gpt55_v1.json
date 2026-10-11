@@ -1,0 +1,64 @@
+{
+  "experiment_id": "epistemic_update_confirmatory_cf_p1_erenumab_comparative_recognition_gpt55_v1",
+  "description": "Comparative provenance recognition gate for confirmatory CF-P1 erenumab STRIVE/ARISE family after repaired adult-population initial evidence.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_p1_erenumab_strive_arise/comparative_recognition_inputs",
+  "input_ablation": {
+    "condition": "confirmatory_no_source_group_id",
+    "omitted_evidence_fields": [
+      "source_group_id"
+    ],
+    "preserved_evidence_fields": [
+      "source_title",
+      "pmid",
+      "doi",
+      "trial_id",
+      "source_locator",
+      "passage_text"
+    ],
+    "purpose": "Prevent project-created provenance labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+  },
+  "prompt_version": "epistemic_update_relation_comparative_recognition_v2_2",
+  "prompt_sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+  "response_schema": "epistemic_update_relation_comparative_recognition_v1",
+  "response_schema_sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_p1_erenumab_comparative_recognition_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_p1_erenumab_comparative_recognition_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 2,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 10,
+    "recognition_calls": 10,
+    "purpose": "Check whether the model recognizes that ARISE has greater independent marginal contribution than the STRIVE same-trial post-hoc publication under A/B order swaps."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_comparative_recognition_judge",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "cf_p1_erenumab_provenance_independent_vs_same_trial_publication_ab",
+      "execution_item_id": "CF_P1_ERENUMAB_COMPARATIVE_PROVENANCE_AB",
+      "input_file": "cf_p1_erenumab_comparative_provenance_ab.json",
+      "input_sha256": "812a8736bc4760acbd2906de7fb4e1730115ed300c270896575014bafb53221d",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "cf_p1_erenumab_provenance_same_trial_publication_vs_independent_ba",
+      "execution_item_id": "CF_P1_ERENUMAB_COMPARATIVE_PROVENANCE_BA",
+      "input_file": "cf_p1_erenumab_comparative_provenance_ba.json",
+      "input_sha256": "0e510e2de287d5f52a338ec5c51d20aaf2ce83dbe17ea750c1fa360b9056817a",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed. Open only after explicit approval for this exact confirmatory CF-P1 comparative provenance recognition gate."
+}

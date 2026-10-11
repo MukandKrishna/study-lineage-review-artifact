@@ -1,0 +1,69 @@
+{
+    "experiment_id":  "epistemic_update_confirmatory_cf_p3_provenance_policy_oracle_gpt55_v1",
+    "description":  "CF-P3 marginal-evidence policy-oracle verifier diagnostic.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_p3_empakidney_dapackd_provenance/verifier_inputs_provenance_updates",
+    "input_ablation":  {
+                           "condition":  "confirmatory_no_source_group_id",
+                           "omitted_evidence_fields":  "source_group_id",
+                           "preserved_evidence_fields":  [
+                                                             "source_title",
+                                                             "pmid",
+                                                             "doi",
+                                                             "trial_id",
+                                                             "source_locator",
+                                                             "passage_text"
+                                                         ],
+                           "purpose":  "Keep the completed CF-P3 visible information state while changing only the verifier prompt."
+                       },
+    "prompt_version":  "epistemic_update_verifier_marginal_evidence_policy_oracle_v1",
+    "prompt_sha256":  "e6bdbe466251f5e59fafe43c95feee84686ad37d2cfb3dae0128f3c7175871e3",
+    "response_schema":  "epistemic_multi_evidence_judge_openai_v1",
+    "response_schema_sha256":  "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_p3_provenance_policy_oracle_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_p3_provenance_policy_oracle_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  1,
+                         "condition_count":  3,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  15,
+                         "recognition_calls":  0,
+                         "independent_unit":  "clinical_family_not_condition_or_repetition",
+                         "purpose":  "Test whether an explicit marginal-evidence policy repairs CF-P3 same-trial over-crediting."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_neutral_verifier",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "policy_oracle_cf_p3_empakidney_provenance_exact_repeat_control",
+                           "execution_item_id":  "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_02",
+                           "input_file":  "cf_p3_empakidney_exact_repeat_control.json",
+                           "input_sha256":  "64ec8f207b148995304790514aa5ef87570c933b15164e3623d61e1824a49b87"
+                       },
+                       {
+                           "condition_id":  "policy_oracle_cf_p3_empakidney_provenance_same_trial_secondary_analysis",
+                           "execution_item_id":  "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_03",
+                           "input_file":  "cf_p3_empakidney_same_trial_update.json",
+                           "input_sha256":  "c7a243b0f899bab976d9c83f46caf2e246ceb7ced13c944c12234d88ca790247"
+                       },
+                       {
+                           "condition_id":  "policy_oracle_cf_p3_empakidney_provenance_independent_trial",
+                           "execution_item_id":  "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_04",
+                           "input_file":  "cf_p3_dapackd_independent_update.json",
+                           "input_sha256":  "48a47f9038002ce6eceadb249d9c83fb19a48cb32d15f0e65b28bfbbad804e5e"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "runtime_requirement":  "When this gate is explicitly approved for model calls, run it with writable/unsandboxed Codex CLI state access from the first attempt. Do not attempt a sandboxed model-call run; sandboxed use is for validate-only checks.",
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

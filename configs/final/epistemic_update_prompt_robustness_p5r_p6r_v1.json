@@ -1,0 +1,60 @@
+{
+    "experiment_id":  "epistemic_update_prompt_robustness_p5r_p6r_v1",
+    "description":  "Offline-gated two-prompt verifier robustness check for prospective provenance.",
+    "model_calls_enabled":  false,
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/verifier_inputs",
+    "families":  [
+                     "P5R",
+                     "P6R"
+                 ],
+    "conditions":  [
+                       "same_trial_update",
+                       "independent_update"
+                   ],
+    "modes":  "document_level_baseline",
+    "prompt_variants":  [
+                            {
+                                "id":  "base_v2",
+                                "path":  "prompts/epistemic_update_verifier_neutral_v2.txt",
+                                "sha256":  "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02"
+                            },
+                            {
+                                "id":  "reordered_v1",
+                                "path":  "prompts/epistemic_update_verifier_neutral_prompt_robustness_reordered_v1.txt",
+                                "sha256":  "21637e3a4d495f81801b3676fe27a75738ad80dfa9a9ed3ba7d5b31ad462265f"
+                            }
+                        ],
+    "models":  [
+                   "gpt_5_5_medium",
+                   "qwen3_4b",
+                   "gemma3_4b"
+               ],
+    "repetitions_per_input":  5,
+    "planned_calls":  120,
+    "primary_estimands":  [
+                              "same_trial_overcredit_rate",
+                              "independent_support_preservation",
+                              "validity_rate",
+                              "prompt_consistency"
+                          ],
+    "required_controls":  [
+                              "exact_input_hash_match",
+                              "schema_hash_match",
+                              "strict_vs_canonical_validity",
+                              "raw_output_preservation",
+                              "family_level_pairing"
+                          ],
+    "forbidden_changes":  [
+                              "clinical_text",
+                              "evidence_order",
+                              "trial_ids",
+                              "source_group_ids",
+                              "gold_labels",
+                              "chat_template",
+                              "decoding",
+                              "relation_hints",
+                              "posthoc_prompt_selection"
+                          ],
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

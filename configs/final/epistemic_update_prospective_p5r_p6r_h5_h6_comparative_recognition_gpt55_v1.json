@@ -1,0 +1,106 @@
+{
+    "experiment_id":  "epistemic_update_prospective_p5r_p6r_h5_h6_comparative_recognition_gpt55_v1",
+    "description":  "Frozen relation-recognition checks for P5R/P6R/H5/H6.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/comparative_recognition_inputs",
+    "prompt_version":  "epistemic_update_relation_comparative_recognition_v2_2",
+    "prompt_sha256":  "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+    "response_schema":  "epistemic_update_relation_comparative_recognition_v1",
+    "response_schema_sha256":  "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_comparative_recognition_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_comparative_recognition_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  4,
+                         "condition_count":  10,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  50,
+                         "recognition_calls":  50,
+                         "purpose":  "Recognise provenance/applicability before integration claims."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_comparative_recognition_judge",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "p5r_provenance_ab",
+                           "execution_item_id":  "P5R_PROVENANCE_AB",
+                           "input_file":  "p5r_provenance_ab.json",
+                           "input_sha256":  "cb6fa37c3ebe55d7f4da3b7dd22460fe01ff8d9c7397ce2cf9a1408b70b232e2",
+                           "expected_comparative_answer":  "B"
+                       },
+                       {
+                           "condition_id":  "p5r_provenance_ba",
+                           "execution_item_id":  "P5R_PROVENANCE_BA",
+                           "input_file":  "p5r_provenance_ba.json",
+                           "input_sha256":  "703106d9e8ba45ca00c4ae281df9a63403ac917a0489b613e211bb1201e7bbf1",
+                           "expected_comparative_answer":  "A"
+                       },
+                       {
+                           "condition_id":  "p6r_provenance_ab",
+                           "execution_item_id":  "P6R_PROVENANCE_AB",
+                           "input_file":  "p6r_provenance_ab.json",
+                           "input_sha256":  "8bc363267701a93b5bc11281b93d0376a5bc12d911d54b13a14dcb3061c5417e",
+                           "expected_comparative_answer":  "B"
+                       },
+                       {
+                           "condition_id":  "p6r_provenance_ba",
+                           "execution_item_id":  "P6R_PROVENANCE_BA",
+                           "input_file":  "p6r_provenance_ba.json",
+                           "input_sha256":  "46f436a3a37fab0411b52d3264093f7fe2ca4b5e7052b9038da614526ada299a",
+                           "expected_comparative_answer":  "A"
+                       },
+                       {
+                           "condition_id":  "h5_provenance_ab",
+                           "execution_item_id":  "H5_PROVENANCE_AB",
+                           "input_file":  "h5_provenance_ab.json",
+                           "input_sha256":  "910b70d30a59ca5a46feaaf9d5d095fa0ec900bc8ca71fb05e9908575d48925a",
+                           "expected_comparative_answer":  "B"
+                       },
+                       {
+                           "condition_id":  "h5_provenance_ba",
+                           "execution_item_id":  "H5_PROVENANCE_BA",
+                           "input_file":  "h5_provenance_ba.json",
+                           "input_sha256":  "baab69f720060ce961181e19ea368a9222bc4bcfe0836cdc386defec402b9000",
+                           "expected_comparative_answer":  "A"
+                       },
+                       {
+                           "condition_id":  "h5_applicability_ab",
+                           "execution_item_id":  "H5_APPLICABILITY_AB",
+                           "input_file":  "h5_applicability_ab.json",
+                           "input_sha256":  "f107d153183c254d9a54af55bfd7d85306b2a5ef82c5f215f26aa832fdb9c95d",
+                           "expected_comparative_answer":  "B"
+                       },
+                       {
+                           "condition_id":  "h5_applicability_ba",
+                           "execution_item_id":  "H5_APPLICABILITY_BA",
+                           "input_file":  "h5_applicability_ba.json",
+                           "input_sha256":  "cdab89ac5c0811afc5699b91028803605a22d5ecd4dce36101773de953813bdc",
+                           "expected_comparative_answer":  "A"
+                       },
+                       {
+                           "condition_id":  "h6_provenance_ab",
+                           "execution_item_id":  "H6_PROVENANCE_AB",
+                           "input_file":  "h6_provenance_ab.json",
+                           "input_sha256":  "887585299b69c901d49bb1ec488eb9d2331082c3f3daeb3c48fd502b5c85e9d2",
+                           "expected_comparative_answer":  "B"
+                       },
+                       {
+                           "condition_id":  "h6_provenance_ba",
+                           "execution_item_id":  "H6_PROVENANCE_BA",
+                           "input_file":  "h6_provenance_ba.json",
+                           "input_sha256":  "0cfca01ae2bab95e97680ed5f7f1349fd8cd172762fd3a1fb19f129f63c6dd63",
+                           "expected_comparative_answer":  "A"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

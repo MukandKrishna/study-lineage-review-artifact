@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "H2_SEMAGLUTIDE_OBESITY_SCOPE_TRANSFER_X1",
+  "claim_id": "H2_ADULT_SEMAGLUTIDE_OBESITY_WEIGHT_LOSS_CLAIM",
+  "claim_text": "Among adults with overweight or obesity without diabetes, once-weekly semaglutide 2.4 mg reduced body weight compared with placebo.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "H2_E1_STEP1_ADULTS_METHODS",
+      "source_group_id": "SEMAGLUTIDE_SOURCE_STEP1_ADULTS_NCT03548935",
+      "source_title": "Once-Weekly Semaglutide in Adults with Overweight or Obesity",
+      "pmid": "33567185",
+      "doi": "10.1056/NEJMoa2032183",
+      "trial_id": "NCT03548935",
+      "source_locator": "PubMed abstract methods, results, and conclusions",
+      "passage_text": "METHODS: In this double-blind trial, we enrolled 1961 adults with a body-mass index of 30 or greater, or 27 or greater in persons with at least one weight-related coexisting condition, who did not have diabetes, and randomly assigned them, in a 2:1 ratio, to 68 weeks of treatment with once-weekly subcutaneous semaglutide at a dose of 2.4 mg or placebo, plus lifestyle intervention. The coprimary end points were the percentage change in body weight and weight reduction of at least 5%."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "H2_E2_STEP1_ADULTS_WEIGHT_RESULT",
+      "source_group_id": "SEMAGLUTIDE_SOURCE_STEP1_ADULTS_NCT03548935",
+      "source_title": "Once-Weekly Semaglutide in Adults with Overweight or Obesity",
+      "pmid": "33567185",
+      "doi": "10.1056/NEJMoa2032183",
+      "trial_id": "NCT03548935",
+      "source_locator": "PubMed abstract methods, results, and conclusions",
+      "passage_text": "RESULTS: The mean change in body weight from baseline to week 68 was -14.9% in the semaglutide group as compared with -2.4% with placebo, for an estimated treatment difference of -12.4 percentage points. More participants in the semaglutide group than in the placebo group achieved weight reductions of 5% or more at week 68."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "H2_U1_SELECT_ADULT_WEIGHT_APPLICABLE",
+    "source_group_id": "SEMAGLUTIDE_SOURCE_SELECT_NCT03574597",
+    "source_title": "Long-term weight loss effects of semaglutide in obesity without diabetes in the SELECT trial",
+    "pmid": "38740993",
+    "doi": "10.1038/s41591-024-02996-7",
+    "trial_id": "NCT03574597",
+    "source_locator": "PubMed abstract SELECT weight and anthropometric outcomes",
+    "passage_text": "ABSTRACT: In the SELECT cardiovascular outcomes trial, semaglutide showed a 20% reduction in major adverse cardiovascular events in 17,604 adults with preexisting cardiovascular disease, overweight or obesity, without diabetes. Here in this prespecified analysis, effects of semaglutide on weight and anthropometric outcomes, safety and tolerability by baseline body mass index were examined. In patients treated with semaglutide, weight loss continued over 65 weeks and was sustained for up to 4 years. At 208 weeks, semaglutide was associated with mean reduction in weight (-10.2%) versus placebo (-1.5%; P < 0.0001). ClinicalTrials.gov identifier: NCT03574597."
+  }
+}

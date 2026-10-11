@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model_input_sequential_update_v1.schema.json",
+  "title": "Leak-free sequential epistemic update input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "item_id",
+    "claim_id",
+    "claim_text",
+    "initial_evidence",
+    "added_evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "item_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "initial_evidence": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/evidence_item"
+      }
+    },
+    "added_evidence": {
+      "oneOf": [
+        {"$ref": "#/$defs/evidence_item"},
+        {"type": "null"}
+      ]
+    }
+  },
+  "$defs": {
+    "evidence_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bundle_position",
+        "evidence_id",
+        "source_group_id",
+        "source_title",
+        "pmid",
+        "doi",
+        "trial_id",
+        "source_locator",
+        "passage_text"
+      ],
+      "properties": {
+        "bundle_position": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_group_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pmid": {
+          "type": ["string", "null"]
+        },
+        "doi": {
+          "type": ["string", "null"]
+        },
+        "trial_id": {
+          "type": ["string", "null"]
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passage_text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+    "experiment_id":  "epistemic_update_confirmatory_cf_p3_empakidney_initial_neutral_verifier_gpt55_v2",
+    "description":  "Repaired initial-only entailment configuration for confirmatory CF-P3 EMPA-KIDNEY/DAPA-CKD provenance family; the initial passage explicitly states adult eligibility and SGLT2-inhibitor empagliflozin wording.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_p3_empakidney_dapackd_provenance/verifier_inputs_initial_gate",
+    "input_ablation":  {
+                           "condition":  "confirmatory_no_source_group_id",
+                           "omitted_evidence_fields":  "source_group_id",
+                           "preserved_evidence_fields":  [
+                                                             "source_title",
+                                                             "pmid",
+                                                             "doi",
+                                                             "trial_id",
+                                                             "source_locator",
+                                                             "passage_text"
+                                                         ],
+                           "purpose":  "Prevent project-created provenance labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+                       },
+    "prompt_version":  "epistemic_update_verifier_neutral_v2",
+    "prompt_sha256":  "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+    "response_schema":  "epistemic_multi_evidence_judge_openai_v1",
+    "response_schema_sha256":  "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_p3_empakidney_initial_neutral_verifier_v2.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_p3_empakidney_initial_neutral_verifier_v2_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  1,
+                         "condition_count":  1,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  5,
+                         "recognition_calls":  0,
+                         "purpose":  "Require stable initial support for the repaired frozen CF-P3 class-level SGLT2-inhibitor CKD claim before testing provenance updates."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_neutral_verifier",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  {
+                       "condition_id":  "cf_p3_empakidney_provenance_initial",
+                       "execution_item_id":  "CF_P3_EMPAKIDNEY_PROVENANCE_INITIAL",
+                       "input_file":  "cf_p3_empakidney_initial.json",
+                       "input_sha256":  "24d5543a003c465af3aa81b3738223bd89674389d1d278f6daa72139ab502eff"
+                   },
+    "model_calls_enabled":  false,
+    "runtime_requirement":  "When this gate is explicitly approved for model calls, run it with writable/unsandboxed Codex CLI state access from the first attempt. Do not attempt a sandboxed model-call run; sandboxed use is for validate-only checks.",
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

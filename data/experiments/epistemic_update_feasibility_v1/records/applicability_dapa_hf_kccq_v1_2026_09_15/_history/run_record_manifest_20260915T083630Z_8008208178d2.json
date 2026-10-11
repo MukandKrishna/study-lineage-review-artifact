@@ -1,0 +1,517 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_applicability_dapa_hf_kccq_v1_2026_09_15",
+  "created_at_utc": "2026-09-15T08:32:15.366253+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve exact prompts, prompt versions, model/version and settings, exact model inputs, rendered prompts, raw outputs, parsed outputs, repetitions, errors/retries, A/B assignments, token logs where available, source records, and family-change records. Do not overwrite earlier outputs on rerun.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_applicability_dapa_hf_kccq_record_archive.json",
+    "bytes": 1941,
+    "sha256": "f83effb5387696e6c7488fb53a3832135af91b4deb933bdef6dd8fd6beadcdc7",
+    "last_write_time_utc": "2026-09-15T08:24:58.649793+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_applicability_dapa_hf_kccq_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2072,
+      "sha256": "3807479c832e63eee48beb43b5be1951d8c7d88eca4ffd0889d01391460e2d77",
+      "last_write_time_utc": "2026-09-15T08:24:58.639817+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 2736,
+      "sha256": "81a6a49fdf57cf03038dd66210f17c4ef98fea484b0c3ab13ef557b2b8d1c5e8",
+      "last_write_time_utc": "2026-09-15T08:30:51.971267+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_applicability_dapa_hf_kccq_comparative_recognition_gpt55_v1.json",
+      "bytes": 2579,
+      "sha256": "116b26f36abfae5964bedaab00cd995568169ff743e9d3a8d598df7f8ec3a068",
+      "last_write_time_utc": "2026-09-15T08:24:58.646842+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_1.txt",
+      "bytes": 2362,
+      "sha256": "ca84d78bf93d570576a0ac497a9317dd04efcdc2f495732cab1559c5edd7434b",
+      "last_write_time_utc": "2026-09-14T14:50:13.633582+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_applicability_dapa_hf_kccq_initial_gate_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_INITIAL",
+      "condition_id": "a2_dapa_hf_kccq_applicability_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_dapa_hf_kccq_v1_2026_09_15\\rendered_prompts\\epistemic_update_applicability_dapa_hf_kccq_initial_gate_neutral_verifier_gpt55_v1\\A2_DAPA_HF_KCCQ_APPLICABILITY_INITIAL.txt",
+      "rendered_prompt_sha256": "aa1c1ae005fb0dc4de33df8ca785f8531261ab6fde4ea05b2c313f9f5008768c",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_MATCHED_A",
+      "condition_id": "a2_dapa_hf_kccq_applicability_matched_a",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_dapa_hf_kccq_v1_2026_09_15\\rendered_prompts\\epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1\\A2_DAPA_HF_KCCQ_APPLICABILITY_MATCHED_A.txt",
+      "rendered_prompt_sha256": "e509b5a854e9220d223e02648dc56f45ada1ddd1371f1b477a41f7b8ac221371",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_MATCHED_B",
+      "condition_id": "a2_dapa_hf_kccq_applicability_matched_b",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_dapa_hf_kccq_v1_2026_09_15\\rendered_prompts\\epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1\\A2_DAPA_HF_KCCQ_APPLICABILITY_MATCHED_B.txt",
+      "rendered_prompt_sha256": "5acda32f67fb2cfe16bea3365644fb278816295f1fea1b17e680d887270b3329",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1",
+      "execution_item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_NULL_CONTROL",
+      "condition_id": "a2_dapa_hf_kccq_applicability_null_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_dapa_hf_kccq_v1_2026_09_15\\rendered_prompts\\epistemic_update_applicability_dapa_hf_kccq_updates_neutral_verifier_gpt55_v1\\A2_DAPA_HF_KCCQ_APPLICABILITY_NULL_CONTROL.txt",
+      "rendered_prompt_sha256": "aa8989ce483bb37b4fc37161b27caf2b46aebab29b1dbdf2d9ee3b95089e037c",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_dapa_hf_kccq_comparative_recognition_gpt55_v1",
+      "execution_item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_COMPARATIVE_APPLICABILITY",
+      "condition_id": "a2_dapa_hf_kccq_applicability_applicability_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_dapa_hf_kccq_v1_2026_09_15\\rendered_prompts\\epistemic_update_applicability_dapa_hf_kccq_comparative_recognition_gpt55_v1\\A2_DAPA_HF_KCCQ_APPLICABILITY_COMPARATIVE_APPLICABILITY.txt",
+      "rendered_prompt_sha256": "0f3b9e4dbc31b9a15c6a90d8cd1aadf296f27eb3884606cdd524aa876829eeb6",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_applicability_dapa_hf_kccq_comparative_recognition_gpt55_v1",
+      "execution_item_id": "A2_DAPA_HF_KCCQ_APPLICABILITY_COMPARATIVE_SWAPPED_APPLICABILITY",
+      "condition_id": "a2_dapa_hf_kccq_applicability_applicability_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\applicability_dapa_hf_kccq_v1_2026_09_15\\rendered_prompts\\epistemic_update_applicability_dapa_hf_kccq_comparative_recognition_gpt55_v1\\A2_DAPA_HF_KCCQ_APPLICABILITY_COMPARATIVE_SWAPPED_APPLICABILITY.txt",
+      "rendered_prompt_sha256": "bd592ef8618532f98acb7c5dd61cd03f07fc783aac8fb5f4566229c95ffabf65",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_dapa_hf_kccq_v1\\authoring_records\\a2_dapa_hf_kccq_applicability.json",
+      "bytes": 12705,
+      "sha256": "66cfd7d33605d664255dc263d90682ca0845b3c3659c3b7c8375f5235795670d",
+      "last_write_time_utc": "2026-09-15T08:24:58.617056+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_dapa_hf_kccq_v1\\construction_audit_table.csv",
+      "bytes": 595,
+      "sha256": "bfd074ff1adeaf60cae610f93216318fb75cc8e90ced39f6c9ad4b85ff8544b4",
+      "last_write_time_utc": "2026-09-15T08:24:58.647795+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_dapa_hf_kccq_v1\\offline_validation_report.json",
+      "bytes": 147,
+      "sha256": "e28cb2608c82e31a09adddb81064707ed808a4411e1182796e8e1b6944102c54",
+      "last_write_time_utc": "2026-09-15T08:24:58.649793+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\construction\\epistemic_update_applicability_dapa_hf_kccq_v1\\source_verification_record.json",
+      "bytes": 1171,
+      "sha256": "2863e3f05008ac35d56f11dc3fbda58a9e9bd3f46daad66d73a6a36fcc8ff04f",
+      "last_write_time_utc": "2026-09-15T08:24:58.647795+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\comparative_recognition_inputs\\a2_dapa_hf_kccq_applicability_applicability_ab.json",
+      "bytes": 4152,
+      "sha256": "9ee1d92cb79aa82a1511ac3d9551186feb09a33192c0145fbf319b6defd1c002",
+      "last_write_time_utc": "2026-09-15T08:24:58.641794+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\comparative_recognition_inputs\\a2_dapa_hf_kccq_applicability_applicability_ba.json",
+      "bytes": 4160,
+      "sha256": "17247e23a354edfd3d1000fab1333b7b99e0b2486c4d9ac77155f5dbbe6561fe",
+      "last_write_time_utc": "2026-09-15T08:24:58.643809+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\run_plan_manifest.json",
+      "bytes": 553,
+      "sha256": "61145d430661cb8677eeb84279f9335f3cd490a5a89ea99c19e47346ba0704d7",
+      "last_write_time_utc": "2026-09-15T08:24:58.649793+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\verifier_inputs_initial_gate\\a2_dapa_hf_kccq_applicability_initial.json",
+      "bytes": 2130,
+      "sha256": "e2b33d8e7b543ce85fb3237410f8599dcb0d416d6e6edf688c5f94f1507a0d40",
+      "last_write_time_utc": "2026-09-15T08:24:58.617056+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\verifier_inputs_updates\\a2_dapa_hf_kccq_applicability_matched_a.json",
+      "bytes": 3145,
+      "sha256": "1ca6e0a276969cc0661f44b64f5cd745c7f0fa895d2c84a7f67dabd1ff8b9d0f",
+      "last_write_time_utc": "2026-09-15T08:24:58.632836+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\verifier_inputs_updates\\a2_dapa_hf_kccq_applicability_matched_b.json",
+      "bytes": 3069,
+      "sha256": "116c6e2792666e37a28c7533a37e2c7673728460135be6a61e31f51ae691631f",
+      "last_write_time_utc": "2026-09-15T08:24:58.634828+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\epistemic_update_applicability_dapa_hf_kccq_v1\\verifier_inputs_updates\\a2_dapa_hf_kccq_applicability_null_control.json",
+      "bytes": 3135,
+      "sha256": "3b465c5903a4d33f8a276afe766049b428cb9cdf4dc7403883ec4ee442d5eef4",
+      "last_write_time_utc": "2026-09-15T08:24:58.636798+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_applicability_dapa_hf_kccq_initial_gate_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 5,
+      "sha256": "6096a79304f5d1b0920c77c93963ca68e8cb072715cb1caf5f0cf5a6d331efc7",
+      "response_status_counts": {
+        "ok": 5
+      },
+      "error_category_counts": {
+        "": 5
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_applicability_dapa_hf_kccq_updates_neutral_verifier_v1.jsonl",
+      "exists": true,
+      "row_count": 15,
+      "sha256": "ee583890cfd798c34ff2f3cfba8d643cca3dce36bf8d935d21241deb0bc95c26",
+      "response_status_counts": {
+        "ok": 15
+      },
+      "error_category_counts": {
+        "": 15
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_applicability_dapa_hf_kccq_comparative_recognition_v1.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_applicability_dapa_hf_kccq_initial_gate_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_applicability_dapa_hf_kccq_updates_neutral_verifier_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_applicability_dapa_hf_kccq_comparative_recognition_v1_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T035845Z_2c0d971bb1f9.json",
+      "bytes": 12010,
+      "sha256": "2c0d971bb1f9d2bbfda0f29ec5be151f52fd15f9a474ad2d152d70cfb0d8490b",
+      "last_write_time_utc": "2026-09-10T03:56:39.218516+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T035846Z_a595a937b403.md",
+      "bytes": 3551,
+      "sha256": "a595a937b4031371a3cdc7e4a2400bbbd20741f702d7e0d6e04e8c607133e8c1",
+      "last_write_time_utc": "2026-09-10T03:56:39.218516+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T040011Z_435073821508.md",
+      "bytes": 3903,
+      "sha256": "4350738215084829acc0f2b3e67a2b05f592a3a20f91e4d1b31c7a96a03c6bb9",
+      "last_write_time_utc": "2026-09-10T03:58:46.006150+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\_history\\P1_V1_V2_PROMPT_COMPARISON_20260910T040011Z_f7dc2f24f643.json",
+      "bytes": 12010,
+      "sha256": "f7dc2f24f643d8bab5edf6e68ea4a4f912761f38fd56205aab7f50df737825bc",
+      "last_write_time_utc": "2026-09-10T03:58:46.005489+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_dapa_hf_kccq_verifier_v1\\REPORT.md",
+      "bytes": 2271,
+      "sha256": "7c6df277bc11820b9d6a28186169434515c2eaf7d985de49aec65fc25e91c0f5",
+      "last_write_time_utc": "2026-09-15T08:32:01.213886+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_applicability_dapa_hf_kccq_verifier_v1\\summary.json",
+      "bytes": 3035,
+      "sha256": "95946193939e2c3e59e7419f12e99f3b908f0e804de60566fe5919e8a9c25985",
+      "last_write_time_utc": "2026-09-15T08:31:58.649694+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v1\\REPORT.md",
+      "bytes": 512,
+      "sha256": "9bc20faf8189ff617d179f264740138da7a6479ba9d91011b93bf18513d8e267",
+      "last_write_time_utc": "2026-09-09T10:25:15.942716+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v1\\summary.json",
+      "bytes": 1022,
+      "sha256": "c7f0d279aafbf05b1b2f1cd3c8efef424d67fcb6e7e9e4b4e4744ddd342e7be0",
+      "last_write_time_utc": "2026-09-09T10:25:15.941679+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v2\\REPORT.md",
+      "bytes": 512,
+      "sha256": "9a6706dad33544d07ff2bae81c1f1238d161e2bb46d0bc376abf878ed590462e",
+      "last_write_time_utc": "2026-09-10T03:54:05.654217+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_comparative_recognition_v2\\summary.json",
+      "bytes": 1022,
+      "sha256": "edd222e8938f232030f5693943a2b762984adb5d0cd44657fac9d1bc93931b20",
+      "last_write_time_utc": "2026-09-10T03:54:05.654217+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v1\\REPORT.md",
+      "bytes": 695,
+      "sha256": "a04cbaeaec7a6a07c1860ceacb68db8eefb281e35b4d4f5d29492da21dd585fe",
+      "last_write_time_utc": "2026-09-09T10:19:39.881824+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v1\\summary.json",
+      "bytes": 2782,
+      "sha256": "ba8d7959f79351e8ded70bc32c46b9cf503c530222a91a0486a777002fe851c3",
+      "last_write_time_utc": "2026-09-09T10:19:39.880822+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v2\\REPORT.md",
+      "bytes": 695,
+      "sha256": "53295efa20017557db2f8c1c7aa2128f07845c7ab0eed8207d7087bce13b0482",
+      "last_write_time_utc": "2026-09-10T03:51:46.167185+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_p1_neutral_verifier_v2\\summary.json",
+      "bytes": 2782,
+      "sha256": "81574fdf73f9f612620d26de902a99d6d4ce7c51ca420e45a5ae7e1d7b044bd0",
+      "last_write_time_utc": "2026-09-10T03:51:46.167185+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_neutral_verifier_v1\\REPORT.md",
+      "bytes": 1007,
+      "sha256": "35ea13f670a7a252de49361ed6a989c8db6458874e70ab21a366b3875b490227",
+      "last_write_time_utc": "2026-09-14T15:11:48.644121+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_neutral_verifier_v1\\summary.json",
+      "bytes": 3636,
+      "sha256": "5c9891d980c3e9e622810ce541f0f34a63d63743a41e731264f5bdf776c846ee",
+      "last_write_time_utc": "2026-09-14T15:11:27.450661+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_v2_h1_null_controls_neutral_verifier_v1\\REPORT.md",
+      "bytes": 859,
+      "sha256": "bf065ff5283dce14262a8a2448a492cafad543fb33b943d936d56435ac4d1d6d",
+      "last_write_time_utc": "2026-09-14T15:39:44.997151+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_ladder_dapa_hf_v2_h1_null_controls_neutral_verifier_v1\\summary.json",
+      "bytes": 2419,
+      "sha256": "5dedc9d1e81ab6a4630918f56d6cef7bb19cf4f2f165aa9f25feae4195998f00",
+      "last_write_time_utc": "2026-09-14T15:39:37.650553+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1\\REPORT.md",
+      "bytes": 1532,
+      "sha256": "2fd9f8f0306e74d83bec79702ab7271d44397913e7f0dfdeb110a639142ae816",
+      "last_write_time_utc": "2026-09-10T14:34:51.653790+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1\\summary.json",
+      "bytes": 7918,
+      "sha256": "1ea80768b07b4bc7a0c1e84ff2cb3b88df3dd87375f9837efb972522c78b5cfd",
+      "last_write_time_utc": "2026-09-10T14:25:38.459549+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1_partial\\REPORT.md",
+      "bytes": 1576,
+      "sha256": "720d50ce1be49661e24fc0e60b72d78f7ae26844cfb01e9502c9355040a34eb4",
+      "last_write_time_utc": "2026-09-10T14:10:19.637493+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_provenance_three_family_neutral_verifier_v1_partial\\summary.json",
+      "bytes": 7871,
+      "sha256": "1eea0f7e6b5b29e9e48717272076c84039cdf704750ba0e66e77b64edeb4e47b",
+      "last_write_time_utc": "2026-09-10T14:10:19.621890+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_V1_V2_PROMPT_COMPARISON.json",
+      "bytes": 12010,
+      "sha256": "1d4c1b154f418dbff2f9d5004c4b3641e9c9ca29532c1c34a98d89804fda5cca",
+      "last_write_time_utc": "2026-09-10T04:00:11.577218+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_V1_V2_PROMPT_COMPARISON.md",
+      "bytes": 3903,
+      "sha256": "530f70f986f1917b38dd20e42c2ab79e79b4acde05091575447cc2d70703e93b",
+      "last_write_time_utc": "2026-09-10T04:00:11.580125+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\P1_VERIFIER_VS_COMPARATIVE_DIAGNOSTIC_SUMMARY.md",
+      "bytes": 17646,
+      "sha256": "9a4cd723b772774ef0a0f066a8d9c84677b33c565abf1cc3fea52b6e39fe5315",
+      "last_write_time_utc": "2026-09-10T03:29:47.552965+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 13619,
+      "sha256": "f600a126a83faf73ed1d8913668d2349a6347e0b178a59b0604918c90eadf42e",
+      "last_write_time_utc": "2026-09-10T14:11:32.237794+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 16380,
+      "sha256": "6f8539ae31ae2daa4a1f68a40032e9da80fb1ed542cb6341710aa3953fe1e6db",
+      "last_write_time_utc": "2026-09-10T14:11:48.288664+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11098,
+      "sha256": "7b3bf84b2b0bc8489984a4dbe84b73e58ef9d3de9a71f7e24bc89d005855eafa",
+      "last_write_time_utc": "2026-09-15T07:31:58.877559+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\60_build_dapa_hf_kccq_applicability_family.py",
+      "bytes": 37067,
+      "sha256": "eacc5c3a33bc394713a977d4ade3dd8179c9b373e27d18a386e4c164a25da5b7",
+      "last_write_time_utc": "2026-09-15T08:20:03.946156+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 15398,
+      "sha256": "c58ae358cfba7052837172fbc2a19a63418c33afc1f27d2345f454d40356e253",
+      "last_write_time_utc": "2026-09-02T13:54:40.590589+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 7773,
+      "sha256": "d39ec34ae90ea38fa1619f4aa13e8fbe1f044f0e4209dff4f856b312fe84d3b3",
+      "last_write_time_utc": "2026-09-10T03:29:35.473060+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_multi_evidence_schemas.py",
+      "bytes": 34781,
+      "sha256": "0644d5bd40016b6ade0b4e422cdfb3284c28dfd342e4358e38c35bbb70b0af51",
+      "last_write_time_utc": "2026-09-02T19:40:42.227848+00:00"
+    }
+  ],
+  "project_notes": []
+}

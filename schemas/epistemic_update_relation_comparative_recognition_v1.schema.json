@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "epistemic_update_relation_comparative_recognition_v1.schema.json",
+  "title": "Epistemic update relation-comparative recognition output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item_id",
+    "target_relation",
+    "comparative_answer",
+    "confidence",
+    "metadata_basis",
+    "evidence_basis",
+    "reason"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_relation": {
+      "type": "string",
+      "enum": ["provenance", "applicability", "direction"]
+    },
+    "comparative_answer": {
+      "type": "string",
+      "enum": ["A", "B", "no_meaningful_difference"]
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "metadata_basis": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_basis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["update_label", "evidence_id", "evidence_quote"],
+        "properties": {
+          "update_label": {
+            "type": "string",
+            "enum": ["A", "B"]
+          },
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_quote": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

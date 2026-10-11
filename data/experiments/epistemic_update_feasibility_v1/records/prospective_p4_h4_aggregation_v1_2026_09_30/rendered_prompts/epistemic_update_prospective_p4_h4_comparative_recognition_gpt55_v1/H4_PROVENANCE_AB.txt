@@ -1,0 +1,105 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "H4_PROVENANCE_AB",
+  "claim_id": "H4_GLP1_CV_COMPOSITION_CLAIM",
+  "claim_text": "In adults with type 2 diabetes and high cardiovascular risk, GLP-1 receptor agonist therapy reduces major adverse cardiovascular events compared with placebo.",
+  "target_relation": "provenance",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "H4_E1_LEADER_METHODS",
+      "source_group_id": "STUDY_LEADER_NCT01179048",
+      "source_title": "Liraglutide and cardiovascular outcomes in type 2 diabetes",
+      "pmid": "27295427",
+      "doi": "10.1056/NEJMoa1603827",
+      "trial_id": "NCT01179048",
+      "source_locator": "PubMed abstract methods",
+      "passage_text": "In this double-blind trial, we randomly assigned patients with type 2 diabetes and high cardiovascular risk to receive liraglutide or placebo. The primary composite outcome was the first occurrence of death from cardiovascular causes, nonfatal myocardial infarction, or nonfatal stroke."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "H4_E2_LEADER_RESULT",
+      "source_group_id": "STUDY_LEADER_NCT01179048",
+      "source_title": "Liraglutide and cardiovascular outcomes in type 2 diabetes",
+      "pmid": "27295427",
+      "doi": "10.1056/NEJMoa1603827",
+      "trial_id": "NCT01179048",
+      "source_locator": "PubMed abstract conclusion and registration",
+      "passage_text": "The rate of the first occurrence of death from cardiovascular causes, nonfatal myocardial infarction, or nonfatal stroke among patients with type 2 diabetes mellitus was lower with liraglutide than with placebo. LEADER ClinicalTrials.gov number, NCT01179048."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "H4_U1_LEADER_CKD_SAME_TRIAL",
+    "source_group_id": "STUDY_LEADER_NCT01179048",
+    "source_title": "Effects of liraglutide versus placebo on cardiovascular events in patients with type 2 diabetes mellitus and chronic kidney disease",
+    "pmid": "30566006",
+    "doi": "10.1161/CIRCULATIONAHA.118.036418",
+    "trial_id": "NCT01179048",
+    "source_locator": "PubMed/PMC abstract and conclusion",
+    "passage_text": "LEADER trial results demonstrated cardiovascular benefits for patients with type 2 diabetes mellitus at high cardiovascular risk on standard of care randomized to liraglutide versus placebo. These analyses show that liraglutide treatment of patients with T2DM and CKD at high CV risk leads to a reduction in diverse CV outcomes and all-cause mortality, in line with the overall results of the trial."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "H4_U2_SUSTAIN6_INDEPENDENT_SUPPORT",
+    "source_group_id": "STUDY_SUSTAIN6_NCT01720446",
+    "source_title": "Semaglutide and cardiovascular outcomes in patients with type 2 diabetes",
+    "pmid": "27633186",
+    "doi": "10.1056/NEJMoa1607141",
+    "trial_id": "NCT01720446",
+    "source_locator": "PubMed abstract results",
+    "passage_text": "The primary outcome occurred in 108 of 1648 patients (6.6%) in the semaglutide group and in 146 of 1649 patients (8.9%) in the placebo group (hazard ratio, 0.74; 95% confidence interval, 0.58 to 0.95). In patients with type 2 diabetes who were at high cardiovascular risk, the rate of cardiovascular death, nonfatal myocardial infarction, or nonfatal stroke was significantly lower among patients receiving semaglutide than among those receiving placebo."
+  }
+}

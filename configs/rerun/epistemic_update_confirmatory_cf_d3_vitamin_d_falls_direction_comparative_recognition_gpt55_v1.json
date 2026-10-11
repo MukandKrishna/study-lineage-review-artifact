@@ -1,0 +1,65 @@
+{
+  "experiment_id": "epistemic_update_confirmatory_cf_d3_vitamin_d_falls_direction_comparative_recognition_gpt55_v1",
+  "description": "CF-D3 comparative recognition gate.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_d3_vitamin_d_falls_direction/comparative_recognition_inputs",
+  "input_ablation": {
+    "condition": "confirmatory_no_source_group_id",
+    "omitted_evidence_fields": [
+      "source_group_id"
+    ],
+    "preserved_evidence_fields": [
+      "source_title",
+      "pmid",
+      "doi",
+      "trial_id",
+      "source_locator",
+      "passage_text"
+    ],
+    "purpose": "Prevent project-created relation labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+  },
+  "prompt_version": "epistemic_update_relation_comparative_recognition_v2_2",
+  "prompt_sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+  "response_schema": "epistemic_update_relation_comparative_recognition_v1",
+  "response_schema_sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_comparative_recognition_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_d3_vitamin_d_falls_direction_comparative_recognition_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 2,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 10,
+    "recognition_calls": 10,
+    "purpose": "Check A/B-swapped direction recognition."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_comparative_recognition_judge",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "cf_d3_vitamin_d_falls_direction_direction_matched_a_vs_matched_b_ab",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_COMPARATIVE_DIRECTION",
+      "input_file": "cf_d3_vitamin_d_falls_direction_comparative_direction_ab.json",
+      "input_sha256": "209a70ba5a041ed063b6c50edfe11043bbebcd981156861ffa644f49aae7bfdc",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "condition_id": "cf_d3_vitamin_d_falls_direction_direction_matched_a_vs_matched_b_ba",
+      "execution_item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_COMPARATIVE_SWAPPED_DIRECTION",
+      "input_file": "cf_d3_vitamin_d_falls_direction_comparative_direction_ba.json",
+      "input_sha256": "89eca97abd88bfbe3ae3fff04919f89aea4ba15cfc7dca80f2c44fdcff2ea4b5",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "model_calls_enabled": false,
+  "runtime_requirement": "Use writable/unsandboxed Codex CLI state access for approved model-call runs; sandbox only for validate-only.",
+  "model_call_gate": "Closed after offline build. Open only after explicit approval for this exact gate."
+}

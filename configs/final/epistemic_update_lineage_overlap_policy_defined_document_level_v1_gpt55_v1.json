@@ -1,0 +1,66 @@
+﻿{
+    "experiment_id":  "epistemic_update_lineage_overlap_policy_defined_document_level_v1",
+    "bundle_id":  "epistemic_update_lineage_overlap_policy_defined_28_v1_promise_arise_draft",
+    "description":  "Policy-defined lineage and overlap exploratory control; source_group_id omitted from model input; separate from the primary paper denominator.",
+    "prompt_version":  "epistemic_update_verifier_lineage_policy_v1",
+    "prompt_sha256":  "21c82b57592ce3c950f1f7acbc011f6d8d39e6d0202fe938aa6aab0deb1c758e",
+    "aggregation_mode":  "document_level_policy_defined_lineage",
+    "input_directory":  "results/final_naacl/lineage_overlap_policy_defined_control_v1/verifier_inputs",
+    "input_ablation":  {
+                           "omitted_evidence_fields":  "source_group_id",
+                           "rationale":  "The policy defines flag semantics but does not expose the project-created helper label."
+                       },
+    "response_schema":  "epistemic_multi_evidence_judge_openai_v1",
+    "response_schema_sha256":  "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_epistemic_update_lineage_overlap_policy_defined_document_level_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_epistemic_update_lineage_overlap_policy_defined_document_level_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  1,
+                         "condition_count":  4,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  20,
+                         "recognition_calls":  0,
+                         "purpose":  "Policy-defined test of whether visible source metadata is used to distinguish same-trial reports from independent trials after overlap is controlled."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_policy_defined_lineage_verifier",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "replacement_same_high",
+                           "execution_item_id":  "PROMISE_ARISE_SAME_HIGH",
+                           "input_file":  "PROMISE_ARISE_SAME_HIGH.json",
+                           "input_sha256":  "ff47f2b81e50f225b846f23707b12239641e16c3671018de2156785ecf452964"
+                       },
+                       {
+                           "condition_id":  "replacement_same_low",
+                           "execution_item_id":  "PROMISE_ARISE_SAME_LOW",
+                           "input_file":  "PROMISE_ARISE_SAME_LOW.json",
+                           "input_sha256":  "4a55e1b5d16dc53ef404f57f1a8b05ed79f9da3a4d3da1c0393b2fcf8804de3a"
+                       },
+                       {
+                           "condition_id":  "replacement_independent_high",
+                           "execution_item_id":  "PROMISE_ARISE_INDEPENDENT_HIGH",
+                           "input_file":  "PROMISE_ARISE_INDEPENDENT_HIGH.json",
+                           "input_sha256":  "1f2b8d72888e1b782a7cc77a09644592013a107ac075014b29f59e4afb4b092d"
+                       },
+                       {
+                           "condition_id":  "replacement_independent_low",
+                           "execution_item_id":  "PROMISE_ARISE_INDEPENDENT_LOW",
+                           "input_file":  "PROMISE_ARISE_INDEPENDENT_LOW.json",
+                           "input_sha256":  "a1428a7a5079d60f0ef64b191217966d505bf350fbbf43c22292e9611c4d386f"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

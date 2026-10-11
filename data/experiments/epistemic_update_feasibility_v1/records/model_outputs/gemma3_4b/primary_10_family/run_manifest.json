@@ -1,0 +1,61 @@
+{
+  "manifest_version": "1.1",
+  "updated_at_utc": "2026-10-01T00:48:52.222554+00:00",
+  "status": "complete",
+  "scientific_gate": true,
+  "model": {
+    "repo_id": "google/gemma-3-4b-it",
+    "revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "dtype": "bfloat16",
+    "device": "cuda:0",
+    "model_role": "Model C"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "transformers": "5.0.0",
+    "huggingface_hub": "1.11.0",
+    "jsonschema": "4.26.0",
+    "cuda": "12.8",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "active_device": "cuda:0",
+    "model_type": "gemma3",
+    "model_class": "Gemma3ForConditionalGeneration",
+    "allocated_gib_after_load": 8.01
+  },
+  "model_file_hash_manifest": "model_files_sha256.json",
+  "bundle_zip_sha256_expected": "3a9ed46de2b1c5b2e0ad6df12a3e9f92970c3064e64e93f5ee7c772a4485ca0c",
+  "bundle_manifest_sha256_actual": "585e66f0359f559e2cfb9b07b08bbfb96b53145b52812a3bceaf8d8a9f6cc8b3",
+  "adapter": {
+    "id": "qwen_json_schema_suffix_v1",
+    "description": "The exact archived prompt is preserved and followed only by a minified JSON Schema format contract. No clinical content, relation label, answer, or policy hint is added."
+  },
+  "decoding": {
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "max_new_tokens": 2048,
+    "reason": "Greedy decoding is the lowest stochasticity supported by Transformers.",
+    "effective_do_sample": false,
+    "effective_dtype": "bfloat16"
+  },
+  "parser_policy": {
+    "version": "dual_validity_v1",
+    "strict_contract": "json.loads on untouched raw_output",
+    "canonicalization_rule": "strip_at_most_one_outer_markdown_fence_only",
+    "canonical_primary_validity": "schema + semantic validation after at most one outer fence removal",
+    "raw_output_mutated": false
+  },
+  "planned_responses": 330,
+  "completed_final_records": 330,
+  "calls_this_session": 321,
+  "max_calls_this_session": 330,
+  "result_files": [
+    "predictions.jsonl",
+    "errors.jsonl"
+  ]
+}

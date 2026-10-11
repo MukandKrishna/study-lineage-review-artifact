@@ -1,0 +1,87 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+This is the study-level provenance-aware aggregation condition. Before making the combined
+judgement, group evidence items by their underlying study identity using trial_id and source_group_id.
+Multiple reports from the same study may add detail about that study, but they must not be counted as
+independent corroborating studies. Evidence from a different trial_id may count as independent
+corroboration if it is applicable to the claim and points in the relevant direction.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_P4_DAPT_STROKE_EXACT_REPEAT",
+  "claim_id": "CF_P4_DAPT_STROKE_PROVENANCE_CLAIM",
+  "claim_text": "For patients with acute minor ischemic stroke or high-risk transient ischemic attack treated within 24 hours, clopidogrel plus aspirin reduces early recurrent ischemic stroke compared with aspirin alone.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P4_E1_CHANCE_METHODS",
+      "source_group_id": "STUDY_CHANCE_NCT00979589",
+      "source_title": "Clopidogrel with aspirin in acute minor stroke or transient ischemic attack",
+      "pmid": "23803136",
+      "doi": "10.1056/NEJMoa1215340",
+      "trial_id": "NCT00979589",
+      "source_locator": "PubMed abstract methods",
+      "passage_text": "In a randomized, double-blind, placebo-controlled trial conducted at 114 centers in China, we randomly assigned 5170 patients within 24 hours after the onset of minor ischemic stroke or high-risk TIA to combination therapy with clopidogrel and aspirin or to placebo plus aspirin. The primary outcome was stroke during 90 days of follow-up."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P4_E2_CHANCE_RESULT",
+      "source_group_id": "STUDY_CHANCE_NCT00979589",
+      "source_title": "Clopidogrel with aspirin in acute minor stroke or transient ischemic attack",
+      "pmid": "23803136",
+      "doi": "10.1056/NEJMoa1215340",
+      "trial_id": "NCT00979589",
+      "source_locator": "PubMed abstract results and conclusion",
+      "passage_text": "Stroke occurred in 8.2% of patients in the clopidogrel-aspirin group, as compared with 11.7% of those in the aspirin group. Among patients with TIA or minor stroke who can be treated within 24 hours after the onset of symptoms, the combination of clopidogrel and aspirin is superior to aspirin alone for reducing the risk of stroke in the first 90 days."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "P4_E2_CHANCE_RESULT",
+    "source_group_id": "STUDY_CHANCE_NCT00979589",
+    "source_title": "Clopidogrel with aspirin in acute minor stroke or transient ischemic attack",
+    "pmid": "23803136",
+    "doi": "10.1056/NEJMoa1215340",
+    "trial_id": "NCT00979589",
+    "source_locator": "PubMed abstract results and conclusion",
+    "passage_text": "Stroke occurred in 8.2% of patients in the clopidogrel-aspirin group, as compared with 11.7% of those in the aspirin group. Among patients with TIA or minor stroke who can be treated within 24 hours after the onset of symptoms, the combination of clopidogrel and aspirin is superior to aspirin alone for reducing the risk of stroke in the first 90 days."
+  }
+}

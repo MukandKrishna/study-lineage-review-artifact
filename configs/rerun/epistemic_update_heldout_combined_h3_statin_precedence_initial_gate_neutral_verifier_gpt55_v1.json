@@ -1,0 +1,41 @@
+{
+  "experiment_id": "epistemic_update_heldout_combined_h3_statin_precedence_initial_gate_neutral_verifier_gpt55_v1",
+  "description": "Initial-only verifier gate for H3 statin precedence family.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_heldout_combined_precedence_h3_statin_primary_prevention_v1/verifier_inputs_initial_gate",
+  "prompt_version": "epistemic_update_verifier_neutral_v2",
+  "prompt_sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+  "response_schema": "epistemic_multi_evidence_judge_openai_v1",
+  "response_schema_sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_heldout_combined_h3_statin_precedence_initial_gate_neutral_verifier_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_heldout_combined_h3_statin_precedence_initial_gate_neutral_verifier_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 1,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 5,
+    "recognition_calls": 0,
+    "purpose": "Require stable WOSCOPS initial support before testing H3 relation precedence updates."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_neutral_verifier",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "h3_statin_precedence_initial",
+      "execution_item_id": "H3_STATIN_PRECEDENCE_X0",
+      "input_file": "h3_statin_precedence_initial.json",
+      "input_sha256": "45443225c67b3f9ef2cb157b91bb643653d2d8565155d210a2a7d4e254edb802"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after approved H3 initial verifier gate completed: 1 input x 5 repeats = 5 calls."
+}

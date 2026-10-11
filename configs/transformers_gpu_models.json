@@ -1,0 +1,25 @@
+{
+  "purpose": "Pinned local Transformers checkpoints used for the open-weight runs.",
+  "models": {
+    "qwen3_4b": {
+      "model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+    },
+    "gemma3_4b": {
+      "model_id": "google/gemma-3-4b-it",
+      "revision": "093f9f388b31de276ce2de164bdc2081324b9767"
+    },
+    "llama3_1_8b": {
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "revision": "0e9e39f249a16976918f6564b8830bc894c89659"
+    },
+    "ministral3_8b": {
+      "model_id": "mistralai/Ministral-3-8B-Instruct-2512-BF16",
+      "revision": "f6fae9795746f63c9be8344932f01275f3c63734"
+    }
+  },
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 2048
+  }
+}

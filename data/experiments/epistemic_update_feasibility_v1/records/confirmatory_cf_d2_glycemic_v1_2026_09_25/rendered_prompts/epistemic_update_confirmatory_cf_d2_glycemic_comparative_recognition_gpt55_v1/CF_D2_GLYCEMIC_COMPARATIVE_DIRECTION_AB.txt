@@ -1,0 +1,101 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_D2_GLYCEMIC_COMPARATIVE_DIRECTION_AB",
+  "claim_id": "CF_D2_GLYCEMIC_T2D_MORTALITY_CV_CLAIM",
+  "claim_text": "In adults with type 2 diabetes, intensive glycemic control reduces death or major cardiovascular risk compared with conventional or standard glycemic control.",
+  "target_relation": "direction",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_D2_E1_UKPDS91_METHODS",
+      "source_title": "Post-trial monitoring of a randomised controlled trial of intensive glycaemic control in type 2 diabetes extended from 10 years to 24 years (UKPDS 91)",
+      "pmid": "38772405",
+      "doi": "10.1016/S0140-6736(24)00537-3",
+      "trial_id": "ISRCTN75451837",
+      "source_locator": "PubMed abstract Background and Methods sentences",
+      "passage_text": "Background: The 20-year UK Prospective Diabetes Study showed major clinical benefits for people with newly diagnosed type 2 diabetes randomly allocated to intensive glycaemic control with sulfonylurea or insulin therapy or metformin therapy, compared with conventional glycaemic control. Methods: 5102 patients enrolled between 1977 and 1991 were originally randomly allocated to intensive glycaemic control or conventional glycaemic control."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_D2_E2_UKPDS91_RESULTS",
+      "source_title": "Post-trial monitoring of a randomised controlled trial of intensive glycaemic control in type 2 diabetes extended from 10 years to 24 years (UKPDS 91)",
+      "pmid": "38772405",
+      "doi": "10.1016/S0140-6736(24)00537-3",
+      "trial_id": "ISRCTN75451837",
+      "source_locator": "PubMed abstract Findings and Interpretation sentences",
+      "passage_text": "Findings: Early intensive glycaemic control with sulfonylurea or insulin therapy, compared with conventional glycaemic control, showed relative risk reductions of 10% for death from any cause, 17% for myocardial infarction, and 26% for microvascular disease. Interpretation: Early intensive glycaemic control with sulfonylurea or insulin, or with metformin, appeared to confer a near-lifelong reduced risk of death and myocardial infarction."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "CF_D2_UA_ACCORD_RESULTS",
+    "source_title": "Effects of intensive glucose lowering in type 2 diabetes",
+    "pmid": "18539917",
+    "doi": "10.1056/NEJMoa0802743",
+    "trial_id": "NCT00000620",
+    "source_locator": "PubMed and journal abstract Methods, Results, and Conclusions sentences",
+    "passage_text": "Methods: The trial randomly assigned 10,251 participants with type 2 diabetes and cardiovascular disease or additional cardiovascular risk factors to intensive therapy targeting glycated hemoglobin below 6.0% or standard therapy targeting 7.0% to 7.9%. Results: Death from any cause occurred in 257 patients in the intensive-therapy group and 203 in the standard-therapy group, a hazard ratio of 1.22. Conclusions: Higher mortality in the intensive-therapy group led to discontinuation of the intensive regimen for safety reasons."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "CF_D2_UB_ADVANCE_RESULTS",
+    "source_title": "Intensive blood glucose control and vascular outcomes in patients with type 2 diabetes",
+    "pmid": "18539916",
+    "doi": "10.1056/NEJMoa0802987",
+    "trial_id": "NCT00145925",
+    "source_locator": "PubMed abstract Methods, Results, and Conclusions sentences",
+    "passage_text": "Methods: The trial randomly assigned 11,140 patients with type 2 diabetes to standard glucose control or intensive glucose control using gliclazide modified release and other drugs as required to achieve a glycated hemoglobin value of 6.5% or less. Results: After a median of 5 years, intensive control reduced the combined major macrovascular and microvascular outcome from 20.0% to 18.1%; death from any cause had a hazard ratio of 0.93 with intensive control and was not statistically significant. Conclusions: Intensive glucose control yielded a 10% relative reduction in the combined major macrovascular and microvascular outcome, primarily through reduced nephropathy."
+  }
+}

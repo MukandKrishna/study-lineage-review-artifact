@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "status": "offline_provenance_reconciled_complete",
+  "bundle_id": "epistemic_update_p5r_p6r_h5_h6_combined_220_h5_repaired_v1",
+  "model_id": "gpt_5_5_medium",
+  "active_config": "configs/epistemic_update_prospective_p5r_p6r_h5_h6_document_level_provenance_reconciled_gpt55_v1.json",
+  "active_config_sha256": "2b7c8060c10a70406ae8bedd046b84b673ef94a3a45d41c88a96a727e093ad74",
+  "source_config": "configs/epistemic_update_prospective_p5r_p6r_h5_h6_document_level_neutral_verifier_gpt55_v1.json",
+  "source_config_sha256": "188e4c0fe6ad7ce35fca818aed7a9d5bcf1507f9cb83d041e78551a07f9e105f",
+  "source_ledgers": [
+    {
+      "path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_missing20_completion_v1.jsonl",
+      "sha256": "1c7c6da2bfcf2819deab61947c3b083fbfdd327746adea8a1810640050f37105",
+      "rows": 20
+    },
+    {
+      "path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_h5_repaired_document_v1.jsonl",
+      "sha256": "0702773e046b7cc4bc62896ef54b68d6a937270214a6fe47436b3bc05b321c76",
+      "rows": 20
+    },
+    {
+      "path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_h6_qualification_repair_document_level_v1.jsonl",
+      "sha256": "d98a438a222383c7e1a6e290db3c7a8afd03b8903665bb18b001c66104665a04",
+      "rows": 5
+    },
+    {
+      "path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_repaired_v2.jsonl",
+      "sha256": "aeaafd418313fe240d2a1f34a2129e22d56441478f6699b481e2ded685f1e334",
+      "rows": 85
+    }
+  ],
+  "source_row_counts_used": {
+    "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_missing20_completion_v1.jsonl": 20,
+    "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_h5_repaired_document_v1.jsonl": 20,
+    "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_h6_qualification_repair_document_level_v1.jsonl": 5,
+    "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_repaired_v2.jsonl": 40
+  },
+  "planned_rows": 85,
+  "reconciled_rows": 85,
+  "unavailable_rows": 0,
+  "missing_calls": [],
+  "output_ledger": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_document_level_provenance_reconciled_v1.jsonl",
+  "output_ledger_sha256": "a8971776dc7e433b5542eb4b2058dfcd904bd532278f371a0005ac0972cf1287",
+  "historical_ledgers_modified": false,
+  "reconciliation_model_calls_made": 0,
+  "completion_model_calls_in_source_ledgers": 20
+}

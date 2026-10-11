@@ -1,0 +1,81 @@
+You are assessing how well a fixed medical claim is grounded by the supplied evidence.
+
+Use only the claim, evidence passages, and source metadata shown in MODEL INPUT. Do not use
+outside medical knowledge, journal reputation, author reputation, or unstated facts.
+
+If added_evidence is null, assess the initial evidence as the current evidence set. Otherwise,
+assess the initial evidence and added evidence together as the current set. Assess every evidence
+item in the displayed order. For each evidence_quote, copy one contiguous,
+character-for-character substring from that evidence item's passage_text. Do not join separate
+spans, change words, or insert ellipses.
+
+Assess the claim as written. Do not weaken, strengthen, or reinterpret the claim.
+
+Use these per-evidence labels:
+- supports: the passage directly states or entails the complete claim as written.
+- conflicts: the passage directly states or entails the opposite of a central part of the claim.
+- insufficient: the passage concerns the claim but does not contain enough information to decide it.
+- out_of_scope: the passage does not bear closely enough on the claim as written to determine
+  whether it supports or conflicts with it.
+
+Use these combined labels:
+- supported: the supplied evidence grounds the complete claim.
+- contradicted: the supplied evidence grounds an opposing claim.
+- unsupported: the supplied evidence does not ground the claim.
+- not_enough_evidence: the supplied evidence is relevant but insufficient for a decision.
+- mixed_evidence: the supplied evidence contains substantive support and substantive conflict.
+
+Score definitions:
+- semantic_support_score: how directly an individual passage supports the complete claim, from
+  0 (no support) to 100 (explicit complete support).
+- warrant_strength_score: how strongly the supplied evidence justifies the complete claim as
+  written, from 0 (no warrant) to 100 (complete warrant).
+- combined_support_score: strength of the supporting side of the current evidence set, from 0 to 100.
+- combined_conflict_score: strength of the opposing side of the current evidence set, from 0 to 100.
+- confidence: confidence in this assessment, not confidence that the medical claim is true.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id exactly.
+Give concise reasons; do not provide hidden chain-of-thought.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "D2_RENAL_DENERVATION_BP_DIRECTION_NULL_CONTROL",
+  "claim_id": "D2_RDN_REDUCES_SYSTOLIC_BP_CLAIM",
+  "claim_text": "Among adults with resistant or uncontrolled hypertension, catheter-based renal denervation reduces systolic blood pressure compared with control or sham procedure.",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "D2_E1_HTN2_METHODS",
+      "source_group_id": "RDN_SOURCE_SYMPLICITY_HTN2_NCT00888433",
+      "source_title": "Renal sympathetic denervation in patients with treatment-resistant hypertension (The Symplicity HTN-2 Trial): a randomised controlled trial",
+      "pmid": "21093036",
+      "doi": "10.1016/S0140-6736(10)62039-9",
+      "trial_id": "NCT00888433",
+      "source_locator": "PubMed abstract methods, findings, and interpretation",
+      "passage_text": "METHODS: In this multicentre, prospective, randomised trial, patients who had a baseline systolic blood pressure of 160 mm Hg or more (>=150 mm Hg for patients with type 2 diabetes), despite taking three or more antihypertensive drugs, were randomly allocated in a one-to-one ratio to undergo renal denervation with previous treatment or to maintain previous treatment alone (control group). The primary effectiveness endpoint was change in seated office-based measurement of systolic blood pressure at 6 months."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "D2_E2_HTN2_BP_RESULT",
+      "source_group_id": "RDN_SOURCE_SYMPLICITY_HTN2_NCT00888433",
+      "source_title": "Renal sympathetic denervation in patients with treatment-resistant hypertension (The Symplicity HTN-2 Trial): a randomised controlled trial",
+      "pmid": "21093036",
+      "doi": "10.1016/S0140-6736(10)62039-9",
+      "trial_id": "NCT00888433",
+      "source_locator": "PubMed abstract methods, findings, and interpretation",
+      "passage_text": "FINDINGS: Office-based blood pressure measurements in the renal denervation group reduced by 32/12 mm Hg, whereas they did not differ from baseline in the control group. Between-group differences in blood pressure at 6 months were 33/11 mm Hg. INTERPRETATION: Catheter-based renal denervation can safely be used to substantially reduce blood pressure in treatment-resistant hypertensive patients."
+    }
+  ],
+  "added_evidence": {
+    "bundle_position": 3,
+    "evidence_id": "D2_E2_HTN2_BP_RESULT",
+    "source_group_id": "RDN_SOURCE_SYMPLICITY_HTN2_NCT00888433",
+    "source_title": "Renal sympathetic denervation in patients with treatment-resistant hypertension (The Symplicity HTN-2 Trial): a randomised controlled trial",
+    "pmid": "21093036",
+    "doi": "10.1016/S0140-6736(10)62039-9",
+    "trial_id": "NCT00888433",
+    "source_locator": "PubMed abstract methods, findings, and interpretation",
+    "passage_text": "FINDINGS: Office-based blood pressure measurements in the renal denervation group reduced by 32/12 mm Hg, whereas they did not differ from baseline in the control group. Between-group differences in blood pressure at 6 months were 33/11 mm Hg. INTERPRETATION: Catheter-based renal denervation can safely be used to substantially reduce blood pressure in treatment-resistant hypertensive patients."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "bundle_id": "epistemic_update_prompt_robustness_p5r_p6r_v1",
+  "model_id": "qwen_model_b",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "planned_calls": 40,
+  "completed_calls": 40,
+  "valid_predictions": 40,
+  "invalid_or_runtime_records": 0
+}

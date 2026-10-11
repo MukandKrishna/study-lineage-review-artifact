@@ -1,0 +1,63 @@
+{
+    "experiment_id":  "epistemic_update_confirmatory_cf_d2_glycemic_comparative_recognition_gpt55_v1",
+    "description":  "Comparative direction recognition configuration for confirmatory CF-D2 type-2-diabetes glycemic-control mortality/CV family.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_d2_type2_diabetes_glycemic_mortality_direction/comparative_recognition_inputs",
+    "input_ablation":  {
+                           "condition":  "confirmatory_no_source_group_id",
+                           "omitted_evidence_fields":  "source_group_id",
+                           "preserved_evidence_fields":  [
+                                                             "source_title",
+                                                             "pmid",
+                                                             "doi",
+                                                             "trial_id",
+                                                             "source_locator",
+                                                             "passage_text"
+                                                         ],
+                           "purpose":  "Prevent project-created direction labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+                       },
+    "prompt_version":  "epistemic_update_relation_comparative_recognition_v2_2",
+    "prompt_sha256":  "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+    "response_schema":  "epistemic_update_relation_comparative_recognition_v1",
+    "response_schema_sha256":  "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_d2_glycemic_comparative_recognition_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_d2_glycemic_comparative_recognition_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  1,
+                         "condition_count":  2,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  10,
+                         "recognition_calls":  10,
+                         "purpose":  "Check whether the model recognizes that ACCORD has the stronger challenging mortality direction than the nearby/favourable-with-limits ADVANCE update under A/B order swaps."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_comparative_recognition_judge",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "cf_d2_glycemic_direction_challenge_vs_nearby_ab",
+                           "execution_item_id":  "CF_D2_GLYCEMIC_COMPARATIVE_DIRECTION_AB",
+                           "input_file":  "cf_d2_glycemic_comparative_direction_ab.json",
+                           "input_sha256":  "e097bf1e8ca9b5aa61fb6f0ea3175066069e2384a9369fefd65b08d2e28e32ee",
+                           "expected_comparative_answer":  "A"
+                       },
+                       {
+                           "condition_id":  "cf_d2_glycemic_direction_nearby_vs_challenge_ba",
+                           "execution_item_id":  "CF_D2_GLYCEMIC_COMPARATIVE_DIRECTION_BA",
+                           "input_file":  "cf_d2_glycemic_comparative_direction_ba.json",
+                           "input_sha256":  "971c0767ad1953e80216bd70bd659761ea6e5c5c2d1db99869d53fbcfcc0e2ba",
+                           "expected_comparative_answer":  "B"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

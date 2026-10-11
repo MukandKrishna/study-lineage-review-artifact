@@ -1,0 +1,105 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_P4_PROVENANCE_AB",
+  "claim_id": "CF_P4_DAPT_STROKE_PROVENANCE_CLAIM",
+  "claim_text": "For patients with acute minor ischemic stroke or high-risk transient ischemic attack treated within 24 hours, clopidogrel plus aspirin reduces early recurrent ischemic stroke compared with aspirin alone.",
+  "target_relation": "provenance",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "P4_E1_CHANCE_METHODS",
+      "source_group_id": "STUDY_CHANCE_NCT00979589",
+      "source_title": "Clopidogrel with aspirin in acute minor stroke or transient ischemic attack",
+      "pmid": "23803136",
+      "doi": "10.1056/NEJMoa1215340",
+      "trial_id": "NCT00979589",
+      "source_locator": "PubMed abstract methods",
+      "passage_text": "In a randomized, double-blind, placebo-controlled trial conducted at 114 centers in China, we randomly assigned 5170 patients within 24 hours after the onset of minor ischemic stroke or high-risk TIA to combination therapy with clopidogrel and aspirin or to placebo plus aspirin. The primary outcome was stroke during 90 days of follow-up."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "P4_E2_CHANCE_RESULT",
+      "source_group_id": "STUDY_CHANCE_NCT00979589",
+      "source_title": "Clopidogrel with aspirin in acute minor stroke or transient ischemic attack",
+      "pmid": "23803136",
+      "doi": "10.1056/NEJMoa1215340",
+      "trial_id": "NCT00979589",
+      "source_locator": "PubMed abstract results and conclusion",
+      "passage_text": "Stroke occurred in 8.2% of patients in the clopidogrel-aspirin group, as compared with 11.7% of those in the aspirin group. Among patients with TIA or minor stroke who can be treated within 24 hours after the onset of symptoms, the combination of clopidogrel and aspirin is superior to aspirin alone for reducing the risk of stroke in the first 90 days."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "P4_U1_CHANCE_12H_SAME_TRIAL",
+    "source_group_id": "STUDY_CHANCE_NCT00979589",
+    "source_title": "Treatment effect of clopidogrel plus aspirin within 12 hours of acute minor stroke or transient ischemic attack",
+    "pmid": "27001965",
+    "doi": "10.1161/JAHA.115.003038",
+    "trial_id": "NCT00979589",
+    "source_locator": "PubMed abstract methods, results, and registration",
+    "passage_text": "This was a subanalysis of the CHANCE trial, mainly limited to the prespecified group of patients randomized within 12 hours to either the combination of clopidogrel plus aspirin or aspirin alone. The dual antiplatelet was more effective than aspirin alone in reducing the risk of recurrent ischemic stroke (6.57% versus 8.91%, P=0.03). Unique identifier: NCT00979589."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "P4_U2_POINT_INDEPENDENT_TRIAL",
+    "source_group_id": "STUDY_POINT_NCT00991029",
+    "source_title": "Clopidogrel and aspirin in acute ischemic stroke and high-risk TIA",
+    "pmid": "29766750",
+    "doi": "10.1056/NEJMoa1800410",
+    "trial_id": "NCT00991029",
+    "source_locator": "PubMed/NEJM abstract summary",
+    "passage_text": "In patients with minor ischemic stroke or high-risk transient ischemic attack, clopidogrel plus aspirin was associated with a lower risk of major ischemic events than aspirin alone at 90 days but with a higher risk of major hemorrhage."
+  }
+}

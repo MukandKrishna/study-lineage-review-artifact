@@ -1,0 +1,101 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "CF_D3_VITAMIN_D_FALLS_DIRECTION_V2_COMPARATIVE_DIRECTION",
+  "claim_id": "CF_D3_V2_VITD_BASED_FALL_REDUCTION_CLAIM",
+  "claim_text": "In older adults, vitamin-D-based supplementation reduces falls compared with placebo or control.",
+  "target_relation": "direction",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "CF_D3_V2_E1_DAILY_VITD_CALCIUM_METHODS",
+      "source_title": "Effects of vitamin D and calcium supplementation on falls",
+      "pmid": "12568412",
+      "doi": "10.1359/jbmr.2003.18.2.343",
+      "trial_id": null,
+      "source_locator": "PubMed abstract and Wiley abstract summary",
+      "passage_text": "A randomized double-blind trial compared calcium plus vitamin D with calcium alone in elderly women."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "CF_D3_V2_E2_DAILY_VITD_CALCIUM_FALL_RESULT",
+      "source_title": "Effects of vitamin D and calcium supplementation on falls",
+      "pmid": "12568412",
+      "doi": "10.1359/jbmr.2003.18.2.343",
+      "trial_id": null,
+      "source_locator": "PubMed abstract and Wiley abstract summary",
+      "passage_text": "After adjustment, calcium plus vitamin D treatment accounted for a 49% reduction of falls. The report concluded that a single intervention with vitamin D plus calcium over a 3-month period reduced the risk of falling compared with calcium alone."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "CF_D3_V2_U1_CHOLECALCIFEROL_CALCIUM_AGREEING",
+    "source_title": "Effect of cholecalciferol plus calcium on falling in ambulatory older men and women",
+    "pmid": "16505262",
+    "doi": "10.1001/archinte.166.4.424",
+    "trial_id": null,
+    "source_locator": "PubMed abstract result summary",
+    "passage_text": "A 3-year randomized controlled trial tested cholecalciferol plus calcium citrate malate in ambulatory older men and women. Cholecalciferol-calcium significantly reduced the odds of falling in women, odds ratio 0.54, 95% CI 0.30 to 0.97. Fall reduction was most pronounced in less active women, odds ratio 0.35, 95% CI 0.15 to 0.81."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "CF_D3_V2_U2_ANNUAL_HIGH_DOSE_CHALLENGING",
+    "source_title": "Annual high-dose oral vitamin D and falls and fractures in older women",
+    "pmid": "20460620",
+    "doi": "10.1001/jama.2010.594",
+    "trial_id": "ACTRN12605000658617",
+    "source_locator": "PubMed abstract objective, intervention, results, and conclusion",
+    "passage_text": "A double-blind placebo-controlled trial randomly assigned community-dwelling women aged 70 years or older to receive 500000 IU of cholecalciferol or placebo each autumn to winter for 3 to 5 years. Women in the vitamin D group fell 2892 times, rate 83.4 per 100 person-years, while placebo women fell 2512 times, rate 72.7 per 100 person-years; incidence rate ratio 1.15, 95% CI 1.02 to 1.30. The conclusion stated that annual oral administration of high-dose cholecalciferol resulted in an increased risk of falls and fractures."
+  }
+}

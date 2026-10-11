@@ -1,0 +1,417 @@
+{
+  "schema_version": "1.0",
+  "record_manifest_id": "epistemic_update_confirmatory_cf_p3_empakidney_v2_2026_09_25",
+  "created_at_utc": "2026-09-25T15:27:09.572775+00:00",
+  "development_material": true,
+  "do_not_treat_as_future_test_data": true,
+  "model_calls_made_by_archiver": 0,
+  "cost_log_status": "Direct costs are not available for ChatGPT subscription-backed Codex CLI runs; token usage is retained when returned by the provider.",
+  "preservation_policy": "Preserve exact prompts, prompt versions, model/version and settings, exact model inputs, rendered prompts, raw outputs, parsed outputs, repetitions, errors/retries, A/B assignments, token logs where available, source/provenance records, family-change records, the pre-call acceptance matrix, and the final-test protocol. Do not overwrite earlier outputs on rerun.",
+  "record_spec": {
+    "role": "record_archive_spec",
+    "path": "configs\\epistemic_update_confirmatory_cf_p3_empakidney_record_archive.json",
+    "bytes": 2772,
+    "sha256": "1ce88a95ea47d354d671160e4eb90a1f2b7ddd21fb4bf1db75d65d8c56e68dcb",
+    "last_write_time_utc": "2026-09-25T15:27:03.805128+00:00"
+  },
+  "configs": [
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_gpt55_v1.json",
+      "bytes": 2965,
+      "sha256": "40b4366fe2a75bcfbc55329b6872828cd5d4873f8fd0ce39a805e8bf6cc8e176",
+      "last_write_time_utc": "2026-09-25T15:01:39.222277+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v1.json",
+      "bytes": 3543,
+      "sha256": "6e4377337d92106823a058c72c59fc0fb53c0a195437c5b924c52a4153e883b6",
+      "last_write_time_utc": "2026-09-25T15:18:20.134103+00:00"
+    },
+    {
+      "role": "run_config",
+      "path": "configs\\epistemic_update_confirmatory_cf_p3_empakidney_comparative_recognition_gpt55_v1.json",
+      "bytes": 3436,
+      "sha256": "b2e0a68eda52ab5c0d0af02dcf6d88af91531661d6c2e708f1a0ad080f45c65f",
+      "last_write_time_utc": "2026-09-25T15:23:03.329798+00:00"
+    }
+  ],
+  "prompt_templates": [
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_relation_comparative_recognition_v2_2.txt",
+      "bytes": 2718,
+      "sha256": "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+      "last_write_time_utc": "2026-09-16T07:25:50.409464+00:00"
+    },
+    {
+      "role": "prompt_template",
+      "path": "prompts\\epistemic_update_verifier_neutral_v2.txt",
+      "bytes": 2417,
+      "sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+      "last_write_time_utc": "2026-09-10T03:29:27.756334+00:00"
+    }
+  ],
+  "rendered_prompts": [
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_gpt55_v2",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_INITIAL",
+      "condition_id": "cf_p3_empakidney_provenance_initial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_p3_empakidney_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_gpt55_v2\\CF_P3_EMPAKIDNEY_PROVENANCE_INITIAL.txt",
+      "rendered_prompt_sha256": "d5b542d7df4dd9d6fb0f003d941b362fa51b2c9ae2b55867b091e099bfd3bab4",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v2",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_02",
+      "condition_id": "cf_p3_empakidney_provenance_exact_repeat_control",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_p3_empakidney_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v2\\CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_02.txt",
+      "rendered_prompt_sha256": "62ea70764c63e26c23fe263a4645cea9c81e4be0cf7382fdc4a0160e85d178d0",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v2",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_03",
+      "condition_id": "cf_p3_empakidney_provenance_same_trial_secondary_analysis",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_p3_empakidney_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v2\\CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_03.txt",
+      "rendered_prompt_sha256": "5e16c564b3208d5bcaa105e4a6383f3ff4f811b32ed7002026ec035a74324e9a",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v2",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_04",
+      "condition_id": "cf_p3_empakidney_provenance_independent_trial",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_p3_empakidney_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_p3_empakidney_updates_neutral_verifier_gpt55_v2\\CF_P3_EMPAKIDNEY_PROVENANCE_EVAL_04.txt",
+      "rendered_prompt_sha256": "a023cdfd6a8b4b289840e7f9ffb5460edd014ec20b482ef947b5e225d1d80e54",
+      "expected_comparative_answer": null
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_p3_empakidney_comparative_recognition_gpt55_v2",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_COMPARATIVE_PROVENANCE_AB",
+      "condition_id": "cf_p3_empakidney_provenance_independent_vs_same_trial_secondary_ab",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_p3_empakidney_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_p3_empakidney_comparative_recognition_gpt55_v2\\CF_P3_EMPAKIDNEY_COMPARATIVE_PROVENANCE_AB.txt",
+      "rendered_prompt_sha256": "85479225d51bfb99f44f6b214e7c256aa27f8b805e0f4e5f4842fdc2daedb054",
+      "expected_comparative_answer": "A"
+    },
+    {
+      "experiment_id": "epistemic_update_confirmatory_cf_p3_empakidney_comparative_recognition_gpt55_v2",
+      "execution_item_id": "CF_P3_EMPAKIDNEY_COMPARATIVE_PROVENANCE_BA",
+      "condition_id": "cf_p3_empakidney_provenance_same_trial_secondary_vs_independent_ba",
+      "rendered_prompt_path": "data\\experiments\\epistemic_update_feasibility_v1\\records\\confirmatory_cf_p3_empakidney_v2_2026_09_25\\rendered_prompts\\epistemic_update_confirmatory_cf_p3_empakidney_comparative_recognition_gpt55_v2\\CF_P3_EMPAKIDNEY_COMPARATIVE_PROVENANCE_BA.txt",
+      "rendered_prompt_sha256": "1b58f7151ae15399bd72a112e74253b9b60a027aab6d5d4de10987c9309fc640",
+      "expected_comparative_answer": "B"
+    }
+  ],
+  "schemas": [
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_multi_evidence_judge_v1.schema.json",
+      "bytes": 4450,
+      "sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+      "last_write_time_utc": "2026-09-02T14:17:10.795258+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_comparative_recognition_input_v1.schema.json",
+      "bytes": 2217,
+      "sha256": "e7e29833bc1322ac22925567d60cff8cf7f1fae6010f42d2fb9f964609522b25",
+      "last_write_time_utc": "2026-09-09T00:44:40.506688+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_family_v1.schema.json",
+      "bytes": 9555,
+      "sha256": "3c701a320c07dfaff49d89ce6975d9d0f825488e8d09c4cf6559c32291046272",
+      "last_write_time_utc": "2026-09-10T09:15:02.910408+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_input_v1.schema.json",
+      "bytes": 2030,
+      "sha256": "2a2b90c0d25dac6d355ed3956c07c363403371d9e71ee3c169bda4a88d3f8f33",
+      "last_write_time_utc": "2026-09-06T17:03:21.352618+00:00"
+    },
+    {
+      "role": "schema",
+      "path": "schemas\\epistemic_update_relation_comparative_recognition_v1.schema.json",
+      "bytes": 1582,
+      "sha256": "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+      "last_write_time_utc": "2026-09-09T10:21:53.495662+00:00"
+    }
+  ],
+  "construction_records": [
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance\\leak_free_comparative_recognition_inputs\\cf_p3_empakidney_comparative_provenance_ab.json",
+      "bytes": 5260,
+      "sha256": "09769f8782a29b6cc05bb99dcf80c472487917a5593b8cc3f82a37713e752476",
+      "last_write_time_utc": "2026-09-25T14:55:40.385138+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance\\leak_free_comparative_recognition_inputs\\cf_p3_empakidney_comparative_provenance_ba.json",
+      "bytes": 5260,
+      "sha256": "62afeaccab2421c69aa779e96d9626ea24c4a43b16daf25c1cf0a81cf6b5b77e",
+      "last_write_time_utc": "2026-09-25T14:55:40.385138+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance\\leak_free_inputs\\cf_p3_dapackd_independent_update.json",
+      "bytes": 3687,
+      "sha256": "48a47f9038002ce6eceadb249d9c83fb19a48cb32d15f0e65b28bfbbad804e5e",
+      "last_write_time_utc": "2026-09-25T14:55:40.386135+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance\\leak_free_inputs\\cf_p3_empakidney_exact_repeat_control.json",
+      "bytes": 3078,
+      "sha256": "64ec8f207b148995304790514aa5ef87570c933b15164e3623d61e1824a49b87",
+      "last_write_time_utc": "2026-09-25T14:55:40.387136+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance\\leak_free_inputs\\cf_p3_empakidney_initial.json",
+      "bytes": 2194,
+      "sha256": "24d5543a003c465af3aa81b3738223bd89674389d1d278f6daa72139ab502eff",
+      "last_write_time_utc": "2026-09-25T14:55:40.388137+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance\\leak_free_inputs\\cf_p3_empakidney_same_trial_update.json",
+      "bytes": 3709,
+      "sha256": "c7a243b0f899bab976d9c83f46caf2e246ceb7ced13c944c12234d88ca790247",
+      "last_write_time_utc": "2026-09-25T14:55:40.389134+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_p3_empakidney_dapackd_provenance\\comparative_recognition_inputs\\cf_p3_empakidney_comparative_provenance_ab.json",
+      "bytes": 5260,
+      "sha256": "09769f8782a29b6cc05bb99dcf80c472487917a5593b8cc3f82a37713e752476",
+      "last_write_time_utc": "2026-09-25T14:55:40.392143+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_p3_empakidney_dapackd_provenance\\comparative_recognition_inputs\\cf_p3_empakidney_comparative_provenance_ba.json",
+      "bytes": 5260,
+      "sha256": "62afeaccab2421c69aa779e96d9626ea24c4a43b16daf25c1cf0a81cf6b5b77e",
+      "last_write_time_utc": "2026-09-25T14:55:40.392143+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_p3_empakidney_dapackd_provenance\\verifier_inputs_initial_gate\\cf_p3_empakidney_initial.json",
+      "bytes": 2194,
+      "sha256": "24d5543a003c465af3aa81b3738223bd89674389d1d278f6daa72139ab502eff",
+      "last_write_time_utc": "2026-09-25T14:55:40.393140+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_p3_empakidney_dapackd_provenance\\verifier_inputs_provenance_updates\\cf_p3_dapackd_independent_update.json",
+      "bytes": 3687,
+      "sha256": "48a47f9038002ce6eceadb249d9c83fb19a48cb32d15f0e65b28bfbbad804e5e",
+      "last_write_time_utc": "2026-09-25T14:55:40.394141+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_p3_empakidney_dapackd_provenance\\verifier_inputs_provenance_updates\\cf_p3_empakidney_exact_repeat_control.json",
+      "bytes": 3078,
+      "sha256": "64ec8f207b148995304790514aa5ef87570c933b15164e3623d61e1824a49b87",
+      "last_write_time_utc": "2026-09-25T14:55:40.395139+00:00"
+    },
+    {
+      "role": "construction_or_input_record",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\run_inputs\\confirmatory_final_test_v1\\cf_p3_empakidney_dapackd_provenance\\verifier_inputs_provenance_updates\\cf_p3_empakidney_same_trial_update.json",
+      "bytes": 3709,
+      "sha256": "c7a243b0f899bab976d9c83f46caf2e246ceb7ced13c944c12234d88ca790247",
+      "last_write_time_utc": "2026-09-25T14:55:40.396665+00:00"
+    }
+  ],
+  "predictions": [
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_v2.jsonl",
+      "exists": true,
+      "row_count": 5,
+      "sha256": "9b3f59d7194f6b630684daedb259862a0ecd2fe3b7bc0abbbe4f1751aacdb90c",
+      "response_status_counts": {
+        "ok": 5
+      },
+      "error_category_counts": {
+        "": 5
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_updates_neutral_verifier_v2.jsonl",
+      "exists": true,
+      "row_count": 15,
+      "sha256": "62388d1fa1e8e9b0a65ce347a96a6a302e49da201d3c3b01ec16479203530255",
+      "response_status_counts": {
+        "ok": 15
+      },
+      "error_category_counts": {
+        "": 15
+      }
+    },
+    {
+      "role": "prediction",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\predictions\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_comparative_recognition_v2.jsonl",
+      "exists": true,
+      "row_count": 10,
+      "sha256": "5754288ceaf5f4234b6e98e72c6476f6df7272b4b0da52040a73071d7bd98e2f",
+      "response_status_counts": {
+        "ok": 10
+      },
+      "error_category_counts": {
+        "": 10
+      }
+    }
+  ],
+  "errors": [
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_v2_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_updates_neutral_verifier_v2_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    },
+    {
+      "role": "error",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\errors\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_comparative_recognition_v2_errors.jsonl",
+      "exists": false,
+      "row_count": 0,
+      "sha256": null,
+      "response_status_counts": {},
+      "error_category_counts": {}
+    }
+  ],
+  "result_records": [
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_v2\\REPORT.md",
+      "bytes": 535,
+      "sha256": "4bae745584255221599ae9dc6a15054f27aad5f2d78f58efba16f5f3e2177493",
+      "last_write_time_utc": "2026-09-25T15:01:55.196817+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_initial_gate_neutral_verifier_v2\\summary.json",
+      "bytes": 1017,
+      "sha256": "a4a007a505717c4113eddafdddaf86245ef7ffa62096abd7e52d0ea08e69ab9f",
+      "last_write_time_utc": "2026-09-25T15:01:55.195810+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_updates_neutral_verifier_v2\\REPORT.md",
+      "bytes": 748,
+      "sha256": "00dce871423312a31e7f8d2aa2c8b96b6830a1ef53f98db7869a042d9f234275",
+      "last_write_time_utc": "2026-09-25T15:18:38.691625+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_updates_neutral_verifier_v2\\summary.json",
+      "bytes": 2302,
+      "sha256": "36436b9baefe2f97de25608d33885037ca75b975058600b996a7ff2da026f3c7",
+      "last_write_time_utc": "2026-09-25T15:18:38.690625+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_comparative_recognition_v2\\REPORT.md",
+      "bytes": 738,
+      "sha256": "13bf6959c8ed932dcd457e04e6234563463b12f7372386be3bdd79f824303b97",
+      "last_write_time_utc": "2026-09-25T15:23:39.926103+00:00"
+    },
+    {
+      "role": "derived_result",
+      "path": "results\\epistemic_update_feasibility_v1\\gpt_5_5_medium_confirmatory_cf_p3_empakidney_comparative_recognition_v2\\summary.json",
+      "bytes": 1242,
+      "sha256": "c75acf97558eeec82ca6b2954a4bde455fc4a671954b94581247ee31ac1ae7ec",
+      "last_write_time_utc": "2026-09-25T15:23:39.926103+00:00"
+    }
+  ],
+  "code_files": [
+    {
+      "role": "code",
+      "path": "src\\44_run_epistemic_update_verifier.py",
+      "bytes": 17190,
+      "sha256": "74a24e0399980d91e54dd5edfb800f115328d12d770cb06b622a297aa40931cb",
+      "last_write_time_utc": "2026-09-25T02:55:14.136903+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\46_run_epistemic_update_comparative_recognition.py",
+      "bytes": 19226,
+      "sha256": "8809a895ba9cf35ca6b61ee510e576dab3085c1c8fbeaeff5b91e397bc5446b6",
+      "last_write_time_utc": "2026-09-25T02:55:38.077879+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\47_evaluate_epistemic_update_p1_comparative_recognition.py",
+      "bytes": 6942,
+      "sha256": "72c32ff36cb47bb9735c193355fb2d96b350a305ea3cbf7d03ca55c4cd12d899",
+      "last_write_time_utc": "2026-09-20T10:46:15.824323+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\59_archive_epistemic_update_run_records.py",
+      "bytes": 11781,
+      "sha256": "d821660e0fba493ce4c29862dab422d5b84b4f9a2af091f6c79271c55a31c198",
+      "last_write_time_utc": "2026-09-18T10:32:40.810744+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\providers\\codex_cli_client.py",
+      "bytes": 17825,
+      "sha256": "65cacaa751d796dd711700e99af3ccfae2cf8fd53063b620372d954d4e665a97",
+      "last_write_time_utc": "2026-09-16T17:56:10.995192+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_update_prompt_contract.py",
+      "bytes": 9561,
+      "sha256": "7d2bc0a45510de229d971464ac2cb62b3791dcd129084f0f4ffa124bc2c994e6",
+      "last_write_time_utc": "2026-09-18T10:40:17.746239+00:00"
+    },
+    {
+      "role": "code",
+      "path": "src\\epistemic_multi_evidence_schemas.py",
+      "bytes": 34781,
+      "sha256": "0644d5bd40016b6ade0b4e422cdfb3284c28dfd342e4358e38c35bbb70b0af51",
+      "last_write_time_utc": "2026-09-02T19:40:42.227848+00:00"
+    }
+  ],
+  "project_notes": [
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\cf_p3_empakidney_dapackd_provenance_acceptance_matrix.csv",
+      "bytes": 8264,
+      "sha256": "a73910eaf6d9de7f6a08e5e1750aa4ed27317b953ebf116fff11549a13e74e93",
+      "last_write_time_utc": "2026-09-25T14:56:08.199700+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\candidate_inventory.csv",
+      "bytes": 8204,
+      "sha256": "24bd6bfebdcfc5fb3a5dd6abf90fe4b82d849f812156fc3f59ecb76b2bee510b",
+      "last_write_time_utc": "2026-09-24T17:03:13.536712+00:00"
+    },
+    {
+      "role": "project_note",
+      "path": "data\\experiments\\epistemic_update_feasibility_v1\\private\\confirmatory\\final_test_v1\\confirmatory_final_test_v1_offline_freeze_audit.csv",
+      "bytes": 4257,
+      "sha256": "13f91d2ef4fee527d753171c1e8aa200327e7c10899ae70102eb2a7d782b7f25",
+      "last_write_time_utc": "2026-09-24T17:07:52.976724+00:00"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "experiment_id": "epistemic_update_prospective_p5r_p6r_h5_h6_h5_repaired_document_neutral_verifier_gpt55_v1",
+  "bundle_id": "epistemic_update_p5r_p6r_h5_h6_combined_220_h5_repaired_v1",
+  "description": "Targeted repaired H5 composition verifier; replaces only the four changed H5 update conditions.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/verifier_inputs",
+  "prompt_version": "epistemic_update_verifier_neutral_v2",
+  "prompt_sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+  "aggregation_mode": "document_level_baseline",
+  "response_schema": "epistemic_multi_evidence_judge_openai_v1",
+  "response_schema_sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_h5_repaired_document_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_prospective_p5r_p6r_h5_h6_h5_repaired_document_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 4,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 20,
+    "recognition_calls": 0,
+    "purpose": "Replace H5 same-trial, out-of-scope, qualification, and exact-repeat inputs after offline design repair."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_neutral_verifier",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "h5_same_trial_update",
+      "execution_item_id": "H5_SAME_TRIAL_UPDATE",
+      "input_file": "h5_same_trial_update.json",
+      "input_sha256": "29bc9d4fd4b14019c4ca47ab206aeae08f655e164641a325bc9d163548a99fd8"
+    },
+    {
+      "condition_id": "h5_out_of_scope",
+      "execution_item_id": "H5_OUT_OF_SCOPE",
+      "input_file": "h5_out_of_scope.json",
+      "input_sha256": "6e48b205f71716d71ffbe113963c7166debc3998af2c657b2dd8eafbd88b5ed7"
+    },
+    {
+      "condition_id": "h5_qualification",
+      "execution_item_id": "H5_QUALIFICATION",
+      "input_file": "h5_qualification.json",
+      "input_sha256": "9098f06e6c0375bb1c094e6916673c4aba5d2ef2ce3b6d67318739cba7bc2c8a"
+    },
+    {
+      "condition_id": "h5_exact_repeat",
+      "execution_item_id": "H5_EXACT_REPEAT",
+      "input_file": "h5_exact_repeat.json",
+      "input_sha256": "776cf7938d1aed0e3e60f7506bea51e40e8dcc0d456c2bbcd52326d27a6b220f"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after the user-authorized 20-call H5 repair run completed. Do not reopen without new explicit approval."
+}

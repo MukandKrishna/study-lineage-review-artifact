@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "epistemic_multi_evidence_judge_v1.schema.json",
+  "title": "Epistemic multi-evidence judge output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item_id",
+    "per_evidence_assessments",
+    "combined_assessment"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "per_evidence_assessments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "bundle_position",
+          "evidence_id",
+          "relation_to_claim",
+          "semantic_support_score",
+          "warrant_strength_score",
+          "confidence",
+          "evidence_quote",
+          "reason"
+        ],
+        "properties": {
+          "bundle_position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relation_to_claim": {
+            "type": "string",
+            "enum": [
+              "supports",
+              "conflicts",
+              "insufficient",
+              "out_of_scope"
+            ]
+          },
+          "semantic_support_score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "warrant_strength_score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "confidence": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "evidence_quote": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "combined_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "combined_support_score",
+        "combined_conflict_score",
+        "warrant_strength_score",
+        "confidence",
+        "conflict_present",
+        "used_evidence_ids",
+        "ignored_evidence_ids",
+        "used_bundle_positions",
+        "ignored_bundle_positions",
+        "combination_flags",
+        "reason"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "unsupported",
+            "not_enough_evidence",
+            "mixed_evidence"
+          ]
+        },
+        "combined_support_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "combined_conflict_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "warrant_strength_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "conflict_present": {
+          "type": "boolean"
+        },
+        "used_evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "ignored_evidence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "used_bundle_positions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "ignored_bundle_positions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "combination_flags": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "single_evidence",
+              "independent_corroboration",
+              "duplicate_evidence",
+              "conflicting_evidence",
+              "out_of_scope_evidence",
+              "insufficient_evidence",
+              "none"
+            ]
+          }
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

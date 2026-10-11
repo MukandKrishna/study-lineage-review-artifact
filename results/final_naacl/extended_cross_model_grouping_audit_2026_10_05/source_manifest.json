@@ -1,0 +1,13 @@
+﻿{
+    "mitigation_csv":  "results/final_naacl/prospective_p5r_p6r_h5_h6_family_comparison_v1/mitigation_family_summary.csv",
+    "family_csv":  "results/final_naacl/prospective_p5r_p6r_h5_h6_family_comparison_v1/family_summary.csv",
+    "raw_records_modified":  false,
+    "new_model_calls":  0,
+    "artifact_scope":  "paper-facing aggregate results and audit summaries",
+    "raw_archives_included":  false,
+    "raw_archives_location":  "archived outside this minimum NAACL repository",
+    "reproducibility_note":  "Per-call result records for the reported cross-model grouping summaries are included under data/experiments/epistemic_update_feasibility_v1/records/model_outputs. Model weights and execution environments remain external.",
+    "model_result_records_included":  true,
+    "model_result_records_path":  "data/experiments/epistemic_update_feasibility_v1/records/model_outputs",
+    "model_weights_included":  false
+}

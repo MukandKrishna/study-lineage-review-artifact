@@ -1,0 +1,23 @@
+{
+  "experiment_id": "epistemic_update_prompt_robustness_p5r_p6r_gpt55_reordered_v1",
+  "bundle_id": "epistemic_update_prompt_robustness_p5r_p6r_v1",
+  "description": "Approved GPT-5.5 reordered-prompt slice of the P5R/P6R robustness check.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/epistemic_update_prospective_p5r_p6r_h5_h6_v1/verifier_inputs",
+  "prompt_version": "epistemic_update_verifier_neutral_prompt_robustness_reordered_v1",
+  "prompt_sha256": "21637e3a4d495f81801b3676fe27a75738ad80dfa9a9ed3ba7d5b31ad462265f",
+  "response_schema": "epistemic_multi_evidence_judge_openai_v1",
+  "response_schema_sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_prompt_robustness_p5r_p6r_reordered_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_prompt_robustness_p5r_p6r_reordered_v1_errors.jsonl",
+  "pilot_design": {"family_count": 2, "condition_count": 4, "repetitions_per_input": 5, "planned_model_calls": 20, "recognition_calls": 0, "purpose": "Reordered prompt robustness slice."},
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {"gpt_5_5_medium": {"provider": "codex_cli", "executable": "codex", "model": "gpt-5.5", "role": "epistemic_update_neutral_verifier", "reasoning_effort": "medium", "timeout_seconds": 600, "retries_per_repetition": 1}},
+  "executions": [
+    {"condition_id": "p5r_same_trial_update", "execution_item_id": "P5R_SAME_TRIAL_UPDATE", "input_file": "p5r_same_trial_update.json", "input_sha256": "0516aedc07607eff754a15948ff5a070ba7911fc9bd93a547085ce8088d4b038"},
+    {"condition_id": "p5r_independent_update", "execution_item_id": "P5R_INDEPENDENT_UPDATE", "input_file": "p5r_independent_update.json", "input_sha256": "f7c390aaecd728b6b48d238c6307046793b4769548cf0ab104379702c132bc68"},
+    {"condition_id": "p6r_same_trial_update", "execution_item_id": "P6R_SAME_TRIAL_UPDATE", "input_file": "p6r_same_trial_update.json", "input_sha256": "696fd4910eeeee88e25eb8d6012ae27a7bd8503a005688f2070c10f6ecf6279c"},
+    {"condition_id": "p6r_independent_update", "execution_item_id": "P6R_INDEPENDENT_UPDATE", "input_file": "p6r_independent_update.json", "input_sha256": "8e5c08176d38399f772b2bf3be309b848401f2e5ed03180dbe5b3b85e7d7358b"}
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed after the approved 20-call GPT-5.5 reordered-prompt slice completed. Do not reopen without new explicit approval."
+}

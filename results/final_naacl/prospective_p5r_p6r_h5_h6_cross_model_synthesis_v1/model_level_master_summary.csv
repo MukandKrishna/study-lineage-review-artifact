@@ -1,0 +1,4 @@
+model,families,mean_recognition_accuracy,mean_document_validity,mean_document_availability,document_unavailable_calls,mean_grouped_validity,mean_grouped_availability,grouped_unavailable_calls,same_trial_doc_overcredit_calls,same_trial_grouped_overcredit_calls,families_lower_under_grouping_instruction,families_no_change_under_grouping_instruction,prompt_same_trial_overcredit_calls,prompt_independent_semantic_pass_calls,prompt_independent_valid_calls,prompt_independent_audit_rate
+GPT-5.5,4,1.0,1.0,1.0,0,1.0,1.0,0,18,5,4,0,16,14,20,0.7
+Gemma3-4B,4,0.5,0.85,1.0,0,0.9,1.0,0,15,15,0,3,20,20,20,1.0
+Qwen3-4B,4,0.9375,1.0,1.0,0,0.8875,1.0,0,20,20,0,4,20,15,20,0.75

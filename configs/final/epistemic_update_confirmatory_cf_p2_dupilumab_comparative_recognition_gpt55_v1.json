@@ -1,0 +1,63 @@
+{
+    "experiment_id":  "epistemic_update_confirmatory_cf_p2_dupilumab_comparative_recognition_gpt55_v1",
+    "description":  "Comparative provenance recognition configuration for confirmatory CF-P2 dupilumab QUEST/phase 2b family.",
+    "input_directory":  "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_p2_dupilumab_asthma_quest_phase2b/comparative_recognition_inputs",
+    "input_ablation":  {
+                           "condition":  "confirmatory_no_source_group_id",
+                           "omitted_evidence_fields":  "source_group_id",
+                           "preserved_evidence_fields":  [
+                                                             "source_title",
+                                                             "pmid",
+                                                             "doi",
+                                                             "trial_id",
+                                                             "source_locator",
+                                                             "passage_text"
+                                                         ],
+                           "purpose":  "Prevent project-created provenance labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+                       },
+    "prompt_version":  "epistemic_update_relation_comparative_recognition_v2_2",
+    "prompt_sha256":  "5b6b2d0a16eaa8858c2e1dff1e4cc627400e22c927992256b58c529694aa7b24",
+    "response_schema":  "epistemic_update_relation_comparative_recognition_v1",
+    "response_schema_sha256":  "3ceb6a518cc7ae313c4e7bf5ea07a37cb40947224a4d29a17ca7e69c75007eec",
+    "prediction_path":  "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_p2_dupilumab_comparative_recognition_v1.jsonl",
+    "error_path":  "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_p2_dupilumab_comparative_recognition_v1_errors.jsonl",
+    "pilot_design":  {
+                         "family_count":  1,
+                         "condition_count":  2,
+                         "repetitions_per_input":  5,
+                         "planned_model_calls":  10,
+                         "recognition_calls":  10,
+                         "purpose":  "Check whether the model recognizes that the phase 2b trial has greater independent marginal contribution than the QUEST same-trial post-hoc publication under A/B order swaps."
+                     },
+    "default_judge_model_id":  "gpt_5_5_medium",
+    "models":  {
+                   "gpt_5_5_medium":  {
+                                          "provider":  "codex_cli",
+                                          "executable":  "codex",
+                                          "model":  "gpt-5.5",
+                                          "role":  "epistemic_update_comparative_recognition_judge",
+                                          "reasoning_effort":  "medium",
+                                          "timeout_seconds":  600,
+                                          "retries_per_repetition":  1
+                                      }
+               },
+    "executions":  [
+                       {
+                           "condition_id":  "cf_p2_dupilumab_provenance_independent_vs_same_trial_publication_ab",
+                           "execution_item_id":  "CF_P2_DUPILUMAB_COMPARATIVE_PROVENANCE_AB",
+                           "input_file":  "cf_p2_dupilumab_comparative_provenance_ab.json",
+                           "input_sha256":  "82ee23ddca4d454a17e500d593755b844af7866d581219ac0ae949737ee3ca50",
+                           "expected_comparative_answer":  "A"
+                       },
+                       {
+                           "condition_id":  "cf_p2_dupilumab_provenance_same_trial_publication_vs_independent_ba",
+                           "execution_item_id":  "CF_P2_DUPILUMAB_COMPARATIVE_PROVENANCE_BA",
+                           "input_file":  "cf_p2_dupilumab_comparative_provenance_ba.json",
+                           "input_sha256":  "73965120a78a8bc7a81e387c396e4051af4b43229d3a0141d8c0202a761dc440",
+                           "expected_comparative_answer":  "B"
+                       }
+                   ],
+    "model_calls_enabled":  false,
+    "artifact_scope":  "Paper configuration with frozen inputs included in this repository; model environments and credentials remain external.",
+    "path_scope":  "Paths beginning with data/experiments/epistemic_update_feasibility_v1 are archive references and are not included here."
+}

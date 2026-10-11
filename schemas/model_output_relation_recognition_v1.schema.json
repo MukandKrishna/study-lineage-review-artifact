@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "model_output_relation_recognition_v1.schema.json",
+  "title": "Epistemic update relation-recognition output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item_id",
+    "provenance_relation",
+    "applicability_relation",
+    "direction_relation",
+    "confidence",
+    "metadata_basis",
+    "evidence_basis",
+    "reason"
+  ],
+  "properties": {
+    "item_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance_relation": {
+      "type": "string",
+      "enum": ["independent", "not_independent", "unclear"]
+    },
+    "applicability_relation": {
+      "type": "string",
+      "enum": ["applicable", "not_applicable", "unclear"]
+    },
+    "direction_relation": {
+      "type": "string",
+      "enum": ["agrees", "conflicts", "unclear"]
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "metadata_basis": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "evidence_basis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence_id", "evidence_quote"],
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_quote": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

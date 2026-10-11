@@ -1,0 +1,105 @@
+You are comparing two possible evidence updates for the same fixed medical claim and the same
+initial evidence set.
+
+Use only the claim, initial evidence, Update A, Update B, and displayed source metadata shown in
+MODEL INPUT. Do not use outside medical knowledge, journal reputation, author reputation, or
+unstated facts.
+
+Answer only the relation named by target_relation. The matched comparison is between Update A and
+Update B; it is not between the initial evidence and a single added item. Do not decide how the
+final claim verdict should change.
+
+If target_relation is provenance, answer this question:
+Which update adds genuinely independent evidence relative to the initial evidence set?
+
+For provenance, genuinely independent evidence means evidence derived from a distinct underlying
+study, trial, or participant cohort. A different PMID, publication, follow-up report, subgroup
+analysis, or secondary analysis of the same underlying study is not independent.
+
+If target_relation is applicability, answer this question:
+Which update is applicable to the claim as written?
+
+If target_relation is direction, answer this question:
+Which update introduces genuine opposing evidence relative to the claim?
+
+Choose exactly one comparative_answer:
+- A: Update A satisfies the target_relation question.
+- B: Update B satisfies the target_relation question.
+- no_meaningful_difference: Update A and Update B do not differ meaningfully on the target_relation
+  question based on the supplied text and metadata.
+
+Judge only the requested relation. For example, an update can report an agreeing direction while
+being less applicable, or can be from the same trial while still reporting a relevant result.
+
+For metadata_basis, list only displayed identifiers or source facts used for the comparison.
+
+For every evidence_basis entry, copy one contiguous, character-for-character substring from the
+corresponding passage_text. The evidence_quote must pass an exact substring check:
+- preserve uppercase/lowercase exactly;
+- preserve punctuation exactly;
+- do not lowercase the first letter of a sentence;
+- do not join separate spans;
+- do not insert ellipses;
+- if copying a phrase immediately after a heading such as METHODS: or RESULTS:, either include the
+  heading exactly or copy the following sentence with its original capitalization.
+
+An empty evidence_basis list is allowed when the supplied passages do not establish the comparison.
+
+Return JSON only, matching the supplied response schema and its field order. Echo item_id and
+target_relation exactly. Give one concise reason; do not provide hidden chain-of-thought. Do not
+recommend or reveal a final verifier label or score.
+
+MODEL INPUT:
+{
+  "schema_version": "1.0",
+  "item_id": "H3_STATIN_PRECEDENCE_COMPARATIVE_SWAPPED_DIRECTION",
+  "claim_id": "H3_PRAVASTATIN_PRIMARY_PREVENTION_CHD_EVENTS_CLAIM",
+  "claim_text": "Among middle-aged men with hypercholesterolemia and no prior myocardial infarction, pravastatin reduces fatal or nonfatal coronary events compared with placebo.",
+  "target_relation": "direction",
+  "initial_evidence": [
+    {
+      "bundle_position": 1,
+      "evidence_id": "H3_E1_WOSCOPS_PRIMARY_DESIGN",
+      "source_group_id": "STATIN_SOURCE_WOSCOPS_PRIMARY",
+      "source_title": "Prevention of coronary heart disease with pravastatin in men with hypercholesterolemia",
+      "pmid": "7566020",
+      "doi": "10.1056/NEJM199511163332001",
+      "trial_id": "WOSCOPS",
+      "source_locator": "PubMed/NEJM abstract methods and objective",
+      "passage_text": "BACKGROUND: This double-blind study was designed to determine whether pravastatin in men with hypercholesterolemia and no history of myocardial infarction reduced the combined incidence of nonfatal myocardial infarction and death from coronary heart disease. METHODS: 6595 men, 45 to 64 years of age, were randomly assigned to pravastatin (40 mg each evening) or placebo. The average follow-up period was 4.9 years."
+    },
+    {
+      "bundle_position": 2,
+      "evidence_id": "H3_E2_WOSCOPS_PRIMARY_RESULT",
+      "source_group_id": "STATIN_SOURCE_WOSCOPS_PRIMARY",
+      "source_title": "Prevention of coronary heart disease with pravastatin in men with hypercholesterolemia",
+      "pmid": "7566020",
+      "doi": "10.1056/NEJM199511163332001",
+      "trial_id": "WOSCOPS",
+      "source_locator": "PubMed/NEJM abstract results and conclusions",
+      "passage_text": "RESULTS: There were 248 definite coronary events, specified as nonfatal myocardial infarction or death from coronary heart disease, in the placebo group and 174 in the pravastatin group. CONCLUSIONS: Treatment with pravastatin significantly reduced the incidence of myocardial infarction and death from cardiovascular causes."
+    }
+  ],
+  "update_a": {
+    "bundle_position": 3,
+    "evidence_id": "H3_U3_ALLHAT_LLT_NEAR_APPLICABLE_CHALLENGE",
+    "source_group_id": "STATIN_SOURCE_ALLHAT_LLT",
+    "source_title": "Major outcomes in moderately hypercholesterolemic, hypertensive patients randomized to pravastatin vs usual care",
+    "pmid": "12479764",
+    "doi": "10.1001/jama.288.23.2998",
+    "trial_id": "ALLHAT-LLT",
+    "source_locator": "PubMed abstract objective, intervention, and results",
+    "passage_text": "OBJECTIVE: To determine whether pravastatin compared with usual care reduces all-cause mortality in older, moderately hypercholesterolemic, hypertensive participants. INTERVENTION: Pravastatin, 40 mg/d, vs usual care. RESULTS: All-cause mortality was similar for the 2 groups, and CHD event rates were not significantly different."
+  },
+  "update_b": {
+    "bundle_position": 4,
+    "evidence_id": "H3_U2_4S_SECONDARY_PREVENTION_POSITIVE_OUT_OF_SCOPE",
+    "source_group_id": "STATIN_SOURCE_4S",
+    "source_title": "Randomised trial of cholesterol lowering in 4444 patients with coronary heart disease: the Scandinavian Simvastatin Survival Study",
+    "pmid": "7968073",
+    "doi": null,
+    "trial_id": "4S",
+    "source_locator": "PubMed abstract",
+    "passage_text": "The trial evaluated cholesterol lowering with simvastatin on mortality and morbidity in patients with coronary heart disease. Patients with angina pectoris or previous myocardial infarction were randomised to simvastatin or placebo."
+  }
+}

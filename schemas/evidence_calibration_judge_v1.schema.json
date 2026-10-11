@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Evidence calibration judge v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "label",
+    "semantic_support_score",
+    "warrant_strength_score",
+    "confidence",
+    "evidence_quote",
+    "reason"
+  ],
+  "properties": {
+    "label": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "unsupported",
+        "contradicted",
+        "not_enough_evidence"
+      ]
+    },
+    "semantic_support_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "warrant_strength_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "evidence_quote": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

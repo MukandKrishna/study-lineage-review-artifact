@@ -1,0 +1,68 @@
+{
+  "experiment_id": "epistemic_update_confirmatory_cf_p1_erenumab_updates_neutral_verifier_gpt55_v1",
+  "description": "Provenance update verifier gate for confirmatory CF-P1 erenumab STRIVE/ARISE family after repaired adult-population initial evidence.",
+  "input_directory": "data/experiments/epistemic_update_feasibility_v1/private/run_inputs/confirmatory_final_test_v1/cf_p1_erenumab_strive_arise/verifier_inputs_provenance_updates",
+  "input_ablation": {
+    "condition": "confirmatory_no_source_group_id",
+    "omitted_evidence_fields": [
+      "source_group_id"
+    ],
+    "preserved_evidence_fields": [
+      "source_title",
+      "pmid",
+      "doi",
+      "trial_id",
+      "source_locator",
+      "passage_text"
+    ],
+    "purpose": "Prevent project-created provenance labels from reaching the model while preserving ordinary bibliographic and passage evidence."
+  },
+  "prompt_version": "epistemic_update_verifier_neutral_v2",
+  "prompt_sha256": "2fcc7aa7ef282f986a89a22941ea153bd3a8c90a26fabfbe9e1e963c473fca02",
+  "response_schema": "epistemic_multi_evidence_judge_openai_v1",
+  "response_schema_sha256": "8a887e03ed43c3ce135faf711e2ec19f46ff7cd97e29486c11dde0923e809344",
+  "prediction_path": "data/experiments/epistemic_update_feasibility_v1/predictions/gpt_5_5_medium_confirmatory_cf_p1_erenumab_updates_neutral_verifier_v1.jsonl",
+  "error_path": "data/experiments/epistemic_update_feasibility_v1/errors/gpt_5_5_medium_confirmatory_cf_p1_erenumab_updates_neutral_verifier_v1_errors.jsonl",
+  "pilot_design": {
+    "family_count": 1,
+    "condition_count": 3,
+    "repetitions_per_input": 5,
+    "planned_model_calls": 15,
+    "recognition_calls": 0,
+    "purpose": "Test whether exact-repeat, same-trial publication, and independent-trial updates behave differently after the repaired CF-P1 initial gate."
+  },
+  "default_judge_model_id": "gpt_5_5_medium",
+  "models": {
+    "gpt_5_5_medium": {
+      "provider": "codex_cli",
+      "executable": "codex",
+      "model": "gpt-5.5",
+      "role": "epistemic_update_neutral_verifier",
+      "reasoning_effort": "medium",
+      "timeout_seconds": 600,
+      "retries_per_repetition": 1
+    }
+  },
+  "executions": [
+    {
+      "condition_id": "cf_p1_erenumab_provenance_exact_repeat_control",
+      "execution_item_id": "CF_P1_ERENUMAB_PROVENANCE_EVAL_02",
+      "input_file": "cf_p1_erenumab_exact_repeat_control.json",
+      "input_sha256": "8474e18a29df3dbab5a43416f6c13349d7eec533cdc8794792e7fb87ac8f9705"
+    },
+    {
+      "condition_id": "cf_p1_erenumab_provenance_same_trial_publication",
+      "execution_item_id": "CF_P1_ERENUMAB_PROVENANCE_EVAL_03",
+      "input_file": "cf_p1_erenumab_same_trial_update.json",
+      "input_sha256": "7d856c8740363e3531ba7fb4c6920a054ad228a3c7fd87d56eff7f84e9c1b1c7"
+    },
+    {
+      "condition_id": "cf_p1_erenumab_provenance_independent_trial",
+      "execution_item_id": "CF_P1_ERENUMAB_PROVENANCE_EVAL_04",
+      "input_file": "cf_p1_erenumab_independent_update.json",
+      "input_sha256": "7820985a9e594667c22a19a5d5eb19984b54411215ca22536988f101fa184cb5"
+    }
+  ],
+  "model_calls_enabled": false,
+  "model_call_gate": "Closed. Open only after explicit approval for this exact confirmatory CF-P1 provenance update verifier gate."
+}

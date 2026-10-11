@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "created_at_utc": "2026-09-28T07:03:03.334145+00:00",
+  "model": {
+    "repo_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "dtype": "float16",
+    "device": "cuda:0",
+    "quantisation": "none"
+  },
+  "primary_responses": 330,
+  "strict_valid": 270,
+  "strict_invalid": 60,
+  "exact_inputs": 66,
+  "repetitions_per_input": 5,
+  "inputs_with_one_unique_raw_output_across_repeats": 66,
+  "validation_errors": {
+    "verifier evidence_quote is not an exact substring": 40,
+    "bundle_position mismatch": 15,
+    "recognition evidence_quote is not an exact substring": 5
+  },
+  "recognition_core_correct": "110/120",
+  "recognition_strict_correct": "105/120",
+  "interpretation": "partial cross-model replication with provenance recognition-use dissociation and additional small-model direction/order and applicability-integration weaknesses",
+  "diagnostic_triggers": {
+    "cf_p3_relation_and_policy_oracles": true,
+    "h3_m1_cue_ablation": true
+  },
+  "operational_deviation": "Final Kaggle session processed 210 pending calls, not the predeclared maximum 60. Calls remained stateless and the frozen ledger is contiguous.",
+  "families": [
+    {
+      "family": "CF-P1",
+      "relation": "provenance",
+      "strict_valid": "30/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "same-trial over-credited 5/5",
+      "strict_family_outcome": "recognition_only",
+      "clean_claim_eligible": "yes"
+    },
+    {
+      "family": "CF-P2",
+      "relation": "provenance",
+      "strict_valid": "10/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "all verifier inputs strict-invalid; raw same-trial over-credit 5/5",
+      "strict_family_outcome": "recognition_only",
+      "clean_claim_eligible": "no: initial invalid"
+    },
+    {
+      "family": "CF-P3",
+      "relation": "provenance",
+      "strict_valid": "25/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "same-trial over-credited 5/5; repeat control invalid",
+      "strict_family_outcome": "recognition_only",
+      "clean_claim_eligible": "yes, control caveat"
+    },
+    {
+      "family": "CF-A1",
+      "relation": "applicability",
+      "strict_valid": "30/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "applicable used 5/5; mismatch ignored 5/5",
+      "strict_family_outcome": "joint_pass",
+      "clean_claim_eligible": "yes"
+    },
+    {
+      "family": "CF-A2",
+      "relation": "applicability",
+      "strict_valid": "30/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "applicable used 5/5; mismatch ignored 5/5",
+      "strict_family_outcome": "joint_pass",
+      "clean_claim_eligible": "yes"
+    },
+    {
+      "family": "CF-A3",
+      "relation": "applicability",
+      "strict_valid": "20/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "mismatch ignored 5/5; applicable update ignored and invalid 5/5",
+      "strict_family_outcome": "recognition_only",
+      "clean_claim_eligible": "no"
+    },
+    {
+      "family": "CF-D1",
+      "relation": "direction",
+      "strict_valid": "15/30",
+      "recognition_core": "5/10",
+      "recognition_strict": "0/10",
+      "integration_audit": "challenge mixed/conflict in raw 5/5 but invalid; recognition order failure",
+      "strict_family_outcome": "joint_fail",
+      "clean_claim_eligible": "no"
+    },
+    {
+      "family": "CF-D2",
+      "relation": "direction",
+      "strict_valid": "30/30",
+      "recognition_core": "5/10",
+      "recognition_strict": "5/10",
+      "integration_audit": "challenge mixed/conflict 5/5; recognition correct in one order only",
+      "strict_family_outcome": "integration_only",
+      "clean_claim_eligible": "yes, order-sensitivity result"
+    },
+    {
+      "family": "CF-D3",
+      "relation": "direction",
+      "strict_valid": "25/30",
+      "recognition_core": "10/10",
+      "recognition_strict": "10/10",
+      "integration_audit": "agreeing/challenging updates pass; repeat control invalid",
+      "strict_family_outcome": "recognition_only",
+      "clean_claim_eligible": "target relation only"
+    },
+    {
+      "family": "H3",
+      "relation": "composition",
+      "strict_valid": "55/60",
+      "recognition_core": "30/30",
+      "recognition_strict": "30/30",
+      "integration_audit": "provenance over-credit 5/5; clear scope exclusions pass; near challenge ignored",
+      "strict_family_outcome": "recognition_only",
+      "clean_claim_eligible": "yes, mixed/control caveat"
+    }
+  ]
+}
