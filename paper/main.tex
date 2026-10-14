@@ -34,7 +34,7 @@
 \newcommand{\dev}{\textsc{dev}}
 \newcommand{\planned}{\textsc{planned}}
 
-\title{Recognising Study Lineage Is Not Enough: Same-Trial Evidence Over-Credit in Medical LLM Verification}
+\title{Recognizing Study Lineage Is Not Enough: Over-Crediting Same-Trial Evidence in LLM-Based Medical Verification}
 
 \author{Anonymous submission}
 
@@ -43,256 +43,284 @@
 
 \begin{abstract} 
 
-Publication count is not study count: two reports from one clinical trial are not two independent studies. We test whether medical LLM verifiers recognise this distinction and use it when aggregating evidence for a fixed claim. Our source-audited evaluation covers 14 clinical families across two separately frozen suites and five model conditions; it also tests clinical applicability and result direction. Recognition and aggregation are evaluated in separate stateless calls, with repeated calls measuring within-input stability. In the STRIVE example in Figure~\ref{fig:strive-arise-gap}, GPT-5.5 identifies ARISE as the independent trial in 10/10 recognition calls, yet marks the later same-trial STRIVE report as independent corroboration in 5/5 separate aggregation calls. Across the three original provenance families, the same recognition--aggregation contrast holds for GPT-5.5. It also appears in selected Qwen3-4B and Ministral-3-8B family conditions. A study-grouping instruction reduces GPT-5.5 over-credit from 4/5 to 0/5 in each of two later pure-provenance families, but effects in other model conditions are mixed or limited by rejected outputs. These results expose a gap between elicited lineage recognition and evidence aggregation, not an internal mechanism or a universal grouping remedy.
+Publication count is not study count. A model can identify shared trial lineage correctly in a direct task yet over-credit a second publication from the same trial when aggregating evidence. We evaluate this behavior in medical LLM verification using 14 source-audited clinical families and five model conditions. The families span provenance, clinical applicability, result direction, and composition; the provenance families provide the direct lineage tests. Recognition and aggregation are separate stateless calls, and repeated calls assess within-input stability. Across all three original provenance families, GPT-5.5 identifies the independent update in 10/10 recognition calls per family but over-credits the same-trial report in 5/5 separate aggregation calls per family. Selected Qwen3-4B and Ministral-3-8B conditions show the same cross-task contrast. A study-grouping instruction reduces GPT-5.5 over-credit from 4/5 to 0/5 in each later pure-provenance family. Other model conditions show mixed behavior, and rejected outputs limit several comparisons. The results identify a behavioral gap between elicited lineage recognition and evidence aggregation. An anonymized code and data artifact is available at \url{https://anonymous.4open.science/r/study-lineage-review-artifact/}.
+
 \end{abstract}
 
 \section{Introduction}
 
-A medical verifier can judge a claim against one evidence passage correctly and still mishandle the next passage. The central distinction is simple: a new publication is not necessarily a new study. A second publication may repeat or reanalyse the same underlying trial, while another publication may report an independent trial. Both passages may support the claim, but only the latter represents an additional independent evidential update. Figure~\ref{fig:strive-arise-gap} makes this distinction concrete. It shows two STRIVE reports grouped under one trial, ARISE as an independent trial, and the contrasting GPT-5.5 outcomes on two separate tasks: correct lineage recognition but same-trial over-credit during aggregation. A similar problem arises when positive evidence is clinically credible but falls outside the population or outcome scope of the claim, or when new evidence points in the opposite direction. In each case, the question is not only whether the new passage is relevant, but what kind of update it licenses.
+A single clinical trial can generate several publications: a primary report may be followed by subgroup, safety, or longer-term analyses. These papers may support the same claim, but they come from one study. Clinical datasets can retain source links between trial results and supporting publications; CliniFact, for example, derives claims from trial results and links them to supporting scientific publications \citep{zhang-etal-2025-dataset}. A verifier that treats documents as independent studies can overstate the independence of the evidence.
 
-\begin{figure}[t]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig1_story_candidate.pdf}
-\caption{A source-audited example of the paper's central distinction. The STRIVE primary report and later analysis share trial NCT02456740, whereas ARISE is an independent trial (NCT02483585) \citep{goadsby-etal-2017-erenumab,diener-etal-2021-strive,dodick-etal-2018-arise}. In separate GPT-5.5 calls, lineage recognition identifies ARISE as the new trial in 10/10 calls, but evidence aggregation counts the later STRIVE report as independent corroboration in 5/5 calls. Repeated calls measure within-input stability, not independent clinical cases.}
-\label{fig:strive-arise-gap}
+\includegraphics[width=\columnwidth]{figures/fig1.pdf}
+\caption{A source-audited example of the recognition--aggregation gap. The STRIVE primary report and later analysis derive from trial NCT02456740, whereas the ARISE primary report comes from an independent trial (NCT02483585) \citep{goadsby-etal-2017-erenumab,diener-etal-2021-strive,dodick-etal-2018-arise}. In separate stateless GPT-5.5 calls, ARISE is identified as the independent update in 10/10 recognition calls (five per candidate order), but the later STRIVE analysis is marked as independent corroboration in 5/5 aggregation calls. Repeated calls assess within-input stability; the clinical family is the experimental unit.} \label{fig:strive-arise-gap}
 \end{figure}
 
-Most factuality and grounding benchmarks frame verification as a static decision over a provided context \citep{min-etal-2023-factscore,hu-etal-2024-knowledge,dammu-etal-2024-claimver}. Citation and RAG evaluations extend this view by asking whether systems retrieve, cite, and synthesize supporting sources \citep{gao-etal-2023-enabling,krishna-etal-2025-fact,es-etal-2024-ragas,saadfalcon-etal-2024-ares}. Recent work has moved closer to dynamic evidence use. GroupQA shows that models may give disproportionate weight to paraphrased duplicates and can be affected by evidence order \citep{naphade-2026-rational}; source-conflict experiments show that repetition can reverse source preferences \citep{schuster-etal-2026-whose}; and belief-revision benchmarks test when a model should update or preserve a conclusion \citep{wilie-etal-2024-belief}. Medical benchmarks likewise expose failures under contextual mismatch and counterfactual evidence \citep{qu-farber-2026-medieval,jullien-etal-2024-semeval}. Together, this literature motivates a more specific test: identifying the source relationship of each added passage and measuring its effect on the combined clinical judgement.
+Existing evaluations clarify several parts of this problem. FACTPICO tests whether plain-language summaries preserve trial populations, interventions, comparators, outcomes, and findings \citep{joseph-etal-2024-factpico}. MediEval separates medical truth from support in a patient context \citep{qu-farber-2026-medieval}, while FORCEBENCH shows that a relevant citation may still be too weak or narrow for the claim attached to it \citep{qian-etal-2026-relevant}. Multi-document studies find that paraphrased repetition can outweigh distinct support and reverse source preferences under conflict \citep{naphade-2026-rational,schuster-etal-2026-whose}. ECON separates conflict detection from resolution \citep{jiayang-etal-2024-econ}. When Facts Change finds that a verbalized temporal distinction may fail to affect the final prediction \citep{wallat-etal-2026-facts}. These findings motivate a source-level test of whether an LLM verifier treats distinct publications from one clinical study as dependent evidence when combining their findings.
 
-We therefore test evidence updating with two separate tasks. One asks the model to identify how an added report relates to existing evidence; the other asks it to judge the combined evidence. In the three original provenance families, GPT-5.5 identifies the shared lineage in every recognition call yet over-credits the same-trial report in every corresponding aggregation condition (Section~\ref{sec:results}). Selected open-weight conditions show the same family-level contrast. Because the calls are stateless and the recognition answer is not supplied to the verifier, this is an observed gap across tasks, not proof of an internal recognition-then-failure mechanism.
+Our evaluation covers 14 source-audited clinical families across five model conditions. The provenance block directly tests whether an added publication derives from the same study or from an independent study. The remaining families test clinical applicability, result direction, and combinations of these relations. Within each family, we keep the claim fixed and vary the relation of the added evidence. Relation recognition and evidence aggregation are evaluated in separate stateless calls. Repeated calls assess within-input stability; clinical families are the experimental units.
 
-The evaluation keeps each medical claim fixed, adds one source-traceable evidence item at a time, assigns an externally auditable relation label, and scores recognition separately from final judgement integration. Existing work typically addresses static attribution, context faithfulness, source conflict, or belief revision, but rarely isolates clinically meaningful update relations under source-level controls. Beyond study provenance, our families test whether evidence applies to the claim's clinical scope and whether its result supports or challenges the claim.
+The experiments address three connected questions. First, can a verifier identify shared study lineage? Second, when separate recognition calls are correct, do aggregation calls respect that dependence? Third, can explicit study-level grouping reduce same-trial over-credit while preserving support from a genuinely independent trial? The second question defines the paper's central behavioral contrast.
 
-Our contributions are:
+Across all three original provenance families, GPT-5.5 answers the lineage comparison correctly but still over-credits the same-trial publication in the separate aggregation condition. Selected Qwen3-4B and Ministral-3-8B conditions show the same family-level contrast. Explicit study grouping removes the error for GPT-5.5 in both later pure-provenance families while preserving support for the independent trial. Grouping effects vary across models, and rejected outputs leave some comparisons unresolved.
+
+The paper makes three contributions:
 \begin{itemize}
-    \item We construct two source-audited suites totalling 14 clinical families across study provenance, clinical applicability, and result direction, with null controls and counterbalanced recognition inputs. The suites were frozen at different stages, and rejected model outputs remain visible.
-    \item We show a family-level recognition--aggregation gap: GPT-5.5 correctly labels lineage but over-credits same-trial reports in separate calls in all three original provenance families; selected open-weight conditions show the same contrast.
-    \item We test an explicit study-grouping instruction against document-level aggregation. It reduces GPT-5.5 over-credit in two later pure-provenance families, while independent-trial support and model-dependent failures are reported separately.
+    \item We show a family-level recognition--aggregation gap: a model can correctly identify shared study lineage in a direct task yet still over-credit a same-trial publication in a separate evidence-aggregation task.
+
+    \item We construct a source-audited evaluation of 14 clinical families that separates relation recognition from aggregation and treats each clinical family as the experimental unit and repeated calls as stability checks.
+
+    \item We test whether an explicit study-grouping intervention reduces same-trial over-credit while preserving support for a genuinely independent trial.
 \end{itemize}
 
 
-\section{Related Work}
+\section{Related work}
 
-\subsection{From pointwise factuality to diagnostic evaluation}
+\subsection{Medical evidence verification and contextual grounding}
 
-Fine-grained factuality work has shown that the unit of evaluation matters. FActScore decomposes long-form generations into atomic claims \citep{min-etal-2023-factscore}; RefChecker and ClaimVer localize attribution, contradiction, and unsupported content at finer granularity \citep{hu-etal-2024-knowledge,dammu-etal-2024-claimver}. ALCE evaluates cited generation along correctness and citation-quality axes, while FRAMES evaluates retrieval, factuality, and multi-hop synthesis in end-to-end RAG \citep{gao-etal-2023-enabling,krishna-etal-2025-fact}. RAGAS and ARES separate dimensions such as faithfulness, relevance, and evaluator reliability \citep{es-etal-2024-ragas,saadfalcon-etal-2024-ares}. Sufficient Context makes another useful separation: whether the retrieved context contains enough information and whether the model actually uses it \citep{joren-etal-2025-sufficient}. We extend this diagnostic approach to controlled additions of evidence for a fixed medical claim.
+Fine-grained factuality evaluators operate below the whole-answer level. FActScore decomposes long-form generations into atomic facts and measures the proportion supported by a knowledge source \citep{min-etal-2023-factscore}. ClaimVer identifies individual claims, verifies them against a knowledge graph, and returns evidence and an explanation for each prediction \citep{dammu-etal-2024-claimver}. This granularity matters in medicine because an answer may contain both supported and unsupported clinical statements.
 
-Recent strong evaluation papers follow a similar methodological pattern: replace a broad endpoint with a smaller set of interpretable subproblems. Atomic NLI decomposition reveals inconsistency hidden by high overall NLI accuracy \citep{srikanth-rudinger-2025-nli}; MediEval separates medical truth from patient-context support in a factorial design and names the resulting failure modes \citep{qu-farber-2026-medieval}. This motivates our own decomposition of evidence updating into relation recognition and integration.
+Medical benchmarks make the claim--evidence relation more explicit. FACTPICO evaluates whether plain-language summaries of randomized controlled trials preserve the population, intervention, comparator, outcome, and reported findings \citep{joseph-etal-2024-factpico}. Clinical-trial NLI tests entailment and contradiction over trial reports, including controlled perturbations \citep{jullien-etal-2024-semeval}. MediEval crosses medical truth with support in a specific patient record \citep{qu-farber-2026-medieval}, and CliniFact derives clinical claims from trial results and links them to supporting publication evidence \citep{zhang-etal-2025-dataset}. FORCEBENCH tests a related boundary in cited RAG: a passage can be relevant yet fail to warrant a claim's relation, certainty, scope, temporal status, or numeric precision \citep{qian-etal-2026-relevant}. These clinical claim-verification evaluations do not test whether aggregation respects trial-level dependence across publications.
 
-\subsection{Conflict, repetition, and belief updating}
+\subsection{Source dependence and recognition--use gaps}
 
-Controlled evidence studies show that LLMs are sensitive to factors that should not be treated as independent evidence. GroupQA reports that duplicated paraphrases can shift answers even when they do not add genuinely new support, and that evidence order also matters \citep{naphade-2026-rational}. Whose Facts Win? shows source preferences under inter-context conflict, but also that repetition can reverse those preferences \citep{schuster-etal-2026-whose}. ECON separates inter-evidence conflict detection from conflict resolution, finding that models may identify conflict yet still resolve it by favouring one source or falling back on prior knowledge \citep{jiayang-etal-2024-econ}. Belief-R evaluates whether models update when premises change and preserve conclusions when they should remain stable \citep{wilie-etal-2024-belief}. When Facts Change further separates temporal-conflict detection from recognizing fact mutability and from acting on that judgement; larger models can identify the relevant temporal relation yet fail to propagate it to the final prediction \citep{wallat-etal-2026-facts}.
+Clinical evidence synthesis treats the study, rather than its reports, as the unit of interest. The Cochrane Handbook calls for multiple reports of one study to be linked while retaining useful information from each \citep{li-etal-2024-cochrane}. Aggregator uses PubMed metadata to cluster articles likely to report the same registered trial \citep{smalheiser-holt-2020-aggregator}. That work addresses the linkage step; our evaluation asks whether an LLM verifier respects that linkage when combining evidence for a claim.
 
-Work on context faithfulness shows that models' use of supplied evidence depends on memory strength, evidence presentation, and task requirements \citep{li-etal-2025-investigating,sun-etal-2026-task}. We examine the specific case of source dependence in clinical evidence. Two publications can agree with the same medical claim while arising from one randomized trial or from independent trials. 
-We test whether a verifier uses that distinction when it combines their findings. We also test whether clinically credible evidence is applied within the population and outcome scope of the claim.
+Multi-document studies show that repetition can change model behavior without adding an independent source. GroupQA finds that paraphrased repetition can be more persuasive than distinct supporting documents \citep{naphade-2026-rational}. Whose Facts Win? shows that repeating information from a less-preferred source can reverse source preferences under conflict \citep{schuster-etal-2026-whose}. Bara formalizes a related distinction between report multiplicity and evidential ancestry in controlled multi-agent inference \citep{bara-2026-epistemic-sybil}. Our setting differs from literal or paraphrased duplication and from synthetic agent reports: the documents are distinct clinical publications, but some derive from the same clinical trial.
 
-Repeated judge calls also require care. Rating Roulette reports substantial intra-rater inconsistency in LLM-as-a-judge scoring \citep{haldar-hockenmaier-2025-rating}. We therefore use repeats to estimate within-input stability, not as independent samples, and treat the clinical family as the experimental unit.
+Other studies examine whether models act consistently on relations they can identify. ECON evaluates conflict detection separately from conflict resolution \citep{jiayang-etal-2024-econ}. Belief-R tests whether models revise a conclusion when a new premise requires an update and retain it otherwise \citep{wilie-etal-2024-belief}. When Facts Change reports that larger models can verbalize the relevant temporal distinction without consistently carrying it into their final predictions \citep{wallat-etal-2026-facts}. Sufficient Context similarly separates whether retrieved context contains enough information from whether a model uses it correctly \citep{joren-etal-2025-sufficient}. These studies motivate our separation of lineage recognition from evidence aggregation, although our two tasks are evaluated in independent model calls.
 
-\subsection{Internal representations and downstream use}
 
-ProbeRAG shows that aligned and conflicting RAG states can be separated in hidden representations and uses a learned conflict probe as part of a faithfulness intervention \citep{gao-etal-2026-beyond-black}. SpARE similarly finds signals of conflict between context and memory in intermediate activations and uses sparse-autoencoder features to steer knowledge selection \citep{zhao-etal-2025-steering}. These studies motivate future representation-level work on study dependence. The present evaluation measures observable relation recognition and evidence use.
+Adjacent medical-AI work examines when text-side bias can help medical visual question answering and how adversarial image--text conflicts can disrupt multimodal medical RAG \citep{sun2022unimodal,zuo2025make}. Recent work on monosemantic attribution instead seeks more stable representation-level explanations for clinical language models \citep{mamalakis2026monosemantic}. Our study remains behavioral: it tests whether a verifier's answers across separate recognition and aggregation tasks respect the same source relation.
 
-The confidence-updating studies of \citet{kumaran-etal-2026-competing,kumaran-etal-2026-causal} illustrate a useful sequence of diagnostic experiments. One manipulates answer visibility and the direction of advice to measure sensitivity to new evidence. The other measures confidence before abstention is available, compares it with alternative predictors, and tests confidence-related activations and decision thresholds. We use the same logic to isolate one explanation for evidence-update behavior at a time.
-
-BayesBench likewise separates latent-state inference from downstream prediction under sequential evidence accumulation \citep{samanta-etal-2026-bayesbench}, while Contextual Belief Management distinguishes failed stay, failed update, and failed isolation in a closed-world belief-tracking setting \citep{xu-etal-2026-cbm}.
-
-Clinical evidence provides an additional warning against overinterpreting a successful probe. In one recent study, activation probes recovered evidence-grade information more accurately than models' explicit grade statements, but the analyses also showed strong dependence on surface wording and weak transfer across topics and grading rubrics \citep{tayebi-arasteh-2026-strength}. Any provenance probe in our setting must therefore use topic-held-out splits and explicit lexical/metadata controls.
-
-\subsection{Medical evidence and contextual grounding}
-
-Clinical trial NLI offers source-linked evidence and controlled perturbations \citep{jullien-etal-2024-semeval}. MediEval separates world-level medical truth from support in the patient context, showing why a medically true statement can still be unsupported in the case at hand \citep{qu-farber-2026-medieval}. Recent evidence-grounded science and scholarly-QA work also emphasizes source traceability and provenance interfaces \citep{tan-etal-2026-scitrue,martinboyle-etal-2026-papertrail}. For medical communication, \citet{wong-etal-2025-dangerous} show that source-grounded answers may remain locally accurate yet mislead users when they strip evidence from its original context or purpose. FORCEBENCH frames a related risk for cited RAG: topical relevance alone does not guarantee that a citation licenses the strength, scope, or specificity of the generated claim \citep{qian-etal-2026-relevant}. Our source-audited families test how a verifier treats a later report from an existing trial compared with a report from an independent trial.
-
-Together, these studies motivate our operational question. For a fixed medical claim and evidence state, we identify the relation of each new source-grounded item and test whether the verifier uses that relation in its combined judgement.
-
-\section{Research Questions}
-\label{sec:rq}
-
-We ask three questions about study dependence in evidence aggregation.
-
-\paragraph{RQ1: Lineage recognition.}
-Can a model identify whether two publications report the same underlying study or independent studies?
-
-\paragraph{RQ2: Recognition and aggregation.}
-When separate recognition calls identify shared study lineage correctly, do aggregation calls nevertheless credit the later report as independent corroboration?
-
-\paragraph{RQ3: Study-level grouping.}
-Does an explicit study-grouping instruction reduce same-trial over-credit while preserving corroboration from a genuinely independent study?
-
-\section{Evidence-Update Reliability}
+\section{Task formulation}
 \label{sec:task}
 
-We evaluate how medical claim verifiers use changes in supplied evidence. Each source-audited evidence state has a fixed claim and a known update relation established before model inference. We test whether the verifier recognizes the relation and respects it in the combined judgement.
-\subsection{Evidence states and relations}
-Let $c$ denote the medical claim under evaluation. An initial evidence state $E_0=\{e_1,\ldots,e_k\}$ is accepted only when it already contains enough source-grounded information for the intended baseline judgement. An update $u$ is then added to form $E_1=E_0\cup\{u\}$. We test three relations between $u$, $c$, and the existing evidence state:
+\subsection{Evidence-update setting}
 
-\paragraph{Provenance.} Is $u$ genuinely independent evidence, another report from the same underlying study, or an exact repeat? Study identity is checked against preserved publication metadata and trial identifiers where available.
+For a fixed medical claim $c$, an initial evidence state $E_0$ receives one source-linked update $u$, producing $E_1=E_0\cup\{u\}$. Each update isolates one target relation. \emph{Provenance} asks whether the added report is an exact repeat, another publication from the same underlying study, or evidence from an independent study. \emph{Applicability} asks whether it matches the claim's population, intervention, comparator, outcome, and time frame. \emph{Direction} asks whether the observed claim-relevant result agrees with or challenges the claim. Study independence alone does not establish corroboration: an independent result must also apply to and support the fixed claim. A same-study report can add relevant detail without adding a second independent study. Positive evidence outside the claim's scope should leave the scoped judgment unchanged, while applicable opposing evidence should register conflict without erasing earlier support.
 
-\paragraph{Applicability.} Does $u$ apply to the claim as written with respect to population, intervention, comparator, outcome, and time? Evidence can be credible and topically relevant while still falling outside the claim scope.
+The provenance decision is about the ancestry of the evidence, rather than the number of passages or papers in the input. Let $S(E)$ be the set of underlying studies represented by evidence state $E$, and let $s(u)$ be the study that produced update $u$. A later analysis with $s(u)\in S(E_0)$ leaves the number of studies unchanged even when it reports a new outcome or has a new publication identifier. An update with $s(u)\notin S(E_0)$ adds a study, but it counts as corroboration only when its result is applicable and agrees with the claim. This distinction matters for the combined judgment: two supportive passages can warrant a \texttt{supported} label without warranting an \texttt{independent\_corroboration} flag.
 
-\paragraph{Direction.} Does $u$ agree with, challenge, or leave unclear the claim-relevant result? Direction is defined from the observed claim-relevant result rather than inferred from statistical significance alone.
+The held-out H3 family puts these relations around one fixed statin claim. Its updates include a later WOSCOPS analysis from the same trial lineage, positive evidence from 4S that falls outside the claim's clinical scope, and a challenging result from ALLHAT-LLT \citep{shepherd-etal-1995-woscops,vallejo-vaz-etal-2017-woscops,scandinavian-1994-4s,allhat-2002-llt}. We use H3 as a compositional test that combines relations within one family. Appendix Table~\ref{tab:family-inventory} records the source identities used in this family.
 
-Each relation has a distinct expected effect. Exact repeats and same-study reports preserve the count of independent studies. The scoped judgement follows applicable evidence; an out-of-scope item contributes no claim-level support. Applicable opposing evidence registers conflict while retaining earlier support. Independent supporting evidence may add corroboration. Numerical warrant scores serve as secondary diagnostics.
+\subsection{Lineage recognition and evidence aggregation}
 
-\subsection{Recognition versus integration}
+We evaluated recognition and aggregation in separate stateless calls. The recognition task presents the same initial evidence with two candidate updates and asks which one satisfies a single target relation; both A/B and B/A orders are tested. The aggregation task receives the current evidence state and returns a combined judgment. Its input excludes both the expected relation and the recognition response.
 
-We evaluate two abilities in separate stateless calls. \emph{Relation recognition} asks whether the model identifies the relevant relation without producing a final verdict. \emph{Integration} asks whether the verifier respects that relation in its combined judgement. Correct recognition alongside incorrect aggregation is the behavioural contrast of interest. The recognition response is never supplied to the aggregation call, so this contrast does not identify an internal mechanism or measure the effect of passing a recognition answer to the verifier.
+We ran five fresh invocations for each exact input. Relation recognition and relation-specific aggregation behavior are the primary outcomes; numerical support and confidence scores are diagnostic. Outputs that fail the response contract are reported as rejected and receive no semantic score. Appendix~\ref{app:prompt-contract} provides the full prompts, response schemas, validation rules, and execution details.
 
-\subsection{Measurement boundary}
+\subsection{Evaluation outcomes and validity}
 
-Categorical relation labels and relation-specific integration behaviour are the primary outcomes. Numerical support, warrant, conflict, and confidence scores are retained as diagnostics. Small score movements are not treated as violations unless they exceed variation established by an appropriate development control. Repetitions estimate within-input stability; they are not independent clinical observations.
+The primary contrast asks whether correct lineage answers coexist with appropriate handling in the separate aggregation task. We define same-trial over-credit as a schema-valid aggregation output that marks the added report as independent corroboration even though the source audit links it to a study already represented in the initial evidence. We audit independent-trial preservation separately: the output must both mark independent corroboration and use the added independent evidence. Repeated calls estimate within-input stability, while clinical families remain the experimental cases. Rejected outputs remain in planned-call accounting but receive no semantic score.
 
-\section{Controlled Clinical Families}
-\label{sec:families}
+The combination flag is the primary measure of over-credit, rather than a change in the 0--100 support score. A later report can legitimately add detail and affect the model's assessment without becoming a second independent study. Conversely, the overall claim can remain \texttt{supported} while the model misstates how many independent studies support it. For the independent-trial check, requiring both the flag and use of the added item distinguishes genuine incorporation from a flag attached to an ignored passage. We apply these categorical rules after validating the response structure and evidence quotations.
 
-\subsection{Construction and acceptance checks}
 
-Each family contains one fixed claim, an initial evidence set, a matched update pair that isolates a declared relation, and a null control. Before any model call, we record the expected relation and the expected categorical integration behaviour. A family is rejected if the update fills a missing semantic bridge in the baseline, changes several clinically material dimensions at once, or lacks an externally checkable source relation.
+\section{Benchmark construction}
+\label{sec:benchmark}
 
-The pre-call audit checks population, intervention, comparator, outcome, time, observed direction, study identity, exact source text, and whether the null genuinely adds no information. Development work showed that an apparent provenance effect could disappear once semantic novelty was removed. This audit makes construct validity part of the experimental method.
+\subsection{Source-audited clinical families}
 
-\subsection{Prompts and counterbalancing}
+Each clinical family contains one fixed claim, an initial evidence set, matched updates that isolate a declared relation, and a null control. We established the relation labels before model inference. For provenance, we cross-checked publication records, preserved source metadata, and trial identifiers where available to determine whether reports shared an underlying study. We audited applicability against the claim's clinical scope and assigned direction according to the observed claim-relevant result, with statistical significance considered as supplementary context. The audit also retained the exact passages and source locators used in each input.
 
-The neutral verifier receives only the fixed claim and the complete evidence state. It labels each evidence item and produces a combined judgement without being told which relation is under test. A separate recognition prompt compares Update A and Update B for one target relation only. Both A/B and B/A orders are run. Gold labels, expected score movement, and construction notes are never exposed to the model. Appendix~\ref{app:prompt-contract} reproduces the core prompt templates and output contract.
+We accepted a family only when the initial evidence already supplied the information needed to assess the fixed claim, the candidate updates isolated one clinically material relation, and the source relation could be checked independently. An update that supplied a missing part of the claim or changed several clinical dimensions at once would confound the intended contrast. For provenance, publication identifiers traced reports, while trial records and study descriptions established whether those reports came from the same study. After acceptance, we froze the claim, passages, relation labels, and expected categorical handling before the corresponding model calls. Appendix~\ref{app:family-inventory} gives the complete family inventory, source identities, audit chronology, and analysis status.
 
-Each evidence condition is a fresh, stateless input. This choice controls for the effect of showing the model its previous answer, as in controlled change-of-mind studies \citep{kumaran-etal-2026-competing}. A later secondary study could compare shown and hidden prior verdicts to quantify self-anchoring.
+The controls are designed to separate errors that can look alike in a final verdict. In CF-A3, a passage about olaparib maintenance after relapse reports a positive progression-free-survival result, but the fixed claim concerns first-line maintenance after platinum response. A verifier can read the result correctly and still use it for the wrong population. CF-D3 makes a different demand: the initial evidence reports fewer falls with vitamin D plus calcium, whereas the added annual high-dose vitamin-D trial reports more falls. The latter passage is relevant to the claim and should register a challenge rather than be ignored. These examples distinguish scope and direction errors from the provenance error tested in CF-P1--P3; the selected passage identities are traceable in Appendix Tables~\ref{tab:family-inventory} and~\ref{tab:initial-source-anchors}.
 
-\subsection{Primary metrics}
+CF-P2 illustrates how the provenance contrast is constructed. The initial passages describe the QUEST dupilumab trial (\texttt{NCT02414854}). One candidate is a later analysis of QUEST that examines outcomes by exacerbation history; its different title and PMID still link it to the same trial. The other candidate reports a separate dupilumab trial (\texttt{NCT01854047}) with claim-relevant exacerbation and lung-function findings. Both candidates concern add-on dupilumab in uncontrolled asthma, so choosing between them is a lineage decision rather than a choice between a positive and a negative result. The verifier then receives each update separately, making it possible to check whether it reserves independent corroboration for the second trial.
 
-We report relation-recognition accuracy, order consistency, appropriate-integration rate, null stability, and relation-specific failures such as redundancy inflation, scope contamination, and conflict omission. For the recognition--use contrast, we identify families with correct recognition in both counterbalanced orders and inspect valid aggregation calls for those same families. This is a family-level comparison across separate stateless tasks, not a conditional probability over paired calls.
+\subsection{Experimental unit and freezing}
 
-\section{Experiments}
+The clinical family is the experimental unit because its matched conditions share one claim and one audited contrast. Repeated calls reuse the same input and characterize response stability within a family. Independent-study status required corroborating source records, metadata, and trial identifiers. The original and follow-up suites were frozen separately, so we report them as distinct stages, preserving their separate freezing histories.
 
-\label{sec:experiments}
+\subsection{Evaluation suites and analysis status}
 
-\subsection{Experimental sequence}
-
-We organise the evaluation as a sequence of primary and follow-up tests. Each clinical family is first constructed and source-audited as described in Section~\ref{sec:families}. The claim, evidence passages, relation label, and expected categorical behaviour are frozen before model inference. We then test \emph{integration} with the neutral verifier and \emph{recognition} with a counterbalanced comparison task. A held-out compositional family places provenance, applicability, and direction updates around the same claim. Follow-up diagnostics are introduced only after a repeatable primary-suite failure: oracle conditions test whether explicit relation information or an explicit marginal-evidence policy is sufficient for repair, while a cue ablation removes the study-group label used in this evaluation from H3. This ordering keeps the primary behavioural evaluation separate from interventions designed to test narrower explanations.
-
-For clarity, we distinguish four study-design components. The original ten-family suite is the prospectively frozen primary confirmatory evaluation of recognition and integration, with the held-out H3 family testing composition. The later P5R/P6R/H5/H6 package is a separately frozen follow-up evaluation of study grouping and independent-trial preservation; P5R/P6R also support a secondary two-prompt robustness audit. The CF-P3 oracle tests and H3-M1 cue ablation are post-hoc diagnostics introduced after the primary provenance failure was observed; they are outside the primary denominator. The lineage-by-overlap family is exploratory and policy-instructed, and is reported only as a control rather than as an unprompted lineage-discovery result.
-
-\subsection{Evaluation suite}
-
-The original ten-family evaluation contains three provenance families (CF-P1--P3: migraine, severe asthma, and chronic kidney disease), three applicability families (CF-A1--A3: melanoma, atrial-fibrillation stroke prevention, and ovarian-cancer maintenance), three direction families (CF-D1--D3: glucose control in intensive care, glycaemic control in type 2 diabetes, and vitamin-D fall prevention), and the held-out compositional statin family H3. The primitive families isolate one relation at a time; H3 combines provenance, applicability, and direction updates around one claim. A separately frozen later package adds two provenance families (P5R and P6R) and two compositional families (H5 and H6). Appendix Table~\ref{tab:family-inventory} lists the selected family targets and source identities. The clinical family is the experimental unit; repeated invocations measure stability.
-
-For all nine primitive confirmatory families, we remove the study-group label used in this evaluation (\texttt{source\_group\_id}) from model-visible inputs while retaining truthful source titles, publication identifiers, trial identifiers, source locators, and passages. The original H3 baseline retained this field and serves as a cue-rich compositional reference. H3-M1 is a diagnostic ablation of H3 that removes \texttt{source\_group\_id} while preserving the claim, evidence order, passages, and remaining source metadata. The contrast measures dependence on the study-group label while bibliographic and structured \texttt{trial\_id} cues remain available.
-
-\subsection{Model and execution}
-
-We evaluate five recorded model conditions: \texttt{gpt-5.5} at medium reasoning effort, \texttt{Qwen3-4B-Instruct-2507}, \texttt{Gemma-3-4B-it}, \texttt{Llama-3.1-8B-Instruct}, and \texttt{Ministral-3-8B-Instruct-2512}. The Codex interface leaves GPT temperature and random seed unspecified; open-weight models use their recorded decoding and chat-template adapters (Appendix~\ref{app:prompt-contract}). Five fresh, stateless invocations per exact input measure within-input stability. We retain prompt templates, response schemas, configurations, frozen inputs, rendered prompts, source-audit records, raw and parsed outputs, and content hashes. Valid and rejected outputs are counted separately.
-
-The open-weight checkpoints are the nominal 4B variants for Qwen3 and Gemma3 and the nominal 8B variants for Llama 3.1 and Ministral 3, following their model names. The recorded open-weight runs were executed in Kaggle GPU sessions configured with two Tesla T4 GPUs, each showing a maximum of 15~GiB of GPU memory. Qwen3 and Gemma3 loaded on \texttt{cuda:0}; Llama and Ministral were sharded across both GPUs. Qwen3 and Gemma3 used Python 3.12.13, PyTorch 2.10.0+cu128, and Transformers 5.0.0; Llama and Ministral used Python 3.13.15, PyTorch 2.11.0+cu128, and Transformers 5.16.1. The archived run records do not include reliable wall-clock or GPU-hour totals, so we do not report them. GPT-5.5's parameter count and hardware were not recorded in the run records.
-
-The open-weight checkpoints were loaded from the Hugging Face Hub; the exact repository identifiers and pinned revisions are listed in \texttt{configs/transformers\_gpu\_models.json}.
-
-The cross-model runs preserve the clinical claims, evidence passages, gold behaviours, and semantic task instructions within each input version while adapting model-specific formatting. The ten-family and later four-family packages were frozen and run at different stages; they were not one simultaneous prospective construction. The selected P6R inputs include a later source-corrected independent passage, as documented in Appendix~\ref{app:prompt-contract}.
-
-Each primitive family contributes six exact inputs: one initial state, three update conditions, and two counterbalanced recognition conditions. Five repetitions per input yield 30 responses per family and 270 responses across the nine families. H3 contributes 12 exact inputs: one initial state, five update conditions, and six relation-recognition conditions. These add 60 responses, bringing the original suite to 66 exact inputs and 330 planned calls per model. The later four-family package adds 50 recognition, 85 document-level, and 85 study-grouped calls per model. Thus the selected 14-family comparison accounts for 550 calls per model; completion does not imply that every output passed the scientific validity checks. We keep the accounting separate: the original suite has 1,650 planned calls across five models, the later package has 1,100, prompt robustness has 120 across three models, oracle and cue diagnostics have 195 across three models, and the exploratory lineage-overlap control has 36 calls.
-
-\subsection{Controls and diagnostic interventions}
-
-The exact-repeat condition tests whether merely adding or repeating text changes the judgement. Within provenance families, the same-trial and independent-study updates separate publication count from independent-study count. Within applicability families, positive out-of-scope updates test whether topical similarity or favourable direction is sufficient to influence a narrower claim. Within direction families, applicable challenging updates test whether the verifier mechanically strengthens its judgement whenever evidence is added. Counterbalanced recognition orders reduce an option-position explanation. H3 tests the further alternative that the update policy works only when each relation is isolated in a separate family.
-
-Oracle and cue-ablation diagnostics followed the primary confirmatory suite. CF-P3 was selected post hoc after the primary analysis found a repeatable provenance-integration error despite correct comparative recognition. The diagnostic conditions were frozen before their model calls. The \emph{relation oracle} supplies the item-specific study-dependence relation, leaving the final verdict to the model. The \emph{policy oracle} supplies a general rule: repeated or same-trial reports may add detail while contributing no independent corroboration. Each oracle uses the exact-repeat, same-trial, and independent-study conditions, adding six exact inputs and 30 responses in total.
-
-H3-M1 contributes two counterbalanced provenance-recognition inputs and five neutral-update inputs. It reuses the H3 initial state, which lacks the removed field. H3-M1 therefore adds seven exact inputs and 35 responses. Across CF-P3 and H3-M1, the diagnostic design contains 13 exact inputs and 65 responses \emph{per tested model}, outside both the 330-call original-suite and 550-call selected-comparison denominators. GPT-5.5, Qwen3-4B, and Gemma3-4B completed this diagnostic design; Llama and Ministral did not. Completion is distinct from output validity, particularly for Gemma. These interventions measure how explicit relation identity, an explicit update rule, and removal of a study-group cue affect observable behaviour.
-
-\subsection{Scope of inference}
-
-The two evaluation packages cover 14 clinical families under five recorded model conditions. Families and clinical contrasts define their breadth; repeated invocations measure within-input stability. Comparative recognition measures whether a model can label a relation when asked directly, not whether its answer is carried into a later aggregation call. H3 tests composition with a study-group cue, and H3-M1 measures the effect of removing that cue while retaining bibliographic and trial identity information. Oracle tests measure sensitivity to explicit relation or policy information. The later study-grouping prompt is an intervention, not external deduplication; the P5R/P6R prompt-order robustness audit and the one-family lineage-by-overlap control are reported separately from the main evaluation \citep{mizrahi-etal-2024-state,ceballos-arroyo-etal-2024-open}.
-
-\paragraph{Code and data availability.} The anonymized repository is available at \url{https://anonymous.4open.science/r/study-lineage-review-artifact/}. It contains the paper source, frozen inputs, rendered prompts, schemas, configurations, recorded outputs, manifests, audit summaries, figures, and rerun scripts. GPT-5.5 calls were run through Codex with medium reasoning effort; the archived records support audit of those calls, while exact GPT reruns require Codex access. The open-weight runs can be rerun with the pinned model revisions and GPU runner.
-
-\section{Results}
-\label{sec:results}
-
-The first three Results subsections answer RQ1, RQ2, and RQ3, respectively; the fourth reports contrast conditions for applicability, result direction, and composition. The later subsections report secondary robustness, exploratory-control, and post-hoc diagnostic analyses; they do not redefine the primary three-question evaluation.
-
-\subsection{Can models recognise study lineage?}
-
-The original provenance families CF-P1--P3 each ask the model to compare a same-trial report with an independent trial in both A/B orders. Table~\ref{tab:provenance-results} summarises the contrast by model while retaining the contributing family IDs; Appendix Table~\ref{tab:original-provenance-detail} gives every family row. GPT-5.5 and Qwen identify the relation in all ten recognition calls in each of the three families. Gemma and Llama identify it in five of ten calls per family. Ministral identifies it in all ten CF-P1 calls; in CF-P2 and CF-P3, five recognition outputs are correct and five are rejected in each family, so neither family has complete valid two-order recognition. The later pure-provenance families P5R and P6R also have 10/10 recognition for GPT-5.5, Qwen, and Ministral; validity and order failures limit the corresponding Gemma and Llama comparisons.
+We ran the evaluation in stages. The original, prospectively frozen suite contains three provenance families (CF-P1--P3), three applicability families (CF-A1--A3), three direction families (CF-D1--D3), and the held-out compositional family H3. A separately frozen follow-up package adds two pure-provenance families (P5R and P6R) and two compositional families (H5 and H6). Table~\ref{tab:benchmark-overview} lists their clinical targets and contrasts.
 
 \begin{table*}[t]
 \centering
 \small
-\begin{tabular}{@{}lclc@{}}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{@{}l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X c@{}}
 \toprule
-Model & Full recognition & Same-trial over-credit in evaluable families & Rejected R/I \\
+\textbf{Family} & \textbf{Clinical target} & \textbf{Tested contrast} & \textbf{Inputs} \\
 \midrule
-GPT-5.5 & 3/3 & P1--P3: 5/5 each & 0/0 \\
-Qwen3-4B & 3/3 & P1, P3: 5/5 each; P2 not estimable & 0/5 \\
-Gemma3-4B & 0/3 & Not estimable under full recognition & 0/10 \\
-Llama-3.1-8B & 0/3 & Not estimable under full recognition & 0/10 \\
-Ministral-3-8B & 1/3 (P1) & P1: 5/5 & 10/5 \\
+CF-P1 & Erenumab; episodic migraine & STRIVE follow-up vs ARISE & 6 \\
+CF-P2 & Dupilumab; uncontrolled asthma & QUEST analysis vs distinct trial & 6 \\
+CF-P3 & SGLT2 inhibition; kidney disease & EMPA-KIDNEY analysis vs distinct trial & 6 \\
+CF-A1 & Adjuvant pembrolizumab; melanoma & applicable vs out-of-scope evidence & 6 \\
+CF-A2 & Factor Xa inhibition; atrial fibrillation & applicable vs out-of-scope evidence & 6 \\
+CF-A3 & Olaparib; ovarian-cancer maintenance & first-line vs relapsed disease & 6 \\
+CF-D1 & ICU glucose control & agreeing vs mortality-challenging result & 6 \\
+CF-D2 & Intensive glycemic control & agreeing vs challenging outcome & 6 \\
+CF-D3 & Vitamin D; falls in older adults & fall reduction vs high-dose challenge & 6 \\
+H3 & Pravastatin; coronary-event prevention & provenance, scope, and direction & 12 \\
+\midrule
+P5R & Early antiretroviral therapy & START follow-up vs TEMPRANO; grouping & 10 \\
+P6R & Checkpoint inhibitor plus chemotherapy; lung cancer & same-trial vs independent update; grouping & 10 \\
+H5 & Antiretroviral treatment evidence & compositional follow-up & 14 \\
+H6 & Checkpoint inhibitor evidence & compositional follow-up & 10 \\
+\midrule
+\textbf{Total} & \textbf{14 clinical families} & & \textbf{110} \\
 \bottomrule
-\end{tabular}
-\caption{Recognition and same-trial over-credit across the three original provenance families (CF-P1--P3).}
-\label{tab:provenance-results}
-\par\smallskip
-\begin{minipage}{\textwidth}
-\footnotesize
-Full recognition requires 10/10 correct calls across both orders. Over-credit means labelling a same-trial report as independent; 5/5 counts repeated calls, not studies. R/I lists rejected recognition/integration calls. ``Not estimable'' concerns only the full-recognition contrast; Appendix Table~\ref{tab:original-provenance-detail} gives all family rows.
-\end{minipage}
+\end{tabularx}
+\caption{Clinical targets and analytical roles of the selected 14 families. Inputs are distinct task inputs per model, each invoked five times. The first ten families belong to the original suite (66 inputs); the final four were frozen later (44 inputs). Source identifiers and publication anchors appear in Appendix Tables~\ref{tab:family-inventory} and~\ref{tab:initial-source-anchors}.}
+\label{tab:benchmark-overview}
 \end{table*}
 
-\subsection{Does recognised lineage constrain aggregation?}
+Oracle and cue-ablation tests were introduced after the primary provenance failure and are treated as post-hoc diagnostics. The prompt-order audit is secondary, and the lineage-by-overlap family is exploratory and policy-instructed. These analyses are not pooled with the primary 14-family comparison. Appendix~\ref{app:study-chronology} records the experimental chronology.
 
-In each of CF-P1, CF-P2, and CF-P3, GPT-5.5 recognises study lineage in 10/10 comparative calls but assigns independent corroboration to the same-trial update in 5/5 separate aggregation calls. The finding therefore occurs in three of three original provenance families; 15/15 describes stability across calls, not 15 independent clinical cases. Qwen shows the same contrast in CF-P1 and CF-P3. Its CF-P2 aggregation has five rejected outputs, so that family cannot support a semantic over-credit estimate. Ministral shows the contrast in CF-P1; Gemma and Llama do not provide complete correct recognition across both orders in any of these three families. In the later pure-provenance conditions, GPT-5.5 again recognises P5R and P6R in 10/10 calls each and over-credits the same-trial update in 4/5 document-level calls per family. These comparisons show a behavioural gap across tasks, not that a recognition answer was ignored within a shared model state.
 
-\subsection{Can study grouping reduce over-credit while preserving independent evidence?}
 
-The later package compares a neutral document-level verifier with an explicit study-grouping instruction on the same family conditions. Figure~\ref{fig:grouping-results} shows the attributable same-trial over-credit comparison in the two pure-provenance families. In P5R and P6R, GPT-5.5's over-credit falls from 4/5 to 0/5 in each family; Ministral improves in P6R. Qwen and Gemma remain at 5/5 in both families; Llama is already at zero in its one fully valid comparison. The remaining comparisons have rejected outputs in at least one mode. This is a family-level, model-dependent effect of a prompting intervention, not external study deduplication. Appendix Table~\ref{tab:compositional-detail} reports the compositional H5/H6 flags separately: both initial states already contain an independent study, so a change in the global flag cannot isolate credit given to the added same-trial report.
+\section{Experiments and results}
+\label{sec:results}
+
+\subsection{Experimental setup}
+
+We evaluated five model conditions: \texttt{gpt-5.5} at medium reasoning effort, \texttt{Qwen3-4B-Instruct-2507}, \texttt{Gemma-3-4B-it}, \texttt{Llama-3.1-8B-Instruct}, and \texttt{Ministral-3-8B-Instruct-2512}. The controls cover exact repetition, same-trial versus independent-study updates, positive but out-of-scope evidence, applicable opposing evidence, and counterbalanced recognition order. Primitive confirmatory inputs omit the study-group label used in the grouped condition; H3 remains a cue-rich compositional reference.
+
+The open-weight runs used greedy decoding (\texttt{do\_sample=false}, \texttt{max\_new\_tokens=2048}). In the later grouping condition, the verifier assessed all displayed reports with study identifiers and an instruction to combine evidence by underlying trial identity.
+
+Both tasks returned structured responses, which we checked before reading the clinical judgment. Validation covered the response schema, the requested item identity, coverage and order of displayed evidence, and exact-substring quotations from the passages. We retained raw outputs and validation errors; canonical validity permits removal of one outer Markdown JSON fence while leaving the response content unchanged. Each candidate order in recognition was invoked five times. The grouping condition retains all displayed documents and adds a study-level aggregation instruction. Appendix~\ref{app:prompt-contract} records the complete templates and model-specific formatting details.
+
+Validity differs substantially across models. Of 550 planned calls per model in the selected 14-family comparison, GPT-5.5 has 550 canonical-valid outputs, Qwen 480, Gemma 400, Llama 395, and Ministral 410. These totals describe response validity across recognition, controls, and aggregation. A family with five rejected aggregation calls contributes no estimate of that outcome, even when its recognition answers are correct. Rejected cells appear alongside the family-level semantic results (Appendix Table~\ref{tab:family-validity}).
+
+\subsection{Models can recognize study lineage directly}
+
+Across the three original provenance families, GPT-5.5 and Qwen identify the independent update in all ten recognition calls in each family. Gemma and Llama are correct in five of ten calls per family. Ministral reaches 10/10 in CF-P1; in CF-P2 and CF-P3, five calls are correct and five are rejected. Appendix Table~\ref{tab:original-provenance-detail} gives the full family-level counts.
+
+The two recognition orders matter to the interpretation. Each original provenance family supplies five calls with one candidate as A and five with the candidates reversed; full recognition requires the correct study relation in both presentations. A 5/10 result therefore falls short of the order-balanced criterion even if every valid answer in one presentation is correct. Recognition asks for the independent update, whereas verification assesses the combined support for the claim.
+
+
+\subsection{Correct lineage recognition does not guarantee lineage-respecting aggregation}
+
+Correct lineage answers and lineage-respecting aggregation diverge. 
+GPT-5.5 fully recognizes all three original provenance families, but the separate aggregation task over-credits the same-trial update in 5/5 calls in each family. Qwen shows the same contrast in CF-P1 and CF-P3; its CF-P2 aggregation outputs are rejected. Ministral shows the contrast in CF-P1. Gemma and Llama do not achieve full two-order recognition in these families. Table~\ref{tab:provenance-results} reports the family-level contrast; recognition responses are not inputs to aggregation calls.
+
+The exact-repeat and null controls sharpen this finding. Across the nine original primitive families, GPT-5.5 treated these controls as duplicate or unchanged in 45/45 calls. In CF-P1--P3, it marked the later same-trial publication as independent corroboration in 15/15 calls. The model thus handled literal repetition differently from a second publication linked to an already represented trial. The 15 calls are repeated measurements across three clinical families.
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}X >{\centering\arraybackslash}p{0.16\columnwidth} >{\centering\arraybackslash}p{0.29\columnwidth} >{\centering\arraybackslash}p{0.14\columnwidth}@{}}
+\toprule
+\textbf{Model} &
+\shortstack{\textbf{Recognition}} &
+\shortstack{\textbf{Aggregation}} &
+\shortstack{\textbf{Rejected}\\\textbf{R/A}} \\
+\midrule
+GPT-5.5        & 3/3 & 0/3 & 0/0 \\
+Qwen3-4B       & 3/3 & 0/2 & 0/5 \\
+Gemma3-4B      & 0/3 & \textit{N/E} & 0/10 \\
+Llama-3.1-8B   & 0/3 & \textit{N/E} & 0/10 \\
+Ministral-3-8B & 1/3 & 0/1 & 10/5 \\
+\bottomrule
+\end{tabularx}
+\caption{Family-level recognition--aggregation contrast in CF-P1--P3.
+Full recognition requires 10/10 correct calls across both
+counterbalanced orders. The aggregation column counts
+lineage-respecting families among fully recognized families with valid
+same-trial aggregation outputs.
+N/E means not evaluable because no family met this prerequisite. A
+family is lineage-respecting when the added same-trial report is not
+labeled as independent corroboration. R/A denotes rejected
+recognition/aggregation calls.}
+\label{tab:provenance-results}
+\end{table}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig2_story_candidate.pdf}
-\caption{Family-level summary of the recognition--aggregation contrast and the later study-grouping intervention. Panel A reports lineage recognition above and same-trial over-credit below for the three original provenance families. Panel B reports same-trial over-credit before and after study grouping in P5R and P6R. Recognition and aggregation are separate stateless calls; repeated calls measure within-input stability. NA denotes five rejected verifier outputs, and an asterisk denotes five rejected calls in the marked condition.}
+\includegraphics[width=\textwidth]{figures/fig2.pdf}
+\caption{Model-by-family results for lineage recognition and same-trial evidence aggregation. Panel A reports the original provenance families; Panel B reports the later pure-provenance families used to test study grouping. R denotes full recognition across both candidate orders (10/10 correct calls); D and G indicate whether document-level and study-grouped aggregation, respectively, avoided same-trial over-credit in every valid call. A blue check marks that the criterion was met; an orange cross indicates over-credit in at least one valid call. A triangle marks order-sensitive recognition, a question mark marks recognition limited by rejected outputs, and a dash indicates that aggregation is not estimable. Preservation of genuinely independent evidence is evaluated separately in Appendix Table~\ref{tab:later-detail}.}
 \label{fig:grouping-results}
 \end{figure*}
 
-Independent corroboration is a separate safety check on the intervention (Appendix Table~\ref{tab:later-detail}, panel B). On P6R, all five models preserve support for the complete claim and the independent-trial flag in 5/5 document-level and 5/5 grouped calls. On P5R, GPT-5.5, Qwen, Gemma, and Llama each preserve this outcome in 5/5 valid calls in both modes; Ministral's grouped independent condition has no valid output. The P6R preservation result represents one clinical family across five model conditions.
+\subsection{Study grouping repairs some model--family conditions}
 
-\subsection{Do other evidence relations show the same pattern?}
+P5R is the clearest intervention case. Its initial START report and later START follow-up derive from the same trial, whereas TEMPRANO is an independent trial \citep{lundgren-etal-2015-start,lundgren-etal-2023-start-followup,danel-etal-2015-temprano}. GPT-5.5 recognizes this distinction in 10/10 calls but marks the later START report as independent corroboration in 4/5 document-level calls. Under study grouping, over-credit falls to 0/5. Qwen and Gemma remain at 5/5 over-credit after grouping. Llama has no document-level over-credit in P5R, while Ministral has no valid same-trial document or grouped output for this family.
 
-The applicability and direction families provide contrast conditions, not additional lineage tests. GPT-5.5 selects the target update in all six families under both A/B orders (10/10 recognition calls per family). In its separate verifier calls, it ignores the positive but out-of-scope update in each CF-A family (5/5 per family) and treats the challenging update as conflicting or mixed evidence in each CF-D family (5/5 per family). Qwen recognises the target update in 10/10 calls in each CF-A family, but its applicable CF-A3 update has five rejected verifier outputs; its CF-D recognition varies by family and order. Thus the provenance gap is not a uniform failure on every tested relation, but these selected controls do not establish general applicability or direction reliability. Appendix Table~\ref{tab:control-axis-recognition} gives recognition and rejection denominators for all five models.
+P6R provides a second pure-provenance comparison. GPT-5.5 again moves from 4/5 document-level over-credit to 0/5 under grouping, and Ministral moves from 5/5 to 0/5. Qwen and Gemma remain at 5/5. Rejected grouped outputs leave the Llama comparison unresolved.
 
-In the held-out compositional H3 family, GPT-5.5 and Qwen each get 30/30 recognition calls correct across provenance, applicability, and direction comparisons. Nevertheless, their separate verifier calls flag the added same-trial WOSCOPS report as independent corroboration in 4/5 and 5/5 valid calls, respectively. H3 extends the observed recognition--aggregation contrast beyond a primitive provenance-only family; the 30 calls cover three relation types, so they are not 30 lineage comparisons.
+The independent-trial update provides a separate check on the grouping intervention. In P6R, all five models mark and use it in 5/5 calls before and after grouping. GPT-5.5, Qwen, Gemma, and Llama show the same 5/5 pattern in P5R; Ministral's grouped outputs for that update are rejected. GPT-5.5's reduction in same-trial over-credit therefore coincides with continued use of independent evidence in both families (Appendix Table~\ref{tab:later-detail}).
 
-\subsection{Does the provenance failure survive a prompt-order change?}
+H5 and H6 give a different view of the grouping instruction. For GPT-5.5, the global corroboration flag on the same-trial-update condition changes from 5/5 to 4/5 in H5 and from 5/5 to 1/5 in H6. Both initial evidence states already contain an independent study, so a global flag cannot identify which study received the credit. We report those changes as compositional observations and reserve the same-trial over-credit comparison for P5R and P6R (Appendix Table~\ref{tab:compositional-detail}).
 
-A secondary prompt-robustness audit reran the P5R and P6R document-level conditions with a semantically equivalent reordered verifier prompt. It comprised 40 calls per model for GPT-5.5, Qwen3-4B, and Gemma3-4B, covering two families, same-trial and independent updates, two prompt variants, and five repetitions. GPT-5.5 marked same-trial updates as independent in 16/20 records and passed the independent-update semantic audit in 14/20. Qwen marked every same-trial record as independent (20/20); its independent-update audit passed 15/20 because five records flagged independent corroboration without using the added evidence. Gemma was canonically parseable in all 40 records but strict-valid in 0/40 because every output had one outer Markdown JSON fence; its same-trial records failed the provenance flag rule in 20/20, while its independent-update audit passed 20/20. Thus the broad failure survived the prompt-order change, but the exact failure form and format validity were model-dependent. These secondary calls show robustness across the tested prompt variants only; they do not establish full prompt invariance and are not pooled with the primary denominators. Appendix Table~\ref{tab:prompt-robustness} gives the audit counts.
+\section{Further analysis}
+\label{sec:further-analysis}
 
-Across the selected 14-family comparison, each model has 550 accounted calls. Canonically valid/rejected outputs are 550/0 for GPT-5.5, 480/70 for Qwen, 400/150 for Gemma, 395/155 for Llama, and 410/140 for Ministral; Appendix Table~\ref{tab:family-validity} gives the family-level breakdown. Semantic rates above use valid outputs only; a rejected output is neither a correct nor an incorrect scientific judgement. The five repetitions document within-input stability rather than increasing the number of clinical cases.
+\subsection{Specificity and compositional evidence}
 
-\subsection{Exploratory lineage-by-overlap control}
+Applicability and direction provide specificity controls for the central lineage finding. GPT-5.5 recognizes the target update in all six CF-A/CF-D families (10/10 per family). In separate aggregation calls, it ignores the positive but out-of-scope update in each applicability family and registers the challenging update as conflicting or mixed evidence in each direction family (5/5 per family).
 
-The paper reports one ProMISe/ARISE exploratory, policy-instructed control crossing same-trial versus independent-trial evidence with high versus low textual overlap. Its passage and overlap criteria were fixed before the model calls. Under a prompt that explicitly defines same-trial reports as non-independent and separate trials as independent, GPT-5.5 gives the expected combination label in all four cells across 20/20 calls. Qwen gives the expected label in three of four cells; Gemma succeeds in the two independent-trial cells but not the same-trial cells. Llama's four valid cell outputs are mixed, and Ministral has two valid and two rejected cell outputs. This is a one-family test of applying a stated lineage policy across overlap strata. It is not an unprompted lineage-discovery test or a causal estimate of the effect of overlap.
+H3 asks whether the same pattern survives when the relations are no longer isolated. The family centers on one statin claim and includes a later WOSCOPS analysis from the same lineage, positive but out-of-scope evidence from 4S, and a challenging result from ALLHAT-LLT. GPT-5.5 and Qwen are correct in all 30 recognition calls across provenance, applicability, and direction. Yet their separate aggregation calls still mark the added same-trial WOSCOPS analysis as independent corroboration in 4/5 and 5/5 valid calls, respectively. Those 30 calls comprise ten comparisons for each of the three relations. Full control-axis results are reported in Appendix~\ref{app:control-axis-results}.
 
-The lexical and semantic overlap values and source-faithful passage construction are reported in Appendix Table~\ref{tab:overlap-construction}; the policy-defined four-cell result is in Table~\ref{tab:overlap-policy-results}. The exact-repeat, null, same-trial, and independent-update controls are summarized separately in Appendix Table~\ref{tab:control-outcomes}; applicability and direction integration are broken down by family in Appendix Table~\ref{tab:integration-controls}.
+\subsection{Explicit provenance information repairs one model condition}
 
-\subsection{Follow-up oracle and cue diagnostics}
+CF-P3 tests whether externally supplied provenance information changes aggregation behavior. GPT-5.5 over-credits the same-trial EMPA-KIDNEY analysis in 5/5 neutral-verifier calls. When the verifier is given either the item-specific relation or a general study-dependence policy, the same-trial independent-corroboration flag disappears in all five valid calls, while the independent-trial control remains at 5/5. Qwen retains the same-trial independent-corroboration flag in all five calls under both oracle conditions. Explicit provenance information therefore repairs this GPT-5.5 condition, while Qwen shows the same
+over-credit pattern under the two oracle conditions.
 
-On CF-P3, GPT-5.5's neutral verifier over-credits the same-trial report in 5/5 calls. Supplying either the item-specific relation or a general study-dependence policy removes that flag in all five calls while retaining independent-trial corroboration in 5/5. Qwen still over-credits the same-trial report in 5/5 calls under each oracle. Gemma's same-trial oracle outputs are rejected, so no semantic repair estimate is available. In H3-M1, removing the study-group label (\texttt{source\_group\_id}) leaves GPT-5.5's provenance recognition correct in both orders (10/10), yet its separate verifier still flags the same-trial report as independent in 5/5 calls. Qwen and Gemma each answer only one of the two recognition orders correctly (5/10) and also flag the same-trial report in 5/5 valid verifier calls. These post hoc diagnostics show model-dependent prompt sensitivity; they do not establish a shared internal mechanism or cue-free lineage inference. Appendix Table~\ref{tab:diagnostic-results} gives condition-level denominators and rejection boundaries.
+This diagnostic evaluates externally supplied relation and policy information. Testing whether a model's own recognition response improves later aggregation requires a separate two-stage design. H3-M1 tests a different cue. After removing the study-group cue, GPT-5.5 still recognizes provenance in 10/10 calls and over-credits the same-trial report in 5/5 separate aggregation calls.  Appendix~\ref{app:diagnostic-results} gives the full model-specific denominators.
+
+\subsection{Prompt-order and lineage-by-overlap controls}
+
+A reordered verifier prompt preserves the broad same-trial over-credit pattern in the tested GPT-5.5, Qwen, and Gemma conditions, although validity and the exact failure form vary by model. The lineage-by-overlap analysis uses one policy-instructed ProMISe/ARISE family to compare same-trial and independent passages at higher and lower textual overlap. The control evaluates application of a stated lineage policy across overlap strata. Causal overlap effects and unprompted lineage discovery require separate designs. Both analyses remain outside the primary denominators. Appendices~\ref{app:secondary-analyses} and~\ref{app:validity} report their construction, counts, and rejection boundaries.
+
 
 \section{Conclusion}
 
-Across source-audited clinical families, correct answers to a study-lineage question do not ensure that a separate verifier call will respect that lineage when aggregating reports. The clearest contrast occurs in three original provenance families for GPT-5.5 and in selected conditions for other models. Explicit study grouping reduces GPT-5.5 same-trial over-credit in two later pure-provenance families, but is not a general repair across models. Clinical families, rather than repeated calls, define the scope of these findings. Because recognition and aggregation were separate stateless tasks, the results identify a behavioural gap, not its internal cause.
+The results show a cross-task behavioral gap: study lineage can be recognized in a direct comparison yet fail to guide a separate evidence-aggregation judgment. Across the three original provenance families, GPT-5.5 consistently identified the independent trial but treated a later report from the same trial as independent corroboration. Selected Qwen3-4B and Ministral-3-8B conditions showed the same cross-task pattern. In the later pure-provenance families, study grouping eliminated GPT-5.5 same-trial over-credit while retaining support for independent evidence; effects varied across the other model conditions.
+
+These results show why evidence aggregation should use underlying study identity as the unit of corroboration. The evidence comes from 14 source-audited clinical families, with repeated calls characterizing within-input stability. The staged design distinguishes the original suite, the later grouping follow-up, and post-hoc and exploratory diagnostics. Its scope is the audited families and the displayed source metadata; broader prevalence and cue-free grouping require further evaluation.
 
 \section*{Limitations}
 
-The 14 source-audited families are selected clinical contrasts, not a representative sample of medical claims or publications. The original ten-family and later four-family suites were frozen at different stages, and some later selected inputs use source-corrected passages. Five repetitions of an exact input measure within-input stability, not five independent cases; we do not infer population-level error rates from pooled calls. Recognition and aggregation are separate stateless tasks, so their disagreement does not establish what the model internally represented during aggregation. The grouping condition changes the prompt and exposes study identifiers and a study-group cue; it is not external deduplication and its effect need not transfer to settings without those cues. The prompt-robustness audit covers only P5R/P6R, two prompt variants, and three models; Gemma's canonical parsing does not remove its strict-format limitation. Some open-weight outputs were rejected by the response contract, limiting semantic comparisons. H5/H6 global corroboration flags cannot isolate the added same-trial report, and the lineage-by-overlap control covers only one policy-instructed family. These boundaries limit generalisation and causal interpretation.
+The 14 source-audited families are selected clinical contrasts, not a representative sample of medical claims or publications. Repeated calls measure within-input stability rather than independent clinical cases, and separate stateless recognition and aggregation calls do not reveal the model's internal representation. The grouping condition exposes study identifiers and changes the prompt, while rejected outputs limit some cross-model comparisons; these boundaries constrain generalisation and causal interpretation.
 
 \section*{Ethical considerations}
 
-This is an evaluation of model behaviour on source-linked clinical evidence, not a system for diagnosis or treatment decisions. Over-crediting repeated reports could overstate the strength of clinical support, while rejecting or suppressing genuinely independent evidence could hide useful findings. We therefore distinguish same-trial reports from independent studies, report invalid outputs separately from scientific errors, and avoid presenting tested claims as current clinical recommendations. The repository contains derived research records and source identifiers, not model weights, credentials, or patient-level personal data. Models remain subject to their original access terms, and the clinical sources remain subject to their publication and reuse terms. Any clinical use would require independent source verification and qualified human review.
+This work evaluates model behavior on source-linked clinical evidence in a research setting. Over-crediting repeated reports could overstate the strength of clinical support, while suppression of genuinely independent evidence can hide relevant findings. The study therefore records source lineage, separates rejected outputs from scientific errors, and preserves audit records for the selected evidence. The artifact distributes derived research records and source identifiers; model weights, credentials, and patient-level personal data remain outside the artifact. Any clinical deployment would require independent source verification and qualified human review.
 
 \bibliography{custom}
 
 \appendix
+\raggedbottom
 
-\section{Clinical families and source identity}
+\section{Clinical families, source identity, and study chronology}
 \label{app:family-inventory}
 
-Table~\ref{tab:family-inventory} inventories the 14 families in the selected comparison. The clinical targets are abbreviated descriptions of the \emph{tested claims}, not new clinical conclusions. Study identifiers are transcribed from the selected frozen verifier inputs; a missing identifier in those inputs is not evidence that two reports describe the same study. The original ten-family suite and the later four-family package were constructed and run at different stages.
+\subsection{Ground truth, freezing, and experimental unit}
+\label{app:study-chronology}
+
+We established study lineage from the source record before model inference. Where available, trial registration identifiers provided the clearest link between publications; we also retained publication titles, PMIDs or other identifiers, source locators, and the study descriptions in the frozen records. We assigned a same-trial label only when the selected reports could be linked to the same underlying study; an independent label required a distinct trial or cohort. We audited applicability and direction separately against the fixed claim's population, intervention, comparator, outcome, time frame, and observed result.
+
+For each accepted family, we froze the claim, initial passages, candidate updates, source metadata, relation labels, expected categorical handling, and source-audit records before the corresponding calls. The original ten-family suite and the later four-family package were frozen at different stages. The later P6R source correction is documented in Appendix~\ref{app:prompt-contract}; superseded and selected inputs were not pooled. The clinical family is the experimental unit because its matched conditions share one claim and one audited contrast. Repeated calls of an exact input measure response stability only.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l X X@{}}
+\toprule
+Design component & Families/conditions & Analysis status & Role in the paper \\
+\midrule
+Original suite & CF-P1--P3, CF-A1--A3, CF-D1--D3, H3 & prospectively frozen primary evaluation & recognition and aggregation across provenance, applicability, direction, and composition \\
+Later package & P5R, P6R, H5, H6 & separately frozen follow-up & study grouping and preservation of genuinely independent evidence \\
+Prompt-order audit & P5R, P6R & secondary robustness & tests one semantically equivalent verifier-prompt reordering \\
+Oracles and cue ablation & CF-P3 oracles, H3-M1 & post-hoc diagnostic & tests explicit relation/policy information and removal of the study-group cue \\
+Lineage $\times$ overlap & ProMISe/ARISE control & exploratory, policy-instructed & separates application of a stated lineage rule from ordinary passage overlap \\
+\bottomrule
+\end{tabularx}
+\caption{Experimental chronology and analysis status. Later diagnostics were not part of the original primary denominator and are reported separately.}
+\label{tab:study-chronology}
+\end{table*}
+
+\subsection{Selected family inventory}
+
+Table~\ref{tab:family-inventory} lists the 14 families in the selected comparison. The clinical targets provide abbreviated labels for the tested claims. Study identifiers are transcribed from the selected frozen verifier inputs; a missing identifier is not evidence that two reports describe the same study.
 
 \begin{table*}[t]
 \centering
@@ -308,7 +336,7 @@ CF-A1 & 6 & Adjuvant pembrolizumab and melanoma recurrence & \texttt{NCT02362594
 CF-A2 & 6 & Factor Xa inhibition for atrial-fibrillation stroke prevention & \texttt{NCT00412984}; \texttt{NCT00403767}; \texttt{NCT00643201} \\
 CF-A3 & 6 & First-line olaparib-containing ovarian-cancer maintenance & \texttt{NCT01844986}; \texttt{NCT02477644}; \texttt{NCT00753545} \\
 CF-D1 & 6 & ICU glucose control and mortality & Leuven surgical ICU trial; \texttt{NCT00115479}; \texttt{NCT00220987} \\
-CF-D2 & 6 & Intensive glycaemic control and death or cardiovascular risk & \texttt{ISRCTN75451837}; \texttt{NCT00000620}; \texttt{NCT00145925} \\
+CF-D2 & 6 & Intensive glycemic control and death or cardiovascular risk & \texttt{ISRCTN75451837}; \texttt{NCT00000620}; \texttt{NCT00145925} \\
 CF-D3 & 6 & Vitamin-D-based supplementation and falls & \texttt{ACTRN12605000658617} for one source; other source records lack a trial ID \\
 H3 & 12 & Pravastatin and coronary events in primary prevention & WOSCOPS; 4S; ALLHAT-LLT; \texttt{NCT00336336} \\
 \midrule
@@ -322,7 +350,7 @@ H6 & 10 & Compositional checkpoint-inhibitor evidence updates & \texttt{NCT02578
 \label{tab:family-inventory}
 \end{table*}
 
-Table~\ref{tab:initial-source-anchors} gives a traceable publication anchor for each initial state. Source labels and PMIDs are copied from the frozen input metadata rather than inferred from the model outputs; source labels may abbreviate the published article title. Where the initial state has multiple passages or studies, the table shows one anchor only; Table~\ref{tab:family-inventory} records the broader study-identity set. The full passage text and source locators remain in the frozen input records.
+Table~\ref{tab:initial-source-anchors} provides one traceable publication anchor for each initial state. Source labels and PMIDs are copied from the frozen input metadata. Where an initial state contains several passages or studies, the table shows one anchor only; Table~\ref{tab:family-inventory} records the wider identity set.
 
 \begin{table*}[t]
 \centering
@@ -338,7 +366,7 @@ CF-A1 & Adjuvant pembrolizumab versus placebo in resected stage III melanoma & 3
 CF-A2 & Apixaban versus warfarin in patients with atrial fibrillation & 21870978 \\
 CF-A3 & SOLO1/GOG 3004 maintenance olaparib in newly diagnosed advanced ovarian cancer & 34715071 \\
 CF-D1 & Intensive insulin therapy in critically ill patients & 11794168 \\
-CF-D2 & Post-trial monitoring of a randomised controlled trial of intensive glycaemic control in type 2 diabetes extended from 10 years to 24 years (UKPDS 91) & 38772405 \\
+CF-D2 & Post-trial monitoring of a randomised controlled trial of intensive glycemic control in type 2 diabetes extended from 10 years to 24 years (UKPDS 91) & 38772405 \\
 CF-D3 & Effects of vitamin D and calcium supplementation on falls & 12568412 \\
 H3 & Prevention of coronary heart disease with pravastatin in men with hypercholesterolemia & 7566020 \\
 \midrule
@@ -352,9 +380,7 @@ H6 & Pembrolizumab Plus Chemotherapy in Metastatic Non-Small-Cell Lung Cancer & 
 \label{tab:initial-source-anchors}
 \end{table*}
 
-\clearpage
-\raggedbottom
-\section{Prompt and scoring contract}
+\section{Prompts, execution, and implementation details}
 \label{app:prompt-contract}
 
 Figures~\ref{fig:recognition-prompt}--\ref{fig:grouped-prompt} reproduce the core templates: comparative recognition (v2.2), document-level verification (v2), and study-grouped verification (v1). These short names correspond to the full filenames and hashes in the frozen run configurations. The literal \texttt{\{model\_input\_json\}} placeholder is replaced, once per call, by the frozen JSON input containing the claim, displayed source metadata, and evidence passages. Gold answers and expected score movements are not in that input. The figures show the base templates; they omit the varying clinical JSON payload and the model-specific JSON-schema formatting suffix described below. Recognition answers are never passed to verifier calls.
@@ -362,13 +388,47 @@ Figures~\ref{fig:recognition-prompt}--\ref{fig:grouped-prompt} reproduce the cor
 \subsection{Inputs, output validation, and execution}
 \label{app:prompt-execution}
 
-The recognition input contains \texttt{claim\_text}, \texttt{target\_relation}, \texttt{initial\_evidence}, \texttt{update\_a}, and \texttt{update\_b}; verifier inputs contain the fixed claim, \texttt{initial\_evidence}, and either an \texttt{added\_evidence} object or null. Each displayed evidence object carries an evidence ID, ordered bundle position, source title, passage, and available source identifiers. Some original-suite conditions omit the study-group label (\texttt{source\_group\_id}); the later grouped condition includes it and \texttt{trial\_id}. This is a prompt-and-cue intervention, not externally deduplicated evidence.
+The recognition input contains \texttt{claim\_text}, \texttt{target\_relation}, \texttt{initial\_evidence}, \texttt{update\_a}, and \texttt{update\_b}; verifier inputs contain the fixed claim, \texttt{initial\_evidence}, and either an \texttt{added\_evidence} object or null. Each displayed evidence object carries an evidence ID, ordered bundle position, source title, passage, and available source identifiers. Some original-suite conditions omit the study-group label (\texttt{source\_group\_id}); the later grouped condition includes it and \texttt{trial\_id}. This condition changes the aggregation prompt while retaining the displayed documents and source metadata.
 
-Recognition responses must contain the item and target relation, an A/B/no-difference answer, confidence, metadata basis, exact passage quotations, and a reason. Verifier responses must assess every displayed item in order and return an overall label, scores, used/ignored evidence IDs, combination flags, and a reason. The reported over-credit measure reads the \texttt{independent\_corroboration} flag on the same-trial-update condition. We validate the JSON schema, item identity, evidence coverage and order, and quoted substrings before semantic scoring; rejected outputs remain in the denominator accounting but receive no semantic score.
+Recognition responses must contain the item and target relation, an A/B/no-difference answer, confidence, metadata basis, exact passage quotations, and a reason. Verifier responses must assess every displayed item in order and return an overall label, scores, used/ignored evidence IDs, combination flags, and a reason. The reported over-credit measure reads the \texttt{independent\_corroboration} flag on the same-trial-update condition. We validated the JSON schema, item identity, evidence coverage and order, and quoted substrings before semantic scoring; rejected outputs remain in the denominator accounting but receive no semantic score.
 
-GPT-5.5 ran through Codex with medium reasoning effort; that interface did not specify temperature or random seed. The open-weight runs used each model's chat template and greedy decoding (\texttt{do\_sample=false}, \texttt{max\_new\_tokens=2048}). In the combined later-package Qwen/Gemma runner, a provider adapter appended a compact JSON Schema as a format contract to the base template; other model/run adapters differed and are retained in their archived configurations. These formatting instructions did not add clinical evidence or a gold answer. Raw output, strict-format validity, canonical validity after removal of an optional outer JSON fence, and validation errors were retained separately. Five fresh invocations per exact input assess response stability, not five independent clinical cases. Frozen run configurations record model revisions, rendered-prompt and input hashes, and the selected source passages.
+GPT-5.5 ran through Codex with medium reasoning effort; that interface did not specify temperature or random seed. The open-weight runs used each model's chat template and greedy decoding (\texttt{do\_sample=false}, \texttt{max\_new\_tokens=2048}). In the combined later-package Qwen/Gemma runner, a provider adapter appended a compact JSON Schema as a format contract to the base template; other model/run adapters differed and are retained in their archived configurations. These formatting instructions did not add clinical evidence or a gold answer. Raw output, strict-format validity, canonical validity after removal of an optional outer JSON fence, and validation errors were retained separately. We used five fresh invocations per exact input to assess response stability. Frozen run configurations record model revisions, rendered-prompt and input hashes, and the selected source passages.
 
 For P6R, the selected 50 calls per model comprise 30 unchanged calls and 20 later calls using the source-reviewed independent passage for recognition and independent-update conditions. The superseded and selected inputs are not pooled. This compact provenance note preserves the reproducible selection without treating P6R as a distinct experimental design.
+
+\subsection{Model configuration and compute}
+
+The open-weight checkpoints were loaded from pinned Hugging Face revisions recorded in \texttt{configs/transformers\_gpu\_models.json}. The runs used Kaggle GPU sessions with two Tesla T4 GPUs. The archived configurations preserve exact software environments, model-specific loading choices, and runner settings. GPT-5.5 was accessed through Codex; its parameter count and serving hardware are not available in the archived records. Reliable wall-clock and GPU-hour totals were not retained.
+
+The cross-model runs keep the clinical claims, passages, gold behaviors, and semantic task instructions fixed within each input version while adapting model-specific chat and formatting wrappers. The original ten-family suite and later four-family package were executed in separate stages.
+
+\subsection{Call accounting}
+
+Table~\ref{tab:call-accounting} reports the planned calls for each analysis block. Repeated invocations of an exact input measure response stability; they do not increase the number of clinical families. Secondary, diagnostic, and exploratory blocks are kept outside the 14-family primary/follow-up comparison.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Block & Planned calls per tested model & Tested model conditions & Planned calls \\
+\midrule
+Original ten-family suite & 330 & 5 & 1,650 \\
+Later four-family package & 220 & 5 & 1,100 \\
+Prompt-order robustness & 40 & 3 & 120 \\
+CF-P3 oracle + H3-M1 diagnostics & 65 & 3 & 195 \\
+Exploratory lineage-by-overlap control & -- & model-dependent & 36 total \\
+\bottomrule
+\end{tabular}
+\caption{Call accounting by analysis block. Completion does not imply validity; rejected outputs are reported separately in Appendix~\ref{app:validity}.}
+\label{tab:call-accounting}
+\end{table*}
+
+\subsection{Artifact contents and rerun requirements}
+
+The anonymized artifact referenced in the main paper contains the paper source, frozen inputs, rendered prompts, schemas, configurations,
+source-audit records, raw and parsed outputs, manifests, content hashes, figures, and rerun scripts. GPT-5.5 calls were made through Codex with medium reasoning effort. The archived records support audit of these calls, while an exact rerun
+requires Codex access. The open-weight conditions can be rerun from the pinned model revisions and recorded GPU runner.
 
 \clearpage
 
@@ -499,7 +559,7 @@ MODEL INPUT:
 \begin{minipage}{0.96\textwidth}
 \noindent\textbf{Study-grouped verifier prompt (v1)}\par\smallskip
 
-This is a separate, fresh verifier call on the same displayed evidence. Its additional study-level instruction is in the third paragraph; no external process collapses reports before the model sees them.
+This is a fresh verifier call over the same displayed evidence; the third paragraph adds the study-level aggregation instruction.
 
 \begin{lstlisting}[style=paperprompt]
 You are assessing how well a fixed medical claim is grounded by the supplied evidence.
@@ -508,7 +568,7 @@ Use only the claim, evidence passages, and source metadata shown in MODEL INPUT.
 outside medical knowledge, journal reputation, author reputation, or unstated facts.
 
 This is the study-level provenance-aware aggregation condition. Before making the combined
-judgement, group evidence items by their underlying study identity using trial_id and source_group_id.
+judgment, group evidence items by their underlying study identity using trial_id and source_group_id.
 Multiple reports from the same study may add detail about that study, but they must not be counted as
 independent corroborating studies. Evidence from a different trial_id may count as independent
 corroboration if it is applicable to the claim and points in the relevant direction.
@@ -556,8 +616,11 @@ MODEL INPUT:
 \end{figure*}
 
 \Needspace{0.35\textheight}
+
 \section{Original provenance results by family}
 \label{app:provenance-detail}
+
+Table~\ref{tab:original-provenance-detail} gives the recognition and same-trial aggregation rows behind the paper's central cross-task comparison. A rejected call receives no semantic score, so a $0/0$ cell is not a measured zero.
 
 \begin{table*}[t]
 \centering
@@ -591,163 +654,11 @@ Ministral-3-8B & CF-P1 & 10/10 & 5/5 \\
 \label{tab:original-provenance-detail}
 \end{table*}
 
-\Needspace{0.35\textheight}
-\section{Applicability, direction, and compositional recognition}
-\label{app:control-axis-results}
-
-Table~\ref{tab:control-axis-recognition} retains all five model conditions for the six non-provenance primitive families and H3. It reports comparative recognition only; the separate verifier observations discussed in Section~\ref{sec:results} should not be inferred from recognition counts. In CF-A1--A3 the comparison concerns clinical applicability, and in CF-D1--D3 it concerns result direction. H3 combines three relation comparisons, so its total is not a pure lineage score. Rejected recognition calls remain outside the valid denominator and are marked explicitly.
-
-\begin{table*}[t]
-\centering
-\small
-\setlength{\tabcolsep}{3.5pt}
-\begin{tabular}{@{}lccccccc@{}}
-\toprule
-Model & CF-A1 & CF-A2 & CF-A3 & CF-D1 & CF-D2 & CF-D3 & H3 \\
-\midrule
-GPT-5.5        & 10/10 & 10/10 & 10/10 & 10/10 & 10/10 & 10/10 & 30/30 \\
-Qwen3-4B       & 10/10 & 10/10 & 10/10 & $0/5^{\dagger}$ & 5/10 & 10/10 & 30/30 \\
-Gemma3-4B      & 5/10 & 5/10 & 10/10 & 5/10 & $5/5^{\dagger}$ & 5/10 & 15/30 \\
-Llama-3.1-8B   & 5/10 & $0/5^{\dagger}$ & 5/10 & 5/10 & 5/10 & 5/10 & 15/30 \\
-Ministral-3-8B & 10/10 & 10/10 & 10/10 & 10/10 & 5/10 & 10/10 & 20/30 \\
-\bottomrule
-\end{tabular}
-\caption{Comparative recognition in applicability (A), direction (D), and compositional (H3) families. Cells are correct/valid calls. Each primitive family has ten planned recognition calls; H3 has 30 across three relations. $\dagger$ marks five additional rejected recognition calls, not five incorrect answers. Repetitions are within-input stability checks.}
-\label{tab:control-axis-recognition}
-\end{table*}
-
-\Needspace{0.55\textheight}
-\section{Integration controls and exploratory overlap details}
-\label{app:integration-controls-detail}
-
-The tables in this section report the semantic integration outcomes that are not visible in the cross-model recognition table. Unless noted otherwise, these are GPT-5.5 medium results from the nine primitive confirmatory families; repeated calls are stability repetitions. The open-weight primary package supplies family-level validity and recognition counts, but not a harmonized family-by-family semantic integration summary for these applicability and direction controls, so no cross-model integration rate is inferred here.
-
-\begin{table*}[t]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}l l X X@{}}
-\toprule
-Control & Families/conditions & Expected handling & GPT-5.5 result \\
-\midrule
-Exact repeat / null & CF-P1--P3, CF-A1--A3, CF-D1--D3 & no new independent evidence & duplicate or unchanged in 45/45 calls \\
-Same-trial update & CF-P1--P3 & no independent corroboration & over-credit in 15/15 calls \\
-Independent update & P5R, P6R & preserve independent support & 5/5 $\to$ 5/5 in each family \\
-Out-of-scope positive & CF-A1--A3 & ignore for the fixed claim & out\_of\_scope and ignored, 15/15 \\
-Challenging update & CF-D1--D3 & retain support and register conflict & conflict or mixed evidence, 15/15 \\
-\bottomrule
-\end{tabularx}
-\caption{Compact control-outcome summary for the approved confirmatory and later pure-provenance conditions. The 45 exact-repeat calls are nine primitive families with five repetitions each; the 15/15 same-trial, out-of-scope, and challenging-update entries are three families with five repetitions each. The independent-support row is the separate P5R/P6R safety check.}
-\label{tab:control-outcomes}
-\end{table*}
-
-\begin{table*}[t]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}l l X@{}}
-\toprule
-Family & Target update & GPT-5.5 integration outcome \\
-\midrule
-CF-A1 & applicable vs positive out of scope & applicable update used; out-of-scope update ignored, 5/5 \\
-CF-A2 & applicable vs positive out of scope & applicable update used; out-of-scope update ignored, 5/5 \\
-CF-A3 & first-line vs relapsed maintenance & applicable update used; out-of-scope update marked out\_of\_scope and ignored, 5/5 \\
-CF-D1 & agreeing vs mortality-challenging ICU evidence & challenging update treated as conflict/mixed, 5/5 \\
-CF-D2 & agreeing vs mortality-challenging diabetes evidence & challenging update treated as conflict/mixed, 5/5 \\
-CF-D3 & agreeing vs annual high-dose vitamin-D evidence & agreeing update supports 5/5; challenging update conflicts and yields mixed\_evidence, 5/5 \\
-\bottomrule
-\end{tabularx}
-\caption{Family-level applicability and direction integration for GPT-5.5. These are separate neutral-verifier calls from the comparative-recognition calls; the table is a control-axis audit, not evidence that applicability or direction is universally solved.}
-\label{tab:integration-controls}
-\end{table*}
-
-\Needspace{0.35\textheight}
-\subsection{Lineage-by-overlap construction and results}
-\label{app:overlap-control-detail}
-
-The exploratory control uses one source-reviewed ProMISe/ARISE family. The fixed claim concerns 90-day all-cause mortality for early septic shock under early goal-directed therapy (EGDT) versus usual resuscitation. The initial anchor is the ProMISe primary report (\texttt{ISRCTN36307479}); the same-trial update is the ProMISe HTA report with the same registry identifier; the independent update is the ARISE primary report (\texttt{NCT00975793}). The four passages are source-faithful result or conclusion passages: two from the ProMISe lineage and two from ARISE. Review checks recorded the registry linkage, population, intervention, comparator, outcome, time frame, source locator, exact passage text, and passage hashes. No passage was synthetically paraphrased, trimmed, or padded, and the model-visible input did not contain the study-group label (\texttt{source\_group\_id}). We report this as an exploratory, policy-instructed control outside the confirmatory denominator; it is not a confirmatory or causal overlap experiment.
-
-Overlap was measured against the fixed initial ProMISe numerical-result anchor using lowercase Unicode-normalized word/number tokens with punctuation removed. We computed token-set Jaccard, ROUGE-L F1 on the same token sequence, and cosine similarity from the pinned \texttt{sentence-transformers/all-mpnet-base-v2} revision \texttt{e8c3b32e\allowbreak df5434bc\allowbreak 2275fc9b\allowbreak ab85f826\allowbreak 40a19130}. Within each lineage, the high passage had to exceed the low passage on all three measures, with a semantic-cosine gap of at least 0.10 and a lexical gap of at least 0.10 on Jaccard or ROUGE-L. Same-high and independent-high, and likewise same-low and independent-low, were additionally required to be close on semantic and at least one lexical measure. We use these thresholds to define high- and low-overlap strata; they are not a causal manipulation of overlap.
-
-\begin{table*}[t]
-\centering
-\small
-\setlength{\tabcolsep}{3pt}
-\begin{tabularx}{\textwidth}{@{}l >{\raggedright\arraybackslash}X r r c c c@{}}
-\toprule
-Cell & Source passage & Tokens & Chars & Jaccard & ROUGE-L & Cosine \\
-\midrule
-Anchor & ProMISe primary numerical result & 68 & 335 & -- & -- & -- \\
-Same/high & ProMISe HTA numerical result & 57 & 299 & 0.634615 & 0.400000 & 0.846106 \\
-Same/low & ProMISe HTA abstract conclusion & 30 & 182 & 0.109375 & 0.122449 & 0.656978 \\
-Independent/high & ARISE primary numerical result & 56 & 303 & 0.423729 & 0.370968 & 0.922640 \\
-Independent/low & ARISE primary conclusion & 23 & 132 & 0.118644 & 0.109890 & 0.678653 \\
-\bottomrule
-\end{tabularx}
-\caption{Frozen overlap measurements for the one-family policy-instructed lineage control. Scores are computed against the initial ProMISe numerical-result anchor; ``high'' and ``low'' are within-lineage strata, not causal treatments.}
-\label{tab:overlap-construction}
-\end{table*}
-
-Table~\ref{tab:overlap-policy-results} reports the corresponding policy-defined verifier outcomes. The prompt explicitly defined a different underlying trial as independent corroboration and another report from the same trial as duplicate evidence. It therefore tests application of a stated lineage policy, not unprompted lineage discovery.
-
-\begin{table*}[t]
-\centering
-\small
-\begin{tabular}{@{}lccc@{}}
-\toprule
-Cell & Expected relation & Duplicate evidence & Independent corroboration \\
-\midrule
-Same/high & same trial & 5/5 & 0/5 \\
-Same/low & same trial & 5/5 & 0/5 \\
-Independent/high & independent trial & 0/5 & 5/5 \\
-Independent/low & independent trial & 0/5 & 5/5 \\
-\bottomrule
-\end{tabular}
-\caption{Policy-defined lineage-by-overlap results for GPT-5.5. All 20 calls labelled the claim supported; the four cells each contain five fresh stateless calls. This is one exploratory family and does not establish an overlap effect or unprompted lineage discovery.}
-\label{tab:overlap-policy-results}
-\end{table*}
-
-\Needspace{0.4\textheight}
-\section{Selected-call validity by family}
-\label{app:validity}
-
-Table~\ref{tab:family-validity} reports canonical validity for every model-by-family row in the current selection. Each cell is valid/rejected, not correct/incorrect. A rejected response has no semantic score; the family-level recognition and integration denominators are reported separately in Appendix Table~\ref{tab:original-provenance-detail} and Table~\ref{tab:later-detail}. The five calls per exact input are stability repetitions, not five independent clinical cases.
-
-\begin{table*}[t]
-\centering
-\footnotesize
-\begin{tabular}{@{}lrrrrrr@{}}
-\toprule
-Family & Planned & GPT-5.5 & Qwen3-4B & Gemma3-4B & Llama-3.1-8B & Ministral-3-8B \\
-\midrule
-CF-P1 & 30 & 30/0 & 30/0 & 15/15 & 20/10 & 30/0 \\
-CF-P2 & 30 & 30/0 & 10/20 & 10/20 & 20/10 & 10/20 \\
-CF-P3 & 30 & 30/0 & 25/5 & 10/20 & 25/5 & 25/5 \\
-CF-A1 & 30 & 30/0 & 30/0 & 25/5 & 25/5 & 30/0 \\
-CF-A2 & 30 & 30/0 & 30/0 & 20/10 & 25/5 & 30/0 \\
-CF-A3 & 30 & 30/0 & 20/10 & 15/15 & 10/20 & 20/10 \\
-CF-D1 & 30 & 30/0 & 15/15 & 20/10 & 10/20 & 30/0 \\
-CF-D2 & 30 & 30/0 & 30/0 & 15/15 & 25/5 & 10/20 \\
-CF-D3 & 30 & 30/0 & 25/5 & 25/5 & 10/20 & 25/5 \\
-H3    & 60 & 60/0 & 55/5 & 55/5 & 40/20 & 55/5 \\
-\midrule
-P5R & 50 & 50/0 & 45/5 & 50/0 & 50/0 & 25/25 \\
-P6R & 50 & 50/0 & 50/0 & 45/5 & 40/10 & 45/5 \\
-H5  & 70 & 70/0 & 65/5 & 45/25 & 60/10 & 30/40 \\
-H6  & 50 & 50/0 & 50/0 & 50/0 & 35/15 & 45/5 \\
-\midrule
-Total & 550 & 550/0 & 480/70 & 400/150 & 395/155 & 410/140 \\
-\bottomrule
-\end{tabular}
-\caption{Canonical-valid/rejected calls in the selected 14-family comparison. Planned calls are \emph{per model}; each cell sums to its row's planned count.}
-\label{tab:family-validity}
-\end{table*}
-
-\Needspace{0.35\textheight}
-\section{Later-family recognition and aggregation detail}
+\section{Study-grouping and later-family results}
 \label{app:later-detail}
 
-Table~\ref{tab:later-detail} retains P5R/P6R recognition denominators and rejected outputs alongside the independent-trial safety check. In panel A, a document-level (D) or grouped (G) \texttt{independent\_corroboration} flag on the same-trial update is attributable over-credit. Panel B checks whether support for an independent trial is preserved. Table~\ref{tab:compositional-detail} reports H5/H6 separately because both initial states already include an independent study: their global flag cannot isolate credit for the added same-trial report. H5 recognition also combines provenance and applicability comparisons, not pure lineage recognition alone.
+Table~\ref{tab:later-detail} keeps P5R/P6R recognition, document-level over-credit, grouped over-credit, and the independent-trial preservation check together. In panel A, an \texttt{independent\_corroboration} flag on the same-trial update is attributable over-credit. Panel B asks whether the intervention still preserves support for a genuinely independent trial. The H5/H6 results are reported separately because both compositional baselines already contain an independent study; their global corroboration flag cannot isolate credit assigned specifically to the newly added same-trial report.
 
-\Needspace{0.35\textheight}
 \begin{table*}[t]
 \centering
 \small
@@ -811,6 +722,78 @@ H6 & GPT-5.5 & 10/10 (0) & 5/5 (0) & 1/5 (0) \\
 \label{tab:compositional-detail}
 \end{table*}
 
+\section{Applicability, direction, and compositional controls}
+\label{app:control-axis-results}
+
+These analyses are specificity controls. Table~\ref{tab:control-axis-recognition} gives comparative recognition for the six non-provenance primitive families and H3. In CF-A1--A3 the comparison concerns clinical applicability; in CF-D1--D3 it concerns result direction. H3 combines provenance, applicability, and direction, so its total is not a pure lineage score.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Model & CF-A1 & CF-A2 & CF-A3 & CF-D1 & CF-D2 & CF-D3 & H3 \\
+\midrule
+GPT-5.5        & 10/10 & 10/10 & 10/10 & 10/10 & 10/10 & 10/10 & 30/30 \\
+Qwen3-4B       & 10/10 & 10/10 & 10/10 & $0/5^{\dagger}$ & 5/10 & 10/10 & 30/30 \\
+Gemma3-4B      & 5/10 & 5/10 & 10/10 & 5/10 & $5/5^{\dagger}$ & 5/10 & 15/30 \\
+Llama-3.1-8B   & 5/10 & $0/5^{\dagger}$ & 5/10 & 5/10 & 5/10 & 5/10 & 15/30 \\
+Ministral-3-8B & 10/10 & 10/10 & 10/10 & 10/10 & 5/10 & 10/10 & 20/30 \\
+\bottomrule
+\end{tabular}
+\caption{Comparative recognition in applicability (A), direction (D), and compositional (H3) families. Cells are correct/valid calls. Each primitive family has ten planned recognition calls; H3 has 30 across three relations. $\dagger$ marks five additional rejected recognition calls, not five incorrect answers. Repetitions are within-input stability checks.}
+\label{tab:control-axis-recognition}
+\end{table*}
+
+The semantic integration outcomes are shown separately below. Unless noted otherwise, the family-level applicability and direction integration rows are GPT-5.5 medium results; the open-weight primary package does not provide a harmonized family-by-family semantic integration summary for these two control axes, so no cross-model integration rate is inferred from them.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l X X@{}}
+\toprule
+Control & Families/conditions & Expected handling & GPT-5.5 result \\
+\midrule
+Exact repeat / null & CF-P1--P3, CF-A1--A3, CF-D1--D3 & no new independent evidence & duplicate or unchanged in 45/45 calls \\
+Same-trial update & CF-P1--P3 & no independent corroboration & over-credit in 15/15 calls \\
+Independent update & P5R, P6R & preserve independent support & 5/5 $\to$ 5/5 in each family \\
+Out-of-scope positive & CF-A1--A3 & ignore for the fixed claim & out\_of\_scope and ignored, 15/15 \\
+Challenging update & CF-D1--D3 & retain support and register conflict & conflict or mixed evidence, 15/15 \\
+\bottomrule
+\end{tabularx}
+\caption{Compact control-outcome summary for the approved confirmatory and later pure-provenance conditions. The 45 exact-repeat calls are nine primitive families with five repetitions each; the 15/15 same-trial, out-of-scope, and challenging-update entries are three families with five repetitions each. The independent-support row is the separate P5R/P6R safety check.}
+\label{tab:control-outcomes}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}l l X@{}}
+\toprule
+Family & Target update & GPT-5.5 integration outcome \\
+\midrule
+CF-A1 & applicable vs positive out of scope & applicable update used; out-of-scope update ignored, 5/5 \\
+CF-A2 & applicable vs positive out of scope & applicable update used; out-of-scope update ignored, 5/5 \\
+CF-A3 & first-line vs relapsed maintenance & applicable update used; out-of-scope update marked out\_of\_scope and ignored, 5/5 \\
+CF-D1 & agreeing vs mortality-challenging ICU evidence & challenging update treated as conflict/mixed, 5/5 \\
+CF-D2 & agreeing vs mortality-challenging diabetes evidence & challenging update treated as conflict/mixed, 5/5 \\
+CF-D3 & agreeing vs annual high-dose vitamin-D evidence & agreeing update supports 5/5; challenging update conflicts and yields mixed\_evidence, 5/5 \\
+\bottomrule
+\end{tabularx}
+\caption{Family-level applicability and direction integration for GPT-5.5. These are separate neutral-verifier calls from the comparative-recognition calls; the table is a control-axis audit, not evidence that applicability or direction is universally solved.}
+\label{tab:integration-controls}
+\end{table*}
+
+In the held-out H3 family, GPT-5.5 and Qwen each answer all 30 comparative recognition calls correctly across provenance, applicability, and direction. In separate aggregation calls, however, the added same-trial WOSCOPS report receives an independent-corroboration flag in 4/5 and 5/5 valid calls, respectively. The 30 recognition calls comprise ten comparisons for each of the three relations.
+
+\section{Secondary robustness and exploratory lineage-by-overlap control}
+\label{app:secondary-analyses}
+
+\subsection{Prompt-order robustness}
+
+The secondary prompt audit reran the P5R/P6R document-level conditions with a semantically equivalent reordered verifier prompt. It contains 40 calls per model for GPT-5.5, Qwen3-4B, and Gemma3-4B: two families, same-trial and independent updates, two prompt variants, and five repetitions. GPT-5.5 marks same-trial updates as independent in 16/20 records and passes the independent-update semantic audit in 14/20. Qwen marks every same-trial record as independent (20/20) and passes 15/20 independent-update audits. Gemma is canonically parseable in all 40 records but strict-valid in 0/40 because each response has one outer Markdown JSON fence; its same-trial records fail the provenance flag rule in 20/20, while the independent-update audit passes 20/20. These calls test robustness to the two recorded prompt variants only and are not pooled with the primary denominators.
+
 \begin{table*}[t]
 \centering
 \small
@@ -827,11 +810,58 @@ Gemma3-4B & 20/20 & 20/20 & 0/40 & 40/40 \\
 \label{tab:prompt-robustness}
 \end{table*}
 
-\Needspace{0.45\textheight}
-\section{Follow-up oracle and cue-ablation results}
+\subsection{Lineage-by-overlap construction and results}
+
+The exploratory control uses one source-reviewed ProMISe/ARISE family. The fixed claim concerns 90-day all-cause mortality for early septic shock under early goal-directed therapy versus usual resuscitation. The initial anchor is the ProMISe primary report (\texttt{ISRCTN36307479}); the same-trial update is the ProMISe HTA report with the same registry identifier; the independent update is the ARISE primary report (\texttt{NCT00975793}). The selected passages are source-faithful result or conclusion passages. Audit records preserve registry linkage, clinical scope, source locator, exact text, and passage hashes. No passage was synthetically paraphrased, trimmed, or padded, and the model-visible input does not contain \texttt{source\_group\_id}.
+
+We measured overlap against the initial ProMISe numerical-result anchor using lowercase Unicode-normalized word/number tokens with punctuation removed. We computed token-set Jaccard, ROUGE-L F1, and cosine similarity from the pinned \texttt{sentence-transformers/all-mpnet-base-v2} revision \texttt{e8c3b32e\allowbreak df5434bc\allowbreak 2275fc9b\allowbreak ab85f826\allowbreak 40a19130}. Within each lineage, the high-overlap passage exceeded the low-overlap passage on all three measures, with a cosine gap of at least 0.10 and a lexical gap of at least 0.10 on Jaccard or ROUGE-L. We also checked the matched high and low cells for cross-lineage comparability. These thresholds define overlap strata; estimating a causal overlap effect requires a separately designed intervention.
+
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}l >{\raggedright\arraybackslash}X r r c c c@{}}
+\toprule
+Cell & Source passage & Tokens & Chars & Jaccard & ROUGE-L & Cosine \\
+\midrule
+Anchor & ProMISe primary numerical result & 68 & 335 & -- & -- & -- \\
+Same/high & ProMISe HTA numerical result & 57 & 299 & 0.634615 & 0.400000 & 0.846106 \\
+Same/low & ProMISe HTA abstract conclusion & 30 & 182 & 0.109375 & 0.122449 & 0.656978 \\
+Independent/high & ARISE primary numerical result & 56 & 303 & 0.423729 & 0.370968 & 0.922640 \\
+Independent/low & ARISE primary conclusion & 23 & 132 & 0.118644 & 0.109890 & 0.678653 \\
+\bottomrule
+\end{tabularx}
+\caption{Frozen overlap measurements for the one-family policy-instructed lineage control. Scores are computed against the initial ProMISe numerical-result anchor; ``high'' and ``low'' are within-lineage strata, not causal treatments.}
+\label{tab:overlap-construction}
+\end{table*}
+
+The verifier prompt for this control explicitly states that another report from the same trial is non-independent and a different trial may provide independent corroboration. The control evaluates policy application across overlap strata; causal overlap effects and unprompted lineage discovery require separate designs. GPT-5.5 produces the expected combination in all four cells (20/20 calls); other model conditions are mixed, as described in the archived analysis. Table~\ref{tab:overlap-policy-results} reports the policy-defined GPT-5.5 outcomes.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Cell & Expected relation & Duplicate evidence & Independent corroboration \\
+\midrule
+Same/high & same trial & 5/5 & 0/5 \\
+Same/low & same trial & 5/5 & 0/5 \\
+Independent/high & independent trial & 0/5 & 5/5 \\
+Independent/low & independent trial & 0/5 & 5/5 \\
+\bottomrule
+\end{tabular}
+\caption{Policy-defined lineage-by-overlap results for GPT-5.5. All 20 calls labeled the claim supported; the four cells each contain five fresh stateless calls. This one-family result reports policy application across overlap strata. Separate designs are needed to estimate overlap effects or unprompted lineage discovery.}
+\label{tab:overlap-policy-results}
+\end{table*}
+
+\section{Post-hoc oracle and cue-ablation diagnostics}
 \label{app:diagnostic-results}
 
-Table~\ref{tab:diagnostic-results} reports the two CF-P3 oracle conditions and H3-M1 separately from the selected 14-family comparison. For CF-P3, the entries count an \texttt{independent\_corroboration} flag on the same-trial update; the independent-trial control checks that an oracle does not simply suppress every update. For H3-M1, recognition compares two A/B orders after removing only \texttt{source\_group\_id}; trial identifiers, titles, passages, and other source metadata remain visible. Its same-trial column is from a separate verifier call. Five repetitions of each input measure stability, not five distinct clinical examples.
+These diagnostics were introduced after the primary provenance failure was observed and were frozen before their own model calls. For CF-P3, the \emph{relation oracle} supplies the item-specific study-dependence relation while leaving the final judgment to the verifier. The \emph{policy oracle} instead supplies a general rule: repeated or same-trial reports may add detail but do not add independent corroboration. Each oracle contains exact-repeat, same-trial, and independent-study conditions, for 30 responses in total per tested model.
+
+H3-M1 removes only \texttt{source\_group\_id} from the cue-rich H3 setup while preserving the claim, passages, evidence order, titles, trial identifiers, and other metadata. It contributes two counterbalanced provenance-recognition inputs and five neutral-update inputs, or 35 responses per tested model. Together, the CF-P3 oracle block and H3-M1 contain 65 responses per tested model. GPT-5.5, Qwen3-4B, and Gemma3-4B completed this diagnostic design; Llama and Ministral were not run in this block. Completion is distinct from output validity.
+
+On CF-P3, GPT-5.5's relation and policy oracles each remove the same-trial independent-corroboration flag in 5/5 valid calls while preserving the independent-trial control. Qwen continues to over-credit the same-trial report under both oracles. Gemma's same-trial oracle outputs are rejected. In H3-M1, GPT-5.5 retains full provenance recognition (10/10) but still flags the same-trial report as independent in 5/5 separate verifier calls. The full model-specific denominators are below.
 
 \begin{table*}[t]
 \centering
@@ -852,5 +882,39 @@ Gemma3-4B & 0/0 (5 rej.) & 0/0 (5 rej.) & 5/5, 5/5 & 5/10 & 5/5 \\
 \label{tab:diagnostic-results}
 \end{table*}
 
-\end{document}
+\section{Validity and rejection accounting}
+\label{app:validity}
 
+Table~\ref{tab:family-validity} reports canonical validity for every model-by-family row in the selected 14-family comparison. Each cell is valid/rejected, not correct/incorrect. A rejected response receives no semantic score. Five repeated calls characterize within-input stability; the 14 clinical families supply the empirical units.
+
+\begin{table*}[t]
+\centering
+\footnotesize
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Family & Planned & GPT-5.5 & Qwen3-4B & Gemma3-4B & Llama-3.1-8B & Ministral-3-8B \\
+\midrule
+CF-P1 & 30 & 30/0 & 30/0 & 15/15 & 20/10 & 30/0 \\
+CF-P2 & 30 & 30/0 & 10/20 & 10/20 & 20/10 & 10/20 \\
+CF-P3 & 30 & 30/0 & 25/5 & 10/20 & 25/5 & 25/5 \\
+CF-A1 & 30 & 30/0 & 30/0 & 25/5 & 25/5 & 30/0 \\
+CF-A2 & 30 & 30/0 & 30/0 & 20/10 & 25/5 & 30/0 \\
+CF-A3 & 30 & 30/0 & 20/10 & 15/15 & 10/20 & 20/10 \\
+CF-D1 & 30 & 30/0 & 15/15 & 20/10 & 10/20 & 30/0 \\
+CF-D2 & 30 & 30/0 & 30/0 & 15/15 & 25/5 & 10/20 \\
+CF-D3 & 30 & 30/0 & 25/5 & 25/5 & 10/20 & 25/5 \\
+H3    & 60 & 60/0 & 55/5 & 55/5 & 40/20 & 55/5 \\
+\midrule
+P5R & 50 & 50/0 & 45/5 & 50/0 & 50/0 & 25/25 \\
+P6R & 50 & 50/0 & 50/0 & 45/5 & 40/10 & 45/5 \\
+H5  & 70 & 70/0 & 65/5 & 45/25 & 60/10 & 30/40 \\
+H6  & 50 & 50/0 & 50/0 & 50/0 & 35/15 & 45/5 \\
+\midrule
+Total & 550 & 550/0 & 480/70 & 400/150 & 395/155 & 410/140 \\
+\bottomrule
+\end{tabular}
+\caption{Canonical-valid/rejected calls in the selected 14-family comparison. Planned calls are \emph{per model}; each cell sums to its row's planned count.}
+\label{tab:family-validity}
+\end{table*}
+
+\end{document}

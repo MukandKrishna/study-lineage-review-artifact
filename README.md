@@ -20,6 +20,44 @@ A complete mapping of calls, experiments, models, configurations, outputs, valid
 
 The file-level hashes for experiment records are in `data/experiments/epistemic_update_feasibility_v1/FILE_MANIFEST.csv`. Paper-level call accounting is in `results/final_naacl/call_coverage_manifest.csv`; the frozen denominator note is in `results/final_naacl/paper_scope_and_denominator.md`.
 
+## Existing artifact attribution and citations
+
+The evaluation uses existing model and software artifacts. The following links identify their
+original creators and canonical model or technical documentation; the pinned revisions used for
+the reported open-weight runs are recorded in `REPRODUCTION.md` and
+`configs/transformers_gpu_models.json`.
+
+- [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507), released by the Qwen team; see also the [Qwen3 technical report](https://arxiv.org/abs/2505.09388).
+- [Gemma 3 4B instruction-tuned model](https://huggingface.co/google/gemma-3-4b-it), released by Google DeepMind/Gemma Team; see the [Gemma 3 technical report](https://goo.gle/Gemma3Report).
+- [Llama 3.1 8B Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct), released by Meta.
+- [Ministral 3 8B Instruct 2512 BF16](https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512-BF16), released by Mistral AI.
+- GPT-5.5 was accessed through Codex from OpenAI; its weights and serving details are not redistributed here.
+- The open-weight runner uses [Hugging Face Transformers](https://github.com/huggingface/transformers). The exploratory overlap analysis uses the pinned [all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2) sentence-transformers checkpoint. Package versions and lock data are recorded in the dependency files listed above.
+
+The clinical publications used as source evidence are cited in the paper bibliography and retained
+with source identifiers in the audit records. This attribution section identifies the external
+artifacts; it does not by itself grant permission to redistribute model weights or copyrighted
+source passages. Those permissions and access terms are handled separately under the
+reproducibility boundary below.
+
+## Data provenance, PubMed citation, and reuse boundary
+
+The clinical evidence records are source-linked research records. For each selected publication,
+the frozen inputs retain bibliographic metadata such as the title, PMID and DOI where available,
+and a passage locator. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) and related NCBI services were
+used for bibliographic identification and source linking; PubMed is an index and is not the
+copyright holder for the articles indexed there.
+
+Public visibility of a PubMed or publisher page is not treated as permission to redistribute an
+article's full text, abstract, figures, or selected passages. Reuse status must be checked for each
+article using the article or [PMC copyright and licence guidance](https://pmc.ncbi.nlm.nih.gov/about/copyright/)
+and, where necessary, the publisher or copyright holder. The audit schema includes
+`license_or_access_note` for recording that decision.
+If a reuse licence or permission cannot be established, the safe release form is bibliographic
+metadata and a link to the source rather than copied article text. This README records the data
+provenance and the unresolved rights boundary; it is not a licence grant or a substitute for the
+article-by-article release audit.
+
 ## Scope of the reported experiments
 
 The selected comparison contains 14 clinical families and 550 recorded calls per model. Five models are represented: GPT-5.5, Qwen3-4B, Gemma3-4B, Llama-3.1-8B, and Ministral-3-8B. Repeated calls are stability repetitions of fixed inputs, not additional clinical cases.
@@ -58,3 +96,7 @@ The first three checks verify paper artifacts, frozen hashes, prompt contracts, 
 ## Repository status
 
 This is an anonymous review copy. It contains no author names, personal repository links, credentials, model weights, or patient-level data. A permanent public repository and citation information can be added after the review period if the paper is accepted.
+
+## Generative-AI assistance disclosure
+
+AI-based assistants were used for coding assistance and initial research including candidate-family screening. The authors independently verified the source records, selections, code, analyses, and final text.
